@@ -9,30 +9,26 @@ import java.sql.SQLException;
 
 public class JDBCconnect {
 	public static  Connection getConnection(){
-		// Êı¾İ¿âÁ¬½Ó
+		// æ•°æ®åº“è¿æ¥
 		Connection conn = null;
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			 
-	//	conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.72.128:1521:orcl","test","yujian123");
-			//¹«Ë¾»·¾³
-		conn = DriverManager.getConnection("jdbc:oracle:thin:@134.101.168.30:1521:ORACLE1","test","test");   
+	
+			//å…¬å¸ç¯å¢ƒ
+		conn = DriverManager.getConnection("jdbc:oracle:thin:@XXX.XXX.XXX.XXX:1521:ORACLE1","XXX","XXX");   
 			
-//	conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.31.176:1521:orcloc","test","yujian123");
-	//		conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.101.36:1521:orcloc","test","yujian123");
-	//	conn = DriverManager.getConnection("jdbc:oracle:thin:@134.101.168.33:1521:orcl","test","nbit_901");
-		//	conn = DriverManager.getConnection("jdbc:oracle:thin:@134.101.168.52:1521:orcloc","test","yujian123");
-			
-			//±¾µØ»·¾³
-//		conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcloc","test","yujian123");
-			// ´´½¨ConnectionÁ¬½Ó
+
+			//æœ¬åœ°ç¯å¢ƒ
+//		conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcloc","XXXX","XXXX");
+			// åˆ›å»ºConnectionè¿æ¥
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		// ·µ»ØÊı¾İ¿âÁ¬½Ó
+		// è¿”å›æ•°æ®åº“è¿æ¥
 		return conn;
 	}
 
