@@ -1,0 +1,74 @@
+
+
+ul li{
+ list-style-type: none; 
+
+}
+.table-a table{border:1px solid #F00} 
+
+.el-row {
+    margin-bottom: 0px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .el-col {
+    border-radius: 4px;
+  }
+  .bg-purple-dark {
+    background: #99a9bf;
+  }
+  .bg-purple {
+    background: #d3dce6;
+  }
+  .bg-purple-light {
+    background: #e5e9f2;
+  }
+  .grid-content {
+    border-radius: 4px;
+    min-height: 36px;
+  }
+  .row-bg {
+    padding: 10px 0;
+    background-color: #f9fafc;
+  }
+   .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
+  .el-icon-arrow-down {
+    font-size: 12px;
+  }
+  .grid-content{
+  border: 1px solid rgb(220, 223, 230); 
+  border-radius: 0px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  text-align: right;
+  line-height: 36px;
+  white-space:nowrap; 
+	text-overflow:ellipsis; 
+	overflow:hidden;
+	padding: 0px 15px;
+	min-height: 36px;
+		
+  }
+    .grid-content1{
+  border: 1px solid rgb(220, 223, 230); 
+  border-radius: 0px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  text-align: left;
+  line-height: 36px;
+  white-space:nowrap; 
+	text-overflow:ellipsis; 
+	overflow:hidden;
+	padding: 0px 10px;	
+	min-height: 36px;
+  }
+  
+  .el-table td, .el-table th{
+  padding: 5px 0px;
+  }
+  
+  
+  
+  

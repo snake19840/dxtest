@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="com/clas/CharFilter.java" kind="src" path="src"/>
+	<classpathentry kind="src" path="WebContent/Base64.js-master"/>
+	<classpathentry excluding="net/sf/json jar/|net.sf.json jar/|net.sf.json jar/" kind="src" path="WebContent/WEB-INF/lib"/>
+	<classpathentry kind="src" path="com"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+		<accessrules>
+			<accessrule kind="accessible" pattern="**"/>
+		</accessrules>
+	</classpathentry>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/jstl-api-1.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/jstl-impl-1.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/ojdbc6.jar"/>
+	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/commons-fileupload-1.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/commons-net-3.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/gson-2.2.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/orai18n-12.1.0.2.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/commons-io-2.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/net.sf.json jar/commons-beanutils-1.7.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/net.sf.json jar/commons-collections-3.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/net.sf.json jar/commons-lang-2.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/net.sf.json jar/commons-logging.jar"/>
+	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/net.sf.json jar/ezmorph-1.0.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/net.sf.json jar/json-lib-2.4-jdk15.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat LOC"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v8.0new"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.datatools.connectivity.jdt.DRIVERLIBRARY/Generic JDBC Driver"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

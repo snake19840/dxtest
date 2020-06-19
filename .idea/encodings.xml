@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/com/clas/Equ.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/clas/PlanCheck.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/clas/Update.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/servlet/FileupdataServlet.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/servlet/LoginServlet.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/servlet/Up.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/servlet/Up.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/servlet/Up.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/servlet/UpDataContract.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/servlet/UpDataContractFile.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/servlet/UpdateTestServlet.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/servlet/UploadPicture.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/servlet/UploadPicture5.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/servlet/UploadPictureItem.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/servlet/UploadServlet.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/servlet/WarningItemPicture.java" charset="GBK" />
+  </component>
+</project>
