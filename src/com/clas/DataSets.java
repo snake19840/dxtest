@@ -34,12 +34,55 @@ public class DataSets {
 		String dateTomString=dateFormat.format(calendar.getTime());
 		return dateTomString;
 	}
+	public static String yesterdate() {
+		SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+		Calendar calendar=new GregorianCalendar();
+		calendar.setTime(new Date());
+		calendar.roll(calendar.DATE, -1);
+		String dateTomString=dateFormat.format(calendar.getTime());
+		return dateTomString;
+	}
+	public static String anyday(int n) {
+		SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+		Calendar calendar=new GregorianCalendar();
+		calendar.setTime(new Date());
+		calendar.roll(calendar.DATE, n);
+		String dateTomString=dateFormat.format(calendar.getTime());
+		return dateTomString;
+	} 
+	public static String anymonth(int n) {
+		SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+		Calendar calendar=new GregorianCalendar();
+		calendar.setTime(new Date());
+		calendar.set(Calendar.DAY_OF_MONTH,1);
+		calendar.roll(calendar.MONTH, n);
+		String dateTomString=dateFormat.format(calendar.getTime());
+		return dateTomString;
+	} 
+	public static String monthNow(Date n) {
+		SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+		Calendar calendar=new GregorianCalendar();
+		calendar.setTime(n);
+		calendar.set(Calendar.DAY_OF_MONTH,1);
+		calendar.roll(calendar.MONTH, 0);
+		String dateTomString=dateFormat.format(calendar.getTime());
+		return dateTomString;
+	} 
+	public static String monthNext(Date n) {
+		SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+		Calendar calendar=new GregorianCalendar();
+		calendar.setTime(n);
+		calendar.set(Calendar.DAY_OF_MONTH,1);
+		calendar.roll(calendar.MONTH, 1);
+		String dateTomString=dateFormat.format(calendar.getTime());
+		return dateTomString;
+	} 
+	
 	
     public   ArrayList<Equ> list=new ArrayList<Equ>();
     public static ArrayList<Equ> getEqus(String sn,String username){
     	//System.out.println(1111);
     	ArrayList<Equ> list=new ArrayList<Equ>();
-    	
     	
         try {
         	
@@ -65,8 +108,6 @@ public class DataSets {
 		    	list.add(equ);
             }System.out.println(list);
 		//}
-				
-			
             
             conn.close();
             ps.close();
@@ -75,10 +116,7 @@ public class DataSets {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        
-        
         return list;
-
     }
     
     //将list转成json样式的字符串
@@ -123,6 +161,10 @@ public class DataSets {
         return json;
 
     }
-
+public static void main(String[] args) {
+	System.out.println(DataSets.anymonth(1));
+	
+	
+}
 
 }

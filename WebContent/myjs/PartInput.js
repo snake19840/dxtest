@@ -367,15 +367,12 @@ var warning=new Vue({
 	       console.log(command);
 		  files= command;
 	    if(command[0]=="upfile"){ 
-	    console.log(1111);
- 		console.log(this.$refs.upload[command[4]]);
-		console.log(this.$refs.upload);
+	
 		this.$refs.upload[command[4]].$el.click();
 	    }else if (command[0]=="edit") {
-	    	console.log(2222);
 		this.WarningGsons[command[4]].flag=this.WarningGsons[command[4]].flag ? false:true;
 	    }else if (command[0]=="del"){
-	    	console.log(3333);
+	    
 		this.open(command[1]);
 	    }
 		},

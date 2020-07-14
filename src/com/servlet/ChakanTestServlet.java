@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import com.clas.Equ;
 import com.clas.EquFile;
+import com.clas.SelectAll;
 import com.dao.FileDao;
 import com.google.gson.Gson;
 
@@ -93,14 +94,25 @@ public class ChakanTestServlet extends HttpServlet {
 		
 		 FileDao fileDao=new FileDao();
 	     List<EquFile> list2=fileDao.files(id);
+	     String sql="select * from (select rownum r,t.* from (SELECT * FROM dxtestchage WHERE id='"+id+"' ORDER by  now desc) t where rownum<=5 ) where r>0";
+//	     SELECT id,users,content,chagedate FROM dxtestchage WHERE id='"+id+"' ORDER by  now desc";
+	     List<Equ> listChage=SelectAll.Warningstatu(sql);
+	     sql="select COUNT(id) from dxtestchage WHERE id='"+id+"'";
+	     int tatol =SelectAll.getCount(sql);
 	     Gson gson=new Gson();
 		request.setAttribute("list", list);
 		request.setAttribute("list2", list2);
+		request.setAttribute("listChage", listChage);
+		request.setAttribute("tatol", tatol);
 		String listG=gson.toJson(list2); 
+		String listChageG=gson.toJson(listChage); 
 		String listGson=gson.toJson(list); 
+		String tatolGson=gson.toJson(tatol); 
 		request.setAttribute("listG", listG);
 	session.setAttribute("listGson", listGson);
 	session.setAttribute("listG", listG);
+	session.setAttribute("listChageG", listChageG);
+	session.setAttribute("tatolGson", tatolGson);
 		
 		 request.getRequestDispatcher("TestTable3.jsp").forward(request, response);
 	}

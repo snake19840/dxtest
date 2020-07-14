@@ -187,9 +187,49 @@ public class Equ {
 		private String author;
 		private  String a;
 		private Map<String, Object> rowData;
+		private  String chagedate;
+		private  String users;
+		private  String content;
+		private int m;
+		private int n;
+
+
+
+	
+		
 
 		
 		
+		public int getM() {
+			return m;
+		}
+		public void setM(int m) {
+			this.m = m;
+		}
+		public int getN() {
+			return n;
+		}
+		public void setN(int n) {
+			this.n = n;
+		}
+		public String getChagedate() {
+			return chagedate;
+		}
+		public void setChagedate(String chagedate) {
+			this.chagedate = chagedate;
+		}
+		public String getUsers() {
+			return users;
+		}
+		public void setUsers(String users) {
+			this.users = users;
+		}
+		public String getContent() {
+			return content;
+		}
+		public void setContent(String content) {
+			this.content = content;
+		}
 		public String getConedit() {
 			return conedit;
 		}

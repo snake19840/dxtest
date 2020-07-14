@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+ 	"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- 	<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" -->
+<!-- "C:\Users\yujian\.lemminx\cache\http\hibernate.sourceforge.net\hibernate-configuration-3.0.dtd"> -->
+<hibernate-mapping>
+	<!-- 1.配置类和表对应
+		class标签
+		name属性：实体类全路径名
+		table属性：数据库表名称
+	 -->
+	<class name="com.sq.entity.User" table="t_user">
+		<!-- 2.配置实体类id和表id对应
+			hibernate要求实体类有一个属性唯一值
+			hibernate要求表有字段作为唯一值
+		 -->
+		 <!-- id标签
+		 	name属性：实体类里面id属性名称
+		 	column属性：生成表字段名称
+		  -->
+		 <id name="id" column="id" type="long">
+		 	<!-- 设置数据库表id增长策略 
+		 		native:生成的表id值就是主键自动增长
+		 	-->
+		 	<generator class="native"></generator>
+		 </id>
+		 <!-- 3.配置其他属性和表字段对象
+		 	name属性：实体类属性名称
+		 	column属性：生成表字段名称
+		  -->
+		 <property name="username" column="username"></property>
+		 <property name="password" column="password"></property>
+	</class>
+	
+	<class name="com.sq.entity.User2" table="tt_user">
+		 <id name="id" column="id" type="long">
+		 	<generator class="native"></generator>
+		 </id>
+		 <property name="username" column="username"></property>
+		 <property name="password" column="password"></property>
+	</class>
+	
+		<class name="com.dao.Dxtestcontractfile" table="DXTESTCONTRACTFILE">
+		 <id name="id" column="id" type="long">
+		 	<generator class="native"></generator>
+		 </id>
+		 <property name="CONTRACTPICTURE" column="CONTRACTPICTURE"></property>
+		 <property name="CONTRACTID" column="CONTRACTID"></property>
+		 <property name="CONTRACTNOWDATE" column="CONTRACTNOWDATE"></property>
+		 <property name="PLAN1" column="PLAN1"></property>
+		 <property name="PLAN2" column="PLAN2"></property>
+		 <property name="PLAN3" column="PLAN3"></property>
+		 <property name="PLAN4" column="PLAN4"></property>
+		 
+	</class>
+</hibernate-mapping>

@@ -9,31 +9,83 @@ import java.sql.SQLException;
 
 public class JDBCconnect {
 	public static  Connection getConnection(){
-		// 数据库连接
+		// 閺佺増宓佹惔鎾圭箾閹猴拷
 		Connection conn = null;
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			 
 	
-			//公司环境
-		conn = DriverManager.getConnection("jdbc:oracle:thin:@XXX.XXX.XXX.XXX:1521:ORACLE1","XXX","XXX");   
+			//閸忣剙寰冮悳顖氼暔
+//			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcloc","test","test");
+//			conn = DriverManager.getConnection("jdbc:oracle:thin:@134.101.168.33:1521:orcl3","test","test");
 			
 
-			//本地环境
-//		conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcloc","XXXX","XXXX");
-			// 创建Connection连接
+			//閺堫剙婀撮悳顖氼暔
+		conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcloc","test","yujian123");
+			// 閸掓稑缂揅onnection鏉╃偞甯�
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		// 返回数据库连接
+		// 鏉╂柨娲栭弫鐗堝祦鎼存捁绻涢幒锟�
 		return conn;
 	}
 
 	public static void close(Connection con, PreparedStatement ps, ResultSet rs) {
 		// TODO Auto-generated method stub
 		
-	}
+	        // TODO Auto-generated method stub  
+	          
+	        //关闭结果集  
+	        try {  
+	              
+	            //结果集关闭方法  
+	            if(rs!=null){  
+	                  
+	                rs.close();  
+	                  
+	            }  
+	              
+	        } catch (SQLException e) {  
+	            // TODO Auto-generated catch block  
+	            e.printStackTrace();  
+	        }finally{  
+	              
+	            //关闭声明的sql语句  
+	            try {  
+	                  
+	                //关闭声明的sql语句方法  
+	                if(ps!=null){  
+	                      
+	                    ps.close();  
+	                      
+	                }  
+	                  
+	            } catch (SQLException e) {  
+	                // TODO Auto-generated catch block  
+	                e.printStackTrace();  
+	            }finally{  
+	                  
+	                //卸载驱动  
+	                try {  
+	                      
+	                    //驱动卸载方法  
+	                    if(con!=null){  
+	                          
+	                        con.close();  
+	                          
+	                    }  
+	                      
+	                } catch (SQLException e) {  
+	                    // TODO Auto-generated catch block  
+	                    e.printStackTrace();  
+	                }  
+	                  
+	            }  
+	        }  
+	      
+	    } 
+	
 }

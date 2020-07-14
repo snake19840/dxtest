@@ -448,7 +448,7 @@
 							  <div class="control-group ">
 								<label class="control-label2" >其它信息:</label>
 								<div class="controls">
-								  <input name="oth" type="text" id="oth" size="16" value="">
+								  <textarea name="oth" type="textarea" style="width: 70%" id="oth" size="16" value=""></textarea>
 								 
 								</div>
 							  </div>

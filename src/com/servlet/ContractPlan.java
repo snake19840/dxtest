@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.clas.Equ;
+import com.clas.SelectAll;
 import com.dao.ContractDao;
 import com.google.gson.Gson;
 
@@ -47,8 +48,10 @@ public class ContractPlan extends HttpServlet {
 		response.setContentType("Text/html");
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		
+		 
 		HttpSession session=request.getSession();
+		
+		
 		List<Equ> contractPlanList=ContractDao.contractPlanList();
 		Gson gson = new Gson();
 		String contractPlanListGson=gson.toJson(contractPlanList); 

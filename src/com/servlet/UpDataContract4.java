@@ -198,6 +198,13 @@ public class UpDataContract4 extends HttpServlet {
 					+ "	'"+    oppname+"',	'"+    oppid+"',	'"+    myid+"',	'"+    classson+"','"+sgmoney+"')";
 			
 			flag=SelectAll.Update(sql);
+			
+			List<Equ> list = gson.fromJson(plan1, new TypeToken<List<Equ>>() {}.getType());
+			for (int i = 0; i < list.size(); i++) {
+				sql = "insert into PLANSUB (PAYNAME,PAYPOR,PAYDATE,STATU_SUB,REALPAY,PAYPLAN,CONTRACTID) values('"+list.get(i).getPayname()+"','"+list.get(i).getPaypor()+"',"
+						+ "'"+list.get(i).getPaydate()+"','"+list.get(i).getStatu()+"','','"+list.get(i).getPaydate()+"','"+contractid+"')";
+						flag=SelectAll.insertItem(sql);
+			}
 			out.print("{\"statu\":1,\"WarningGsons\":\" Ìí¼Ó³É¹¦ \"}");
 			out.close();
 

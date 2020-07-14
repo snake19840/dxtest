@@ -46,6 +46,7 @@ public class Payover extends HttpServlet {
 		String plandate1=request.getParameter("plandate1");
 		String planm1=request.getParameter("planm1");
 		String sgmoney=request.getParameter("sgmoney");
+		String paydate=request.getParameter("paydate");
 		
 		String sql="update DXTESTCONTRACT set  planm2='"+planm2+"',	statu='"+statu+"',	plandate2='"+plandate2+"',	plandate1='"+plandate1+"',	planm1='"+planm1+"',sgmoney='"+sgmoney+"'  where contractid='"+contractid+"'";
 		boolean flag=SelectAll.Update(sql);
@@ -59,6 +60,16 @@ public class Payover extends HttpServlet {
 		List<Equ> contractListItem=SelectAll.Warningstatu(sqlv);
 		String contractListItemGson=gson.toJson(contractListItem); 
 		session.setAttribute("contractListItemGson", contractListItemGson);
+		
+		List<Equ> list2 = gson.fromJson(planm2, new TypeToken<List<Equ>>() {}.getType());
+		for (int i = 0; i < list2.size(); i++) {
+//			sql = "insert into PLANSUB (PAYNAME,PAYPOR,PAYDATE,STATU,REALPAY,PAYPLAN,CONTRACTID) values('"+list2.get(i).getPayname()+"','"+list2.get(i).getPaypor()+"',"
+//					+ "'"+list.get(i).getPaydate()+"','"+list2.get(i).getStatu()+"','"+list2.get(i).getPaydate()+"','"+list2.get(i).getPaydate()+"','"+contractid+"')";
+			sql = "update PLANSUB set  PAYNAME='"+list2.get(i).getPayname()+"',PAYPOR='"+list2.get(i).getPaypor()+"',STATU_SUB='"+list2.get(i).getStatu()+"',REALPAY='"+list2.get(i).getPaydate()+"',PAYPLAN='"+list2.get(i).getPaydate()+"'  where contractid='"+contractid+"' and PAYDATE='"+paydate+"'";		
+			flag=SelectAll.Update(sql);
+					
+		}
+		
 		PrintWriter out = response.getWriter();
 		out.print("{\"statu\":"+flag+",\"contractListItemGson\":" + contractListItemGson + "}");
 		out.close();

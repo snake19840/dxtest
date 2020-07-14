@@ -28,6 +28,11 @@
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'>
 	<link rel="shortcut icon" href="img/favicon.ico">
 	<!-- end: Favicon -->
+	<script src="myjs/vue.js" charset="GBK"></script>
+<script src="myjs/axios.js" charset="GBK"></script>
+<script src="node_modules/moment/moment.js" charset="GBK"></script>
+<script src="element-ui/lib/index.js"></script>
+	<link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
 </head>
 <body onload="initvar()" onunload="setvar()">
 
@@ -461,7 +466,7 @@ String		ownname4 = "";
 							  <div class="control-group ">
 								<label class="control-label2" >其它信息:</label>
 								<div class="controls">
-								  <input name="oth" type="text" id="oth" size="16" value="<%=oth %>">
+								  <textarea name="oth"  class="form-inline textarea" id="oth" style="width: 70%" value="<%=oth %>"></textarea>
 								 
 								</div>
 							  </div>

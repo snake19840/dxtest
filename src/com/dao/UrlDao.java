@@ -17,7 +17,7 @@ public class UrlDao {
 //			String urlImg="D:/WebService/tomcat/apache-tomcat-8.5.47/webapps/dxtest/upload/equ/";
 //			return urlImg;
 //		}
-//	
+	
 	
 	
 //	<---------------±¾µØ------------------>

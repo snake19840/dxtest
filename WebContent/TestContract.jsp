@@ -473,12 +473,12 @@ String list3Gson=(String)session.getAttribute("list3Gson");
 								<tr  v-for="(item2,index) in planm2" style="text-align: center;">
 									<td>
 										<b>
-											1
+											{{index+1}}
 										</b>
 									</td>
 									<td>
-										<select style="width:130px;" v-model="item.payname">
-										<option v-for="item in classpaylistGson">{{item2.rowData.PAYNAME}}
+										<select style="width:130px;" v-model="item2.payname">
+										<option v-for="item in classpaylistGson">{{item.rowData.PAYNAME}}
 											</option>
 											
 										</select>
@@ -869,8 +869,6 @@ var vm=new Vue({
 	  
 	},
 	upd(){
-	    
-	    
 	    
 	    this.$confirm('是否提交表单, 是否继续?', '提示', {
 	          confirmButtonText: '确定',

@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.clas.Equ;
 import com.clas.SelectAll;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import net.sf.json.JSONObject;
 
@@ -194,6 +196,16 @@ public class UpDataContract3 extends HttpServlet {
 					+ "	    classson='"+    classson+"' ,sgmoney='"+sgmoney+"'  where contractid='"+contractid+"'";
 		
 			flag=SelectAll.Update(sql);
+			List<Equ> list = gson.fromJson(plan1, new TypeToken<List<Equ>>() {}.getType());
+			List<Equ> list2 = gson.fromJson(planm2, new TypeToken<List<Equ>>() {}.getType());
+			for (int i = 0; i < list2.size(); i++) {
+//				sql = "insert into PLANSUB (PAYNAME,PAYPOR,PAYDATE,STATU,REALPAY,PAYPLAN,CONTRACTID) values('"+list2.get(i).getPayname()+"','"+list2.get(i).getPaypor()+"',"
+//						+ "'"+list.get(i).getPaydate()+"','"+list2.get(i).getStatu()+"','"+list2.get(i).getPaydate()+"','"+list2.get(i).getPaydate()+"','"+contractid+"')";
+				sql = "update PLANSUB set  PAYNAME='"+list2.get(i).getPayname()+"',PAYPOR='"+list2.get(i).getPaypor()+"',STATU_SUB='"+list2.get(i).getStatu()+"',REALPAY='"+list2.get(i).getPaydate()+"',PAYPLAN='"+list2.get(i).getPaydate()+"'  where contractid='"+contractid+"' and PAYDATE='"+list.get(i).getPaydate()+"'";		
+				flag=SelectAll.Update(sql);
+						
+			}
+			
 			out.print("{\"statu\":1,\"WarningGsons\":\" ÐÞ¸Ä³É¹¦ \"}");
 			out.close();
 

@@ -44,6 +44,7 @@ public class TestChakanContract extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		
 		HttpSession session=request.getSession();
+		
 		List<Equ> contractList=ContractDao.contractList();
 		
 		session.setAttribute("contractList", contractList);

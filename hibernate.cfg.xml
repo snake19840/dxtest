@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+ "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+ "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+<session-factory>
+    <!--程序执行的时候是否显示真正的sql语句-->
+    <property name="show_sql">true</property>
+    <!--使用的SQL对应的“方言”，此处是Oracle11的“方言”-->
+    <property name="dialect">org.hibernate.dialect.OracleDialect
+    </property>
+    <!--连接数据库的Driver-->
+    <property name="connection.driver_class">
+        oracle.jdbc.driver.OracleDriver
+    </property>
+    <!--数据库连接url-->
+    <property name="connection.url">
+        jdbc:oracle:thin:@localhost:1521:orcloc
+    </property>
+    <!--用户名-->
+    <property name="connection.username">test</property>
+    <!--密码-->
+    <property name="connection.password">yujian123</property>
+    <mapping resource="Student.hbm.xml"/>
+</session-factory>
+</hibernate-configuration>
+
+
+
+
+
+
+
+
+
+
+

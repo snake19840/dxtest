@@ -1,6 +1,5 @@
 package com.servlet;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,7 +23,6 @@ import com.clas.ISOtoUTF;
 import com.clas.SelectAll;
 import com.dao.UrlDao;
 import com.google.gson.Gson;
-
 
 /**
  * Servlet implementation class upfile
@@ -98,10 +96,14 @@ public class upfile extends HttpServlet {
 //            System.out.println(contractid);
             String sql ="select COUNT(CONTRACTPICTURE) from DXTESTCONTRACTFILE WHERE CONTRACTID='"+nowdate+ fileName+"' and PLAN1='"+plan1+"'";
             int a=SelectAll.getCount(sql);
+            contractpicture=nowdate+ fileName;
             if (a==0) {
             	ff.write(storeFile);
             	  sql=" insert into DXTESTCONTRACTFILE (CONTRACTPICTURE,CONTRACTID,PLAN1) values('"+nowdate+ fileName+"','"+contractid+"','"+plan1+"')";
                   boolean Flag =SelectAll.insertItem(sql);
+//                  	Demo demo=new Demo();
+//                  	demo.upfile(contractpicture, plan1, contractid);
+//            	boolean Flag=true;
                   out.print("{\"statu\":"+Flag+",\"message\":1}");
       			out.close();
             }else {

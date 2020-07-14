@@ -8,7 +8,14 @@
 <%
 					     String today=DataSets.nowdate();
 						String tomorrow=DataSets.tomorrow();
+						String monthNow=DataSets.anymonth(0);
+						String monthNext=DataSets.anymonth(1);
 						%>
+	<!-- end: CSS -->
+	<script src="myjs/vue.js" charset="GBK"></script>
+<script src="myjs/axios.js" charset="GBK"></script>
+<script src="element-ui/lib/index.js"></script>
+
 
 <!-- start: Header -->
 	<div class="navbar"  style="display: block;">
@@ -26,322 +33,56 @@
 				</a>
 								
 				<!-- start: Header Menu -->
-				<div class="nav-no-collapse header-nav" style="display: block;">
-					<ul class="nav pull-right">
-						
-					<li class="dropdown hidden-phone">
-					<a class="btn dropdown-toggle"  href="ReturnIndex">
-								首页
-							</a>
-					</li>
-					<li class="dropdown hidden-phone">
-<!-- 							<a class="btn dropdown-toggle" data-toggle="dropdown" href="AllListServlet"> -->
-					<a class="btn dropdown-toggle"  href="AllListServlet">
-								设备管理
-							</a>
-							<ul class="dropdown-menu notifications">
-								<li class="dropdown-menu-title">
- 								</li>	
- 							
-                            	<li>
-                                     <a href="AddTestServletR">
-										<!--<span class="icon blue"><i class="icon-user"></i></span>-->
-										
-										<i class="halflings-icon book"></i> 设备录入
-										
-										<!-- <span class="time">1 min</span>  -->
-                                    </a> 
-                                </li>
-                              <li>
-                                     <a href="AllListServlet">
-                                     <i class="halflings-icon search"></i> 设备查询
-										
-									</a> 
-                                </li>
-                                <li>
-                                     <a href="AllListServlet2">
-                                      <i class="halflings-icon edit"></i> 设备修改
-										
-									</a> 
-                                </li>
-                                 <li>
-                                     <a href="TestMap">
-                                      <i class="halflings-icon map-marker"></i> 机房拓扑
-										
-									</a> 
-                                </li>
-                            
-							</ul>
-						</li>
-						<!-- start: Notifications Dropdown -->
-						<li class="dropdown hidden-phone">
-							<a class="btn dropdown-toggle"  href="AllListServlet4?sdate=<%=today %>&edate=<%=tomorrow%>">
-								<!-- <i class="icon-calendar"></i>
-								 <span class="badge red">
-								 </span> -->
-							运维管理</a>
-							<ul class="dropdown-menu tasks">
-								<li class="dropdown-menu-title">
- 								</li>
-								<li>
-                                     <a href="AllListServlet4?sdate=<%=today %>&edate=<%=tomorrow%>">
-										<!--<span class="icon blue"><i class="icon-user"></i></span>-->
-										<i class="icon-user-md"></i> 日常运维
-										<!-- <span class="message1">维护日志</span> -->
-										<!-- <span class="time">1 min</span>  -->
-                                    </a> 
-                                </li>
-                                	<li>
-                                     <a href="secpos">
-									
-										<i class="icon-signal"></i> 安全态势
-										
-                                    </a> 
-                                </li>
-<!--                                  	<li> -->
-<!--                                      <a href="calendar.jsp"> -->
-									
-<!-- 										<i class="icon-signal"></i> 维护日历 -->
-										
-<!--                                     </a>  -->
-<!--                                 </li> -->
-                               
-							</ul>
-						</li>
-						<!-- end: Notifications Dropdown -->
-						
-						
-						
-					
-						
-						<li id="contract-management-TestHeader" class="dropdown hidden-phone" style="display: none">
-							<a class="btn dropdown-toggle"  href="TestChakanContract">
-								合同管理
-							</a>
-							<ul class="dropdown-menu messages">
-								<li class="dropdown-menu-title">
-								</li>	
-								 <li>
-                                     <a href="TestContract">
-                                     <i class="icon-pencil"></i> 合同录入</a>
-                                   </li>
-                                   <li>
-                                     <a href="TestChakanContract">
-                                     <i class="icon-group"></i> 合同查找</a>
-                                     </li>
-                                     <li>
-                                     <a href="ContractPlan">
-                                     <i class="icon-calendar"></i> 合同计划
-									</a> 
-									</li>
-									<li>
-									<a href="Base">
-                                     <i class="icon-info-sign"></i> 基础信息录入
-									</a> 
-                                </li>
-                            		
-							</ul>
-						</li>
-						
-						
-						
-						
-						<!-- start: Message Dropdown -->
-						<li class="dropdown hidden-phone">
-							<a class="btn dropdown-toggle"  href="TestUsers">
-								<!-- <i class="icon-envelope"></i>
-								<span class="badge red">
-								4 </span> -->
-								系统管理
-							</a>
-							<ul class="dropdown-menu messages">
-								<li class="dropdown-menu-title">
- 									<!-- <span>You have 9 messages</span>
-									<a href="#refresh"><i class="icon-repeat"></i></a> -->
-								</li>	
-								 <li>
-                                     <a href="TestUsers">
-                                     <i class="icon-user"></i> 用户管理
-									</a> 
-                                </li>
-                                
-                                 <li id="perm" style="display: none;">
-                                     <a href="TestPerm">
-                                     <i class="icon-sitemap"></i> 权限管理
-									</a> 
-                                </li>
-                            		
-							</ul>
-						</li>
-						
-						<!-- start: User Dropdown -->
-						<li class="dropdown">
-							<a class="btn dropdown-toggle" id="user1" name="user1"  href="#">
-								<i class="halflings-icon white user"></i> 
-								<span class="caret" ></span>
-							</a>
-							<ul class="dropdown-menu">
-								<li class="dropdown-menu-title">
- 									<span>帐户设置</span>
-								</li>
-<!-- 								<li><a href="#"><i class="halflings-icon user"></i> 用户信息</a></li> -->
-								<li><a href="#" onclick="logout()"><i class="halflings-icon off"></i> 注销</a></li>
-								
-							</ul>
-						</li>
-						<!-- end: User Dropdown -->
-					</ul>
+				<div style="float: right;margin-right: -39px;" id="header" >
+				<el-menu :default-active="activeIndex" class="el-menu-demo" style="background-color: rgb(87, 142, 190)" mode="horizontal" @select="handleSelect">
+  <el-submenu index="1">
+    <template slot="title">设备管理</template>
+    <el-menu-item index="1-1" @click="linkjsp('AddTestServletR')">设备录入</el-menu-item>
+    <el-menu-item index="1-2" @click="linkjsp('AllListServlet')">设备查询</el-menu-item>
+    <el-menu-item index="1-3" @click="linkjsp('AllListServlet2')">设备修改</el-menu-item>
+    <el-menu-item index="1-4" @click="linkjsp('TestMap')">机房拓扑</el-menu-item>
+    
+  </el-submenu>
+  <el-submenu index="2">
+    <template slot="title">运维管理</template>
+    <el-menu-item index="2-1" @click="linkjsp('AllListServlet4?sdate=<%=today %>&edate=<%=tomorrow%>')">日常运维</el-menu-item>
+    <el-menu-item index="2-2" @click="linkjsp('secpos')">安全态势</el-menu-item>
+    <el-menu-item index="2-3" @click="linkjsp('out_warning.jsp')">故障报表</el-menu-item>
+  </el-submenu>
+  
+ 
+  <el-submenu index="3" v-if="isCon()">
+    <template slot="title">合同管理</template>
+    <el-menu-item index="3-1" @click="linkjsp('TestContract')">合同录入</el-menu-item>
+    <el-menu-item index="3-2" @click="linkjsp('TestChakanContract')">合同查找</el-menu-item>
+    <el-menu-item index="3-3" @click="linkjsp('ContractPlan')">合同计划</el-menu-item>
+    <el-submenu index="3-4">
+    <template slot="title">合同报表</template>
+    <el-menu-item index="3-4-1" @click="linkjsp('TestChakanContractPart?monthNow=<%=monthNow %>&monthNext=<%=monthNext %>&f=a')">合同预报帐统计</el-menu-item>
+    <el-menu-item index="3-4-2" >合同报表导出</el-menu-item>
+    <el-menu-item index="3-4-3" >合同报表分析</el-menu-item>
+    </el-submenu>
+    <el-menu-item index="3-5" @click="linkjsp('Base')">基础信息录入</el-menu-item>
+  </el-submenu>
+
+  
+   <el-submenu index="4">
+    <template slot="title">系统管理</template>
+    <el-menu-item index="4-1" @click="linkjsp('TestUsers.jsp')">用户管理</el-menu-item>
+    <el-menu-item index="4-2" @click="linkjsp('TestPerm')" v-if="islevela()">权限管理</el-menu-item>
+  </el-submenu>
+  
+  <el-submenu index="5" >
+  <template slot="title">{{user}}</template>
+  <el-menu-item index="5-1" @click="loginout()">注销</el-menu-item>
+  </el-submenu>
+  
+</el-menu>
 				</div>
 				<!-- end: Header Menu -->
 				
 				
 				
-				<div class="nav-no-collapse header-nav"  style="display: none">
-					<ul class="nav pull-right">
-						
-					<li class="dropdown hidden-phone">
-					<a class="btn dropdown-toggle"  href="ReturnIndex">
-								首页
-							</a>
-					</li>
-					<li class="dropdown hidden-phone">
-							<a class="btn dropdown-toggle"  href="AllListServlet">
-								设备管理
-							</a>
-							<ul class="dropdown-menu notifications">
-								<li class="dropdown-menu-title">
- 								</li>	
- 							
-                            	<li>
-                                     <a href="AddTestServletR">
-										<!--<span class="icon blue"><i class="icon-user"></i></span>-->
-										
-										<i class="halflings-icon book"></i> 设备录入
-										
-										<!-- <span class="time">1 min</span>  -->
-                                    </a> 
-                                </li>
-                              <li>
-                                     <a href="AllListServlet">
-                                     <i class="halflings-icon search"></i> 设备查询
-										
-									</a> 
-                                </li>
-                                <li>
-                                     <a href="AllListServlet2">
-                                      <i class="halflings-icon edit"></i> 设备修改
-										
-									</a> 
-                                </li>
-                            
-							</ul>
-						</li>
-						
-						
-						
-						
-						<!-- start: Notifications Dropdown -->
-						<li class="dropdown hidden-phone">
-							<a class="btn dropdown-toggle"  href="#">
-								<!-- <i class="icon-calendar"></i>
-								 <span class="badge red">
-								 </span> -->
-							运维管理</a>
-							<ul class="dropdown-menu tasks">
-								<li class="dropdown-menu-title">
- 								</li>
-								<li>
-                                     <a href="AllListServlet4?sdate=<%=today %>&edate=<%=tomorrow%>">
-										<!--<span class="icon blue"><i class="icon-user"></i></span>-->
-										<i class="icon-user-md"></i> 日常运维
-										<!-- <span class="message1">维护日志</span> -->
-										<!-- <span class="time">1 min</span>  -->
-                                    </a> 
-                                </li>
-                                   	<li>
-                                     <a href="secpos">
-									
-										<i class="icon-signal"></i> 安全态势
-										
-                                    </a> 
-                                </li>
-                
-                               
-							</ul>
-						</li>
-			
-						
-						<li id="contract-management-TestHeader" class="dropdown hidden-phone" style="display: none">
-							<a class="btn dropdown-toggle"  href="TestChakanContract">
-								合同管理
-							</a>
-							<ul class="dropdown-menu messages">
-								<li class="dropdown-menu-title">
-								</li>	
-								 <li>
-                                     <a href="TestContract">
-                                     <i class="icon-pencil"></i> 合同录入</a>
-                                   </li>
-                                   <li>
-                                     <a href="TestChakanContract">
-                                     <i class="icon-group"></i> 合同查找</a>
-                                     </li>
-                                     <li>
-                                     <a href="ContractPlan">
-                                     <i class="icon-calendar"></i> 合同计划
-									</a> 
-									</li>
-									<li>
-									<a href="Base">
-                                     <i class="icon-info-sign"></i> 基础信息录入
-									</a> 
-                                </li>
-                            		
-							</ul>
-						</li>
-						
-						
-						
-						
-						<!-- start: Message Dropdown -->
-						<li class="dropdown hidden-phone">
-							<a class="btn dropdown-toggle"  href="TestUsers.jsp">
-								<!-- <i class="icon-envelope"></i>
-								<span class="badge red">
-								4 </span> -->
-								系统管理
-							</a>
-							<ul class="dropdown-menu messages">
-								<li class="dropdown-menu-title">
- 									<!-- <span>You have 9 messages</span>
-									<a href="#refresh"><i class="icon-repeat"></i></a> -->
-								</li>
-								 <li>
-                                     <a href="TestUsers.jsp">
-                                     <i class="icon-user"></i> 用户管理
-									</a> 
-                                </li>
-							</ul>
-						</li>
-						
-						<!-- start: User Dropdown -->
-						<li class="dropdown">
-							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-								<i class="halflings-icon white user"></i> 
-								<span class="caret"></span>
-							</a>
-							<ul class="dropdown-menu">
-								<li class="dropdown-menu-title">
- 									<span>帐户设置</span>
-								</li>
-<!-- 								<li><a href="#"><i class="halflings-icon user"></i> 用户信息</a></li> -->
-								<li><a href="#" onclick="logout()"><i class="halflings-icon off"></i> 注销</a></li>
-								
-							</ul>
-						</li>
-						<!-- end: User Dropdown -->
-					</ul>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -351,7 +92,40 @@
 	<!-- start: Header 2-->
 	
 	
-		
+<script type="text/javascript">
+    listusGson=<%=session.getAttribute("listusGson") %>;
+    
+var hd=new Vue({
+    el:'#header',
+    data:{
+	listusGson:listusGson[0],
+	user:listusGson[0].userid,
+    },
+    methods:{
+	loginout(){
+	    location.href="LogoutServlet";
+	},
+	linkjsp(url){
+	    location.href=url;
+	},
+	
+	isCon(){
+	   if (this.listusGson.con=="1") {
+	       return 1;
+	}else {
+	    return 0;
+	}
+	},
+	islevela(){
+	    if (this.listusGson.levela=="1") {
+		       return 1;
+		}else {
+		    return 0;
+		}
+	},
+    },
+})
+</script>		
 	
 	
 

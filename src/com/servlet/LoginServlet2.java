@@ -97,6 +97,7 @@ public class LoginServlet2 extends HttpServlet {
 				List<Equ> listAllDxtestwork=SelectAll.SelectAllDxtestwork();
 				List<Equ> listAllDxtestwork2=SelectAll.SelectAllDxtestwork2();
 				List<Equ> userIds=SelectAll.userIds();
+				
 //				System.out.println(planAlertStr);
 				//合同提示列表
 				
