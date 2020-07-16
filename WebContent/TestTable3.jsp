@@ -434,6 +434,7 @@
 			<input type ="hidden" id="id1" name="id1" :value ="id" >
 			<input type ="hidden" id="sn1" name="sn1" :value ="sn" >
 		<input   type="submit" name="buttonall" class="btn btn-primary" id="buttonall" value="打印页面"   @click="checkall">								
+<!-- 		<a  @click="checkall()">aaaa</a> -->
 		</form>			 
 	</div>	
 		
@@ -537,6 +538,8 @@ var app3=new Vue({
 	   console.log(this.sn);
 	   formall.action="PrintTestServlet";
 		formall.submit();
+// 		console.log(1)
+// 		location.href='PrintTest2.jsp';
        }
    }
 });

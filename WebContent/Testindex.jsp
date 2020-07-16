@@ -338,6 +338,7 @@ function getCookie(name) {
 <%--     useridindex="<%=request.getAttribute("userid")%>"; --%>
     listAllDxtestworkObj2 = <%=session.getAttribute("listAllDxtestwork2") %>;
 	 listAllDxtestworkObj = <%=session.getAttribute("listAllDxtestwork")  %>;
+	
     typeclassGson=<%=session.getAttribute("typeclassGson")%>;
   let  data=<%=session.getAttribute("planalertlistGson")%>;
   listusGson=<%=session.getAttribute("listusGson")%>;   
@@ -494,7 +495,8 @@ if (planalertlistGson!=[]) {
      <script src="assets/js/lib/bootstrap.min.js" charset="utf-8" language="javascript"></script>
     <script src="assets/js/lib/jquery-ui/jquery-ui.min.js"></script>
      <script charset="GBK" type="text/javascript" language="javascript" src="assets/js/lib/moment/moment.js"></script>
-    <script charset="GBK" type="text/javascript" language="javascript"  src="js/fullcalendar.min.js"></script>
+     
+<!--     <script charset="GBK" type="text/javascript" language="javascript"  src="js/fullcalendar.min.js"></script> -->
     <script charset="UTF-8" type="text/javascript" language="javascript"  src="assets/js/lib/calendar/fullcalendar.min.js"></script>
     <script charset="GBK" type="text/javascript" language="javascript"  src="assets/js/lib/calendar/fullcalendar-init.js"></script>
     

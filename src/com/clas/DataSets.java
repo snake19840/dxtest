@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,6 +31,21 @@ public class DataSets {
 		SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
 		Calendar calendar=new GregorianCalendar();
 		calendar.setTime(new Date());
+		calendar.add(calendar.DATE, 1);
+		String dateTomString=dateFormat.format(calendar.getTime());
+		return dateTomString;
+	}
+	public static String anytomorrow(String n) {
+		SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+		Date dd=null;
+		try {
+			 dd=dateFormat.parse(n);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Calendar calendar=new GregorianCalendar();
+		calendar.setTime(dd);
 		calendar.add(calendar.DATE, 1);
 		String dateTomString=dateFormat.format(calendar.getTime());
 		return dateTomString;
@@ -162,7 +178,8 @@ public class DataSets {
 
     }
 public static void main(String[] args) {
-	System.out.println(DataSets.anymonth(1));
+	String d="2020-09-12";
+	System.out.println(DataSets.anytomorrow(d));
 	
 	
 }

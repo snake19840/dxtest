@@ -81,7 +81,7 @@ arrGson=<%=session.getAttribute("arrGson")%>;
     <el-radio v-model="radio1" label="2" style="letter-spacing: 1px;" border>EXCEL</el-radio>
   </div>
 	<div><span style="padding-left: 89px;"></span>
-	 <el-button type="primary" size="medium"  style="margin-left: 20%;margin-top: 15px;">导出报表</el-button>
+	 <el-button type="primary" size="medium"  style="margin-left: 20%;margin-top: 15px;" @click="output()">导出报表</el-button>
 	</div>
 						 
 			</div>			
@@ -180,6 +180,30 @@ function formatDate(date) {
      d = d < 10 ? ('0' + d) : d;  
      return y + '-' + m + '-' + d;  
   }
+function getEndMonth(n,x){
+    var year = n.getYear(); //获取当前日期的年份
+    var month = n.getMonth(); //获取当前日期的月份
+    var day = n.getDate; //获取当前日期的日
+    var days = new Date(year, month+1, 0);
+    days = days.getDate(); //获取当前日期中的月的天数
+    var year2 = year;
+    var month2 = parseInt(month) + 1+x;
+    if (month2 >= 13) {
+	year2 = parseInt(year2) + 1;
+	month2 = month2%12;
+	}else if(month2 <= 0){
+	    year2 = parseInt(year2) - 1;
+	    month2=12-month2;
+	}
+    if (month2 < 10) {
+	month2 = '0' + month2;
+	}
+    if(days<10){
+	days='0'+days;
+    }
+    var t2 = year2+1900 + '-' + month2 + '-' +days;
+    return t2;
+}
  function getNextMonth(n,x) {
 //      n=new Date(n);
 var year = n.getYear(); //获取当前日期的年份
@@ -189,9 +213,12 @@ var days = new Date(year, month, 0);
 days = days.getDate(); //获取当前日期中的月的天数
 var year2 = year;
 var month2 = parseInt(month) + 1+x;
-if (month2 == 13) {
+if (month2 >= 13) {
 year2 = parseInt(year2) + 1;
-month2 = 1;
+month2 = month2%12;
+}else if(month2 <= 0){
+    year2 = parseInt(year2) - 1;
+    month2=12-month2;
 }
 var day2 = day;
 var days2 = new Date(year2, month2, 0);
@@ -213,17 +240,26 @@ return t2;
      var t2 = year2+1900 + '-01-01';
      return t2;
  }
+ function getEndYear(n,x){
+     var year = n.getYear(); //获取当前日期的年份
+     var year2 = year;
+     year2 = parseInt(year2) + x;
+     var t2 = year2+1900 + '-12-31';
+     return t2;
+ }
  
  var dd=new Date();
  var output=new Vue({
      el:'#output',
      data:{
+	 startDate:"",
+	 endDate:"",
 	 radio1:'1',
 	 pickerOptions:{
 	     shortcuts: [{
 	            text: '最近一个月',
 	            onClick(picker) {
-	              const end = getNextMonth(dd,1);
+	              const end = getEndMonth(dd,0);
 	              const start = getNextMonth(dd,0);
 	              
 	              picker.$emit('pick', [start, end]);
@@ -231,14 +267,14 @@ return t2;
 	          }, {
 	            text: '最近三个月',
 	            onClick(picker) {
-	              const end = getNextMonth(dd,1);
-	              const start = getNextMonth(dd,-2);
+	              const end = getEndMonth(dd,0);
+	              const start = getNextMonth(dd,-3);
 	              picker.$emit('pick', [start, end]);
 	            }
 	          },{
 		            text: '最近一年',
 		            onClick(picker) {
-		              const end = getNextYear(dd,1);
+		              const end = getEndYear(dd,0);
 		              const start = getNextYear(dd,0);
 		           
 		              picker.$emit('pick', [start, end]);
@@ -246,7 +282,7 @@ return t2;
 		          },{
 			            text: '上一年',
 			            onClick(picker) {
-			              const end = getNextYear(dd,0);
+			              const end = getEndYear(dd,-1);
 			              const start = getNextYear(dd,-1);
 			              picker.$emit('pick', [start, end]);
 			            }
@@ -257,12 +293,33 @@ return t2;
 	          dateValue: '',
      },
      methods:{
-	 
+	 output(){
+	     if(this.startDate==''|| this.endDate==''){
+		 this.$message.error('请输入时间');
+	     }
+	     axios.get('out_warning',{
+		 params:{
+		     startDate:this.startDate,
+		     endDate:this.endDate,
+		     type:this.radio1,
+		 }
+	     }).then((response)=>{
+			 console.log(response.data);
+			 location.href="PrintTest2.jsp";
+		     }).catch((error)=>{
+			 console.log(error);
+		     }).then(function(){
+			 
+		     });
+	 },
      },
      watch:{
 	 dateValue:function(n,o){
 	   n[0]= n[0].toString().length>15? formatDate(n[0]):n[0];
 	   n[1]= n[1].toString().length>15? formatDate(n[1]):n[1];
+// 	   console.log(n);
+	   this.startDate=n[0];
+	   this.endDate=n[1];
 	 },
      },
  })

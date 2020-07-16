@@ -175,7 +175,7 @@ monthNext=<%=session.getAttribute("monthNext")%>;
 					<div style="height: 50px;">
 					<div style="float: left;">
 					<span style="padding-left: 20px;padding-right: 10px;"><b>请选择月份 :</b></span><el-date-picker
-      v-model="value2"
+      v-model="monthNow"
       type="month"
       placeholder="选择月">
     </el-date-picker>
@@ -208,7 +208,6 @@ monthNext=<%=session.getAttribute("monthNext")%>;
     show-overflow-tooltip
       prop="rowData.CONTRACTNAME"
       label="合同名称"
-      sortable
      min-width="200">
     </el-table-column>
      <el-table-column
@@ -229,12 +228,16 @@ monthNext=<%=session.getAttribute("monthNext")%>;
      >
     </el-table-column>
      <el-table-column
-      prop="rowData.PLANM1"
      show-overflow-tooltip
       label="当前进度"
+      sort-by="contractPlanListGson."
       sortable
+      sort-by="scope"
        width="102"
      >
+      <template slot-scope="scope">
+      {{planname(scope.row)}}
+      </template>
     </el-table-column>
       <el-table-column
       prop="rowData.REALPAY"
@@ -411,8 +414,20 @@ monthNext=<%=session.getAttribute("monthNext")%>;
 		
 		
 <script type="text/javascript">
+function tab(date1,m){
+    date2=getNextMonth(m,0)
+    var oDate1 = new Date(date1);
+    var oDate2 = new Date(date2);
+    if(oDate1.getTime() > oDate2.getTime()){
+        return 1;
+    } if(oDate1.getTime() == oDate2.getTime()){
+	  return 2;
+    }else {
+       return 3;
+    }
+}
 function getNextMonth(n,x) {
-		 n=new Date(n);
+    n=new Date(n);
 var year = n.getYear(); //获取当前日期的年份
 var month = n.getMonth(); //获取当前日期的月份
 var day = n.getDate; //获取当前日期的日
@@ -420,9 +435,9 @@ var days = new Date(year, month, 0);
 days = days.getDate(); //获取当前日期中的月的天数
 var year2 = year;
 var month2 = parseInt(month) + 1+x;
-if (month2 == 13) {
+if (month2 >= 13) {
    year2 = parseInt(year2) + 1;
-   month2 = 1;
+   month2 = month2%12;
 }
 var day2 = day;
 var days2 = new Date(year2, month2, 0);
@@ -435,15 +450,17 @@ if (month2 < 10) {
 }
 
 var t2 = year2+1900 + '-' + month2 + '-01';
-console.log(t2);
+// console.log(t2);
 return t2;
 }
 var tableList=new Vue({
     el:'#tableList',
     data:{
-	paycon:"全部",
-	options:[{"value":"全部"},{"value":"已付款"},{"value":"未付款"},],
-	value2:monthNow,
+	st:1,
+	paycon:"未付款",
+	options:[{"value":"未付款"},{"value":"已付款"},{"value":"全部"}],
+// 	options:[{"value":"未付款"}],
+	monthNow:monthNow,
 	value3:monthNext,
 	contractPlanListGson:contractPlanListGson,
 	tableData:[],
@@ -455,13 +472,11 @@ var tableList=new Vue({
 	allCount:0,
 	allData:contractListJSON,
 	subcontents:[],
+	date1:getNextMonth(Date(),0),
     },
     mounted:function(){
 	let items=this.allData;
 	this.tableData=this.dataShow(items);
-
-	
-
 
 
 // 	console.log(this.tableData);
@@ -533,6 +548,7 @@ var tableList=new Vue({
 // 	    console.log(e);
 	    this.edit(e);
 	},
+
 	sortby(){
 	    console.log(row);
 	    console.log(index);
@@ -566,23 +582,22 @@ var tableList=new Vue({
 		    return parseInt(datex/(86400000))+'天';
 	      },
 	      changeMonth(n){
-		
+// 			this.options
 		  this.ax(n);
 	      },
 	      changepaycon(n){
 		  axios.get('/dxtest/TestChakanContractPart', 
 			  {
 		      params:{
-			  monthNow:this.value2,
+			  monthNow:this.monthNow,
 			  monthNext:this.value3,
 			  f:"c",
 			  f2:n
 		      }
 			  })
 		      .then( (response)=> {
-		      console.log(response);
+// 		      console.log(response);
 		      this.value3=response.data.monthNext;
-		      this.value2=response.data.monthNow;
 		      this.contractPlanListGson=response.data.contractPlanListGson;
 		      this.allData=response.data.contractPlanListGson;
 		      this.tableData=this.dataShow( this.allData);
@@ -596,18 +611,20 @@ var tableList=new Vue({
 	      },
 	      
 	      ax(n){
+// 		  console.log(getNextMonth(n,0));
+// 		  console.log(getNextMonth(n,1));
 		  axios.get('/dxtest/TestChakanContractPart', 
 			  {
 		      params:{
 			  monthNow:getNextMonth(n,0),
 			  monthNext:getNextMonth(n,1),
 			  f:"b",
+			  f2:this.paycon,
 		      }
 			  })
 		      .then( (response)=> {
-		      console.log(response);
+// 		      console.log(response);
 		      this.value3=response.data.monthNext;
-		      this.value2=response.data.monthNow;
 		      this.contractPlanListGson=response.data.contractPlanListGson;
 		      this.allData=response.data.contractPlanListGson;
 		      this.tableData=this.dataShow( this.allData);
@@ -639,10 +656,16 @@ var tableList=new Vue({
 					   return a;
 					}
 	      },
-	      
+		planname(e){
+	 	   if(e.rowData.STATU=='end'){
+	 	       return "已结束";
+	 	   } 
+	 	    return e.rowData.PLANM1;
+		},
 	      
     },
     computed:{
+
 	sum(){
 	    let s=0;
 	    let a=0;
@@ -658,15 +681,40 @@ var tableList=new Vue({
     },
     watch:{
 	input2:function(n,o){
-	    console.log(n);
+// 	    console.log(n);
 	    this.shaixuan(n);
 	},
-	value2:function(n,o){
-	    this.changeMonth(n);
+	monthNow:function(n,o){
+		  if(tab(this.date1,n)==1){
+		      this.options=[{"value":"已付款"}];
+		      this.paycon="已付款";
+		  }else if (tab(this.date1,n)==2) {
+		      this.options=[{"value":"未付款"},{"value":"已付款"},{"value":"全部"}];
+		      this.paycon="未付款";
+		}else if (tab(this.date1,n)==3) {
+		    this.options=[{"value":"未付款"}];
+		    this.paycon="未付款";
+		}
+		  if(getNextMonth(this.monthNow,0)==this.date1){
+		      this.st=0;
+		  }
+		  var  t1=new Date(n);
+			var  t0=new Date(o);
+			var  t=new Date(this.date1)
+		  if (getNextMonth(this.monthNow,0)==this.date1 && (t0.getTime()-t.getTime())>=0) {
+		      this.st=1;
+		}
+// 		  console.log(this.st);
+		  this.changeMonth(n);
 	},
 	paycon:function(n,o){
-// 	    console.log(n);
-	    this.changepaycon(n);
+	    if (this.st==1) {
+// 		console.log(getNextMonth(this.monthNow,0));
+		  if(getNextMonth(this.monthNow,0)==this.date1){
+			this.changepaycon(n);
+	    }
+	    }
+	    this.st=1;
 	},
     },
 })

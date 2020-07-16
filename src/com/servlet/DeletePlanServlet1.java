@@ -62,9 +62,14 @@ public class DeletePlanServlet1 extends HttpServlet {
 //		System.out.println("==="+edate);
 //		System.out.println("==="+username);
 //		System.out.println("==="+statu);
-		
-		
+		String sql="select stno from dxtestwork where username='"+username+"' and sdate='"+sdate+"' and edate='"+edate+"' and statu='"+statu+"'";
+		String stno=SelectAll.getKey(sql, "stno");
+		boolean f=false;
 		SelectAll.deletePlan(username, sdate, edate, statu);
+		sql = "update dxtestwork set  userpwd=''  where stno='"+stno+"'";
+		if (statu.equals("»Ö¸´")) {
+			f=SelectAll.Update(sql);
+		}
 		
 		
 		//System.out.println("OK");

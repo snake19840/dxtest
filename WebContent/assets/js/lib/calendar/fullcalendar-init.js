@@ -131,7 +131,7 @@ function($) {
 		originalEventObject);
 		// assign it the date that was reported
 		copiedEventObject.start = date;
-		console.log(copiedEventObject.start);
+//		console.log(copiedEventObject.start);
 
 		if ($categoryClass) copiedEventObject['className'] = [$categoryClass];
 		// render the event on the calendar
@@ -738,9 +738,9 @@ function($) {
 		}
 
 		text = "[" + text.substr(0, text.length - 1) + "]";
+		
 		var obj = JSON.parse(text);
-//		console.log(obj);
-
+		
 		var defaultEvents = obj;
 		// var defaultEvents =  text;
 		//console.log(defaultEvents);
@@ -758,7 +758,7 @@ function($) {
 				center: 'title',
 				right: ''
 			},
-
+			nowDate:Date(),
 			events: defaultEvents,
 			editable: true,
 			droppable: true,

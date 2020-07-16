@@ -1981,7 +1981,7 @@ public class SelectAll {
 		try {
 			int intid=1;
 			Connection conn=com.clas.JDBCconnect.getConnection();
-			String sql="select * from dxtestwork where task is null or task='0' order by sdate desc";
+			String sql="select * from dxtestwork where task is null or task='0' and userpwd is null and sn!='0' order by sdate desc";
 			Statement statement=null;
 			statement=conn.createStatement();
 			ResultSet rs=statement.executeQuery(sql);

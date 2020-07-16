@@ -111,7 +111,7 @@ contractListItemGson=<%=session.getAttribute("contractListItemGson")%>;
 					<a href="ReturnIndex">主页</a> 
 					<i class="icon-angle-right"></i>
 				</li>
-				<li><a href="<%=TT%>">合同计划</a>
+				<li><a href="#" onClick="javascript :history.back(-1);">合同计划</a>
 				<i class="icon-angle-right"></i>
 				</li>
 				<li><a href="#">合同计划调整</a>
