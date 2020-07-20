@@ -29,7 +29,9 @@
 		<property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
 		
 		<!-- 3.把映射文件放入到核心配置文件中 必须的-->
-		<mapping resource="com/sq/entity/User.hbm.xml"/>
+		<mapping resource="com/sq/entity/User.hbm.xml"></mapping>
 		
 	</session-factory>		
 </hibernate-configuration>
+<!-- 		<property name="hibernate.connection.password">yujian123</property> -->
+<!-- 		<property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:orcloc</property> -->

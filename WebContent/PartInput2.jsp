@@ -104,7 +104,7 @@ overflow-x:auto;
 	</div>
 
 
-<template v-if="false">
+<template :v-if="isRec()">
 <div v-if="isRec" style="text-align: left;background-color: #eee !important;" class="box-content">
 <span style="margin-left:25px" id="select_name">
 	<b>{{listusGson[0].userid}}</b>

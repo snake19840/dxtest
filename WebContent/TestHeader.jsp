@@ -12,10 +12,17 @@
 						String monthNext=DataSets.anymonth(1);
 						%>
 	<!-- end: CSS -->
-	<script src="myjs/vue.js" charset="GBK"></script>
+<script src="myjs/vue.js" charset="GBK"></script>
 <script src="myjs/axios.js" charset="GBK"></script>
-<script src="element-ui/lib/index.js"></script>
 
+<script src="node_modules/moment/moment.js" charset="GBK"></script>
+<script src="element-ui/lib/index.js"></script>
+<style>
+.itemWraning {
+  margin-top: 10px;
+  margin-right: 40px;
+}
+</style>
 
 <!-- start: Header -->
 	<div class="navbar"  style="display: block;">
@@ -34,17 +41,16 @@
 								
 				<!-- start: Header Menu -->
 				<div style="float: right;margin-right: -39px;" id="header" >
-				<el-menu :default-active="activeIndex" class="el-menu-demo" style="background-color: rgb(87, 142, 190)" mode="horizontal" @select="handleSelect">
+				<el-menu :default-active="'activeIndex'" class="el-menu-demo" style="background-color: rgb(87, 142, 190)" mode="horizontal" @select="'handleSelect'">
   <el-submenu index="1">
     <template slot="title">设备管理</template>
     <el-menu-item index="1-1" @click="linkjsp('AddTestServletR')">设备录入</el-menu-item>
     <el-menu-item index="1-2" @click="linkjsp('AllListServlet')">设备查询</el-menu-item>
     <el-menu-item index="1-3" @click="linkjsp('AllListServlet2')">设备修改</el-menu-item>
     <el-menu-item index="1-4" @click="linkjsp('TestMap')">机房拓扑</el-menu-item>
-    
   </el-submenu>
   <el-submenu index="2">
-    <template slot="title">运维管理</template>
+    <template slot="title">运维管理 <el-badge class="mark" v-model="valueWarning" /></template>
     <el-menu-item index="2-1" @click="linkjsp('AllListServlet4?sdate=<%=today %>&edate=<%=tomorrow%>')">日常运维</el-menu-item>
     <el-menu-item index="2-2" @click="linkjsp('secpos')">安全态势</el-menu-item>
     <el-menu-item index="2-3" @click="linkjsp('out_warning.jsp')">故障报表</el-menu-item>
@@ -59,8 +65,8 @@
     <el-submenu index="3-4">
     <template slot="title">合同报表</template>
     <el-menu-item index="3-4-1" @click="linkjsp('TestChakanContractPart?monthNow=<%=monthNow %>&monthNext=<%=monthNext %>&f=a')">合同预报帐统计</el-menu-item>
-    <el-menu-item index="3-4-2" >合同报表导出</el-menu-item>
-    <el-menu-item index="3-4-3" >合同报表分析</el-menu-item>
+    <el-menu-item index="3-4-2" @click="linkjsp('out_contract.jsp')">合同报表导出</el-menu-item>
+    <el-menu-item index="3-4-3" @click="linkjsp('secposContract')">合同报表分析</el-menu-item>
     </el-submenu>
     <el-menu-item index="3-5" @click="linkjsp('Base')">基础信息录入</el-menu-item>
   </el-submenu>
@@ -90,14 +96,23 @@
 	
 	
 	<!-- start: Header 2-->
-	
-	
 <script type="text/javascript">
     listusGson=<%=session.getAttribute("listusGson") %>;
+    listAllDxtestworkObj = <%=session.getAttribute("listAllDxtestwork")  %>;
+
+    warningCount = {
+	      "f" : function(){
+		  if (listAllDxtestworkObj==null){listAllDxtestworkObj=[];}
+		  if(listAllDxtestworkObj.length==0){return ""; }
+	            return listAllDxtestworkObj.length;
+	      }
+	}
     
 var hd=new Vue({
     el:'#header',
     data:{
+	value:"",
+	valueWarning:warningCount.f(),
 	listusGson:listusGson[0],
 	user:listusGson[0].userid,
     },
@@ -108,7 +123,7 @@ var hd=new Vue({
 	linkjsp(url){
 	    location.href=url;
 	},
-	
+
 	isCon(){
 	   if (this.listusGson.con=="1") {
 	       return 1;

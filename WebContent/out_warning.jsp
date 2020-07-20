@@ -16,8 +16,6 @@
 	 <link href="mycss/iconfont.css" rel="stylesheet" type="text/css"/>
     <link href="mycss/fileUpload.css" rel="stylesheet" type="text/css">
 	
-	
-	
 	<link id="bootstrap-style" href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 	<link id="base-style" href="css/style.css" rel="stylesheet">
@@ -81,12 +79,43 @@ arrGson=<%=session.getAttribute("arrGson")%>;
     <el-radio v-model="radio1" label="2" style="letter-spacing: 1px;" border>EXCEL</el-radio>
   </div>
 	<div><span style="padding-left: 89px;"></span>
-	 <el-button type="primary" size="medium"  style="margin-left: 20%;margin-top: 15px;" @click="output()">导出报表</el-button>
+	 <el-button  type="primary" size="medium"  style="margin-left: 20%;margin-top: 15px;" @click="output()">导出报表</el-button>
 	</div>
 						 
 			</div>			
 						</div>
 					</div>
+					
+<table style="display:none;"  id="item"> 
+	<tr>
+    <th>故障编号</th>
+<th>记录信息</th>
+<th>录入人员</th>
+<th>记录时间戳</th>
+<th>记录时间</th>
+<th>设备状态</th>
+<th>恢复标记</th>
+<th>设备SN号</th>
+<th>设备名称</th>
+<th>设备位置</th>
+<th>设备IP</th>
+   </tr>
+  <tr v-for="(item,index) in listGson_print" :key="index">
+    <td >{{item.rowData.STNO=item.rowData.STNO=='0'? "无":item.rowData.STNO}}</td>
+<td>{{item.rowData.MESSAGE}}</td>
+<td>{{item.rowData.USERNAME}}</td>
+<td>{{item.rowData.NOWDATE}}</td>
+<td>{{TimeSave(item.rowData.STNO,item.rowData.TIME,item.rowData.SDATE,item.rowData.NOWDATE)}}</td>
+<td>{{Status(item.rowData.STNO,item.rowData.STATU)}}</td>
+<td>{{restore(item.rowData.USERPWD,item.rowData.STNO)}}</td>
+<td style="vnd.ms-excel.numberformat:@;">{{item.rowData.SN=item.rowData.SN!='0'? item.rowData.SN:"无"}}</td>
+<td>{{item.rowData.PNAME_T2=item.rowData.SN!="无"? item.rowData.PNAME_T2:"无"}}</td>
+<td>{{item.rowData.POS_T2=item.rowData.SN!="无"? item.rowData.POS_T2:"无"}}</td>
+<!-- <td>{{item.rowData.IP_T2=item.rowData.SN!="无"? item.rowData.IP_T2.substring(0,(item.rowData.IP_T2).indexOf('\/')):"无"}}</td> -->
+<td >{{II(item.rowData.IP_T2,item.rowData.SN)}}</td>
+  </tr>
+	</table>	
+					
 				</div>
 
 			</div><!--/.fluid-container-->
@@ -172,6 +201,47 @@ arrGson=<%=session.getAttribute("arrGson")%>;
 		
 		
  <script type="text/javascript">
+ var tableToExcel = (function () {
+    var uri = 'data:application/vnd.ms-excel;base64,'
+        , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+        , base64 = function (s) { return window.btoa(unescape(encodeURIComponent(s))) }
+        , format = function (s, c) { return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; }) }
+        return function (table, name, filename) {
+            console.log(table);
+            if (!table.nodeType) table = document.getElementById(table)
+            var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
+
+            var link = uri + base64(format(template, ctx));
+            var a = document.createElement("a");
+            a.href = link;
+            a.download = filename;//这里是关键所在,当点击之后,设置a标签的属性,这样就可以更改标签的标题了
+            a.click();
+        }
+})()
+ 
+ 
+ function excel(){
+     var fileName = $("故障列表").text();// 获取表格名称
+     var table = document.getElementById("item");// 通过id获取
+     var excelContent = table.innerHTML;
+     var excelFile = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:x='urn:schemas-microsoft-com:office:excel' xmlns='http://www.w3.org/TR/REC-html40'>";
+     excelFile += "<head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>worksheet</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head>";
+     excelFile += "<body><table>";
+     excelFile += excelContent.replace(/\n/g,"<br style='mso-data-placement:same-cell;'/>") ;
+     excelFile += "</table></body>";
+     excelFile += "</html>";
+     var link = "data:application/vnd.ms-excel;base64," + base64(excelFile);
+     var a = document.createElement("a");
+     a.download = fileName+"故障列表";
+     a.href = link;
+     a.click();
+ }
+ function base64 (content) {
+     return window.btoa(unescape(encodeURIComponent(content)));
+ }
+ 
+ 
+ 
 function formatDate(date) { 
      var y = date.getFullYear();  
      var m = date.getMonth() + 1;  
@@ -255,6 +325,7 @@ return t2;
 	 startDate:"",
 	 endDate:"",
 	 radio1:'1',
+	 listGson_print:[],
 	 pickerOptions:{
 	     shortcuts: [{
 	            text: '最近一个月',
@@ -293,10 +364,68 @@ return t2;
 	          dateValue: '',
      },
      methods:{
+	 II(IP_T2,SN){
+	     if (SN!="无"){
+		 let i=IP_T2.indexOf("/");
+		    return IP_T2.substring(0,i);
+	     }else{
+		 return "无";
+	     }
+	 },
+	 restore(USERPWD,STNO){
+	     if(STNO!='无'){
+		 if(USERPWD!='restore'){
+		     return "未修复";
+		 }else{
+		     return "已修复";
+		 }
+	     }else{
+		 return "正常";
+	     }
+	 },
+	 Status(STNO,STATU){
+	     if(STNO!='无'){
+		 if(STATU!='恢复'){
+		     return STATU;
+		 }else{
+		     return "修复";
+		 }
+	     }else{
+		 return "设备正常";
+	     }
+	 },
+	 TimeSave(STNO,TIME,SDATE,NOWDATE){
+	     if(STNO!='无'){
+		 if(TIME!=null){
+		     return SDATE.substring(0,10)+" "+TIME;
+		 }else{
+		     return NOWDATE;
+		 }
+	     }else{
+		 return SDATE.substring(0,10)+" "+TIME;
+	     }
+	 },
+	 changeTable(){
+	     axios.get('out_warning',{
+		 params:{
+		     startDate:this.startDate,
+		     endDate:this.endDate,
+		     type:"2",
+		 }
+	     }).then((response)=>{
+			 console.log(response.data);
+			 this.listGson_print=response.data.listGson_print;
+		     }).catch((error)=>{
+			 console.log(error);
+		     }).then(function(){
+			 
+		     });
+	 },
 	 output(){
 	     if(this.startDate==''|| this.endDate==''){
 		 this.$message.error('请输入时间');
 	     }
+	     if(this.radio1=='1'){
 	     axios.get('out_warning',{
 		 params:{
 		     startDate:this.startDate,
@@ -311,6 +440,10 @@ return t2;
 		     }).then(function(){
 			 
 		     });
+	     }else if(this.radio1=='2'){
+		 tableToExcel('item','workSheet','故障报表.xls');
+// 		 excel();
+	     }
 	 },
      },
      watch:{
@@ -320,9 +453,17 @@ return t2;
 // 	   console.log(n);
 	   this.startDate=n[0];
 	   this.endDate=n[1];
+	   this.changeTable();
 	 },
      },
  })
     </script>
+    <script type="text/javascript">
+
+
+ // 点击导出按钮
+
+    </script>
+    
 </body>
 </html>

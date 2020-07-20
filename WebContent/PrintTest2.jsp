@@ -325,7 +325,12 @@ listGson_print=<%=session.getAttribute("listGson_print") %>;
   border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:160pt'>
   <p class=MsoNormal align=left style='text-align:left;line-height:12.0pt'><span
   style='font-size:11.0pt;font-family:宋体;color:black'>检查异常描述：<%if(!statu.equals("恢复")){%>
-	  <%=message%>
+  <%if(message.length()>110){ %>
+  <%=message.substring(0,110)+"..."%>
+  <%}else{%>
+  <%=message%>
+  <%} %>
+	  
   <%}%></span></p>
   </td>
   <td width=217 style='width:179.0pt;border-top:none;border-left:none;
@@ -360,11 +365,11 @@ listGson_print=<%=session.getAttribute("listGson_print") %>;
   </td>
  </tr>
  <tr style='height:36.8pt'>
-  <td width=566 colspan=6 style='width:458.15pt;word-break:break-all;border-top:none;border-left:
+  <td width=566 colspan=6 style='width:458.15pt; word-break:break-all;overflow: hidden;text-overflow: ellipsis;border-top:none;border-left:
   solid windowtext 1.0pt;border-bottom:none;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:108.8pt'>
   <p class=MsoNormal align=left style='text-align:left;line-height:12.0pt'><span
-  style='font-size:11.0pt;font-family:宋体;color:black'>备注：<span lang=EN-US>
+  style='font-size:11.0pt;font-family:宋体;color:black'>备注： <span lang=EN-US>
   <%
   if(!stno.equals("0")){%>
 	  设备名: <%=PNAME_T2 %> </br>&nbsp;设备位置: <%=POS_T2 %>&nbsp;设备IP: <%=IP_T2 %>&nbsp;
@@ -374,13 +379,15 @@ listGson_print=<%=session.getAttribute("listGson_print") %>;
   说明:&nbsp;
   <%} %>
   
-  <%if(statu.equals("恢复")){%>
-   <%=message%>
+  <%if(statu.equals("恢复")){	  
+  %>
+  <%if(message.length()>240){%>
+  <%=message.substring(0,240)+"..."%>
+  <%}else{%>
+  <%=message%>
+  <%} %>
 	<%  } %>
-  
- 
   </span></span></p>
-  
   </td>
  </tr>
  <tr style='height:20.7pt'>
@@ -420,13 +427,13 @@ listGson_print=<%=session.getAttribute("listGson_print") %>;
   <td width=265 colspan=3 valign=top style='width:212.65pt;border:none;
   border-bottom:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:10.4pt'>
   <p class=MsoNormal align=left style='text-align:left;line-height:12.0pt'><span
-  style='font-size:11.0pt;font-family:宋体;color:black'>审核人签字</span></p>
+  style='font-size:11.0pt;font-family:宋体;color:black'>审核人签字 :&nbsp;蒋勇</span></p>
   </td>
   <td width=221 colspan=2 valign=top style='width:181.95pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:10.4pt'>
   <p class=MsoNormal align=left style='text-align:left;line-height:12.0pt'><span
-  style='font-size:11.0pt;font-family:宋体;color:black'>日期时间</span></p>
+  style='font-size:11.0pt;font-family:宋体;color:black'>日期时间 :&nbsp;<%=markTime.substring(0,10)%></span></p>
   </td>
  </tr>
  <tr height=0>

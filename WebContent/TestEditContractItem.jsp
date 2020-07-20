@@ -696,7 +696,7 @@ String contractListItemFileGson=(String)session.getAttribute("contractListItemFi
 			        }).catch(() => {
 			          this.$message({
 			            type: 'info',
-			            message: '请填写完整'
+			            message: '表单出错'
 			          });          
 			        });
 			},

@@ -1159,7 +1159,7 @@ public class SelectAll {
 			}
 			
 			ps.close();
-			 ps2.close();
+//			 ps2.close();
 			 ps3.close();
 			rs2.close();
 			 rs3.close();
@@ -1981,7 +1981,17 @@ public class SelectAll {
 		try {
 			int intid=1;
 			Connection conn=com.clas.JDBCconnect.getConnection();
-			String sql="select * from dxtestwork where task is null or task='0' and userpwd is null and sn!='0' order by sdate desc";
+//			String sql="select * from dxtestwork where task is null or task='0' and userpwd is null and sn!='0' order by sdate desc";
+			String sql="select t1.ID,	t1.MESSAGE,	t1.USERNAME,	t1.USERPWD,	t1.NOWDATE,	t1.SDATE,	"
+					+ "t1.EDATE,	t1.SN,	t1.PICTURE,	t1.STATU,	t1.STNO,	t1.TASK,	t1.TIME,t2.ID AS "
+					+ "ID_t2,	t2.STDATE AS STDATE_t2,	t2.SDATE AS SDATE_t2,	t2.EDATE AS EDATE_t2,	"
+					+ "t2.REDATE AS REDATE_t2,	t2.PNAME AS PNAME_t2,	t2.USE AS USE_t2,	t2.OWNNAME AS OWNNAME_t2,	"
+					+ "t2.PRONAME AS PRONAME_t2,	t2.MANNAME AS MANNAME_t2,	t2.AGENAME AS AGENAME_t2,	"
+					+ "t2.MANTYP AS MANTYP_t2,	t2.SNAME AS SNAME_t2,	t2.STYP AS STYP_t2,	t2.POS AS POS_t2,	"
+					+ "t2.IP AS IP_t2,	t2.PORT AS PORT_t2,	t2.CPU AS CPU_t2,	t2.MEMORY AS MEMORY_t2,	t2.DISK AS DISK_t2,	"
+					+ "t2.SYN AS SYN_t2,	t2.ORACLE AS ORACLE_t2,	t2.SN AS SN_t2,	t2.OTH AS OTH_t2,	t2.SID AS SID_t2 from "
+					+ "dxtestwork t1,dxtest t2 where t2.sn!='0' and t1.sn=t2.sn and t1.stno!='0' and t1.userpwd is null and task='0' "
+					+ "order by t1.sdate desc";
 			Statement statement=null;
 			statement=conn.createStatement();
 			ResultSet rs=statement.executeQuery(sql);
@@ -1999,6 +2009,9 @@ public class SelectAll {
 				equ.setSdate(rs.getString("sdate"));
 				equ.setStno(rs.getString("stno"));
 				equ.setTask(rs.getString("task"));
+				equ.setPNAME_T2(rs.getString("PNAME_T2"));
+				equ.setIP_T2(rs.getString("IP_T2"));
+				equ.setPOS_T2(rs.getString("POS_T2"));
 				listAllDxtestwork.add(equ);
 			}
 			rs.close();

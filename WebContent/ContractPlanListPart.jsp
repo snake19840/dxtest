@@ -107,6 +107,8 @@
 
 
 </style> 
+
+
 	<style type="text/css">
 .input2 input{
 height:40px; }
@@ -559,7 +561,7 @@ var tableList=new Vue({
 	      },
 	      countCamcount(e){
 		  var sum=e.rowData.CAMOUNT;
-		  var per=e.rowData.SGMONEY/100;
+		  var per=e.rowData.PAYPOR/100;
 		  return (sum*per).toFixed(2);
 	      },
 	      payconfirm(e){
@@ -672,7 +674,7 @@ var tableList=new Vue({
 	    let per=0; 
 	    for(i in this.contractPlanListGson){
 		a=this.contractPlanListGson[i].rowData.CAMOUNT;
-		per=this.contractPlanListGson[i].rowData.SGMONEY/100;
+		per=this.contractPlanListGson[i].rowData.PAYPOR/100;
 		s=s+(a*per);
 		
 	    }

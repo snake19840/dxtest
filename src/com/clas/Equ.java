@@ -15,6 +15,7 @@ public class Equ {
 		
 		private boolean flag;
 		private int id;
+		private int value;
 		private String sid;//卡片编号
 		private String did;//档案编号
 		private String stdate; //设备初次搬入机房日期
@@ -192,7 +193,9 @@ public class Equ {
 		private  String content;
 		private int m;
 		private int n;
-
+		private String PNAME_T2;
+		private String POS_T2;
+		private String IP_T2;
 
 
 	
@@ -200,6 +203,30 @@ public class Equ {
 
 		
 		
+		public String getPNAME_T2() {
+			return PNAME_T2;
+		}
+		public void setPNAME_T2(String pNAME_T2) {
+			PNAME_T2 = pNAME_T2;
+		}
+		public String getPOS_T2() {
+			return POS_T2;
+		}
+		public void setPOS_T2(String pOS_T2) {
+			POS_T2 = pOS_T2;
+		}
+		public String getIP_T2() {
+			return IP_T2;
+		}
+		public void setIP_T2(String iP_T2) {
+			IP_T2 = iP_T2;
+		}
+		public int getValue() {
+			return value;
+		}
+		public void setValue(int value) {
+			this.value = value;
+		}
 		public int getM() {
 			return m;
 		}

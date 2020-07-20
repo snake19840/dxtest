@@ -322,7 +322,7 @@ listGsonAll=<%=session.getAttribute("listGsonAll") %>;
 		<script src="Base64.js-master/Base64.js-master/base64.js"></script>
 		<script src="tableExport.jquery.plugin-master/tableExport.jquery.plugin-master/tableExport.js"></script>
 		
-<script src="jquery-table2excel-master/jquery-table2excel-master/dist/jquery.table2excel.min.js"></script>
+
 		
 	
 		<script src="js/bootstrap.min.js"></script>
@@ -370,10 +370,7 @@ listGsonAll=<%=session.getAttribute("listGsonAll") %>;
 		<script src="js/retina.js"></script>
 
 		<script src="js/custom.js"></script>
-		<script src="excel/external/jszip.min.js"></script>
-		<script src="excel/external/FileSaver.js"></script>
-		<script src="excel/scripts/demo.page.js"></script>
-		<script src="excel/scripts/excel-gen.js"></script>
+		
 	<!-- end: JavaScript-->
 
 <script type="text/javascript">

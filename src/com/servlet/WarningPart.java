@@ -99,6 +99,10 @@ public class WarningPart extends HttpServlet {
 		session.setAttribute("stno_AllListServlet3",stno); 
 		session.setAttribute("edate", edate);
 		session.setAttribute("sdate", sdate);
+		List<Equ> listAllDxtestwork=SelectAll.SelectAllDxtestwork();
+		String listAllDxtestworkSon=gson.toJson(listAllDxtestwork);
+		session.setAttribute("listAllDxtestwork", listAllDxtestworkSon);
+		
 		
 		if (userpwd) {
 			request.getRequestDispatcher("TestWarningItem.jsp").forward(request, response);

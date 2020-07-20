@@ -159,6 +159,7 @@ var warning=new Vue({
     methods:{
     	
 //	isRec(){
+//		console.log(this.WarningGsons['0'].rowData.STATU);
 //	   return this.WarningGsons['0'].rowData.STATU!='»Ö¸´' ? true:false;
 //	},
 	dataShowf(items){

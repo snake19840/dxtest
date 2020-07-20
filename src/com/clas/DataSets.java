@@ -1,5 +1,7 @@
 package com.clas;
 
+import static org.junit.jupiter.api.DynamicTest.stream;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -178,8 +180,13 @@ public class DataSets {
 
     }
 public static void main(String[] args) {
-	String d="2020-09-12";
-	System.out.println(DataSets.anytomorrow(d));
+	String d="[恢复时间]2020-04-11 09:48:45 [故障分类]数据库 [故障原因]数据库扩容后未更改control01.ctl路径,磁盘空间满了之后无法写入文件,导致后台进行\"LGWR\"异常终止,使数据实例终止. [故障处理]把oradata实例中的control01.ctl从VolGroup-LogVol03映射至sdb1";
+	String d1="我";
+	byte[]  buff=d.getBytes();
+	byte[]  buff1=d1.getBytes();
+	System.out.println(d.length());
+	System.out.println(buff.length);
+	System.out.println(buff1.length);
 	
 	
 }

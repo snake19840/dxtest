@@ -36,6 +36,10 @@ function codeA(a) {
 		     var s_edate=listAllDxtestworkObj[i]["edate"];
 		     var message= listAllDxtestworkObj[i]["message"];
 		     var sn= listAllDxtestworkObj[i]["sn"];
+			var ip=listAllDxtestworkObj[i]["IP_T2"];
+			ip=ip.substring(0,ip.indexOf('/'));
+			var pos=listAllDxtestworkObj[i]["POS_T2"];
+			var pname=listAllDxtestworkObj[i]["PNAME_T2"];
 		     var stno= listAllDxtestworkObj[i]["stno"];
 		     var statu= listAllDxtestworkObj[i]["statu"];
 		     var userpwd= listAllDxtestworkObj[i]["userpwd"];
@@ -58,7 +62,8 @@ function codeA(a) {
 				 text += "<a href=\"WarningPart?sn="+sn+"&sdate="+codeA(s_sdate)+"&userid="+userid+"&stno="+stno+"&edate="+codeA(s_edate)+"&statu="+codeA("告警")+"\"";
 				 text += ">"   ;
 				 text += "<i class=\""+textSub1(statu)+"\"></i>";
-				 text += "设备SN号:&nbsp;&nbsp;&nbsp;&nbsp;"+sn+"&nbsp;&nbsp;&nbsp;&nbsp;<strong>事件时间:&nbsp;&nbsp;&nbsp;&nbsp;"+sdateL+"</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+				 text += ""+pname+"&nbsp;&nbsp;&nbsp;&nbsp;";
+				text += "<strong>事件时间:&nbsp;&nbsp;&nbsp;&nbsp;"+sdateL+"</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 				 text += "事件内容:&nbsp;&nbsp;&nbsp;&nbsp; "+message+"                                 ";
 				 text += "</a>";
 				 text += "</li>";
@@ -70,7 +75,8 @@ function codeA(a) {
 				 text += "<a href=\"WarningPart?sn="+sn+"&sdate="+codeA(s_sdate)+"&userid="+userid+"&stno="+stno+"&edate="+codeA(s_edate)+"&TT=ReturnIndex&statu="+codeA("故障")+"\"";
 				 text += ">"   ;
 				 text += "<i class=\""+textSub1(statu)+"\"></i>";
-				 text += "设备SN号:&nbsp;&nbsp;&nbsp;&nbsp;"+sn+"&nbsp;&nbsp;&nbsp;&nbsp;<strong>事件时间:&nbsp;&nbsp;&nbsp;&nbsp;"+sdateL+"</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+				 text += ""+pname+"&nbsp;&nbsp;&nbsp;&nbsp;";
+				text += "<strong>事件时间:&nbsp;&nbsp;&nbsp;&nbsp;"+sdateL+"</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 				 text += "事件内容:&nbsp;&nbsp;&nbsp;&nbsp; "+message+"                                 ";
 				 text += "</a>";
 				 text += "</li>";

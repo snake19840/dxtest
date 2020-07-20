@@ -392,8 +392,8 @@ function getCookie(name) {
          <template slot-scope="scope">
         <el-button
           size="mini"
-          type="danger"
-          @click="wraning(scope.$index, scope.row)" class="el-icon-warning-outline"></el-button>
+          type="info"
+          @click="wraning(scope.$index, scope.row)" class="el-icon-info"></el-button>
       </template>
       
     </el-table-column>

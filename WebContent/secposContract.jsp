@@ -7,8 +7,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>secpos</title>
+<meta http-equiv="Content-Type" content="text/html; charset='utf-8'" />
+<title>secposContract</title>
+
 <meta name="description" content="Bootstrap Metro Dashboard">
 	<meta name="author" content="">
 	<meta name="keyword" content="">
@@ -16,19 +17,32 @@
 	 <link href="mycss/iconfont.css" rel="stylesheet" type="text/css"/>
     <link href="mycss/fileUpload.css" rel="stylesheet" type="text/css">
 	
-	
-	
 	<link id="bootstrap-style" href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 	<link id="base-style" href="css/style.css" rel="stylesheet">
 	<link id="base-style-responsive" href="css/style-responsive.css" rel="stylesheet">
+	    <link href="assets/css/lib/calendar/fullcalendar.css" rel="stylesheet" />
+    <link href='css/jquery-ui-1.8.21.custom.css' rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="alert/css/alert.css">
+	<link rel="shortcut icon" href="img/favicon.ico">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'>
 	<!-- end: CSS -->
 <link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
+
 </head>
 <body>
 <script type="text/javascript">
 arrGson=<%=session.getAttribute("arrGson")%>;
+arrfxGson=<%=session.getAttribute("arrfxGson")%>;
+arrsxGson=<%=session.getAttribute("arrsxGson")%>;
+arrff0=<%=session.getAttribute("arrff0")%>;
+arrff1=<%=session.getAttribute("arrff1")%>;
+arrss0=<%=session.getAttribute("arrss0")%>;
+arrss1=<%=session.getAttribute("arrss1")%>;
+arrCountGson=<%=session.getAttribute("arrCountGson")%>;
+listfGsosn=<%=session.getAttribute("listfGsosn")%>;
+listsGsosn=<%=session.getAttribute("listsGsosn")%>;
+
 </script>
 <%@include file="TestHeader.jsp" %>
 		<div class="container-fluid-full">
@@ -58,8 +72,10 @@ arrGson=<%=session.getAttribute("arrGson")%>;
 					</div>
 					
 						<div class="box-content">
+						
 						 <div id="main" style="width: 100%;height:400px;"></div>
-<!-- 						 <div id="main2" style="width: 100%;height:400px;"></div> -->
+						 <hr align=center width=100% color=#987cb9 SIZE=1 style="background: linear-gradient(to right, #409eff 0%,#ebeef5 50%,#e6a23c 100%);">
+						 <div id="main2" style="width: 100%;height:400px;"></div>
 						
 						</div>
 					</div>
@@ -153,32 +169,76 @@ arrGson=<%=session.getAttribute("arrGson")%>;
 		<script src="echarts/china.js"></script>
 		<script src="echarts/dataTool.min.js"></script>
 		<script src="echarts/echarts-gl.min.js"></script>
-		<script src="ecStat.min.js"></script>
+<!-- 		<script src="ecStat.min.js"></script> -->
 		<script src="echarts/world.js"></script>
 		
-		
+
 		
  <script type="text/javascript">
+ var t2=[];
+ for (i in listfGsosn){
+     t2.push(listfGsosn[i].rowData.CLASSFAMILY);
+ }
+ for (i in listsGsosn){
+     t2.push(listsGsosn[i].rowData.CLASSSON);
+ }
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('main'));
-//         var myChart2 = echarts.init(document.getElementById('main2'));
+        var myChart2 = echarts.init(document.getElementById('main2'));
         var date = new Date();
         var yearArr= new Array(3);
-      let  year0=date.getFullYear()-2,year1=date.getFullYear()-1,year2=date.getFullYear();
-      yearArr[0]=""+year0+"年"
-      yearArr[1]=""+year1+"年"
-      yearArr[2]=""+year2+"年"
+        var countArr=[];
+        let a=0;
+        let ss=0;
+      let  year0=date.getFullYear(),year1=date.getFullYear()-1,year2=date.getFullYear()-2;
+      
+      for (i in arrGson){
+	  
+	  for(j in arrGson[i]){
+	     
+	      a=isNaN(parseInt(arrGson[i][j]))? 0:parseInt(arrGson[i][j]);
+	      ss=ss+a;
+	  }
+	  countArr.push(ss);
+	  ss=0;
+      }
+    for (i in arrff0){
+	let t=arrff0[i];
+	delete t.id;
+	
+    }
+    for (i in arrff1){
+	let t=arrff1[i];
+	delete t.id;
+    }
+    for (i in arrss0){
+	let t=arrss0[i];
+	delete t.id;
+    }
+    for (i in arrss1){
+	let t=arrss1[i];
+	delete t.id;
+    }
+    
+      yearArr[0]=""+year0+"年";
+      yearArr[1]=""+year1+"年";
+      yearArr[2]=""+year2+"年";
+      yearArr[3]=yearArr[0]+"付款笔数";
+    var  month=['一月', '二月', '三月', '四月', '五月', '六月', '七月','八月','九月','十月','十一月','十二月'];
   
-     
+      var colors = ['#4cea42', '#d14a61', '#64478b','#5793f3'];  
         // 指定图表的配置项和数据
         var option = {
-	      		
+        	 color: colors,
         	    title: {
         		x:'40px',
         	        text: '近三年合同付款金额'
         	    },
         	    tooltip: {
-        	        trigger: 'axis'
+        	        trigger: 'axis',
+//         	            axisPointer: {
+//         	                type: 'cross'
+//         	            }
         	    },
         	    legend: {
         	        data: yearArr
@@ -207,40 +267,147 @@ arrGson=<%=session.getAttribute("arrGson")%>;
         	    },
         	    xAxis: {
         	        type: 'category',
-        	        boundaryGap: false,
+        	       
+        	        axisTick: {
+        	                alignWithLabel: true
+        	            },
         	        data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月','八月','九月','十月','十一月','十二月']
         	    },
-        	    yAxis: {
-        	        type: 'value'
-        	    },
+        	    yAxis: [{
+        	            type: 'value',
+        	            name: '付款金额',
+        	          
+        	            position: 'left',
+        	            axisLine: {
+        	            },
+        	            axisLabel: {
+        	                formatter: '{value} 元'
+        	            }
+        	        },{
+        	            type: 'value',
+        	            name: '付款笔数',
+        	          
+        	            position: 'right',
+        	            
+        	            axisLabel: {
+        	                formatter: '{value} 笔'
+        	            }
+        	        }
+        	        ],
         	    series: [
         	        {
-        	            name: yearArr[0],
+        	            name: yearArr[2],
         	            type: 'line',
-        	            stack: '付款总金额',
+        	            stack: '付款金额',
         	            data: arrGson[2]
         	        },
         	        {
         	            name: yearArr[1],
         	            type: 'line',
-        	            stack: '付款总金额',
+        	            stack: '付款金额',
         	            data: arrGson[1]
         	        },
         	        {
-        	            name: yearArr[2],
+        	            name: yearArr[0],
         	            type: 'line',
-        	            stack: '付款总金额',
+        	            stack: '付款金额',
         	            data: arrGson[0]
         	        },
+        	        {
+        	            name: yearArr[3],
+        	            type: 'bar',
+        	            stack: yearArr[3],
+        	            yAxisIndex: 1,
+        	            data: arrCountGson,
+        	        },
+        	        
+        	        
         	    ]
         	};
 
+        
+
+        option2 = {
+        	
+        	 tooltip: {
+        	        trigger: 'item',
+        	        formatter: '{a} <br/>{b}: {c} ({d}%)'
+        	    },
+            title: [{
+                text: yearArr[1]+" - "+yearArr[0]+"  项目付款情况",
+                x:'40%',
+            }, {
+                subtext: yearArr[1]+"付款总金额: "+countArr[1]+"元",
+                left: '25%',
+                top: '85%',
+                textAlign: 'center'
+            }, {
+                subtext: yearArr[0]+"付款总金额: "+countArr[0]+"元",
+                left: '75%',
+                top: '85%',
+                textAlign: 'center'
+            }, ],
+            legend: {
+                orient: 'vertical',
+                left: 10,
+                data: t2,
+            },
+            series: [
+        	{
+        	    name: '项目大类',
+                type: 'pie',
+                selectedMode: 'single',
+                center: ['25%', '50%'],
+                radius: [0, '30%'],
+                label: {
+                    position: 'inner'
+                },
+                labelLine: {
+                    show: false
+                },
+                data:arrff0
+                    },
+                {
+                    name: '项目子类',
+                    type: 'pie',
+                    center: ['25%', '50%'],
+                    radius: ['45%', '60%'],
+                    
+                    data: arrss0
+                }, 
+                
+                
+                {
+                name: '项目大类',
+                type: 'pie',
+                selectedMode: 'single',
+                center: ['75%', '50%'],
+                radius: [0, '30%'],
+                label: {
+                    position: 'inner'
+                },
+                labelLine: {
+                    show: false
+                },
+                data:arrff1
+                    },
+                {
+                    name: '项目子类',
+                    type: 'pie',
+                    center: ['75%', '50%'],
+                    radius: ['45%', '60%'],
+                    data: arrss1
+                },
+            
+            ],
+        	
+        };
       
 
       
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
-//         myChart2.setOption(option2);
+        myChart2.setOption(option2);
   
         
         
@@ -262,5 +429,7 @@ arrGson=<%=session.getAttribute("arrGson")%>;
             return y + '年' + m  + '月';  
          } 
     </script>
+    
+
 </body>
 </html>

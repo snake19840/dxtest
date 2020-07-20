@@ -52,6 +52,30 @@ height:40px; }
 height:0;line-height:40px; 
 }
 </style>		
+	<style type="text/css">
+.input2 input{
+height:40px; }
+
+.add-on, select, textarea, input[type="text"],.uneditable-input{
+height:40px;
+}
+.el-input__icon {
+    /* height: 0; */
+    /* line-height: 40px; */
+}
+.el-input__icon {
+     height: 40px; 
+    width: 25px;
+    text-align: center;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+    line-height: 40px;
+}
+.el-input--mini .el-input__icon {
+    line-height: 0px;
+    height: 28px;
+}
+</style>
 	
 </head>
 <body>

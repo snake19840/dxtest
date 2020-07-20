@@ -5,7 +5,7 @@
     
     
     <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<<style>
+<style>
 {mso-displayed-decimal-separator:"\.";
 	mso-displayed-thousand-separator:"\,";}
 .xl1510810
@@ -915,7 +915,7 @@ rt
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'>
 	<!-- end: CSS -->
 	<link href="mycss1/TestMap.css" rel="stylesheet">
-
+<link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
 	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
 	  	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

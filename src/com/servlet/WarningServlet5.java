@@ -81,6 +81,12 @@ public class WarningServlet5 extends HttpServlet {
 		session.setAttribute("WarningGsons",WarningGsons); 
 		
 		session.setAttribute("stno_AllListServlet3",stno); 
+		
+		 sqlv="select * from WARNINGSTATU";
+			List<Equ> WarningStatu=SelectAll.Warningstatu(sqlv);
+			String WarningStatuGson=gson.toJson(WarningStatu);  
+			session.setAttribute("WarningStatuGsons",WarningStatuGson); 
+		
 		if (userpwd.equals("restore")) {
 			request.getRequestDispatcher("TestWarningItem4.jsp").forward(request, response);
 		}else {

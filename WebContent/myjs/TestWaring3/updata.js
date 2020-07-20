@@ -170,7 +170,7 @@ function goPage(pno, psize) {
 				alert("巡检时间格式不正确");
 				}else{
 					c_sdate=c_sdate1.substr(0,10);
-			console.log(c_sdate);
+//			console.log(c_sdate);
 			var e = new Date(c_sdate1);
 			var e0 = new Date();
 			if(e>e0){

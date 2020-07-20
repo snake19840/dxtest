@@ -95,7 +95,10 @@ public class WarningItem extends HttpServlet {
 			List<Equ> list=SelectAll.Warningstatu(sql);
 			String WarningGsons=gson.toJson(list);
 			session.setAttribute("WarningGsons", WarningGsons);
-	        out.print("{\"statu\":\"success\",\"WarningGsons\":"+WarningGsons+",\"task\":"+task+"}");
+			List<Equ> listAllDxtestwork=SelectAll.SelectAllDxtestwork();
+			String listAllDxtestworkSon=gson.toJson(listAllDxtestwork);
+			session.setAttribute("listAllDxtestwork", listAllDxtestworkSon);
+	        out.print("{\"statu\":\"success\",\"WarningGsons\":"+WarningGsons+",\"task\":"+task+",\"listAllDxtestworkObj\":"+listAllDxtestworkSon+"}");
 	  	    out.close();
 		
 }  else {

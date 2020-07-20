@@ -39,6 +39,7 @@ public class deleli extends HttpServlet {
 		//session.setAttribute("##", ##Gson);
 		BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream(), "utf-8"));
 		String line = null;
+		boolean flag2=false;
 		StringBuilder sb = new StringBuilder();
 		while ((line = br.readLine()) != null) {
 			sb.append(line);
@@ -53,7 +54,7 @@ public class deleli extends HttpServlet {
 		String sdate=SelectAll.getKey(sql, "sdate");
 		sql=" select statu from dxtestwork where id='"+id+"' ";
 		String statu=SelectAll.getKey(sql, "statu");
-		String userpwd=null;
+		String userpwd="";
 		
 		 sql =" delete from dxtestwork where id='"+id+"'  ";
 		
@@ -61,8 +62,8 @@ public class deleli extends HttpServlet {
 		boolean flag=SelectAll.Del(sql);
 		if (flag) {
 			if (statu.equals("»Ö¸´")) {
-				sql="update dxtestwork set  userpwd='"+userpwd+"'  where stno='"+stno+"'";
-				boolean flag2=SelectAll.Update(sql);
+				sql="update dxtestwork set  userpwd=null  where stno='"+stno+"'";
+				 flag2=SelectAll.Update(sql);
 			}
 			
 			List<Equ> list=null;
@@ -75,7 +76,10 @@ public class deleli extends HttpServlet {
 			}
 			String WarningGsons=gson.toJson(list);
 			session.setAttribute("WarningGsons", WarningGsons);
-	           out.print("{\"statu\":\"success\",\"WarningGsons\":"+WarningGsons+"}");
+			List<Equ> listAllDxtestwork=SelectAll.SelectAllDxtestwork();
+			String listAllDxtestworkSon=gson.toJson(listAllDxtestwork);
+			session.setAttribute("listAllDxtestwork", listAllDxtestworkSon);
+	           out.print("{\"statu\":\"success\",\"WarningGsons\":"+WarningGsons+",\"listAllDxtestworkObj\":"+listAllDxtestworkSon+"}");
 			out.close();
 			
 		}else {

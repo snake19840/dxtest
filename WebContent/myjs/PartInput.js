@@ -156,9 +156,7 @@ var warning=new Vue({
     methods:{
     	
 	isRec(){
-// 	    console.log(this.WarningGsons['0'].rowData.STATU);
-		
-	   return this.WarningGsons['0'].rowData.STATU!='»Ö¸´' ? true:false;
+	   return !this.WarningGsons[0].rowData.USERPWD;
 	},
 	dataShowf(items){
 //	 	    console.log(this.WarningGsons.length);
@@ -389,6 +387,8 @@ var warning=new Vue({
 			 this.dataShow=this.dataShowf(response.data.WarningGsons);
 			 this.WarningGsons=response.data.WarningGsons;
 //			 console.log(this.WarningGsons[0].rowData.USERPWD);
+	listAllDxtestworkObj=response.data.listAllDxtestworkObj;
+			hd.valueWarning=warningCount.f();
 		          if(this.WarningGsons.length==0){
 		          	location.href = "Testindex.jsp";
 		          }else{
@@ -466,7 +466,7 @@ var warning=new Vue({
 		    console.log(this.WarningGsons[0].rowData.EDATE);
 		    console.log(this.listusGson[0].userid); */
 		    var myDate = new Date();
-		    console.log(formatDate(myDate));
+//		    console.log(formatDate(myDate));
 		    function formatDate(date) {
 			  var date = new Date(date);
 			  var YY = date.getFullYear() + '-';
@@ -500,9 +500,11 @@ var warning=new Vue({
 	                },
 	                enctype:'application/json',
 		    }).then((response)=>{
-			console.log(response.data);
+			console.log(response);
 			 this.dataShow=this.dataShowf(response.data.WarningGsons);
 			 this.WarningGsons=response.data.WarningGsons;
+		listAllDxtestworkObj=response.data.listAllDxtestworkObj;
+			hd.valueWarning=warningCount.f();
 			
 			this.$message({
 		            type: 'success',

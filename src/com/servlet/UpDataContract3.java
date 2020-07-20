@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -122,7 +123,7 @@ public class UpDataContract3 extends HttpServlet {
 				+ "and	oppx='"+oppx+"' and	oppmail='"+oppmail+"' and	oppe2='"+oppe2+"' and	oppad='"+oppad+"' ";
 		String myWhere="WHERE myu='"+myu+"' and	mya='"+mya+"' and	myp='"+myp+"' and	myn='"+myn+"' and	mye='"+mye+"' "
 				+ "and	myad='"+myad+"' and	mye2='"+mye2+"' and	myx='"+myx+"' and	myemail='"+myemail+"' "; 
-		
+		List<Equ> listTemp=new ArrayList<Equ>();
 		boolean flag=false;
 		String sql="select COUNT(contractid) from DXTESTCONTRACT WHERE contractid='"+contractid+"'";
 		int count=SelectAll.getCount(sql);
@@ -196,6 +197,7 @@ public class UpDataContract3 extends HttpServlet {
 					+ "	    classson='"+    classson+"' ,sgmoney='"+sgmoney+"'  where contractid='"+contractid+"'";
 		
 			flag=SelectAll.Update(sql);
+			
 			List<Equ> list = gson.fromJson(plan1, new TypeToken<List<Equ>>() {}.getType());
 			List<Equ> list2 = gson.fromJson(planm2, new TypeToken<List<Equ>>() {}.getType());
 			for (int i = 0; i < list2.size(); i++) {
@@ -205,6 +207,9 @@ public class UpDataContract3 extends HttpServlet {
 				flag=SelectAll.Update(sql);
 						
 			}
+//			sql="SELECT  * FROM PLANSUB  where contractid='"+contractid+"' ";
+//			listTemp=SelectAll.Warningstatu(sql);
+		
 			
 			out.print("{\"statu\":1,\"WarningGsons\":\" ÐÞ¸Ä³É¹¦ \"}");
 			out.close();

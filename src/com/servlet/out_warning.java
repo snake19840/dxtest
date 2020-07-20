@@ -68,6 +68,7 @@ public class out_warning extends HttpServlet {
 		session.setAttribute("listGson_print", listGson);
 		boolean f=true;
 		PrintWriter out = response.getWriter();
+		
 		out.print("{\"statu\":" + f + ",\"listGson_print\":" + listGson + "}");
 		out.close();
 		

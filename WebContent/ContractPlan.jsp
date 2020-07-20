@@ -45,24 +45,8 @@
 	<!-- end: CSS -->
 	<link rel="stylesheet" href="alert/css/alert.css">
 
-	<script src="myjs/vue.js" charset="GBK"></script>
-	<script src="myjs/axios.js" charset="GBK"></script>
-	<script src="node_modules/moment/moment.js" charset="GBK"></script>
-	<script src="element-ui/lib/index.js"></script>
-	<link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
+<link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
 
-	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
-	<!--[if lt IE 9]>
-	  	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<link id="ie-style" href="css/ie.css" rel="stylesheet">
-	<![endif]-->
-	
-	<!--[if IE 9]>
-		<link id="ie9style" href="css/ie9.css" rel="stylesheet">
-	<![endif]-->
-		
-	<!-- start: Favicon -->
-	<link rel="shortcut icon" href="img/favicon.ico">
 	<!-- end: Favicon -->
 <style type="text/css">
 	.el-message-box{
