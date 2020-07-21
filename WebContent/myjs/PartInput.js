@@ -500,7 +500,7 @@ var warning=new Vue({
 	                },
 	                enctype:'application/json',
 		    }).then((response)=>{
-			console.log(response);
+//			console.log(response);
 			 this.dataShow=this.dataShowf(response.data.WarningGsons);
 			 this.WarningGsons=response.data.WarningGsons;
 		listAllDxtestworkObj=response.data.listAllDxtestworkObj;

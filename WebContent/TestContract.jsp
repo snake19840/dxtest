@@ -178,7 +178,7 @@ String list3Gson=(String)session.getAttribute("list3Gson");
 							<b style="padding-left: 50px;padding-right: 52px;letter-spacing: 3px;">联系方式</b><input v-model="oppe" size="16" type="text"   id="oppe1" >
 							</div> 
 							<div style="width: 50%;float: right;">
-							<b style="padding-left: 50px;padding-right: 52px;letter-spacing: 3px;">通讯地址</b><input v-model="oppad" size="16" type="text"   id="oppad1" > 
+							<b style="padding-left: 50px;padding-right: 39px;letter-spacing: 3px;">供应商地址</b><input v-model="oppa" size="16" type="text"   id="oppa1" > 
 							</div>
 							</div>
 							
@@ -187,7 +187,7 @@ String list3Gson=(String)session.getAttribute("list3Gson");
 							<b style="padding-left: 50px;padding-right: 86px;letter-spacing: 3px;">电话</b><input v-model="oppe2" size="16" type="text"  id="oppe21" >
 							</div> 
 							<div style="width: 50%;float: right;">
-							<b style="padding-left: 50px;padding-right: 86px;letter-spacing: 3px;">传真</b><input v-model="oppx" size="16" type="text"  id="oppx1" > 
+							<b style="padding-left: 50px;padding-right: 89px;letter-spacing: 3px;">传真</b><input v-model="oppx" size="16" type="text"  id="oppx1" > 
 							</div>
 							</div>
 							
@@ -197,6 +197,7 @@ String list3Gson=(String)session.getAttribute("list3Gson");
 							<b style="padding-left: 50px;padding-right: 52px;letter-spacing: 3px;">电子邮箱</b><input v-model="oppmail" size="16" type="text"  id="oppmail1" >
 							</div> 
 							<div style="width: 50%;float: right;">
+							<b style="padding-left: 50px;padding-right: 56px;letter-spacing: 3px;">通讯地址</b><input v-model="oppad" size="16" type="text"  id="oppad1" > 
 							</div>
 							</div>
 							
@@ -914,7 +915,55 @@ var vm=new Vue({
 		this.statu="end";
 	    }
 	    this.oppunit=this.oppu;
-	    
+// 	    console.log(this.contractid);
+// 	    console.log(this.contractname);
+// 	    console.log(this.oppunit);
+// 	    console.log(this.markdate);
+// 	    console.log(this.contractnlife);
+// 	    console.log(this.myname);
+// 	    console.log(this.oppname);
+// 	    console.log(this.CAMOUNT);
+// 	    console.log(this.plan2);
+// 	    console.log(this.plan4);
+// 	    console.log(this.plandate2);
+// 	    console.log(this.plandate1);
+// 	    console.log(this.planm1);
+// 	    console.log(this.classson);
+// 	    console.log(this.oppu);
+// 	    console.log(this.oppp);
+// 	    console.log(this.oppa);
+// 	    console.log(this.oppn);
+// 	    console.log(this.oppe);
+// 	    console.log(this.oppx);
+// 	    console.log(this.oppmail);
+// 	    console.log(this.oppe2);
+// 	    console.log(this.oppad);
+// 	    console.log(this.opppayb);
+// 	    console.log(this.opppaya);
+// 	    console.log(this.opppayz);
+// 	    console.log(this.opppayh);
+// 	    console.log(this.opppaye);
+// 	    console.log(this.opppaya2);
+// 	    console.log(this.opppaym);
+// 	    console.log(this.myu);
+// 	    console.log(this.mya);
+// 	    console.log(this.myp);
+// 	    console.log(this.myn);
+// 	    console.log(this.mye);
+// 	    console.log(this.myad);
+// 	    console.log(this.mye2);
+// 	    console.log(this.myx);
+// 	    console.log(this.myemail);
+// 	    console.log(this.mypayb);
+// 	    console.log(this.mypaya);
+// 	    console.log(this.mypayz);
+// 	    console.log(this.mypayh);
+// 	    console.log(this.mypaye);
+// 	    console.log(this.mypaya2);
+// 	    console.log(this.mypaym);
+// 	    console.log(this.plan1);
+// 	    console.log(this.planm2);
+
 	    if (this.contractid==''||	this.contractname==''||	this.oppunit==''||	this.markdate==''||	this.contractnlife==''||	this.myname==''||	this.oppname==''||	this.CAMOUNT==''||	this.plan2==''||	this.plan4==''||	this.plandate2==''||	this.plandate1==''||	this.planm1==''||	this.classson==''||	this.oppu==''||	this.oppp==''||	this.oppa==''||	this.oppn==''||	this.oppe==''||	this.oppx==''||	this.oppmail==''||	this.oppe2==''||	this.oppad==''||	this.opppayb==''||	this.opppaya==''||	this.opppayz==''||	this.opppayh==''||	this.opppaye==''||	this.opppaya2==''||	this.opppaym==''||	this.myu==''||	this.mya==''||	this.myp==''||	this.myn==''||	this.mye==''||	this.myad==''||	this.mye2==''||	this.myx==''||	this.myemail==''||	this.mypayb==''||	this.mypaya==''||	this.mypayz==''||	this.mypayh==''||	this.mypaye==''||	this.mypaya2==''||	this.mypaym==''||	this.plan1==''||	this.planm2=='') {
 		this.$message({
 	            type: 'info',

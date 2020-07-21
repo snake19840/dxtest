@@ -340,7 +340,10 @@ listsGsosn=<%=session.getAttribute("listsGsosn")%>;
                 subtext: yearArr[1]+"付款总金额: "+countArr[1]+"元",
                 left: '25%',
                 top: '85%',
-                textAlign: 'center'
+                textAlign: 'center',
+                "textStyle": {
+                        "fontSize": 30
+                    }
             }, {
                 subtext: yearArr[0]+"付款总金额: "+countArr[0]+"元",
                 left: '75%',

@@ -495,7 +495,11 @@ function($) {
 			form.append("<div style='width: 100%;padding-left: 42px;padding-top: 9x;' class='row'></div>");
 			form.find(".row").append("<div style='width: 30%;float: left;/* padding-left: 0px; */' class='col-md-6'><div class='form-group'><label class='control-label'>巡检人员</label>\
             <select class='form-control' name='title'>\
-            "+selectUsers()+"</select></div></div>").append("<input type='hidden' name='nowdate' value='" + today + "'/>").append("<div style='width: 50%;float: right;' class='col-md-6'><div class='form-group'><label class='control-label'>事件类型</label><select class='form-control' name='category'></select></div></div>").find("select[name='category']").append("<option value='badge-inverse'>预设巡检人员</option></div></div>");
+            "+selectUsers()+"</select></div></div>")
+			.append("<input type='hidden' name='nowdate' value='" + today + "'/>")
+			.append("<div style='width: 50%;float: right;' class='col-md-6'><div class='form-group'><label class='control-label'>事件类型</label><select class='form-control' name='category'></select></div></div>")
+			.find("select[name='category']")
+			.append("<option value='badge-inverse'>预设巡检人员</option></div></div>");
 
 		}else if(listusGson[0].levela==1){
 		    
@@ -503,12 +507,17 @@ function($) {
 			form.append("<div style='width: 100%;padding-left: 42px;padding-top: 9x;' class='row'></div>");
 			form.find(".row").append("<div style='width: 30%;float: left;/* padding-left: 0px; */' class='col-md-6'><div class='form-group'><label class='control-label'>巡检人员</label>\
         <select class='form-control' name='title'>\
-       "+selectUsers()+"</select></div></div>").append("<input type='hidden' name='nowdate' value='" + today + "'/>").append("<div style='width: 50%;float: right;' class='col-md-6'><div class='form-group'><label class='control-label'>事件类型</label><select class='form-control' name='category'></select></div></div>").find("select[name='category']").append("<option value='badge-inverse'>预设巡检人员</option></div></div>");
+       "+selectUsers()+"</select></div></div>")
+		.append("<input type='hidden' name='nowdate' value='" + today + "'/>")
+		.append("<div style='width: 50%;float: right;' class='col-md-6'><div class='form-group'><label class='control-label'>事件类型</label><select class='form-control' name='category'></select></div></div>")
+		.find("select[name='category']")
+		.append("<option value='badge-inverse'>预设巡检人员</option></div></div>");
 			form.append("<div id='change1' style='display:block; width: 100%;padding-left: 42px;padding-top: 9x;' class='a1'></div>");
 			form.find(".a1").append("<input type='button'  onclick='changex(1,\""+userid+"\",\""+today+"\")' value='切换故障登记'>");
 		}
 		//        普通人员
 		else {
+			if(listAllDxtestworkObj.length==0){
 			var form = $("<form></form>");
 			form.append("<div style='width: 100%;padding-top:20px;' class='row'></div>");
 			form.find(".row")
@@ -517,7 +526,27 @@ function($) {
             .append("<input type='hidden' name='nowdate' value='" + today + "'/>")
             .append("<div style='disply:inline;float: left;width: 30%;display: inline;' class='col-md-6'><div class='form-group'><label class='control-label'>巡检时间</label><input style='width:70px;' type='time' value='"+timea+"' name='timea'></div></div>")
             .append("<div style='disply:inline;float: left;width: 10%;display: inline;' class='col-md-6'><div class='form-group'><label class='control-label'>事件类型</label>\
-            <select style='width:90px;' class='form-control' name='category'></select></div></div>").find("select[name='category']").append("<option value='badge-success'>巡检正常</option>").append("<option value='badge-important'>设备故障</option>").append("<option value='badge-warning'>设备告警</option></div></div>");
+            <select style='width:90px;' class='form-control' name='category'></select></div></div>")
+			.find("select[name='category']")
+			.append("<option value='badge-success'>巡检正常</option>")
+			.append("<option value='badge-important'>设备故障</option>")
+			.append("<option value='badge-warning'>设备告警</option></div></div>");
+			}
+			else{
+				var form = $("<form></form>");
+			form.append("<div style='width: 100%;padding-top:20px;' class='row'></div>");
+			form.find(".row")
+			.append("<div style='float: left;width: 30%;' class='col-md-6'><div class='form-group'><label style='margin-left:60px;' class='control-label'>巡检人员</label>\
+            <span style='margin-left:60px;' class='form-control' name='title' >" + userid + "</span></div></div>")
+            .append("<input type='hidden' name='nowdate' value='" + today + "'/>")
+            .append("<div style='disply:inline;float: left;width: 30%;display: inline;' class='col-md-6'><div class='form-group'><label class='control-label'>巡检时间</label><input style='width:70px;' type='time' value='"+timea+"' name='timea'></div></div>")
+            .append("<div style='disply:inline;float: left;width: 10%;display: inline;' class='col-md-6'><div class='form-group'><label class='control-label'>事件类型</label>\
+            <select style='width:100px;' class='form-control' name='category'></select></div></div>")
+			.find("select[name='category']")
+			.append("<option value='badge-success'>无新增故障</option>")
+			.append("<option value='badge-important'>设备故障</option>")
+			.append("<option value='badge-warning'>设备告警</option></div></div>");
+			}
 
 		}
 
@@ -591,7 +620,7 @@ function($) {
 					let d0=myDate.getTime();
 					var flag=d1>d0;
 					if(!flag){
-					location.href = "WarningServlet4?sdate=" + codeA(sdate) + "&edate=" + codeA(edate) + "&userid=" + codeA(userid)+"&time="+timea;
+					location.href = "WarningServlet4?sdate=" + codeA(sdate) + "&edate=" + codeA(edate) + "&userid=" + codeA(userid)+"&time="+timea+"&statu="+listAllDxtestworkObj.length;
 					}else{
 					alert("请选择当天或当天之前的日期");
 					location.reload();
@@ -849,8 +878,12 @@ function changex(e,userid,today) {
 	    text += "</div>";
 	    text += "<div style='disply:inline;float: left;width:10%;display: inline;' class='col-md-6'>";
 	    text += "<div class='form-group'><label class='control-label'>事件类型</label>";
-	    text += "<select style='width:90px;' class='form-control' name='category'>";
-	    text += "<option value='badge-success'>巡检正常</option>";
+	    text += "<select style='width:100px;' class='form-control' name='category'>";
+if(listAllDxtestworkObj.length==0){
+	 text += "<option value='badge-success'>巡检正常</option>";
+}else{
+	 text += "<option value='badge-success'>无新增故障</option>";
+}
 	    text += "<option value='badge-important'>设备故障</option>";
 	    text += "<option value='badge-warning'>设备告警</option>";
 	    text += "</select>";

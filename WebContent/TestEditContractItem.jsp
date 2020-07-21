@@ -170,7 +170,7 @@ String contractListItemFileGson=(String)session.getAttribute("contractListItemFi
 							<b style="padding-left: 50px;padding-right: 52px;letter-spacing: 3px;">联系方式</b><input v-model="oppe" size="16" type="text"   id="oppe1" >
 							</div> 
 							<div style="width: 50%;float: right;">
-							<b style="padding-left: 50px;padding-right: 52px;letter-spacing: 3px;">通讯地址</b><input v-model="oppad" size="16" type="text"   id="oppad1" > 
+							<b style="padding-left: 50px;padding-right: 39px;letter-spacing: 3px;">供应商地址</b><input v-model="oppa" size="16" type="text"   id="oppa1" > 
 							</div>
 							</div>
 							
@@ -179,7 +179,7 @@ String contractListItemFileGson=(String)session.getAttribute("contractListItemFi
 							<b style="padding-left: 50px;padding-right: 86px;letter-spacing: 3px;">电话</b><input v-model="oppe2" size="16" type="text"  id="oppe21" >
 							</div> 
 							<div style="width: 50%;float: right;">
-							<b style="padding-left: 50px;padding-right: 86px;letter-spacing: 3px;">传真</b><input v-model="oppx" size="16" type="text"  id="oppx1" > 
+							<b style="padding-left: 50px;padding-right: 89px;letter-spacing: 3px;">传真</b><input v-model="oppx" size="16" type="text"  id="oppx1" > 
 							</div>
 							</div>
 							
@@ -189,6 +189,7 @@ String contractListItemFileGson=(String)session.getAttribute("contractListItemFi
 							<b style="padding-left: 50px;padding-right: 52px;letter-spacing: 3px;">电子邮箱</b><input v-model="oppmail" size="16" type="text"  id="oppmail1" >
 							</div> 
 							<div style="width: 50%;float: right;">
+							<b style="padding-left: 50px;padding-right: 56px;letter-spacing: 3px;">通讯地址</b><input v-model="oppad" size="16" type="text"  id="oppad1" > 
 							</div>
 							</div>
 							

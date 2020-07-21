@@ -55,6 +55,7 @@ public class WarningServlet4 extends HttpServlet {
 		String sdate=request.getParameter("sdate");
 		String userid=request.getParameter("userid");
 		String time=request.getParameter("time");
+		String fg=request.getParameter("statu");
 		userid=java.net.URLDecoder.decode(userid,"UTF-8");
 		edate=java.net.URLDecoder.decode(edate,"UTF-8");
 		sdate=java.net.URLDecoder.decode(sdate,"UTF-8");
@@ -64,6 +65,10 @@ public class WarningServlet4 extends HttpServlet {
 		
 		String sn="0";
 		String message="巡检正常";
+		if (!fg.equals("0")) {
+			message="无新增故障";
+		}
+		
 		String nowdate="";
 		String statu="恢复";
 		String stnonew="0";
@@ -80,7 +85,12 @@ public class WarningServlet4 extends HttpServlet {
 		session.setAttribute("listAllDxtestwork2", listAllDxtestworkSon2);
 		//request.getRequestDispatcher("Testindex.jsp").forward(request, response);
 		PrintWriter out = response.getWriter();
-		out.print("<script language='javascript'>alert('本次巡检正常!');window.location.href='Testindex.jsp'</script>");
+		if (fg.equals("0")) {
+			out.print("<script language='javascript'>alert('本次巡检正常!');window.location.href='Testindex.jsp'</script>");
+		}else {
+			out.print("<script language='javascript'>alert('本次巡检未发现新增故障!');window.location.href='Testindex.jsp'</script>");
+		}
+		
 		out.close();
 		
 		

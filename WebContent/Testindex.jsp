@@ -251,9 +251,7 @@ String loginId=(String)session.getAttribute("loginId");
 																<option value="inverse">添加人员</option>
 																<option value="success">巡检正常</option>
 																<option value="important">设备故障</option>
-
 																<option value="warning">设备告警</option>
-
 
 															</select>
                                                                 </div>
@@ -524,7 +522,7 @@ function formatDate(date) {
 function getCookie(name) {
 var reg = RegExp(name + '=([^;]+)');
 var arr = document.cookie.match(reg);
-console.log(arr);
+// console.log(arr);
 if (arr) {
     return arr[1];
 } else {
