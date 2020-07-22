@@ -1,6 +1,7 @@
 package com.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,16 +11,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.clas.DataSets;
 import com.clas.Equ;
 import com.clas.SelectAll;
 import com.dao.ContractDao;
 import com.google.gson.Gson;
 
 /**
- * Servlet implementation class TestChakanContract
+ * Servlet implementation class NoTime
  */
-@WebServlet("/TestChakanContract")
-public class TestChakanContract extends HttpServlet {
+@WebServlet("/NoTime")
+public class NoTime extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -31,20 +33,11 @@ public class TestChakanContract extends HttpServlet {
 		response.setContentType("Text/html");
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		doPost(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//		doGet(request, response);
-		response.setContentType("Text/html");
-		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
-		
-		HttpSession session=request.getSession();
+		HttpSession session = request.getSession();
+		PrintWriter out = response.getWriter();
+		Gson gson = new Gson();
+		//String #Gson=gson.toJson(#); 
+		//session.setAttribute("#Gson", #Gson);
 		String sql ="select t1.ID AS ID_t1,t1.CONTRACTID AS CONTRACTID_t1,t1.CONTRACTNAME AS CONTRACTNAME_t1, t1.CONTRACTNOWDATE "
 	    		+ "AS CONTRACTNOWDATE_t1, t1.STATU AS STATU_t1, t1.OPPUNIT AS OPPUNIT_t1, t1.MARKDATE AS MARKDATE_t1, t1.CONTRACTNLIFE AS "
 	    		+ "CONTRACTNLIFE_t1, t1.CAMOUNT AS CAMOUNT_t1,t1.PLANDATE1 AS PLANDATE1_t1,t1.PLAN3 AS PLAN3_t1, t1.PLAN2 AS PLAN2_t1, t1.PLANDATE2 AS "
@@ -59,22 +52,16 @@ public class TestChakanContract extends HttpServlet {
 	    		+ "and t1.myid=t5.myid and  t3.oppid=t4.opppayid  and  t5.myid=t6.mypayid  "
 	    		+ "  order by MARKDATE_t1";
 		 List<Equ> list = SelectAll.Warningstatu(sql);
-		
-		
-		
-		List<Equ> contractList=ContractDao.contractList();
-		
-		session.setAttribute("contractList", contractList);
-		Gson gson = new Gson();
-		String contractListGson=gson.toJson(contractList); 
-		session.setAttribute("contractListGson", contractListGson);
-		
 		 String listGson = gson.toJson(list);
 		    session.setAttribute("list_print", list);
 		    session.setAttribute("listGson_print", listGson);
+		List<Equ> contractList=ContractDao.contractList();
 		
-		request.getRequestDispatcher("TestChakanContract.jsp").forward(request, response);
-		
+		session.setAttribute("contractList", contractList);
+		String contractListGson=gson.toJson(contractList); 
+		session.setAttribute("contractListGson", contractListGson);
+		out.print("{\"statu\":\"1\",\"contractListGson\":" + contractListGson + ",\"listGson_print\":" + listGson + "}");
+		out.close();
 	}
 
 }

@@ -29,6 +29,7 @@
 <body>
 <script type="text/javascript">
 arrGson=<%=session.getAttribute("arrGson")%>;
+arrGson2=<%=session.getAttribute("arrGson2")%>;
 </script>
 <%@include file="TestHeader.jsp" %>
 		<div class="container-fluid-full">
@@ -60,6 +61,8 @@ arrGson=<%=session.getAttribute("arrGson")%>;
 						<div class="box-content">
 						 <div id="main" style="width: 100%;height:400px;"></div>
 <!-- 						 <div id="main2" style="width: 100%;height:400px;"></div> -->
+ <hr align=center width=100% color=#987cb9 SIZE=1 style="background: linear-gradient(to right, #409eff 0%,#ebeef5 50%,#e6a23c 100%);">
+						 <div id="main2" style="width: 100%;height:400px;"></div>
 						
 						</div>
 					</div>
@@ -161,7 +164,7 @@ arrGson=<%=session.getAttribute("arrGson")%>;
  <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('main'));
-//         var myChart2 = echarts.init(document.getElementById('main2'));
+        var myChart2 = echarts.init(document.getElementById('main2'));
         var date = new Date();
         var yearArr= new Array(3);
       let  year0=date.getFullYear()-2,year1=date.getFullYear()-1,year2=date.getFullYear();
@@ -175,7 +178,7 @@ arrGson=<%=session.getAttribute("arrGson")%>;
 	      		
         	    title: {
         		x:'40px',
-        	        text: '近三年每月故障总量'
+        	        text: '近三年每月告警总量'
         	    },
         	    tooltip: {
         	        trigger: 'axis'
@@ -217,30 +220,93 @@ arrGson=<%=session.getAttribute("arrGson")%>;
         	        {
         	            name: yearArr[0],
         	            type: 'line',
-        	            stack: '故障总量',
+        	            stack: '告警总量',
         	            data: arrGson[2]
         	        },
         	        {
         	            name: yearArr[1],
         	            type: 'line',
-        	            stack: '故障总量',
+        	            stack: '告警总量',
         	            data: arrGson[1]
         	        },
         	        {
         	            name: yearArr[2],
         	            type: 'line',
-        	            stack: '故障总量',
+        	            stack: '告警总量',
         	            data: arrGson[0]
         	        },
         	    ]
         	};
 
-      
+      // 指定图表的配置项和数据
+      var option2 = {
+	      		
+      	    title: {
+      		x:'40px',
+      	        text: '近三年每月故障总量'
+      	    },
+      	    tooltip: {
+      	        trigger: 'axis'
+      	    },
+      	    legend: {
+      	        data: yearArr
+      	    },
+      	    grid: {
+      	        left: '3%',
+      	        right: '4%',
+      	        bottom: '3%',
+      	        containLabel: true
+      	    },
+      	    toolbox: {
+      	        feature: {
+//       	            saveAsImage: {},
+//       	            mark : {},
+//       	            markUndo : {},
+//       	            markClear : {},
+//       	            dataZoom : {},
+//       	            dataZoomReset : {},
+//       	            dataView : {},
+//       	            lineChart : {},
+//       	            barChart : {},
+//       	            restore : {},
+//       	            saveAsImage : {},
+      	        },
+      	    
+      	    },
+      	    xAxis: {
+      	        type: 'category',
+      	        boundaryGap: false,
+      	        data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月','八月','九月','十月','十一月','十二月']
+      	    },
+      	    yAxis: {
+      	        type: 'value'
+      	    },
+      	    series: [
+      	        {
+      	            name: yearArr[0],
+      	            type: 'line',
+      	            stack: '故障总量',
+      	            data: arrGson2[2]
+      	        },
+      	        {
+      	            name: yearArr[1],
+      	            type: 'line',
+      	            stack: '故障总量',
+      	            data: arrGson2[1]
+      	        },
+      	        {
+      	            name: yearArr[2],
+      	            type: 'line',
+      	            stack: '故障总量',
+      	            data: arrGson2[0]
+      	        },
+      	    ]
+      	};
 
       
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
-//         myChart2.setOption(option2);
+        myChart2.setOption(option2);
   
         
         

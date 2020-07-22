@@ -206,20 +206,30 @@ public class secposContract
     
     String arrff0 = arrfx[0];
     String arrff1 = arrfx[1];
+    String arrff2 = arrfx[2];
+    
     String arrss0 = arrsx[0];
     String arrss1 = arrsx[1];
+    String arrss2 = arrsx[2];
+    
     String arrCountGson = gson.toJson(arrCount);
     String arrfxGson = gson.toJson(arrfx);
     String arrGson = gson.toJson(arr);
     String arrsxGson = gson.toJson(arrsx);
+    
+    
     session.setAttribute("arrGson", arrGson);
     session.setAttribute("arrfxGson", arrfxGson);
     session.setAttribute("arrsxGson", arrsxGson);
     session.setAttribute("arrCountGson", arrCountGson);
     session.setAttribute("arrff0", arrff0);
     session.setAttribute("arrff1", arrff1);
+    session.setAttribute("arrff2", arrff2);
+    
     session.setAttribute("arrss0", arrss0);
     session.setAttribute("arrss1", arrss1);
+    session.setAttribute("arrss2", arrss2);
+    
     request.getRequestDispatcher("secposContract.jsp").forward(request, response);
   }
 }

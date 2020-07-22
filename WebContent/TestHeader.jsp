@@ -53,7 +53,7 @@
     <template slot="title">运维管理 <el-badge class="mark" v-model="valueWarning" /></template>
     <el-menu-item index="2-1" @click="linkjsp('AllListServlet4?sdate=<%=today %>&edate=<%=tomorrow%>')">日常运维</el-menu-item>
     <el-menu-item index="2-2" @click="linkjsp('secpos')">安全态势</el-menu-item>
-    <el-menu-item index="2-3" @click="linkjsp('out_warning.jsp')">故障报表</el-menu-item>
+    <el-menu-item index="2-3" @click="linkjsp('out_warning.jsp')">巡检报表</el-menu-item>
   </el-submenu>
   
  
@@ -65,7 +65,7 @@
     <el-submenu index="3-4">
     <template slot="title">合同报表</template>
     <el-menu-item index="3-4-1" @click="linkjsp('TestChakanContractPart?monthNow=<%=monthNow %>&monthNext=<%=monthNext %>&f=a')">合同预报帐统计</el-menu-item>
-    <el-menu-item index="3-4-2" @click="linkjsp('out_contract.jsp')">合同报表导出</el-menu-item>
+    <el-menu-item index="3-4-2" @click="linkjsp('out_contract.jsp')">付款报表导出</el-menu-item>
     <el-menu-item index="3-4-3" @click="linkjsp('secposContract')">合同报表分析</el-menu-item>
     </el-submenu>
     <el-menu-item index="3-5" @click="linkjsp('Base')">基础信息录入</el-menu-item>

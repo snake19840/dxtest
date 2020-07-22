@@ -45,14 +45,14 @@ arrGson=<%=session.getAttribute("arrGson")%>;
 					<a href="ReturnIndex">主页</a> 
 					<i class="icon-angle-right"></i>
 				</li>
-				<li><a href="TestChakanContract.jsp" >合同报表导出</a>
+				<li><a href="TestChakanContract.jsp" >付款报表导出</a>
 				</li>
 			</ul>
 			
 		<div  id="output">
 				<div class="box span12">
 					<div class="box-header" data-original-title>
-						<h2><i class="halflings-icon white edit"></i><span class="break"></span>合同报表导出</h2>
+						<h2><i class="halflings-icon white edit"></i><span class="break"></span>付款报表导出</h2>
 						<div class="box-icon">
 							<!-- <a href="#" class="btn-setting"><i class="halflings-icon white wrench"></i></a> -->
 							<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
@@ -88,40 +88,46 @@ arrGson=<%=session.getAttribute("arrGson")%>;
 					
 <table style="display:none;"   id="item"> 
 	<tr>
-    <th>合同编号</th>
+<th>合同编号</th>
 <th>合同名称</th>
 <th>录入时间</th>
 <th>合同状态</th>
+<th>合同金额</th>
+
+<th>项目子类</th>
+<!-- <th>付款名</th> -->
+<!-- <th>付款比例</th> -->
+<!-- <th>文件付款日期</th> -->
+<!-- <th>是否付款</th> -->
+<!-- <th>实际付款日期</th> -->
+
 <th>供应商单位</th>
 <th>合同签订日期</th>
 <th>合同有效期</th>
-<th>合同金额</th>
+
 <th>我方联系人</th>
 <th>对方联系人</th>
 <th>我方联系电话</th>
 <th>对方联系电话</th>
-<th>是否附加合同</th>
-<th>主合同号</th>
-<th>我方签署人</th>
-<th>对方签署人</th>
-<th>项目子类</th>
-<th>付款名</th>
-<th>付款比例</th>
-<th>文件付款日期</th>
-<th>是否付款</th>
-<th>实际付款日期</th>
-<th>法定代表人</th>
-<th>供应商地址</th>
-<th>项目联系人传真</th>
-<th>项目联系人电子邮箱</th>
-<th>通讯地址</th>
-<th>开户行</th>
-<th>银行地址</th>
-<th style="vnd.ms-excel.numberformat:@;">帐号</th>
-<th>户名</th>
-<th>电话</th>
-<th>地址</th>
-<th style="vnd.ms-excel.numberformat:@;">统一社会信用码</th>
+<th>是否子合同</th>
+<th>子合同对应主合同号</th>
+
+<!-- <th>我方签署人</th> -->
+<!-- <th>对方签署人</th> -->
+
+
+<!-- <th>供应商法定代表人</th> -->
+<!-- <th>供应商地址</th> -->
+<!-- <th>项目联系人传真</th> -->
+<!-- <th>项目联系人电子邮箱</th> -->
+<!-- <th>通讯地址</th> -->
+<!-- <th>开户行</th> -->
+<!-- <th>银行地址</th> -->
+<!-- <th style="vnd.ms-excel.numberformat:@;">帐号</th> -->
+<!-- <th>户名</th> -->
+<!-- <th>电话</th> -->
+<!-- <th>地址</th> -->
+<!-- <th style="vnd.ms-excel.numberformat:@;">统一社会信用码</th> -->
 
    </tr>
   <tr v-for="(item,index) in listGson_print" :key="index">
@@ -129,37 +135,45 @@ arrGson=<%=session.getAttribute("arrGson")%>;
 <td>{{item.rowData.CONTRACTNAME_T1}}</td>
 <td>{{item.rowData.CONTRACTNOWDATE_T1}}</td>
 <td>{{STATU_T1(item.rowData.STATU_T1)}}</td>
+<td style="vnd.ms-excel.numberformat:#,##0.00;">{{item.rowData.CAMOUNT_T1}}</td>
+
+<td>{{item.rowData.CLASSSON_T1}}</td>
+<!-- <td>{{item.rowData.PAYNAME_T2}}</td> -->
+<!-- <td>{{item.rowData.PAYPOR_T2}}%</td> -->
+<!-- <td>{{item.rowData.PAYDATE_T2}}</td> -->
+<!-- <td>{{STATU_SUB(item.rowData.STATU_SUB_T2)}}</td> -->
+<!-- <td>{{item.rowData.REALPAY_T2}}</td> -->
+
+
 <td>{{item.rowData.OPPUNIT_T1}}</td>
 <td>{{item.rowData.MARKDATE_T1}}</td>
 <td>{{item.rowData.CONTRACTNLIFE_T1}}</td>
-<td style="vnd.ms-excel.numberformat:#,##0.00;">{{item.rowData.CAMOUNT_T1}}</td>
+
 <td>{{item.rowData.MYN_T5}}</td>
 <td>{{item.rowData.OPPN_T3}}</td>
 <td>{{item.rowData.MYE_T5}}</td>
 <td>{{item.rowData.OPPE2_T3}}</td>
 <td>{{item.rowData.PLAN2_T1}}</td>
-<td>{{item.rowData.PLAN3_T1=item.rowData.PLAN3_T1=="null"? "无":item.rowData.PLAN3_T1}}</td>
+<td>{{item.rowData.PLAN3_T1=item.rowData.PLAN3_T1=="null"? " ":item.rowData.PLAN3_T1}}</td>
 
-<td>{{item.rowData.MYNAME_T1}}</td>
-<td>{{item.rowData.OPPNAME_T1}}</td>
-<td>{{item.rowData.CLASSSON_T1}}</td>
-<td>{{item.rowData.PAYNAME_T2}}</td>
-<td>{{item.rowData.PAYPOR_T2}}%</td>
-<td>{{item.rowData.PAYDATE_T2}}</td>
-<td>{{STATU_SUB(item.rowData.STATU_SUB_T2)}}</td>
-<td>{{item.rowData.REALPAY_T2}}</td>
-<td>{{item.rowData.OPPP_T3}}</td>
-<td>{{item.rowData.OPPA_T3}}</td>
-<td>{{item.rowData.OPPX_T3}}</td>
-<td>{{item.rowData.OPPMAIL_T3}}</td>
-<td>{{item.rowData.OPPAD_T3}}</td>
-<td>{{item.rowData.OPPPAYB_T4}}</td>
-<td>{{item.rowData.OPPPAYA_T4}}</td>
-<td class="counta">{{item.rowData.OPPPAYZ_T4}}</td>
-<td>{{item.rowData.OPPPAYH_T4}}</td>
-<td>{{item.rowData.OPPPAYE_T4}}</td>
-<td>{{item.rowData.OPPPAYA2_T4}}</td>
-<td class="counta">{{item.rowData.OPPPAYM_T4}}</td>
+<!-- <td>{{item.rowData.MYNAME_T1}}</td> -->
+<!-- <td>{{item.rowData.OPPNAME_T1}}</td> -->
+
+
+
+
+<!-- <td>{{item.rowData.OPPP_T3}}</td> -->
+<!-- <td>{{item.rowData.OPPA_T3}}</td> -->
+<!-- <td>{{item.rowData.OPPX_T3}}</td> -->
+<!-- <td>{{item.rowData.OPPMAIL_T3}}</td> -->
+<!-- <td>{{item.rowData.OPPAD_T3}}</td> -->
+<!-- <td>{{item.rowData.OPPPAYB_T4}}</td> -->
+<!-- <td>{{item.rowData.OPPPAYA_T4}}</td> -->
+<!-- <td class="counta">{{item.rowData.OPPPAYZ_T4}}</td> -->
+<!-- <td>{{item.rowData.OPPPAYH_T4}}</td> -->
+<!-- <td>{{item.rowData.OPPPAYE_T4}}</td> -->
+<!-- <td>{{item.rowData.OPPPAYA2_T4}}</td> -->
+<!-- <td class="counta">{{item.rowData.OPPPAYM_T4}}</td> -->
 
   </tr>
 	</table>	
@@ -385,7 +399,6 @@ return t2;
 			            }
 			          }]
 	 },
-	 
 	          value1: '',
 	          dateValue: '',
      },
@@ -423,6 +436,7 @@ return t2;
 	 output(){
 	     if(this.startDate==''|| this.endDate==''){
 		 this.$message.error('请输入时间');
+		 return ;
 	     }
 	     if(this.radio1=='1'){
 	     axios.get('out_warning',{
@@ -440,7 +454,7 @@ return t2;
 			 
 		     });
 	     }else if(this.radio1=='2'){
-		 tableToExcel('item','workSheet','合同报表.xls');
+		 tableToExcel('item','workSheet','付款报表.xls');
 	     }
 	 },
      },

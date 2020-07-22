@@ -82,6 +82,7 @@ height:40px;
 <script type="text/javascript">
 var contractListGson=<%=session.getAttribute("contractListGson")%>;
 var listusGson=<%=session.getAttribute("listusGson")%>;
+listGson_print=<%=session.getAttribute("listGson_print")%>
 </script>
 
 	<%@include file="TestHeader.jsp" %>
@@ -116,6 +117,9 @@ var listusGson=<%=session.getAttribute("listusGson")%>;
 					</div>
 					
 				<div  id="tableList" class="box-content">
+				
+
+				
 					<div style="float: right;height: 50px;">
 <el-input
     placeholder="请输入查询内容"
@@ -124,6 +128,25 @@ var listusGson=<%=session.getAttribute("listusGson")%>;
     v-model="input2" class="input2">
   </el-input>
 					</div>
+						<div style="float: right;height: 50px;margin-right: 50px">
+	<span style="letter-spacing: 2px;">
+			<b>
+<!-- 			<font  color="red">*</font> -->
+			时间范围  :</b>
+			</span>
+<el-date-picker
+	:blur="lostPoint()"
+     v-model="dateValue"
+     
+     type="daterange"
+     align="right"
+     unlink-panels
+     range-separator="至"
+     start-placeholder="开始日期"
+     end-placeholder="结束日期"
+     :picker-options="pickerOptions">
+   </el-date-picker>
+			</div>
 					
 	<el-table
     :data="tableData"
@@ -218,7 +241,7 @@ var listusGson=<%=session.getAttribute("listusGson")%>;
   </el-table>
   
   <div class="block">
-   
+   <div style="float:left;" >
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
@@ -227,8 +250,136 @@ var listusGson=<%=session.getAttribute("listusGson")%>;
       layout="total, sizes, prev, pager, next, jumper"
         :current-page.sync="currentPage"
       :total="allCount">
-    </el-pagination>
+    </el-pagination></div>
+   
+    <div style="float:right;"><el-button size="mini" type="primary" @click="outPrint()">导出报表<i class="el-icon-upload el-icon--right"></i></el-button></div>
   </div>
+  
+  
+  
+  <table style="display:none;"   id="item"> 
+	<tr>
+<th>合同编号</th>
+<th>合同名称</th>
+<th>录入时间</th>
+<th>合同状态</th>
+<th>合同金额</th>
+
+<th>项目子类</th>
+<!-- <th>付款名</th> -->
+<!-- <th>付款比例</th> -->
+<!-- <th>文件付款日期</th> -->
+<!-- <th>是否付款</th> -->
+<!-- <th>实际付款日期</th> -->
+
+<th>供应商单位</th>
+<th>合同签订日期</th>
+<th>合同有效期</th>
+
+<th>我方联系人</th>
+<th>对方联系人</th>
+<th>我方联系电话</th>
+<th>对方联系电话</th>
+<th>是否子合同</th>
+<th>子合同对应主合同号</th>
+
+<th>我方签署人</th>
+<th>对方签署人</th>
+
+<th>供应商法定代表人</th>
+<th>供应商地址</th>
+<th>供应商项目联系人传真</th>
+<th>供应商项目联系人电子邮箱</th>
+<th>供应商通讯地址</th>
+<th>供应商收款开户行</th>
+<th>供应商收款银行地址</th>
+<th>供应商收款帐号</th>
+<th>供应商收款户名</th>
+<th>供应商收款电话</th>
+<th>供应商收款地址</th>
+<th>供应商收款统一社会信用码</th>
+
+
+<th>委托方单位</th>
+<th>委托方地址</th>
+<th>委托方法定代表人</th>
+<th>委托方项目联系人</th>
+<th>委托方联系方式</th>
+<th>委托方通讯地址</th>
+<th>委托方电话</th>
+<th>委托方传真</th>
+<th>委托方电子邮箱</th>
+<th>委托方付款开户行</th>
+<th>委托方付款银行地址</th>
+<th>委托方付款帐号</th>
+<th>委托方付款户名</th>
+<th>委托方付款电话</th>
+<th>委托方付款地址</th>
+<th>委托方付款统一社会信用码</th>
+
+   </tr>
+  <tr v-for="(item,index) in listGson_print" :key="index">
+<td>{{item.rowData.CONTRACTID_T1}}</td>
+<td>{{item.rowData.CONTRACTNAME_T1}}</td>
+<td>{{item.rowData.CONTRACTNOWDATE_T1}}</td>
+<td>{{STATU_T1(item.rowData.STATU_T1)}}</td>
+<td >{{item.rowData.CAMOUNT_T1}}</td>
+
+<td>{{item.rowData.CLASSSON_T1}}</td>
+<!-- <td>{{item.rowData.PAYNAME_T2}}</td> -->
+<!-- <td>{{item.rowData.PAYPOR_T2}}%</td> -->
+<!-- <td>{{item.rowData.PAYDATE_T2}}</td> -->
+<!-- <td>{{STATU_SUB(item.rowData.STATU_SUB_T2)}}</td> -->
+<!-- <td>{{item.rowData.REALPAY_T2}}</td> -->
+
+
+<td>{{item.rowData.OPPUNIT_T1}}</td>
+<td>{{item.rowData.MARKDATE_T1}}</td>
+<td>{{item.rowData.CONTRACTNLIFE_T1}}</td>
+
+<td>{{item.rowData.MYN_T5}}</td>
+<td>{{item.rowData.OPPN_T3}}</td>
+<td>{{item.rowData.MYE_T5}}</td>
+<td>{{item.rowData.OPPE2_T3}}</td>
+<td>{{item.rowData.PLAN2_T1}}</td>
+<td>{{item.rowData.PLAN3_T1=item.rowData.PLAN3_T1=="null"? " ":item.rowData.PLAN3_T1}}</td>
+
+<td>{{item.rowData.MYNAME_T1}}</td>
+<td>{{item.rowData.OPPNAME_T1}}</td>
+
+<td>{{item.rowData.OPPP_T3}}</td>
+<td>{{item.rowData.OPPA_T3}}</td>
+<td>{{item.rowData.OPPX_T3}}</td>
+<td>{{item.rowData.OPPMAIL_T3}}</td>
+<td>{{item.rowData.OPPAD_T3}}</td>
+<td>{{item.rowData.OPPPAYB_T4}}</td>
+<td>{{item.rowData.OPPPAYA_T4}}</td>
+<td class="counta">{{item.rowData.OPPPAYZ_T4}}</td>
+<td>{{item.rowData.OPPPAYH_T4}}</td>
+<td>{{item.rowData.OPPPAYE_T4}}</td>
+<td>{{item.rowData.OPPPAYA2_T4}}</td>
+<td class="counta">{{item.rowData.OPPPAYM_T4}}</td>
+
+<td>{{item.rowData.MYU_T5}}</td>
+<td>{{item.rowData.MYA_T5}}</td>
+<td>{{item.rowData.MYP_T5}}</td>
+<td>{{item.rowData.MYN_T5}}</td>
+<td>{{item.rowData.MYE_T5}}</td>
+<td>{{item.rowData.MYAD_T5}}</td>
+<td>{{item.rowData.MYE2_T5}}</td>
+<td>{{item.rowData.MYX_T5}}</td>
+<td>{{item.rowData.MYEMAIL_T5}}</td>
+<td>{{item.rowData.MYPAYB_T6}}</td>
+<td>{{item.rowData.MYPAYA_T6}}</td>
+<td class="counta">{{item.rowData.MYPAYZ_T6}}</td>
+<td>{{item.rowData.MYPAYH_T6}}</td>
+<td>{{item.rowData.MYPAYE_T6}}</td>
+<td>{{item.rowData.MYPAYA2_T6}}</td>
+<td class="counta">{{item.rowData.MYPAYM_T6}}</td>
+
+  </tr>
+	</table>
+  
   
 					</div>	
 					
@@ -319,9 +470,148 @@ var listusGson=<%=session.getAttribute("listusGson")%>;
 
 
 <script type="text/javascript">
+var tableToExcel = (function () {
+    
+    var uri = 'data:application/vnd.ms-excel;base64,'
+        , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office"  xmlns:x="urn:schemas-microsoft-com:office:excel"  xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso  9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><style>table td,th{text-align: center;} .counta{vnd.ms-excel.numberformat:@;} </style></head><body><table>{table}</table></body></html>'
+        , base64 = function (s) { return  window.btoa(unescape(encodeURIComponent(s))) }
+        , format = function (s, c) { return s.replace(/{(\w+)}/g, function (m,  p) { return c[p]; }) }
+
+        return function (table, name, filename) {
+//             console.log(table);
+            if (!table.nodeType) table = document.getElementById(table)
+            var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
+            var link = uri + base64(format(template, ctx));
+            var a = document.createElement("a");
+            a.href = link;
+            a.download = filename;//这里是关键所在,当点击之后,设置a标签的属性,这样就可以更改标签的标题了
+            a.click();
+        }
+})();
+
+
+function formatDate(date) { 
+     var y = date.getFullYear();  
+     var m = date.getMonth() + 1;  
+     m = m < 10 ? '0' + m : m;  
+     var d = date.getDate();  
+     d = d < 10 ? ('0' + d) : d;  
+     return y + '-' + m + '-' + d;  
+  }
+function getEndMonth(n,x){
+    var year = n.getYear(); //获取当前日期的年份
+    var month = n.getMonth(); //获取当前日期的月份
+    var day = n.getDate; //获取当前日期的日
+    var days = new Date(year, month+1, 0);
+    days = days.getDate(); //获取当前日期中的月的天数
+    var year2 = year;
+    var month2 = parseInt(month) + 1+x;
+    if (month2 >= 13) {
+	year2 = parseInt(year2) + 1;
+	month2 = month2%12;
+	}else if(month2 <= 0){
+	    year2 = parseInt(year2) - 1;
+	    month2=12-month2;
+	}
+    if (month2 < 10) {
+	month2 = '0' + month2;
+	}
+    if(days<10){
+	days='0'+days;
+    }
+    var t2 = year2+1900 + '-' + month2 + '-' +days;
+    return t2;
+}
+ function getNextMonth(n,x) {
+//      n=new Date(n);
+var year = n.getYear(); //获取当前日期的年份
+var month = n.getMonth(); //获取当前日期的月份
+var day = n.getDate; //获取当前日期的日
+var days = new Date(year, month, 0);
+days = days.getDate(); //获取当前日期中的月的天数
+var year2 = year;
+var month2 = parseInt(month) + 1+x;
+if (month2 >= 13) {
+year2 = parseInt(year2) + 1;
+month2 = month2%12;
+}else if(month2 <= 0){
+    year2 = parseInt(year2) - 1;
+    month2=12-month2;
+}
+var day2 = day;
+var days2 = new Date(year2, month2, 0);
+days2 = days2.getDate();
+if (day2 > days2) {
+day2 = days2;
+}
+if (month2 < 10) {
+month2 = '0' + month2;
+}
+var t2 = year2+1900 + '-' + month2 + '-01';
+
+return t2;
+}
+ function getNextYear(n,x){
+     var year = n.getYear(); //获取当前日期的年份
+     var year2 = year;
+     year2 = parseInt(year2) + x;
+     var t2 = year2+1900 + '-01-01';
+     return t2;
+ }
+ function getEndYear(n,x){
+     var year = n.getYear(); //获取当前日期的年份
+     var year2 = year;
+     year2 = parseInt(year2) + x;
+     var t2 = year2+1900 + '-12-31';
+     return t2;
+ }
+ 
+ var dd=new Date();
+
+
 var tableList=new Vue({
     el:'#tableList',
     data:{
+	listGson_print:[],
+	startDate:"",
+	endDate:"",
+	radio1:'2',
+	listGson_print:listGson_print,
+	 pickerOptions:{
+	     shortcuts: [{
+	            text: '最近一个月',
+	            onClick(picker) {
+	              const end = getEndMonth(dd,0);
+	              const start = getNextMonth(dd,0);
+	              
+	              picker.$emit('pick', [start, end]);
+	            }
+	          }, {
+	            text: '最近三个月',
+	            onClick(picker) {
+	              const end = getEndMonth(dd,0);
+	              const start = getNextMonth(dd,-3);
+	              picker.$emit('pick', [start, end]);
+	            }
+	          },{
+		            text: '最近一年',
+		            onClick(picker) {
+		              const end = getEndYear(dd,0);
+		              const start = getNextYear(dd,0);
+		           
+		              picker.$emit('pick', [start, end]);
+		            }
+		          },{
+			            text: '上一年',
+			            onClick(picker) {
+			              const end = getEndYear(dd,-1);
+			              const start = getNextYear(dd,-1);
+			              picker.$emit('pick', [start, end]);
+			            }
+			          }]
+	 },
+	 value1: '',
+     dateValue: '',
 	isCon:false,
 	isConedit:false,
 	isCondel:false,
@@ -336,6 +626,8 @@ var tableList=new Vue({
 	allData:contractListGson,
 	subcontents:[],
     },
+    
+    
     mounted:function(){
 	let items=this.allData;
 	this.tableData=this.dataShow(items);
@@ -366,7 +658,22 @@ if (levela==1) {
 // 	console.log(this.tableData);
     },
     methods:{
-	shaixuan:function(f){
+	outPrint(){
+// 	    console.log(this.startDate);
+// 	    if(this.startDate==''|| this.endDate==''){
+// 		 this.$message.error('请输入时间');
+// 		 return;
+// 	     }
+	    tableToExcel('item','workSheet','合同报表.xls');
+	},
+	 STATU_T1(STATU){
+	     if(STATU=='end'){
+		 return "合同已结束";
+	     }else{
+		 return "合同未结束";
+	     }
+	 },
+	shaixuan(f){
             this.subcontents=contractListGson;
        
              if ((f!=0) && (f!="")) {
@@ -398,7 +705,6 @@ if (levela==1) {
 	             for (let i = 0; i < this.pageNum; i++) {
 	                   // 每一页都是一个数组 形如 [['第一页的数据'],['第二页的数据'],['第三页数据']]
 	                   // 根据每页显示数量 将后台的数据分割到 每一页,假设pageSize为5，  则第一页是1-5(对slice操作来说是0-5)条，第二页是6-10(对slice操作来说是5-10)条...
-	                 
 	                   this.totalPage[i] = items.slice(i*this.pageSize,(i+1)*this.pageSize);
 	                 }
 	             
@@ -418,6 +724,7 @@ if (levela==1) {
 	    this.currentPage=val;
 	    let items=this.allData;
 	    this.tableData=this.dataShow(items);
+	   
 	},
 	rowclick(e){
 	   let id=e.contractid;
@@ -458,7 +765,26 @@ if (levela==1) {
 		  this. open(id);
 		
 	      },
-	
+	      
+		 changeTable(){
+		     axios.get('out_contractMain',{
+			 params:{
+			     startDate:this.startDate,
+			     endDate:this.endDate,
+			     type:"2",
+			 }
+		     }).then((response)=>{
+				 console.log(response.data);
+				 contractListGson=response.data.contractListGson;
+				 this.listGson_print=response.data.listGson_print;
+				 this.shaixuan(this.input2);
+				 
+			     }).catch((error)=>{
+				 console.log(error);
+			     }).then(function(){
+				 
+			     });
+		 },
 	      open(id) {
 		        this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
 		          confirmButtonText: '确定',
@@ -471,7 +797,7 @@ if (levela==1) {
 		        	}
 		        	})
 		        	.then(function (response) {
-		        	console.log(response.data);
+// 		        	console.log(response.data);
 		        	tableList.allData=response.data.contractListGson;
 		        	let items=tableList.allData;
 		        	tableList.tableData=tableList.dataShow(items);
@@ -491,14 +817,57 @@ if (levela==1) {
 		            message: '已取消删除'
 		          });          
 		        });
-		      },   
-	      
+		      },
+		      noTime(){
+			  axios.get('/dxtest/NoTime', {
+			      params: {
+			      statu:"noTime",
+			      }
+			      })
+			      .then( (response)=> {
+			      contractListGson=response.data.contractListGson;
+				 this.listGson_print=response.data.listGson_print;
+				 this.shaixuan(this.input2);
+				
+			      })
+			      .catch( (error) =>{
+			      console.log(error);
+			      })
+			      .then(function () {
+			      // always executed
+			      });
+		      },
+		      lostPoint(){
+// 			  console.log(this.dateValue);
+			  if(this.dateValue==null){
+			      this.noTime()
+			  }
+			  },
+			  dateValue(){
+			      
+			  },
+    },
+    computed:{
+	
     },
     watch:{
 	input2:function(n,o){
 	    console.log(n);
 	    this.shaixuan(n);
 	},
+	    dateValue:function(n,o){
+		if(n==null){
+		    return;
+		}
+		   n[0]= n[0].toString().length>15? formatDate(n[0]):n[0];
+		   n[1]= n[1].toString().length>15? formatDate(n[1]):n[1];
+// 	 	   console.log(n);
+		   this.startDate=n[0];
+		   this.endDate=n[1];
+		   this.changeTable();
+		 },
+	
+	
     },
 })
 

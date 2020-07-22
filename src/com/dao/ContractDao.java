@@ -1332,16 +1332,47 @@ public static List<Equ> paynameitem(String contractid) {
 				contractList.add(equ);
 				
 			}
-			 conn.close();
+			
 	            st.close();
 	            rs.close();
-			
+	            conn.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return contractList;
 	}
+	
+	public static List<Equ> contractListMain(String sdate,String edate) {
+		List<Equ> contractList=new ArrayList<Equ>();
+		try {
+			int inti=1;
+			conn=com.clas.JDBCconnect.getConnection();
+			String sql="select contractid,contractname,markdate,contractnlife,oppunit,camount from  dxtestcontract where markdate>='"+sdate+"' and markdate<'"+edate+"'  order by plandate2";
+			Statement st=conn.createStatement();
+			ResultSet rs=st.executeQuery(sql);
+			while (rs.next()) {
+				Equ equ=new Equ();
+				equ.setContractid(rs.getString("contractid"));
+				equ.setContractname(rs.getString("contractname"));
+				equ.setMarkdate(rs.getString("markdate"));
+				equ.setContractnlife(rs.getString("contractnlife"));
+				equ.setOppunit(rs.getString("oppunit"));
+				equ.setCamount(rs.getString("camount"));
+				contractList.add(equ);
+				
+			}
+			
+	            st.close();
+	            rs.close();
+	            conn.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return contractList;
+	}
+	
 	
 	public static int insertplan1(String paydate,String payname,String payporall,String classson,String contractid,int end) {
 		int a=0;

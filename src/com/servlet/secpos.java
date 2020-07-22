@@ -80,13 +80,45 @@ public class secpos extends HttpServlet {
 				}
 			 
 //			      System.out.println(mm);
-			        sql ="SELECT COUNT (*) FROM( SELECT distinct    stno FROM dxtestwork WHERE nowdate LIKE '%"+mm+"%' and stno <> '0' and  SUBSTR(sdate,1,7) ='"+mm+"') ";
+			        sql ="SELECT COUNT (*) FROM( SELECT distinct    stno FROM dxtestwork WHERE nowdate LIKE '%"+mm+"%' and stno <> '0' and  SUBSTR(sdate,1,7) ='"+mm+"' and stno  like '%A%') ";
 			        count=SelectAll.getCount(sql);
 					arr[i][j]=String.valueOf(count);
 				}
 			}
 	        String arrGson=gson.toJson(arr);
 	        session.setAttribute("arrGson", arrGson);
+	        
+	        
+	        for (int i = 0; i < arr.length; i++) {
+				for (int j = 0; j < arr[i].length; j++) {
+					c.setTime(new Date());
+//				System.out.println(i);
+			        c.add(Calendar.YEAR, -i);
+			         y = c.getTime();
+			        yy  = formatYear.format(y);
+			        
+			        t=j+1;
+			      mm=yy+"-"+ df.format(t);
+			      
+			      if (i==0) {
+			    	
+			    	  if ((j+1)>Integer.parseInt(formatMonth.format(new Date()))) {
+			    		  arr[i][j]="";
+					continue;
+					}
+					
+				}
+			 
+//			      System.out.println(mm);
+			        sql ="SELECT COUNT (*) FROM( SELECT distinct    stno FROM dxtestwork WHERE nowdate LIKE '%"+mm+"%' and stno <> '0' and  SUBSTR(sdate,1,7) ='"+mm+"' and stno  like '%W%') ";
+			        count=SelectAll.getCount(sql);
+					arr[i][j]=String.valueOf(count);
+				}
+			}
+	        
+	        String arrGson2=gson.toJson(arr);
+	        session.setAttribute("arrGson2", arrGson2);
+	        
 		request.getRequestDispatcher("secpos.jsp").forward(request, response);
 	}
 
