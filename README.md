@@ -13,8 +13,9 @@
 #### 安装教程
 
 1.  修改src\com\clas\JDBCconnect.java数据库连接地址
-2.  建数据库
-3.  war包放入tomcat
+2.  修改src/com/dao/UrlDao.java 上传下载路径
+3.  建数据库
+4.  war包放入tomcat
 
 #### 使用说明
 
