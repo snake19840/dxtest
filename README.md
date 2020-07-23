@@ -4,20 +4,22 @@
 机房管理,合同管理
 
 #### 软件架构
-软件架构说明
+软件架构说明:
+前端:jsp ,vue , element, echarts,fullcalendar,JavaScript
+后端:servlet ,java
+数据库:oracle
 
 
 #### 安装教程
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1.  修改src\com\clas\JDBCconnect.java数据库连接地址
+2.  建数据库
+3.  war包放入tomcat
 
 #### 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1.  DXTESTUSER表中创建用户,权限级别都设置为1
+2. 登陆使用
 
 #### 参与贡献
 
