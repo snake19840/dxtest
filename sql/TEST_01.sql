@@ -1,18 +1,3 @@
-/*
- Navicat Premium Data Transfer
-
- Source Server         : 134.101.168.30
- Source Server Type    : Oracle
- Source Server Version : 110200
- Source Host           : 134.101.168.30:1521
- Source Schema         : TEST
-
- Target Server Type    : Oracle
- Target Server Version : 110200
- File Encoding         : 65001
-
- Date: 19/06/2020 10:44:53
-*/
 
 
 -- ----------------------------
