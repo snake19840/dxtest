@@ -17,7 +17,7 @@ public class JDBCconnect {
 	
 			//閸忣剙寰冮悳顖氼暔
 //			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcloc","test","test");
-//			conn = DriverManager.getConnection("jdbc:oracle:thin:@134.101.168.33:1521:orcl3","test","test");
+
 			
 
 			//閺堫剙婀撮悳顖氼暔
