@@ -75,6 +75,11 @@ public class TestChakanContractPart extends HttpServlet {
 		session.setAttribute("monthNext",monthNext);
 		PrintWriter out = response.getWriter();
 //		System.out.println(contractPlanListGson);
+		sql="SELECT DISTINCT CLASSFAMILY FROM CONTRACTCLASS";
+		List<Equ> ListClassFamily = SelectAll.Warningstatu(sql);
+		String ListClassFamilyGson=gson.toJson(ListClassFamily); 
+		session.setAttribute("ListClassFamilyGson", ListClassFamilyGson);
+		
 		
 		if (f.equals("b")||f.equals("c")) {
 			out.print("{\"statu\":\"success\",\"contractPlanListGson\":" + contractPlanListGson + ",\"monthNow\":" + monthNow + ",\"monthNext\":" + monthNext + "}");

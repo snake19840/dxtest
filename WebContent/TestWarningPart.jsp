@@ -115,7 +115,8 @@ function getCookie(name) {
 						  <thead>
 							   <tr>
 							   <th>故障编号</th>
-								  <th>设备编号</th>
+								  <th>设备SN号</th>
+								  <th>设备位置</th>
 								  <th>录入时间</th>
 								  <th>巡检时间</th>
 								  <th>巡检人员</th>
@@ -140,6 +141,7 @@ function getCookie(name) {
 						String nowdate=	equ.getNowdate();
 						String username=	equ.getUsername();
 						String message=	equ.getMessage();
+						String pos=equ.getPos();
 						String sdate=equ.getSdate();
 						if(sdate==null){sdate="0000-00-00";}
 						else{sdate=sdate.substring(0,10);}
@@ -160,6 +162,7 @@ function getCookie(name) {
 			%>
 							 <td><%=stno%></td>
 								<td><%=sn%></td>
+								<td><%=pos%></td>
 								<td class="center"><%=nowdate%></td>
 								<td class="center"><%=time%></td>
 								<td class="center"><%=username%></td>

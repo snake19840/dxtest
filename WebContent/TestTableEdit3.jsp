@@ -6,7 +6,14 @@
 <%@page import="com.clas.Equ"%>
 <%@page import="com.clas.Turn"%>
     <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
+	<style>
+	.a1{
+	display:inline !important;
+	}
+	.a2{
+	display:none !important;
+	}
+	</style>
 <html>
 <head>
 <!-- start: Meta -->
@@ -79,12 +86,6 @@
 				
 			<%@include file="TestMainMenu.jsp" %>
 			
-			<noscript>
-				<div class="alert alert-block span10">
-					<h4 class="alert-heading">Warning!</h4>
-					<p>You need to have <a href="" target="_blank">JavaScript</a> enabled to use this site.</p>
-				</div>
-			</noscript>
 			
 			<!-- start: Content -->
 			<div id="content" class="span10">
@@ -106,10 +107,6 @@
 					<a href="#">设备修改</a>
 				</li>
 			</ul>
-						
-
-
-
 
 			<div >
 				<div class="box span12">
@@ -165,18 +162,20 @@
 								  <!-- <span class="help-inline">Here's more help text</span> -->
 								</div>
 							  </div>
-							  
-							  
 							
 							  <div class="control-group">
 								<label class="control-label2" >品牌 </label>
 								<div class="controls ">
 								<input style="display: none;" id="CB_class_t" name="CB_class" size="16" type="text">
 								 <a style="padding-bottom: 12px;text-decoration:none" href="#" onclick="showClassText('styp1input','styp1')" class="icon-pencil"><i></i></a>
-								<input id="styp1input" style="display: none;" type="text">
-								  <select style="display: line;" name="selectstyp"  id="styp1">
-								  <option value=""></option>
-								  </select>
+								
+								<span>
+								 <select class="a1" name="selectstyp"  id="styp1">
+								  <option></option>
+									</select>
+								<input id="styp1input" class="a2" type="text">
+								</span>
+								
 									<span class="add-on ">型号</span>
 									<input  size="16" type="text" name="textfield8" id="styp2" value="">
 									<input type ="hidden" id="styp" name="styp" value ="" >
@@ -594,14 +593,14 @@ listGson = <%=session.getAttribute("listGson")%>;
 typeListGson = <%=session.getAttribute("typeListGson")%>;
 
 function showClassText(a,b) {
-    if (document.getElementById(a).style.display=="none") {
-	document.getElementById(a).style.display="inline";
-	document.getElementById(b).style.display="none";
+    if (document.getElementById(a).getAttribute("class")=="a1") {
+	document.getElementById(a).setAttribute("class","a2");
+	document.getElementById(b).setAttribute("class","a1");
+	
     }else {
-	document.getElementById(a).style.display="none";
-	document.getElementById(b).style.display="inline";
+	document.getElementById(a).setAttribute("class","a1");
+	document.getElementById(b).setAttribute("class","a2");
     }
-    
 }
 
 var sl=	document.getElementById("styp1");

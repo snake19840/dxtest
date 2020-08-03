@@ -138,6 +138,7 @@ height:40px;
 <script >
 monthNow=<%=session.getAttribute("monthNow")%>;
 monthNext=<%=session.getAttribute("monthNext")%>;
+ListClassFamilyGson=<%=session.getAttribute("ListClassFamilyGson")%>
 </script>
 <body>
 
@@ -190,7 +191,20 @@ monthNext=<%=session.getAttribute("monthNext")%>;
       :value="item.value">
     </el-option>
   </el-select>
+ 
+  <el-select  style="padding-left:10px;width:140px;" v-model="classFamilyValue" :change="change_cf" clearable  placeholder="可筛选合同类型">
+    <el-option
+      v-for="item in ListClassFamilyGson"
+      :key="item.rowData.CLASSFAMILY"
+      :label="item.label"
+      :value="item.rowData.CLASSFAMILY">
+    </el-option>
+  </el-select> 
+  
 					</div>
+					
+					
+					
 <div style="float: right;line-height: 40px;padding-right: 10px;"><span ><b>当月合计付款金额  :</b></span>
 <span style="padding-right: 20px; " >{{sum}} 元</span>
 </div>
@@ -458,6 +472,8 @@ return t2;
 var tableList=new Vue({
     el:'#tableList',
     data:{
+	classFamilyValue:'',
+	ListClassFamilyGson:ListClassFamilyGson,
 	st:1,
 	paycon:"未付款",
 	options:[{"value":"未付款"},{"value":"已付款"},{"value":"全部"}],
@@ -480,27 +496,20 @@ var tableList=new Vue({
 	let items=this.allData;
 	this.tableData=this.dataShow(items);
 
-
 // 	console.log(this.tableData);
     },
     methods:{
 	
-	shaixuan:function(f){
-            this.subcontents=contractListJSON;
-       
-             if ((f!=0) && (f!="")) {
-                 this.subcontents = this.subcontents.filter(temp=>{
-                     return   (temp['contractid'].toLowerCase().includes(f.toLowerCase())||
-                               temp['contractname'].toLowerCase().includes(f.toLowerCase())||
-                               temp['markdate'].toLowerCase().includes(f.toLowerCase())||
-                               temp['contractnlife'].toLowerCase().includes(f.toLowerCase())||
-                               temp['oppunit'].toLowerCase().includes(f.toLowerCase())||
-                               temp['planm1'].toLowerCase().includes(f.toLowerCase())||
-                               temp['plandate1'].toLowerCase().includes(f.toLowerCase())
+	shaixuan:function(){
+            this.subcontents=this.contractPlanListGson;
+             if (this.classFamilyValue!='') {
+        	 this.subcontents = this.subcontents.filter(temp=>{
+                     return   (
+                	     temp['rowData']['PLAN4'].includes(this.classFamilyValue)
                  )
-                             
                  });
-             }
+	    }
+//              console.log(this.subcontents);
              this.allData=this.subcontents;
              this.tableData=this.dataShow( this.allData);
              
@@ -588,6 +597,7 @@ var tableList=new Vue({
 		  this.ax(n);
 	      },
 	      changepaycon(n){
+		 
 		  axios.get('/dxtest/TestChakanContractPart', 
 			  {
 		      params:{
@@ -601,8 +611,7 @@ var tableList=new Vue({
 // 		      console.log(response);
 		      this.value3=response.data.monthNext;
 		      this.contractPlanListGson=response.data.contractPlanListGson;
-		      this.allData=response.data.contractPlanListGson;
-		      this.tableData=this.dataShow( this.allData);
+		      this.shaixuan();
 		      })
 		      .catch( (error) =>{
 		      console.log(error);
@@ -651,7 +660,6 @@ var tableList=new Vue({
 				    }else{
 					return 'success';
 				    }
-				
 				    function initDate(date) {
 					   var a=null;
 					   a= new Date(Date.parse(date.replace(/-/g, "/"))); 
@@ -664,27 +672,46 @@ var tableList=new Vue({
 	 	   } 
 	 	    return e.rowData.PLANM1;
 		},
+		sumPart(n){
+		    let s=0;
+		    let a=0;
+		    let per=0; 
+		    for(i in n){
+			a=n[i].rowData.CAMOUNT;
+			per=n[i].rowData.PAYPOR/100;
+			s=s+(a*per);
+		}
+		return s.toFixed(2);
+		},
 	      
     },
     computed:{
-
+	change_cf(){
+// 		  console.log(this.classFamilyValue);
+		  this.shaixuan();
+	      },
+	
 	sum(){
 	    let s=0;
 	    let a=0;
-	    let per=0; 
-	    for(i in this.contractPlanListGson){
-		a=this.contractPlanListGson[i].rowData.CAMOUNT;
-		per=this.contractPlanListGson[i].rowData.PAYPOR/100;
+	    let per=0;
+	    let n=this.subcontents;
+	    for(i in n){
+		a=n[i].rowData.CAMOUNT;
+		per=n[i].rowData.PAYPOR/100;
 		s=s+(a*per);
-		
 	    }
 	    return s.toFixed(2);
 	},
     },
     watch:{
+	subcontents:function(n,o){
+// 	   console.log(n);
+// 	   this.sum=this.sumPart(n);
+	},
 	input2:function(n,o){
-// 	    console.log(n);
-	    this.shaixuan(n);
+	    
+	    this.shaixuan();
 	},
 	monthNow:function(n,o){
 		  if(tab(this.date1,n)==1){

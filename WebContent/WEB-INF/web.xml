@@ -1,264 +1,268 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
-  <display-name>11.3</display-name>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>11.3</display-name>
 
-<welcome-file-list>
-    <welcome-file>index_login.jsp</welcome-file>
-<!--     <welcome-file>default.html</welcome-file> -->
-<!--     <welcome-file>default.jsp</welcome-file> -->
-  </welcome-file-list>  
-<session-config>
-<session-timeout>28800000</session-timeout>
-</session-config>
- <servlet>
-    <display-name>UploadServlet</display-name>
-    <servlet-name>UploadServlet</servlet-name>
-    <servlet-class>com.servlet.UploadServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UploadServlet</servlet-name>
-    <url-pattern>/UploadServlet</url-pattern>
-  </servlet-mapping>
-  
-
-
-   <servlet>
-    <display-name>UpdateTestServlet</display-name>
-    <servlet-name>UpdateTestServlet</servlet-name>
-    <servlet-class>com.servlet.UpdateTestServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UpdateTestServlet</servlet-name>
-    <url-pattern>/UpdateTestServlet</url-pattern>
-  </servlet-mapping>
-  
-  
-    <servlet>
-    <display-name>Up</display-name>
-    <servlet-name>Up</servlet-name>
-    <servlet-class>com.servlet.Up</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Up</servlet-name>
-    <url-pattern>/Up</url-pattern>
-  </servlet-mapping>
-  
-  
-  
-
-  <servlet>
-    <display-name>AddTestServlet2</display-name>
-    <servlet-name>AddTestServlet2</servlet-name>
-    <servlet-class>com.servlet.AddTestServlet2</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddTestServlet2</servlet-name>
-    <url-pattern>/AddTestServlet2</url-pattern>
-  </servlet-mapping>  
-  
-  
-    <servlet>
-    <display-name>DeleteFileServlet</display-name>
-    <servlet-name>DeleteFileServlet</servlet-name>
-    <servlet-class>com.servlet.DeleteFileServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>DeleteFileServlet</servlet-name>
-    <url-pattern>/DeleteFileServlet</url-pattern>
-  </servlet-mapping> 
-  
-    <servlet>
-    <display-name>AddTestReturnServlet</display-name>
-    <servlet-name>AddTestReturnServlet</servlet-name>
-    <servlet-class>com.servlet.AddTestReturnServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddTestReturnServlet</servlet-name>
-    <url-pattern>/AddTestReturnServlet</url-pattern>
-  </servlet-mapping> 
-  
-     <servlet>
-    <display-name>ChakanTestServlet</display-name>
-    <servlet-name>ChakanTestServlet</servlet-name>
-    <servlet-class>com.servlet.ChakanTestServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ChakanTestServlet</servlet-name>
-    <url-pattern>/ChakanTestServlet</url-pattern>
-  </servlet-mapping> 
-  
-  
-       <servlet>
-    <display-name>EditTestServlet</display-name>
-    <servlet-name>EditTestServlet</servlet-name>
-    <servlet-class>com.servlet.EditTestServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>EditTestServlet</servlet-name>
-    <url-pattern>/EditTestServlet</url-pattern>
-  </servlet-mapping>
-  
- 
-  
-  <servlet>
-    <display-name>AddTestServlet1</display-name>
-    <servlet-name>AddTestServlet1</servlet-name>
-    <servlet-class>com.servlet.AddTestServlet1</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddTestServlet1</servlet-name>
-    <url-pattern>/AddTestServlet1</url-pattern>
-  </servlet-mapping>   
-  
-  
-  <servlet>
-    <display-name>AddTestServlet1c</display-name>
-    <servlet-name>AddTestServlet1c</servlet-name>
-    <servlet-class>com.servlet.AddTestServlet1c</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddTestServlet1c</servlet-name>
-    <url-pattern>/AddTestServlet1c</url-pattern>
-  </servlet-mapping> 
-  
-     <servlet>
-    <display-name>AddServlet</display-name>
-    <servlet-name>AddServlet</servlet-name>
-    <servlet-class>com.servlet.AddServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddServlet</servlet-name>
-    <url-pattern>/AddServlet</url-pattern>
-  </servlet-mapping>  
-  
-
-  
-       <servlet>
-    <display-name>AddTestServlet2c</display-name>
-    <servlet-name>AddTestServlet2c</servlet-name>
-    <servlet-class>com.servlet.AddTestServlet2c</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddTestServlet2c</servlet-name>
-    <url-pattern>/AddTestServlet2c</url-pattern>
-  </servlet-mapping> 
-
-         <servlet>
-    <display-name>AddTestServlet3c</display-name>
-    <servlet-name>AddTestServlet3c</servlet-name>
-    <servlet-class>com.servlet.AddTestServlet3c</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddTestServlet3c</servlet-name>
-    <url-pattern>/AddTestServlet3c</url-pattern>
-  </servlet-mapping> 
- 
-  
-           <servlet>
-    <display-name>AddTestServlet3</display-name>
-    <servlet-name>AddTestServlet3</servlet-name>
-    <servlet-class>com.servlet.AddTestServlet3</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddTestServlet3</servlet-name>
-    <url-pattern>/AddTestServlet3</url-pattern>
-  </servlet-mapping> 
-  
-  
-  
-  <servlet>
-    <display-name>AllListServlet</display-name>
-    <servlet-name>AllListServlet</servlet-name>
-    <servlet-class>com.servlet.AllListServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AllListServlet</servlet-name>
-    <url-pattern>/AllListServlet</url-pattern>
-  </servlet-mapping>  
-  
-    <servlet>
-    <display-name>AllListServlet2</display-name>
-    <servlet-name>AllListServlet2</servlet-name>
-    <servlet-class>com.servlet.AllListServlet2</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AllListServlet2</servlet-name>
-    <url-pattern>/AllListServlet2</url-pattern>
-  </servlet-mapping>  
-
-<servlet>
-    <display-name>SaveServlet</display-name>
-    <servlet-name>SaveServlet</servlet-name>
-    <servlet-class>com.servlet.SaveServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SaveServlet</servlet-name>
-    <url-pattern>/SaveServlet</url-pattern>
-  </servlet-mapping>
-       <servlet>
-       
-       
-    <display-name>FindServlet</display-name>
-    <servlet-name>FindServlet</servlet-name>
-    <servlet-class>com.servlet.FindServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>FindServlet</servlet-name>
-    <url-pattern>/FindServlet</url-pattern>
-  </servlet-mapping>  
-  
-         <servlet>
-    <display-name>UpdataServlet</display-name>
-    <servlet-name>UpdataServlet</servlet-name>
-    <servlet-class>com.servlet.UpdataServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UpdataServlet</servlet-name>
-    <url-pattern>/UpdataServlet</url-pattern>
-  </servlet-mapping>  
-  
-   <servlet>
-    <display-name>FileupdataServlet</display-name>
-    <servlet-name>FileupdataServlet</servlet-name>
-    <servlet-class>com.servlet.FileupdataServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>FileupdataServlet</servlet-name>
-    <url-pattern>/FileupdataServlet</url-pattern>
-  </servlet-mapping> 
-  
-
-    <servlet>
-    <display-name>EditTestServlet1</display-name>
-    <servlet-name>EditTestServlet1</servlet-name>
-    <servlet-class>com.servlet.EditTestServlet1</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>EditTestServlet1</servlet-name>
-    <url-pattern>/EditTestServlet1</url-pattern>
-  </servlet-mapping> 
-  
-  
-      <servlet>
-    <display-name>EditTestServlet2</display-name>
-    <servlet-name>EditTestServlet2</servlet-name>
-    <servlet-class>com.servlet.EditTestServlet2</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>EditTestServlet2</servlet-name>
-    <url-pattern>/EditTestServlet2</url-pattern>
-  </servlet-mapping> 
-  
+	<welcome-file-list>
+		<welcome-file>index_login.jsp</welcome-file>
+		<!-- <welcome-file>default.html</welcome-file> -->
+		<!-- <welcome-file>default.jsp</welcome-file> -->
+	</welcome-file-list>
+	<session-config>
+		<session-timeout>28800000</session-timeout>
+	</session-config>
+	<servlet>
+		<display-name>UploadServlet</display-name>
+		<servlet-name>UploadServlet</servlet-name>
+		<servlet-class>com.servlet.UploadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UploadServlet</servlet-name>
+		<url-pattern>/UploadServlet</url-pattern>
+	</servlet-mapping>
 
 
 
-     <servlet>
-    <display-name>LoginServlet</display-name>
-    <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>com.servlet.LoginServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/LoginServlet</url-pattern>
-  </servlet-mapping> 
-  </web-app>
+	<servlet>
+		<display-name>UpdateTestServlet</display-name>
+		<servlet-name>UpdateTestServlet</servlet-name>
+		<servlet-class>com.servlet.UpdateTestServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateTestServlet</servlet-name>
+		<url-pattern>/UpdateTestServlet</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<display-name>Up</display-name>
+		<servlet-name>Up</servlet-name>
+		<servlet-class>com.servlet.Up</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Up</servlet-name>
+		<url-pattern>/Up</url-pattern>
+	</servlet-mapping>
+
+
+
+
+	<servlet>
+		<display-name>AddTestServlet2</display-name>
+		<servlet-name>AddTestServlet2</servlet-name>
+		<servlet-class>com.servlet.AddTestServlet2</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddTestServlet2</servlet-name>
+		<url-pattern>/AddTestServlet2</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<display-name>DeleteFileServlet</display-name>
+		<servlet-name>DeleteFileServlet</servlet-name>
+		<servlet-class>com.servlet.DeleteFileServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteFileServlet</servlet-name>
+		<url-pattern>/DeleteFileServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<display-name>AddTestReturnServlet</display-name>
+		<servlet-name>AddTestReturnServlet</servlet-name>
+		<servlet-class>com.servlet.AddTestReturnServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddTestReturnServlet</servlet-name>
+		<url-pattern>/AddTestReturnServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<display-name>ChakanTestServlet</display-name>
+		<servlet-name>ChakanTestServlet</servlet-name>
+		<servlet-class>com.servlet.ChakanTestServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChakanTestServlet</servlet-name>
+		<url-pattern>/ChakanTestServlet</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<display-name>EditTestServlet</display-name>
+		<servlet-name>EditTestServlet</servlet-name>
+		<servlet-class>com.servlet.EditTestServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EditTestServlet</servlet-name>
+		<url-pattern>/EditTestServlet</url-pattern>
+	</servlet-mapping>
+
+
+
+	<servlet>
+		<display-name>AddTestServlet1</display-name>
+		<servlet-name>AddTestServlet1</servlet-name>
+		<servlet-class>com.servlet.AddTestServlet1</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddTestServlet1</servlet-name>
+		<url-pattern>/AddTestServlet1</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<display-name>AddTestServlet1c</display-name>
+		<servlet-name>AddTestServlet1c</servlet-name>
+		<servlet-class>com.servlet.AddTestServlet1c</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddTestServlet1c</servlet-name>
+		<url-pattern>/AddTestServlet1c</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<display-name>AddServlet</display-name>
+		<servlet-name>AddServlet</servlet-name>
+		<servlet-class>com.servlet.AddServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddServlet</servlet-name>
+		<url-pattern>/AddServlet</url-pattern>
+	</servlet-mapping>
+
+
+
+	<servlet>
+		<display-name>AddTestServlet2c</display-name>
+		<servlet-name>AddTestServlet2c</servlet-name>
+		<servlet-class>com.servlet.AddTestServlet2c</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddTestServlet2c</servlet-name>
+		<url-pattern>/AddTestServlet2c</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<display-name>AddTestServlet3c</display-name>
+		<servlet-name>AddTestServlet3c</servlet-name>
+		<servlet-class>com.servlet.AddTestServlet3c</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddTestServlet3c</servlet-name>
+		<url-pattern>/AddTestServlet3c</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<display-name>AddTestServlet3</display-name>
+		<servlet-name>AddTestServlet3</servlet-name>
+		<servlet-class>com.servlet.AddTestServlet3</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddTestServlet3</servlet-name>
+		<url-pattern>/AddTestServlet3</url-pattern>
+	</servlet-mapping>
+
+
+
+	<servlet>
+		<display-name>AllListServlet</display-name>
+		<servlet-name>AllListServlet</servlet-name>
+		<servlet-class>com.servlet.AllListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AllListServlet</servlet-name>
+		<url-pattern>/AllListServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<display-name>AllListServlet2</display-name>
+		<servlet-name>AllListServlet2</servlet-name>
+		<servlet-class>com.servlet.AllListServlet2</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AllListServlet2</servlet-name>
+		<url-pattern>/AllListServlet2</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<display-name>SaveServlet</display-name>
+		<servlet-name>SaveServlet</servlet-name>
+		<servlet-class>com.servlet.SaveServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SaveServlet</servlet-name>
+		<url-pattern>/SaveServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+
+
+		<display-name>FindServlet</display-name>
+		<servlet-name>FindServlet</servlet-name>
+		<servlet-class>com.servlet.FindServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FindServlet</servlet-name>
+		<url-pattern>/FindServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<display-name>UpdataServlet</display-name>
+		<servlet-name>UpdataServlet</servlet-name>
+		<servlet-class>com.servlet.UpdataServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdataServlet</servlet-name>
+		<url-pattern>/UpdataServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<display-name>FileupdataServlet</display-name>
+		<servlet-name>FileupdataServlet</servlet-name>
+		<servlet-class>com.servlet.FileupdataServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FileupdataServlet</servlet-name>
+		<url-pattern>/FileupdataServlet</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<display-name>EditTestServlet1</display-name>
+		<servlet-name>EditTestServlet1</servlet-name>
+		<servlet-class>com.servlet.EditTestServlet1</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EditTestServlet1</servlet-name>
+		<url-pattern>/EditTestServlet1</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<display-name>EditTestServlet2</display-name>
+		<servlet-name>EditTestServlet2</servlet-name>
+		<servlet-class>com.servlet.EditTestServlet2</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EditTestServlet2</servlet-name>
+		<url-pattern>/EditTestServlet2</url-pattern>
+	</servlet-mapping>
+
+
+
+
+	<servlet>
+		<display-name>LoginServlet</display-name>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>com.servlet.LoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/LoginServlet</url-pattern>
+	</servlet-mapping>
+</web-app>

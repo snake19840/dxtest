@@ -22,6 +22,10 @@
   margin-top: 10px;
   margin-right: 40px;
 }
+
+.el-menu--horizontal>.el-submenu .el-submenu__title{
+color:#f5f7fa;
+}
 </style>
 
 <!-- start: Header -->
@@ -29,14 +33,14 @@
 		<div class="navbar-inner" style="margin-left: -30px;">
 			<div class="container-fluid">
 			
-				<a class="brand" href="">
+				<a class="brand" href="" style="margin-top: 4px;">
 				<!-- <span>JANUX</span> -->
 				<img alt="" src="img/icon2_dx.png" style="padding-top: 7px">
 				</a>
 			
 				<a class="brand" href="" style="padding-left: 0px;padding-right: 0px;margin-left: 30px;">
 				<!-- <span>JANUX</span> -->
-				<img alt="" src="img/icon3_dx.png" style="padding-top: 7px;">
+				<img alt="" src="img/icon3_dx.png" style="padding-top: 13px;">
 				</a>
 								
 				<!-- start: Header Menu -->

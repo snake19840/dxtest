@@ -83,6 +83,7 @@ height:40px;
 var contractListGson=<%=session.getAttribute("contractListGson")%>;
 var listusGson=<%=session.getAttribute("listusGson")%>;
 listGson_print=<%=session.getAttribute("listGson_print")%>
+ListClassFamilyGson=<%=session.getAttribute("ListClassFamilyGson")%>
 </script>
 
 	<%@include file="TestHeader.jsp" %>
@@ -117,7 +118,17 @@ listGson_print=<%=session.getAttribute("listGson_print")%>
 					</div>
 					
 				<div  id="tableList" class="box-content">
-				
+				  <div style="float: left;width: 140px;">
+<el-select v-model="classFamilyValue" :change="change_cf" clearable  placeholder="可筛选合同类型">
+    <el-option
+      v-for="item in ListClassFamilyGson"
+      :key="item.rowData.CLASSFAMILY"
+      :label="item.label"
+      :value="item.rowData.CLASSFAMILY">
+    </el-option>
+  </el-select>  
+  </div>
+  
 
 				
 					<div style="float: right;height: 50px;">
@@ -127,6 +138,10 @@ listGson_print=<%=session.getAttribute("listGson_print")%>
     clearable
     v-model="input2" class="input2">
   </el-input>
+  
+
+
+  
 					</div>
 						<div style="float: right;height: 50px;margin-right: 50px">
 	<span style="letter-spacing: 2px;">
@@ -135,9 +150,8 @@ listGson_print=<%=session.getAttribute("listGson_print")%>
 			时间范围  :</b>
 			</span>
 <el-date-picker
-	:blur="lostPoint()"
+	:change="lostPoint"
      v-model="dateValue"
-     
      type="daterange"
      align="right"
      unlink-panels
@@ -251,8 +265,11 @@ listGson_print=<%=session.getAttribute("listGson_print")%>
         :current-page.sync="currentPage"
       :total="allCount">
     </el-pagination></div>
-   
+ 
     <div style="float:right;"><el-button size="mini" type="primary" @click="outPrint()">导出报表<i class="el-icon-upload el-icon--right"></i></el-button></div>
+    <template v-if="showSum">
+   <div style="float:right;padding-right: 20px;font-size: 12px;color: #df7910;" ><b>{{startDate}} 至 {{endDate}}合同总金额 : </b>{{sum}} <b>元</b></div>
+   </template>
   </div>
   
   
@@ -572,6 +589,10 @@ return t2;
 var tableList=new Vue({
     el:'#tableList',
     data:{
+	classFamilyValue:'',
+	ListClassFamilyGson:ListClassFamilyGson,
+	showSum:false,
+	sum:0,
 	listGson_print:[],
 	startDate:"",
 	endDate:"",
@@ -611,7 +632,7 @@ var tableList=new Vue({
 			          }]
 	 },
 	 value1: '',
-     dateValue: '',
+     dateValue: null,
 	isCon:false,
 	isConedit:false,
 	isCondel:false,
@@ -673,6 +694,7 @@ if (levela==1) {
 		 return "合同未结束";
 	     }
 	 },
+	
 	shaixuan(f){
             this.subcontents=contractListGson;
        
@@ -686,9 +708,16 @@ if (levela==1) {
                                temp['camount'].toLowerCase().includes(f.toLowerCase())
 //                                (temp['camount']!=null ? temp['sname'].toLowerCase().includes(f.toLowerCase()):0)
                  )
-                             
                  });
              }
+//              console.log(this.classFamilyValue);
+             if (this.classFamilyValue!='') {
+        	 this.subcontents = this.subcontents.filter(temp=>{
+                     return   (temp['plan4'].includes(this.classFamilyValue)
+                 )
+                 });
+	    }
+             
              this.allData=this.subcontents;
              this.tableData=this.dataShow( this.allData);
              
@@ -774,11 +803,12 @@ if (levela==1) {
 			     type:"2",
 			 }
 		     }).then((response)=>{
-				 console.log(response.data);
+// 				 console.log(response.data);
 				 contractListGson=response.data.contractListGson;
 				 this.listGson_print=response.data.listGson_print;
 				 this.shaixuan(this.input2);
-				 
+				 this.sum=this.sumAll();
+				 this.showSum=true;
 			     }).catch((error)=>{
 				 console.log(error);
 			     }).then(function(){
@@ -828,7 +858,7 @@ if (levela==1) {
 			      contractListGson=response.data.contractListGson;
 				 this.listGson_print=response.data.listGson_print;
 				 this.shaixuan(this.input2);
-				
+				this.showSum=false;
 			      })
 			      .catch( (error) =>{
 			      console.log(error);
@@ -837,37 +867,51 @@ if (levela==1) {
 			      // always executed
 			      });
 		      },
-		      lostPoint(){
-// 			  console.log(this.dateValue);
-			  if(this.dateValue==null){
-			      this.noTime()
-			  }
+		     
+		      
+			  sumAll(){
+// 			  console.log(this.subcontents);
+			      let a=0;
+			      for(i in this.subcontents){
+// 				  console.log(parseInt(contractListGson[i].camount));
+// 				  console.log(a);
+				  a=a+parseInt(this.subcontents[i].camount);
+			      }
+// 			      console.log(a);
+			      return a;
 			  },
-			  dateValue(){
-			      
-			  },
+			 
     },
     computed:{
-	
+	 lostPoint(){
+		  let n= this.dateValue;
+			if(n==null||n==''){
+			    this.noTime();
+			}else{
+			 
+				   n[0]= n[0].toString().length>15? formatDate(n[0]):n[0];
+				   n[1]= n[1].toString().length>15? formatDate(n[1]):n[1];
+// 		 	 	   console.log(n);
+				   this.startDate=n[0];
+				   this.endDate=n[1];
+				   this.changeTable();
+			}
+	      },
+	      change_cf(){
+// 		  console.log(this.classFamilyValue);
+		  this.shaixuan(this.input2);
+	      },
     },
     watch:{
+	subcontents:function(n,o){
+// 	    console.log(n);
+	    this.sum=this.sumAll();
+	},
 	input2:function(n,o){
-	    console.log(n);
+// 	    console.log(n);
 	    this.shaixuan(n);
 	},
-	    dateValue:function(n,o){
-		if(n==null){
-		    return;
-		}
-		   n[0]= n[0].toString().length>15? formatDate(n[0]):n[0];
-		   n[1]= n[1].toString().length>15? formatDate(n[1]):n[1];
-// 	 	   console.log(n);
-		   this.startDate=n[0];
-		   this.endDate=n[1];
-		   this.changeTable();
-		 },
-	
-	
+
     },
 })
 

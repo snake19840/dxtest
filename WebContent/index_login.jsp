@@ -80,7 +80,7 @@ width: 200px;
 					
 			<div class="row-fluid">
 				<div class="login-box">
-					<div style="padding: 20px  20px;padding-top: 30px;/* align-content: center; */text-align: center;font-family: KaiTi;text-size: 1px;font-size: 28px;/* font-weight: bolder; */">
+					<div style="padding: 20px  20px;padding-top: 30px;text-align:center;  font-family: KaiTi;text-size: 1px;font-size: 28px;">
 <!-- 					<b>宁波电信IT机房运维管理系统</b> -->
 					<img alt="" src="img/icon5_dx.fw.png">
 <!-- 					<img alt="" src="img/icon6_dx.png" > -->

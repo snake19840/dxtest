@@ -64,10 +64,19 @@ public class TestChakanContract extends HttpServlet {
 		
 		List<Equ> contractList=ContractDao.contractList();
 		
+		sql="SELECT DISTINCT CLASSFAMILY FROM CONTRACTCLASS";
+		List<Equ> ListClassFamily = SelectAll.Warningstatu(sql);
+		
+		
 		session.setAttribute("contractList", contractList);
+		
 		Gson gson = new Gson();
+		
 		String contractListGson=gson.toJson(contractList); 
 		session.setAttribute("contractListGson", contractListGson);
+		
+		String ListClassFamilyGson=gson.toJson(ListClassFamily); 
+		session.setAttribute("ListClassFamilyGson", ListClassFamilyGson);
 		
 		 String listGson = gson.toJson(list);
 		    session.setAttribute("list_print", list);

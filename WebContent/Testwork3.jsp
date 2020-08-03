@@ -197,8 +197,7 @@ function getCookie(name) {
 							  <thead>
 								  <tr>
 									  <th>故障编号</th>
-									  <th>设备编号</th>
-									  
+									  <th>设备SN号</th>
 									  <th>巡检时间</th>
 									  <th>故障内容</th> 
 									  <th>详情</th>                                        
@@ -258,15 +257,10 @@ function getCookie(name) {
 				    text += "<i class=\"halflings-icon white warning-sign\"></i>  ";
 				    text += "</a>";
 			    }
-			   	
-			    
 			}
 // 			console.log(text);
 			document.getElementById("idData").innerHTML=text; 
 		}
-		
-		
-	
 		    
 		              var timer=null;
 						 document.getElementById("idData").addEventListener('click',function(e){
@@ -288,18 +282,12 @@ function getCookie(name) {
 							 
 		</script>			
 
-					
-					
-							
  <table >
     <tr><td><div id="barcon" name="barcon"></div></td></tr>
   </table>
 					
 				</div>
 			</div>	<!--/row-->
-			
-			
-		
 			
  <div >		
 				<div class="box span12">
@@ -309,8 +297,6 @@ function getCookie(name) {
 							<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
 						</div>
 					</div>
-				
-					
 					
 					<div  id="tableList" class="box-content">
 					<div style="float: right;height: 50px;">

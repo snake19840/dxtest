@@ -7,20 +7,24 @@
 /*    Brand color
 ----------------------*/
 .booking-system-feedback {
-  top: 5px !important;
-  right: 15px;
+	top: 5px !important;
+	right: 15px;
 }
+
 .booking-system-top {
-  padding-top: 15px;
+	padding-top: 15px;
 }
+
 .media-body {
-  vertical-align: middle;
+	vertical-align: middle;
 }
+
 .media-body span {
-  font-size: 10px;
-  color: #03a9f5;
+	font-size: 10px;
+	color: #03a9f5;
 }
+
 .media-body p {
-  color: #252525;
-  line-height: 15px;
+	color: #252525;
+	line-height: 15px;
 }

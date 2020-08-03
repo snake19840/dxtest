@@ -84,62 +84,74 @@
 
 </script>
 <style>
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+	font-size: 14px;
+}
 
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-    font-size: 14px;
-  }
+#top {
+	background: #eee;
+	border-bottom: 1px solid #ddd;
+	padding: 0 10px;
+	line-height: 40px;
+	font-size: 12px;
+}
 
-  #top {
-    background: #eee;
-    border-bottom: 1px solid #ddd;
-    padding: 0 10px;
-    line-height: 40px;
-    font-size: 12px;
-  }
-  .left { float: left }
-  .right { float: right }
-  .clear { clear: both }
+.left {
+	float: left
+}
 
-  #script-warning, #loading { display: none }
-  #script-warning { font-weight: bold; color: red }
+.right {
+	float: right
+}
 
-  #calendar {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 0 10px;
-  }
+.clear {
+	clear: both
+}
 
-  .tzo {
-    color: #000;
-  }
+#script-warning, #loading {
+	display: none
+}
 
+#script-warning {
+	font-weight: bold;
+	color: red
+}
+
+#calendar {
+	max-width: 900px;
+	margin: 40px auto;
+	padding: 0 10px;
+}
+
+.tzo {
+	color: #000;
+}
 </style>
 </head>
 <body>
 
-  <div id='top'>
+	<div id='top'>
 
-    <div class='left'>
-      Timezone:
-      <select id='time-zone-selector'>
-        <option value='local' selected>local</option>
-        <option value='UTC'>UTC</option>
-      </select>
-    </div>
+		<div class='left'>
+			Timezone: <select id='time-zone-selector'>
+				<option value='local' selected>local</option>
+				<option value='UTC'>UTC</option>
+			</select>
+		</div>
 
-    <div class='right'>
-      <span id='loading'>loading...</span>
-      <span id='script-warning'><code>php/get-events.php</code> must be running.</span>
-    </div>
+		<div class='right'>
+			<span id='loading'>loading...</span> <span id='script-warning'><code>php/get-events.php</code>
+				must be running.</span>
+		</div>
 
-    <div class='clear'></div>
+		<div class='clear'></div>
 
-  </div>
+	</div>
 
-  <div id='calendar'></div>
+	<div id='calendar'></div>
 
 </body>
 </html>

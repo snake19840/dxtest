@@ -33,6 +33,15 @@
 <script src="node_modules/moment/moment.js" charset="GBK"></script>
 <script src="element-ui/lib/index.js"></script>
 	<link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
+	<style>
+	.a1{
+	display:inline !important;
+	}
+	.a2{
+	display:none !important;
+	}
+	</style>
+	
 </head>
 <body onload="initvar()" onunload="setvar()">
 
@@ -188,19 +197,18 @@ String		ownname4 = "";
 								<input style="display: none;" id="CB_class_t" name="CB_class" size="16" type="text">
 								 <a style="padding-bottom: 12px;text-decoration:none" href="#" onclick="showClassText('styp1input','styp1')" class="icon-pencil"><i></i></a>
 								
-								
-								<input id="styp1input" style="display: none;" type="text">
-								  <select style="display: line;" name="selectstyp"  id="styp1">
+								<span>
+								 <select class="a1" name="selectstyp"  id="styp1">
 								  <option></option>
 									</select>
+								<input id="styp1input" class="a2" type="text">
+								</span>
+								
+								
 									<span class="add-on ">型号</span>
 									<input  size="16" type="text" name="styp2" id="styp2" value="<%=styp2 %>">
 								</div>
 							  </div>
-							  <script type="text/javascript">
-							
-							
-								</script>
 							  
 							   <div id="ch1" class="control-group">
 								<label class="control-label2">设备类型</label>
@@ -573,12 +581,13 @@ String		ownname4 = "";
 // 		  console.log(listGson);
 		  
 		  function showClassText(a,b) {
-			    if (document.getElementById(a).style.display=="none") {
-				document.getElementById(a).style.display="inline";
-				document.getElementById(b).style.display="none";
+			    if (document.getElementById(a).getAttribute("class")=="a1") {
+				document.getElementById(a).setAttribute("class","a2");
+				document.getElementById(b).setAttribute("class","a1");
+				
 			    }else {
-				document.getElementById(a).style.display="none";
-				document.getElementById(b).style.display="inline";
+				document.getElementById(a).setAttribute("class","a1");
+				document.getElementById(b).setAttribute("class","a2");
 			    }
 			    
 			}

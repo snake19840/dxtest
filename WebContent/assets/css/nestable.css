@@ -7,9 +7,9 @@
 /*    Brand color
 ----------------------*/
 .nestable-cart {
-  overflow: hidden;
+	overflow: hidden;
 }
-.dd-handle,
-.dd3-content {
-  color: #000!important;
+
+.dd-handle, .dd3-content {
+	color: #000 !important;
 }

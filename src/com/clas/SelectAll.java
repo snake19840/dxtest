@@ -1,2634 +1,2687 @@
-package com.clas;
+/*      */ package com.clas;
+/*      */ 
+/*      */ import com.clas.Equ;
+/*      */ import com.clas.JDBCconnect;
+/*      */ import java.sql.Connection;
+/*      */ import java.sql.PreparedStatement;
+/*      */ import java.sql.ResultSet;
+/*      */ import java.sql.ResultSetMetaData;
+/*      */ import java.sql.SQLException;
+/*      */ import java.sql.Statement;
+/*      */ import java.text.SimpleDateFormat;
+/*      */ import java.util.ArrayList;
+/*      */ import java.util.Date;
+/*      */ import java.util.HashMap;
+/*      */ import java.util.List;
+/*      */ import java.util.Map;
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */ public class SelectAll
+/*      */ {
+/*      */   public static void updataT(int id, String stdate, String sn, String pos, String ip, String styp, String sname, String sid, String pname, String use, String ownname, String proname, String manname, String agename, String mantyp, String did, String port, String cpu, String memory, String disk, String syn, String oracle, String oth) {
+/*      */     try {
+/*   29 */       int inti = 1;
+/*   30 */       Connection conn = JDBCconnect.getConnection();
+/*   31 */       String sql = "update Dxtest set  stdate=?,sn=?,pos=?,ip=?,styp=?,sname=?,sid=?,pname=?,use=?,ownname=?,proname=?,manname=?,agename=?,mantyp=?,did=?,port=?,cpu=?,memory=?,disk=?,syn=?,oracle=?,oth=?  where id=?";
+/*   32 */       PreparedStatement ps2 = null;
+/*   33 */       ResultSet rs2 = null;
+/*   34 */       ps2 = conn.prepareStatement(sql);
+/*   35 */       ps2.setString(inti++, stdate);
+/*   36 */       ps2.setString(inti++, sn);
+/*   37 */       ps2.setString(inti++, pos);
+/*   38 */       ps2.setString(inti++, ip);
+/*   39 */       ps2.setString(inti++, styp);
+/*   40 */       ps2.setString(inti++, sname);
+/*   41 */       ps2.setString(inti++, sid);
+/*   42 */       ps2.setString(inti++, pname);
+/*   43 */       ps2.setString(inti++, use);
+/*   44 */       ps2.setString(inti++, ownname);
+/*   45 */       ps2.setString(inti++, proname);
+/*   46 */       ps2.setString(inti++, manname);
+/*   47 */       ps2.setString(inti++, agename);
+/*   48 */       ps2.setString(inti++, mantyp);
+/*   49 */       ps2.setString(inti++, did);
+/*   50 */       ps2.setString(inti++, port);
+/*   51 */       ps2.setString(inti++, cpu);
+/*   52 */       ps2.setString(inti++, memory);
+/*   53 */       ps2.setString(inti++, disk);
+/*   54 */       ps2.setString(inti++, syn);
+/*   55 */       ps2.setString(inti++, oracle);
+/*   56 */       ps2.setString(inti++, oth);
+/*   57 */       ps2.setInt(inti++, id);
+/*   58 */       rs2 = ps2.executeQuery();
+/*      */       
+/*   60 */       ps2.close();
+/*   61 */       rs2.close();
+/*      */     
+/*      */     }
+/*   64 */     catch (Exception e) {
+/*      */       
+/*   66 */       e.printStackTrace();
+/*      */     } 
+/*      */   }
+/*      */   
+/*      */   public static void uptestp(String stdate, String sn, String pos, String ip, String styp, String sname, String sid, String pname, String use, String ownname, String proname, String manname, String agename, String mantyp, String did, String port, String cpu, String memory, String disk, String syn, String oracle, String oth) {
+/*      */     try {
+/*   72 */       int inti = 1;
+/*   73 */       Connection conn = JDBCconnect.getConnection();
+/*   74 */       String sqlR = "select count(*) from Dxtesttemp";
+/*   75 */       String sqlin = "insert into Dxtesttemp(stdate,sn,pos,ip,styp,sname,sid,pname,use,ownname,proname,manname,agename,mantyp,did,port,cpu,memory,disk,syn,oracle,oth) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+/*   76 */       String sql = "update Dxtesttemp set  stdate=?,sn=?,pos=?,ip=?,styp=?,sname=?,sid=?,pname=?,use=?,ownname=?,proname=?,manname=?,agename=?,mantyp=?,did=?,port=?,cpu=?,memory=?,disk=?,syn=?,oracle=?,oth=?  where rownum=1";
+/*   77 */       PreparedStatement ps1 = null;
+/*   78 */       PreparedStatement ps2 = null;
+/*   79 */       PreparedStatement ps3 = null;
+/*   80 */       ps1 = conn.prepareStatement(sqlR);
+/*   81 */       ResultSet rs1 = ps1.executeQuery();
+/*   82 */       ResultSet rs2 = null;
+/*   83 */       ResultSet rs3 = null;
+/*   84 */       int count = 0;
+/*   85 */       if (rs1.next()) {
+/*   86 */         count = rs1.getInt("count(*)");
+/*      */       }
+/*      */ 
+/*      */       
+/*   90 */       if (count > 0) {
+/*   91 */         inti = 1;
+/*   92 */         conn = JDBCconnect.getConnection();
+/*   93 */         ps2 = conn.prepareStatement(sql);
+/*   94 */         ps2.setString(inti++, stdate);
+/*   95 */         ps2.setString(inti++, sn);
+/*   96 */         ps2.setString(inti++, pos);
+/*   97 */         ps2.setString(inti++, ip);
+/*   98 */         ps2.setString(inti++, styp);
+/*   99 */         ps2.setString(inti++, sname);
+/*  100 */         ps2.setString(inti++, sid);
+/*  101 */         ps2.setString(inti++, pname);
+/*  102 */         ps2.setString(inti++, use);
+/*  103 */         ps2.setString(inti++, ownname);
+/*  104 */         ps2.setString(inti++, proname);
+/*  105 */         ps2.setString(inti++, manname);
+/*  106 */         ps2.setString(inti++, agename);
+/*  107 */         ps2.setString(inti++, mantyp);
+/*  108 */         ps2.setString(inti++, did);
+/*  109 */         ps2.setString(inti++, port);
+/*  110 */         ps2.setString(inti++, cpu);
+/*  111 */         ps2.setString(inti++, memory);
+/*  112 */         ps2.setString(inti++, disk);
+/*  113 */         ps2.setString(inti++, syn);
+/*  114 */         ps2.setString(inti++, oracle);
+/*  115 */         ps2.setString(inti++, oth);
+/*  116 */         rs2 = ps2.executeQuery();
+/*      */ 
+/*      */         
+/*  119 */         ps2.close();
+/*  120 */         rs2.close();
+/*      */       } else {
+/*      */         
+/*  123 */         inti = 1;
+/*  124 */         conn = JDBCconnect.getConnection();
+/*  125 */         ps3 = conn.prepareStatement(sqlin);
+/*  126 */         ps3.setString(inti++, stdate);
+/*  127 */         ps3.setString(inti++, sn);
+/*  128 */         ps3.setString(inti++, pos);
+/*  129 */         ps3.setString(inti++, ip);
+/*  130 */         ps3.setString(inti++, styp);
+/*  131 */         ps3.setString(inti++, sname);
+/*  132 */         ps3.setString(inti++, sid);
+/*  133 */         ps3.setString(inti++, pname);
+/*  134 */         ps3.setString(inti++, use);
+/*  135 */         ps3.setString(inti++, ownname);
+/*  136 */         ps3.setString(inti++, proname);
+/*  137 */         ps3.setString(inti++, manname);
+/*  138 */         ps3.setString(inti++, agename);
+/*  139 */         ps3.setString(inti++, mantyp);
+/*  140 */         ps3.setString(inti++, did);
+/*  141 */         ps3.setString(inti++, port);
+/*  142 */         ps3.setString(inti++, cpu);
+/*  143 */         ps3.setString(inti++, memory);
+/*  144 */         ps3.setString(inti++, disk);
+/*  145 */         ps3.setString(inti++, syn);
+/*  146 */         ps3.setString(inti++, oracle);
+/*  147 */         ps3.setString(inti++, oth);
+/*  148 */         rs3 = ps3.executeQuery();
+/*      */         
+/*  150 */         ps3.close();
+/*  151 */         rs3.close();
+/*      */       } 
+/*      */       
+/*  154 */       ps1.close();
+/*  155 */       rs1.close();
+/*  156 */       conn.close();
+/*  157 */     } catch (Exception e) {
+/*      */       
+/*  159 */       e.printStackTrace();
+/*      */     } 
+/*      */   }
+/*      */   
+/*      */   public static List<Equ> testformall() {
+/*  164 */    List<Equ> list = new ArrayList<Equ>();
+/*      */     try {
+/*  166 */       int inti = 1;
+/*  167 */       Connection conn = JDBCconnect.getConnection();
+/*  168 */       String sql = "select * from dxtesttemp where rownum=1";
+/*  169 */       PreparedStatement ps = conn.prepareStatement(sql);
+/*  170 */       ps = conn.prepareStatement(sql);
+/*  171 */       ResultSet rs = ps.executeQuery();
+/*  172 */       while (rs.next()) {
+/*  173 */         Equ equ = new Equ();
+/*  174 */         equ.setPname(rs.getString("pname"));
+/*  175 */         equ.setSn(rs.getString("sn"));
+/*  176 */         equ.setPos(rs.getString("pos"));
+/*  177 */         equ.setIp(rs.getString("ip"));
+/*  178 */         equ.setStyp(rs.getString("styp"));
+/*  179 */         equ.setSname(rs.getString("sname"));
+/*  180 */         equ.setSid(rs.getString("sid"));
+/*  181 */         equ.setDid(rs.getString("did"));
+/*  182 */         equ.setStdate(rs.getString("stdate"));
+/*  183 */         equ.setUse(rs.getString("use"));
+/*  184 */         equ.setOwnname(rs.getString("ownname"));
+/*  185 */         equ.setProname(rs.getString("proname"));
+/*  186 */         equ.setManname(rs.getString("manname"));
+/*  187 */         equ.setAgename(rs.getString("agename"));
+/*  188 */         equ.setMantyp(rs.getString("mantyp"));
+/*  189 */         equ.setPort(rs.getString("port"));
+/*  190 */         equ.setCpu(rs.getString("cpu"));
+/*  191 */         equ.setMemory(rs.getString("memory"));
+/*  192 */         equ.setDisk(rs.getString("disk"));
+/*  193 */         equ.setSyn(rs.getString("syn"));
+/*  194 */         equ.setOracle(rs.getString("oracle"));
+/*  195 */         equ.setOth(rs.getString("oth"));
+/*  196 */         list.add(equ);
+/*      */       } 
+/*      */       
+/*  199 */       rs.close();
+/*  200 */       ps.close();
+/*  201 */       conn.close();
+/*  202 */     } catch (Exception e) {
+/*      */       
+/*  204 */       e.printStackTrace();
+/*      */     } 
+/*  206 */     return list;
+/*      */   }
+/*      */   
+/*      */   public static void UpPlanServlet(String sdate, String edate, String statu, String username) {
+/*      */     try {
+/*  211 */       int inti = 1;
+/*  212 */       Connection conn = JDBCconnect.getConnection();
+/*  213 */       String sql = "update dxtestwork set  username=?  where sdate=? and edate=? and statu=?";
+/*      */ 
+/*      */ 
+/*      */       
+/*  217 */       PreparedStatement ps = conn.prepareStatement(sql);
+/*  218 */       ps = conn.prepareStatement(sql);
+/*  219 */       ps.setString(inti++, username);
+/*  220 */       ps.setString(inti++, sdate);
+/*  221 */       ps.setString(inti++, edate);
+/*  222 */       ps.setString(inti++, statu);
+/*      */       
+/*  224 */       ResultSet rs = ps.executeQuery("update dxtestwork set  username='" + username + "'  where sdate='" + sdate + "' and edate='" + edate + "' and statu='" + statu + "'");
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */       
+/*  231 */       rs.close();
+/*  232 */       ps.close();
+/*  233 */       conn.close();
+/*  234 */     } catch (Exception e) {
+/*      */       
+/*  236 */       e.printStackTrace();
+/*      */     } 
+/*      */   }
+/*      */   
+/*      */   public static List<String> typeList() {
+/*  241 */   List<String>  list = new ArrayList<String>();
+/*      */     try {
+/*  243 */       int inti = 1;
+/*  244 */       Connection conn = JDBCconnect.getConnection();
+/*      */       
+/*  246 */       String sql = "select styp from dxtest";
+/*  247 */       PreparedStatement ps = conn.prepareStatement(sql);
+/*  248 */       ResultSet rs = ps.executeQuery();
+/*  249 */       while (rs.next()) {
+/*  250 */         String a = rs.getString(1);
+/*  251 */         if (a == null) {
+/*  252 */           a = "";
+/*      */         }
+/*  254 */         a = a.substring(0, a.indexOf("/"));
+/*  255 */         if (a.length() == 0) {
+/*      */           continue;
+/*      */         }
+/*  258 */         if (list.indexOf(a) == -1) {
+/*  259 */           list.add(a);
+/*      */         }
+/*      */       } 
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */       
+/*  266 */       rs.close();
+/*  267 */       ps.close();
+/*  268 */       conn.close();
+/*  269 */     } catch (Exception e) {
+/*      */       
+/*  271 */       e.printStackTrace();
+/*      */     } 
+/*      */     
+/*  274 */     return list;
+/*      */   }
+/*      */ 
+/*      */   
+/*      */   public static List<Equ> usersall() {
+/*  279 */   List<Equ>  list = new ArrayList<Equ>();
+/*      */     try {
+/*  281 */       int inti = 1;
+/*  282 */       Connection conn = JDBCconnect.getConnection();
+/*  283 */       String sql = "select * from DXTESTUSER where userid is not null";
+/*  284 */       PreparedStatement ps = conn.prepareStatement(sql);
+/*  285 */       ps = conn.prepareStatement(sql);
+/*  286 */       ResultSet rs = ps.executeQuery();
+/*  287 */       while (rs.next()) {
+/*  288 */         Equ equ = new Equ();
+/*  289 */         equ.setUserid(rs.getString("userid"));
+/*  290 */         equ.setUsername(rs.getString("username"));
+/*  291 */         equ.setUserpwd(rs.getString("userpwd"));
+/*  292 */         equ.setAut(rs.getInt("aut"));
+/*  293 */         equ.setDay(rs.getString("day"));
+/*  294 */         equ.setEdi(rs.getString("edi"));
+/*  295 */         equ.setDel(rs.getString("del"));
+/*  296 */         equ.setCon(rs.getString("con"));
+/*  297 */         equ.setConedit(rs.getString("conedit"));
+/*  298 */         equ.setCondel(rs.getString("condel"));
+/*  299 */         equ.setAddevent(rs.getString("addevent"));
+/*  300 */         equ.setLevela(rs.getString("levela"));
+/*  301 */         list.add(equ);
+/*  302 */       }  rs.close();
+/*  303 */       ps.close();
+/*  304 */       conn.close();
+/*  305 */     } catch (Exception e) {
+/*      */       
+/*  307 */       e.printStackTrace();
+/*      */     } 
+/*  309 */     return list;
+/*      */   }
+/*      */   
+/*      */   public static boolean updataAuthor(String username, String con, String addevent, String levela, String day) {
+/*  313 */     boolean a = false;
+/*      */     try {
+/*  315 */       int inti = 1;
+/*  316 */       Connection conn = JDBCconnect.getConnection();
+/*  317 */       String sql = "update DXTESTUSER set  con=?,addevent=?,levela=?,day=?  where username=?";
+/*  318 */       PreparedStatement ps = conn.prepareStatement(sql);
+/*  319 */       ps = conn.prepareStatement(sql);
+/*  320 */       ps.setString(inti++, con);
+/*  321 */       ps.setString(inti++, addevent);
+/*  322 */       ps.setString(inti++, levela);
+/*  323 */       ps.setString(inti++, day);
+/*  324 */       ps.setString(inti++, username);
+/*      */       
+/*  326 */       ResultSet rs = ps.executeQuery();
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */       
+/*  332 */       ps.close();
+/*  333 */       conn.close();
+/*  334 */       a = true;
+/*  335 */     } catch (Exception e) {
+/*      */       
+/*  337 */       e.printStackTrace();
+/*  338 */       a = false;
+/*      */     } 
+/*  340 */     return a;
+/*      */   }
+/*      */   
+/*      */   public static boolean updataUser(String userid, String userpwd, String username, String con, String addevent, String levela) {
+/*  344 */     boolean a = false;
+/*      */     try {
+/*  346 */       int inti = 1;
+/*  347 */       Connection conn = JDBCconnect.getConnection();
+/*  348 */       String sql = "insert into DXTESTUSER (userid,username,userpwd,aut,day,edi,del,con,addevent,levela) values(?,?,?,'2','7','1','1',?,?,?)";
+/*  349 */       PreparedStatement ps = conn.prepareStatement(sql);
+/*  350 */       ps.setString(inti++, userid);
+/*  351 */       ps.setString(inti++, username);
+/*  352 */       ps.setString(inti++, userpwd);
+/*  353 */       ps.setString(inti++, con);
+/*  354 */       ps.setString(inti++, addevent);
+/*  355 */       ps.setString(inti++, levela);
+/*  356 */       ResultSet rs = ps.executeQuery();
+/*  357 */       ps.close();
+/*  358 */       conn.close();
+/*  359 */       a = true;
+/*  360 */     } catch (Exception e) {
+/*      */       
+/*  362 */       e.printStackTrace();
+/*      */     } 
+/*  364 */     return a;
+/*      */   }
+/*      */   
+/*      */   public static List<Equ> searchAuthor(String username) {
+/*  368 */     List<Equ> list = new ArrayList<Equ>(); try {
+/*  369 */       int inti = 1;
+/*  370 */       Connection conn = JDBCconnect.getConnection();
+/*      */       
+/*  372 */       String sql = "select * from DXTESTUSER where username=?";
+/*  373 */       PreparedStatement ps = conn.prepareStatement(sql);
+/*  374 */       ps.setString(inti++, username);
+/*      */       
+/*  376 */       ResultSet rs = ps.executeQuery();
+/*  377 */       while (rs.next()) {
+/*  378 */         Equ equ = new Equ();
+/*  379 */         equ.setUserid(rs.getString("userid"));
+/*  380 */         equ.setUsername(rs.getString("username"));
+/*  381 */         equ.setAut(rs.getInt("aut"));
+/*  382 */         equ.setDay(rs.getString("day"));
+/*  383 */         equ.setCon(rs.getString("con"));
+/*  384 */         equ.setConedit(rs.getString("conedit"));
+/*  385 */         equ.setCondel(rs.getString("condel"));
+/*  386 */         equ.setAddevent(rs.getString("addevent"));
+/*  387 */         equ.setLevela(rs.getString("levela"));
+/*  388 */         list.add(equ);
+/*  389 */       }  rs.close();
+/*  390 */       ps.close();
+/*  391 */       conn.close();
+/*      */     }
+/*  393 */     catch (Exception e) {
+/*      */       
+/*  395 */       e.printStackTrace();
+/*      */     } 
+/*  397 */     return list;
+/*      */   }
+/*      */   
+/*      */   public static List<Equ> listTemp() {
+/*  401 */   List<Equ>  list = new ArrayList<Equ>();
+/*  402 */     int id = 1;
+/*      */     try {
+/*  404 */       Connection conn = JDBCconnect.getConnection();
+/*      */       
+/*  406 */       String sql = "select * from dxtesttemp where rownum=1";
+/*  407 */       Statement stmt = conn.createStatement();
+/*  408 */       ResultSet rs = stmt.executeQuery(sql);
+/*      */       
+/*  410 */       while (rs.next()) {
+/*      */         
+/*  412 */         Equ equ = new Equ();
+/*      */         
+/*  414 */         equ.setId(id);
+/*  415 */         equ.setSid(rs.getString("sid"));
+/*  416 */         equ.setDid(rs.getString("did"));
+/*  417 */         equ.setStdate(rs.getString("stdate"));
+/*  418 */         equ.setUse(rs.getString("use"));
+/*  419 */         equ.setOwnname(rs.getString("ownname"));
+/*  420 */         equ.setProname(rs.getString("proname"));
+/*  421 */         equ.setManname(rs.getString("manname"));
+/*  422 */         equ.setAgename(rs.getString("agename"));
+/*  423 */         equ.setMantyp(rs.getString("mantyp"));
+/*  424 */         equ.setPort(rs.getString("port"));
+/*  425 */         equ.setCpu(rs.getString("cpu"));
+/*  426 */         equ.setMemory(rs.getString("memory"));
+/*  427 */         equ.setDisk(rs.getString("disk"));
+/*  428 */         equ.setSyn(rs.getString("syn"));
+/*  429 */         equ.setOracle(rs.getString("oracle"));
+/*  430 */         equ.setOth(rs.getString("oth"));
+/*  431 */         equ.setPname(rs.getString("pname"));
+/*  432 */         equ.setSn(rs.getString("sn"));
+/*  433 */         equ.setPos(rs.getString("pos"));
+/*  434 */         equ.setIp(rs.getString("ip"));
+/*  435 */         equ.setStyp(rs.getString("styp"));
+/*  436 */         equ.setSname(rs.getString("sname"));
+/*      */ 
+/*      */         
+/*  439 */         list.add(equ);
+/*      */       } 
+/*  441 */       rs.close();
+/*  442 */       conn.close();
+/*  443 */     } catch (Exception exception) {}
+/*      */ 
+/*      */     
+/*  446 */     return list;
+/*      */   }
+/*      */   
+/*      */   public static boolean insertItem(String sql) {
+/*  450 */     boolean a = false;
+/*      */     try {
+/*  452 */       Connection conn = JDBCconnect.getConnection();
+/*  453 */       conn.setAutoCommit(true);
+/*      */       
+/*  455 */       PreparedStatement ps = conn.prepareStatement(sql);
+/*  456 */       ResultSet rs = ps.executeQuery();
+/*  457 */       a = true;
+/*  458 */       rs.close();
+/*  459 */       ps.close();
+/*  460 */       conn.close();
+/*  461 */     } catch (Exception e) {
+/*      */       
+/*  463 */       e.printStackTrace();
+/*      */     } 
+/*  465 */     return a;
+/*      */   }
+/*      */   
+/*      */   public static boolean Del(String sql) {
+/*  469 */     boolean a = false;
+/*      */     
+/*      */     try {
+/*  472 */       Connection conn = JDBCconnect.getConnection();
+/*  473 */       PreparedStatement ps = conn.prepareStatement(sql);
+/*  474 */       ResultSet rs = ps.executeQuery();
+/*  475 */       a = true;
+/*  476 */       rs.close();
+/*  477 */       ps.close();
+/*  478 */       conn.close();
+/*  479 */     } catch (Exception e) {
+/*      */       
+/*  481 */       e.printStackTrace();
+/*      */     } 
+/*  483 */     return a;
+/*      */   }
+/*      */   
+/*      */   public static boolean Update(String sql) {
+/*  487 */     boolean a = false;
+/*      */     
+/*      */     try {
+/*  490 */       Connection conn = JDBCconnect.getConnection();
+/*  491 */       conn.setAutoCommit(true);
+/*  492 */       PreparedStatement ps = conn.prepareStatement(sql);
+/*  493 */       int rs = ps.executeUpdate();
+/*      */       
+/*  495 */       a = true;
+/*      */       
+/*  497 */       ps.close();
+/*  498 */       conn.close();
+/*  499 */     } catch (Exception e) {
+/*  500 */       e.printStackTrace();
+/*      */     } 
+/*      */     
+/*  503 */     return a;
+/*      */   }
+/*      */ 
+/*      */ 
+/*      */   
+/*      */   public boolean Updata_PlanSub(String a, String b, String c, String d, String e, String f, String g) {
+/*  509 */     String sql = "update PLANSUB set  PAYNAME=?,PAYPOR=?,STATU_SUB=?,REALPAY=?,PAYPLAN=?  where contractid=? and PAYNAME=?";
+/*  510 */     int i = 1;
+/*  511 */     PreparedStatement ps = null;
+/*      */     try {
+/*  513 */       Connection conn = JDBCconnect.getConnection();
+/*      */       
+/*  515 */       ps = conn.prepareStatement(sql);
+/*  516 */       ps.setString(i++, a);
+/*  517 */       ps.setString(i++, b);
+/*  518 */       ps.setString(i++, c);
+/*  519 */       ps.setString(i++, d);
+/*  520 */       ps.setString(i++, e);
+/*  521 */       ps.setString(i++, f);
+/*  522 */       ps.setString(i++, g);
+/*  523 */       ResultSet rs = ps.executeQuery();
+/*      */       
+/*  525 */       ps.close();
+/*  526 */       rs.close();
+/*  527 */       conn.close();
+/*      */     
+/*      */     }
+/*  530 */     catch (Exception exception) {
+/*  531 */       exception.printStackTrace();
+/*      */     } 
+/*      */ 
+/*      */     
+/*  535 */     return true;
+/*      */   }
+/*      */ 
+/*      */   
+/*      */   public static String getKey(String sql, String key) {
+/*  540 */     String a = "";
+/*      */     
+/*      */     try {
+/*  543 */       Connection conn = JDBCconnect.getConnection();
+/*  544 */       conn.setAutoCommit(true);
+/*  545 */       PreparedStatement ps = conn.prepareStatement(sql);
+/*  546 */       ps = conn.prepareStatement(sql);
+/*      */ 
+/*      */       
+/*  549 */       ResultSet rs = ps.executeQuery();
+/*  550 */       if (rs.next()) {
+/*  551 */         a = rs.getString(key);
+/*      */       }
+/*      */       
+/*  554 */       rs.close();
+/*  555 */       ps.close();
+/*  556 */       conn.close();
+/*  557 */     } catch (Exception e) {
+/*      */       
+/*  559 */       a = "";
+/*      */     } 
+/*  561 */     return a;
+/*      */   }
+/*      */   
+/*      */   public static int getCount(String sql) {
+/*  565 */     int a = 0;
+/*      */     
+/*      */     try {
+/*  568 */       Connection conn = JDBCconnect.getConnection();
+/*  569 */       conn.setAutoCommit(true);
+/*      */       
+/*  571 */       PreparedStatement ps = conn.prepareStatement(sql);
+/*      */ 
+/*      */       
+/*  574 */       ResultSet rs = ps.executeQuery();
+/*  575 */       while (rs.next()) {
+/*  576 */         a = rs.getInt(1);
+/*      */       }
+/*      */       
+/*  579 */       rs.close();
+/*  580 */       ps.close();
+/*  581 */       conn.close();
+/*      */     }
+/*  583 */     catch (Exception e) {
+/*      */       
+/*  585 */       e.printStackTrace();
+/*      */     } 
+/*  587 */     return a;
+/*      */   }
+/*      */ 
+/*      */   
+/*      */   public static int getRownum(String sql) {
+/*  592 */     int a = 0;
+/*      */     try {
+/*  594 */       Connection conn = JDBCconnect.getConnection();
+/*  595 */       PreparedStatement ps = conn.prepareStatement(sql);
+/*  596 */       ps = conn.prepareStatement(sql);
+/*      */ 
+/*      */       
+/*  599 */       ResultSet rs = ps.executeQuery();
+/*  600 */       if (rs.next()) {
+/*  601 */         a = rs.getInt("id");
+/*      */       }
+/*      */       
+/*  604 */       rs.close();
+/*  605 */       ps.close();
+/*  606 */       conn.close();
+/*  607 */     } catch (Exception e) {
+/*      */       
+/*  609 */       a = 0;
+/*      */     } 
+/*  611 */     return a;
+/*      */   }
+/*      */   
+/*      */   public static boolean deluser(String username) {
+/*  615 */     boolean deluser = false;
+/*      */     try {
+/*  617 */       int inti = 1;
+/*  618 */       Connection conn = JDBCconnect.getConnection();
+/*  619 */       String sql = "delete from DXTESTUSER where username=?";
+/*  620 */       PreparedStatement ps = conn.prepareStatement(sql);
+/*  621 */       ps.setString(inti++, username);
+/*  622 */       ResultSet rs = ps.executeQuery();
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */       
+/*  628 */       deluser = true;
+/*  629 */       ps.close();
+/*  630 */       conn.close();
+/*  631 */     } catch (Exception e) {
+/*      */       
+/*  633 */       e.printStackTrace();
+/*  634 */       deluser = false;
+/*      */     } 
+/*  636 */     return deluser;
+/*      */   }
+/*      */ 
+/*      */   
+/*      */   public static List<Equ> delEqu(String id) {
+/*  641 */     List<Equ> list = new ArrayList<Equ>();
+/*      */     try {
+/*  643 */       int inti = 1;
+/*  644 */       Connection conn = JDBCconnect.getConnection();
+/*  645 */       String sql = "delete from DXTEST where id=?";
+/*  646 */       PreparedStatement ps = conn.prepareStatement(sql);
+/*  647 */       ps = conn.prepareStatement(sql);
+/*  648 */       ps.setString(inti++, id);
+/*  649 */       ResultSet rs = ps.executeQuery();
+/*  650 */       Statement stmt = conn.createStatement();
+/*  651 */       sql = "select * from dxtest ";
+/*  652 */       rs = stmt.executeQuery(sql);
+/*  653 */       while (rs.next()) {
+/*  654 */         Equ equ = new Equ();
+/*  655 */         equ.setId(rs.getInt("id"));
+/*  656 */         equ.setSid(rs.getString("sid"));
+/*  657 */         equ.setStdate(rs.getString("stdate"));
+/*  658 */         equ.setSdate(rs.getString("sdate"));
+/*  659 */         equ.setEdate(rs.getString("edate"));
+/*  660 */         equ.setRedate(rs.getString("redate"));
+/*  661 */         equ.setPname(rs.getString("pname"));
+/*  662 */         equ.setUse(rs.getString("use"));
+/*  663 */         equ.setOwnname(rs.getString("ownname"));
+/*  664 */         equ.setProname(rs.getString("proname"));
+/*  665 */         equ.setManname(rs.getString("manname"));
+/*  666 */         equ.setAgename(rs.getString("agename"));
+/*  667 */         equ.setMantyp(rs.getString("mantyp"));
+/*  668 */         equ.setSname(rs.getString("sname"));
+/*  669 */         equ.setStyp(rs.getString("styp"));
+/*  670 */         equ.setPos(rs.getString("pos"));
+/*  671 */         equ.setIp(rs.getString("ip"));
+/*  672 */         equ.setPort(rs.getString("port"));
+/*  673 */         equ.setCpu(rs.getString("cpu"));
+/*  674 */         equ.setMemory(rs.getString("memory"));
+/*  675 */         equ.setDisk(rs.getString("disk"));
+/*  676 */         equ.setSyn(rs.getString("syn"));
+/*  677 */         equ.setOracle(rs.getString("oracle"));
+/*  678 */         equ.setSn(rs.getString("sn"));
+/*  679 */         equ.setOth(rs.getString("oth"));
+/*  680 */         equ.setSroot(rs.getString("sroot"));
+/*  681 */         equ.setSpwd(rs.getString("spwd"));
+/*  682 */         equ.setOroot(rs.getString("oroot"));
+/*  683 */         equ.setOpwd(rs.getString("opwd"));
+/*  684 */         equ.setAroot(rs.getString("aroot"));
+/*  685 */         equ.setApwd(rs.getString("apwd"));
+/*  686 */         equ.setTitle(rs.getString("title"));
+/*  687 */         equ.setUrl(rs.getString("url"));
+/*  688 */         equ.setDid(rs.getString("did"));
+/*  689 */         list.add(equ);
+/*      */       } 
+/*      */       
+/*  692 */       rs.close();
+/*  693 */       stmt.close();
+/*  694 */       ps.close();
+/*  695 */       conn.close();
+/*  696 */     } catch (Exception e) {
+/*      */       
+/*  698 */       e.printStackTrace();
+/*      */     } 
+/*  700 */     return list;
+/*      */   }
+/*      */   public static List<Equ> allEqus() {
+/*  703 */    List<Equ> list = new ArrayList<Equ>();
+/*      */     try {
+/*  705 */       Connection conn = JDBCconnect.getConnection();
+/*      */ 
+/*      */       
+/*  708 */       Statement stmt = conn.createStatement();
+/*      */ 
+/*      */       
+/*  711 */       String sql = "select * from dxtest WHERE sname!='虚拟机'";
+/*  712 */       ResultSet rs = stmt.executeQuery(sql);
+/*      */ 
+/*      */ 
+/*      */       
+/*  716 */       while (rs.next()) {
+/*  717 */         Equ equ = new Equ();
+/*  718 */         equ.setId(rs.getInt("id"));
+/*  719 */         equ.setSid(rs.getString("sid"));
+/*  720 */         equ.setStdate(rs.getString("stdate"));
+/*  721 */         equ.setSdate(rs.getString("sdate"));
+/*  722 */         equ.setEdate(rs.getString("edate"));
+/*  723 */         equ.setRedate(rs.getString("redate"));
+/*  724 */         equ.setPname(rs.getString("pname"));
+/*  725 */         equ.setUse(rs.getString("use"));
+/*  726 */         equ.setOwnname(rs.getString("ownname"));
+/*  727 */         equ.setProname(rs.getString("proname"));
+/*  728 */         equ.setManname(rs.getString("manname"));
+/*  729 */         equ.setAgename(rs.getString("agename"));
+/*  730 */         equ.setMantyp(rs.getString("mantyp"));
+/*  731 */         equ.setSname(rs.getString("sname"));
+/*  732 */         equ.setStyp(rs.getString("styp"));
+/*  733 */         equ.setPos(rs.getString("pos"));
+/*  734 */         equ.setIp(rs.getString("ip"));
+/*  735 */         equ.setPort(rs.getString("port"));
+/*  736 */         equ.setCpu(rs.getString("cpu"));
+/*  737 */         equ.setMemory(rs.getString("memory"));
+/*  738 */         equ.setDisk(rs.getString("disk"));
+/*  739 */         equ.setSyn(rs.getString("syn"));
+/*  740 */         equ.setOracle(rs.getString("oracle"));
+/*  741 */         equ.setSn(rs.getString("sn"));
+/*  742 */         equ.setOth(rs.getString("oth"));
+/*  743 */         equ.setSroot(rs.getString("sroot"));
+/*  744 */         equ.setSpwd(rs.getString("spwd"));
+/*  745 */         equ.setOroot(rs.getString("oroot"));
+/*  746 */         equ.setOpwd(rs.getString("opwd"));
+/*  747 */         equ.setAroot(rs.getString("aroot"));
+/*  748 */         equ.setApwd(rs.getString("apwd"));
+/*  749 */         equ.setTitle(rs.getString("title"));
+/*  750 */         equ.setUrl(rs.getString("url"));
+/*  751 */         equ.setDid(rs.getString("did"));
+/*      */         
+/*  753 */         list.add(equ);
+/*      */       } 
+/*      */ 
+/*      */       
+/*  757 */       rs.close();
+/*      */       
+/*  759 */       stmt.close();
+/*      */       
+/*  761 */       conn.close();
+/*      */     
+/*      */     }
+/*  764 */     catch (Exception e) {
+/*      */       
+/*  766 */       e.printStackTrace();
+/*      */     } 
+/*      */     
+/*  769 */     return list;
+/*      */   }
+/*      */ 
+/*      */   
+/*      */   public static void deletePlan(String username, String sdate, String edate, String statu) {
+/*      */     try {
+/*  775 */       int intid = 1;
+/*  776 */       Connection conn = JDBCconnect.getConnection();
+/*      */       
+/*  778 */       String sql = "delete from dxtestwork where username=? and sdate=? and edate=? and statu=? ";
+/*      */       
+/*  780 */       PreparedStatement ps = conn.prepareStatement(sql);
+/*  781 */       ps.setString(intid++, username);
+/*  782 */       ps.setString(intid++, sdate);
+/*  783 */       ps.setString(intid++, edate);
+/*  784 */       ps.setString(intid++, statu);
+/*      */       
+/*  786 */       ResultSet rs = ps.executeQuery();
+/*      */       
+/*  788 */       ps.close();
+/*  789 */       rs.close();
+/*  790 */       conn.close();
+/*      */     
+/*      */     }
+/*  793 */     catch (Exception e) {
+/*      */       
+/*  795 */       e.printStackTrace();
+/*      */     } 
+/*      */   }
+/*      */   
+/*      */   public static List<Equ> userAddListRe(String userid) {
+/*  800 */     List<Equ> listus = new ArrayList<Equ>();
+/*      */     try {
+/*  802 */       int intid = 1;
+/*  803 */       Connection conn = JDBCconnect.getConnection();
+/*  804 */       String sql = "select * from dxtestuser where userid=? ";
+/*  805 */       PreparedStatement ps = null;
+/*  806 */       ps = conn.prepareStatement(sql);
+/*  807 */       ps.setString(intid++, userid);
+/*  808 */       ResultSet rs = ps.executeQuery();
+/*      */       
+/*  810 */       while (rs.next()) {
+/*  811 */         Equ equ = new Equ();
+/*  812 */         equ.setUsername(rs.getString("username"));
+/*  813 */         equ.setUserpwd(rs.getString("userpwd"));
+/*  814 */         equ.setAut(rs.getInt("aut"));
+/*  815 */         equ.setUserid(rs.getString("userid"));
+/*  816 */         listus.add(equ);
+/*      */       } 
+/*      */       
+/*  819 */       rs.close();
+/*  820 */       ps.close();
+/*  821 */       conn.close();
+/*      */     }
+/*  823 */     catch (Exception e) {
+/*      */       
+/*  825 */       e.printStackTrace();
+/*      */     } 
+/*      */     
+/*  828 */     return listus;
+/*      */   }
+/*      */ 
+/*      */   
+/*      */   public static int daydf() {
+/*  833 */   int dd=0;
+/*      */     try {
+/*  835 */       int inti = 1;
+/*  836 */       Connection conn = JDBCconnect.getConnection();
+/*      */       
+/*  838 */       String sql = "select day from DXTESTUSER where ##=?";
+/*  839 */       PreparedStatement ps = conn.prepareStatement(sql);
+/*  840 */       ps = conn.prepareStatement(sql);
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */       
+/*  849 */       ps.close();
+/*  850 */       conn.close();
+/*  851 */     } catch (Exception exception) {}
+/*      */ 
+/*      */ 
+/*      */     
+/*  855 */     return dd;
+/*      */   }
+/*      */ 
+/*      */   
+/*      */   public static List<Equ> userAddList(String username, String userpwd) {
+/*  860 */     List<Equ> listus = new ArrayList<Equ>();
+/*      */     
+/*      */     try {
+/*  863 */       int intid = 1;
+/*  864 */       Connection conn = JDBCconnect.getConnection();
+/*  865 */       String sql = "select * from dxtestuser where username=? and userpwd=?";
+/*  866 */       PreparedStatement ps = null;
+/*  867 */       ps = conn.prepareStatement(sql);
+/*  868 */       ps.setString(intid++, username);
+/*  869 */       ps.setString(intid++, userpwd);
+/*  870 */       ResultSet rs = ps.executeQuery();
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */       
+/*  875 */       while (rs.next()) {
+/*  876 */         Equ equ = new Equ();
+/*  877 */         equ.setUsername(rs.getString("username"));
+/*  878 */         equ.setUserpwd(rs.getString("userpwd"));
+/*  879 */         equ.setAut(rs.getInt("aut"));
+/*  880 */         equ.setUserid(rs.getString("userid"));
+/*  881 */         equ.setDay(rs.getString("day"));
+/*  882 */         equ.setEdi(rs.getString("edi"));
+/*  883 */         equ.setDel(rs.getString("del"));
+/*  884 */         equ.setCon(rs.getString("con"));
+/*  885 */         equ.setLevela(rs.getString("levela"));
+/*  886 */         equ.setConedit(rs.getString("conedit"));
+/*  887 */         equ.setCondel(rs.getString("condel"));
+/*  888 */         listus.add(equ);
+/*      */       } 
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */       
+/*  894 */       rs.close();
+/*  895 */       ps.close();
+/*  896 */       conn.close();
+/*      */     
+/*      */     }
+/*  899 */     catch (Exception e) {
+/*      */       
+/*  901 */       e.printStackTrace();
+/*      */     } 
+/*  903 */     return listus;
+/*      */   }
+/*      */ 
+/*      */ 
+/*      */   
+/*      */   public int findCount(Integer count, String sdate, String edate, String statu) {
+/*  909 */     Connection conn = JDBCconnect.getConnection();
+/*      */     
+/*  911 */     String sql = "select count(*) from dxtestwork where  sdate>=? and edate<? and statu= ? order by nowdate,statu desc";
+/*  912 */     System.out.println(sdate);
+/*  913 */     System.out.println(edate);
+/*  914 */     System.out.println(statu);
+/*      */     try {
+/*  916 */       int intid = 1;
+/*  917 */       PreparedStatement ps = null;
+/*  918 */       ps = conn.prepareStatement(sql);
+/*  919 */       ps.setString(intid++, sdate);
+/*  920 */       ps.setString(intid++, edate);
+/*  921 */       ps.setString(intid++, statu);
+/*  922 */       ResultSet rs = ps.executeQuery();
+/*      */       
+/*  924 */       if (rs.next()) {
+/*  925 */         count = Integer.valueOf(rs.getInt(1));
+/*  926 */         System.out.println(count);
+/*      */       } 
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */       
+/*  933 */       rs.close();
+/*  934 */       ps.close();
+/*  935 */       conn.close();
+/*      */     }
+/*  937 */     catch (SQLException e) {
+/*  938 */       e.printStackTrace();
+/*      */     } 
+/*      */     
+/*  941 */     return count.intValue();
+/*      */   }
+/*      */ 
+/*      */   
+/*      */   public static List<Equ> SelectItemPart2(String sn, String nowdate, String stno) {
+/*  946 */     List<Equ> list = new ArrayList<Equ>();
+/*      */     try {
+/*  948 */       String sql = "select * from dxtestwork where stno=? order by nowdate,statu desc";
+/*  949 */       Connection conn = null;
+/*  950 */       PreparedStatement ps = null;
+/*  951 */       ResultSet rs = null;
+/*      */       
+/*  953 */       int intN = 1;
+/*  954 */       conn = JDBCconnect.getConnection();
+/*  955 */       ps = conn.prepareStatement(sql);
+/*      */ 
+/*      */       
+/*  958 */       ps.setString(intN++, stno);
+/*  959 */       rs = ps.executeQuery();
+/*      */       
+/*  961 */       while (rs.next()) {
+/*  962 */         Equ equ = new Equ();
+/*  963 */         equ.setMessage(rs.getString("message"));
+/*  964 */         equ.setUsername(rs.getString("username"));
+/*  965 */         equ.setUserpwd(rs.getString("userpwd"));
+/*  966 */         equ.setNowdate(rs.getString("nowdate"));
+/*  967 */         equ.setSn(rs.getString("sn"));
+/*  968 */         equ.setStatu(rs.getString("statu"));
+/*  969 */         equ.setPicture(rs.getString("picture"));
+/*  970 */         equ.setSdate(rs.getString("sdate"));
+/*  971 */         equ.setEdate(rs.getString("edate"));
+/*  972 */         list.add(equ);
+/*      */       } 
+/*      */       
+/*  975 */       rs.close();
+/*  976 */       ps.close();
+/*  977 */       conn.close();
+/*      */     }
+/*  979 */     catch (Exception e) {
+/*      */       
+/*  981 */       e.printStackTrace();
+/*      */     } 
+/*  983 */     return list;
+/*      */   }
+/*      */ 
+/*      */ 
+/*      */   
+/*      */   public static List<String> ston(String sdate, String edate, String statu) {
+/*  989 */     List<String> ston = new ArrayList<String>();
+/*      */     try {
+/*  991 */       int intid = 1;
+/*  992 */       Connection conn = JDBCconnect.getConnection();
+/*  993 */       String sql1 = "select * from dxtestwork where  sdate>= ? and edate<=? and statu like ? order by nowdate,statu desc,statu desc";
+/*  994 */       PreparedStatement ps = null;
+/*  995 */       ps = conn.prepareStatement(sql1);
+/*  996 */       ps.setString(intid++, sdate);
+/*  997 */       ps.setString(intid++, edate);
+/*  998 */       ps.setString(intid++, statu);
+/*  999 */       ResultSet rs = ps.executeQuery();
+/* 1000 */       while (rs.next())
+/*      */       {
+/*      */         
+/* 1003 */         ston.add(rs.getString(11));
+/*      */       }
+/*      */       
+/* 1006 */       ps.close();
+/* 1007 */       rs.close();
+/* 1008 */       conn.close();
+/* 1009 */     } catch (Exception exception) {}
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */     
+/* 1014 */     return ston;
+/*      */   }
+/*      */   
+/*      */   public static List<Equ> sucList(String stno, String edate, String sdate) {
+/* 1018 */     List<Equ> sucList = new ArrayList<Equ>();
+/*      */     try {
+/* 1020 */       int intid = 1;
+/* 1021 */       Connection conn = JDBCconnect.getConnection();
+/* 1022 */       String sql1 = "select * from dxtestwork where stno=? and edate=? and sdate=?  order by nowdate desc,statu desc";
+/* 1023 */       PreparedStatement ps = null;
+/* 1024 */       ps = conn.prepareStatement(sql1);
+/* 1025 */       ps.setString(intid++, stno);
+/* 1026 */       ps.setString(intid++, edate);
+/* 1027 */       ps.setString(intid++, sdate);
+/*      */       
+/* 1029 */       ResultSet rs = ps.executeQuery("select * from dxtestwork where stno='" + stno + "' and edate='" + edate + "' and sdate='" + sdate + "'  order by nowdate desc,statu desc");
+/*      */       
+/* 1031 */       while (rs.next()) {
+/* 1032 */         Equ equ = new Equ();
+/* 1033 */         equ.setUsername(rs.getString("username"));
+/* 1034 */         equ.setUserpwd(rs.getString("userpwd"));
+/* 1035 */         equ.setNowdate(rs.getString("nowdate"));
+/* 1036 */         equ.setSn(rs.getString("sn"));
+/* 1037 */         equ.setStatu(rs.getString("statu"));
+/* 1038 */         equ.setPicture(rs.getString("picture"));
+/* 1039 */         equ.setSdate(rs.getString("sdate"));
+/* 1040 */         equ.setEdate(rs.getString("edate"));
+/* 1041 */         equ.setStno(rs.getString("stno"));
+/* 1042 */         equ.setMessage(rs.getString("message"));
+/* 1043 */         sucList.add(equ);
+/*      */       } 
+/*      */       
+/* 1046 */       ps.close();
+/* 1047 */       rs.close();
+/* 1048 */       conn.close();
+/*      */     }
+/* 1050 */     catch (Exception e) {
+/*      */       
+/* 1052 */       e.printStackTrace();
+/*      */     } 
+/*      */ 
+/*      */     
+/* 1056 */     return sucList;
+/*      */   }
+/*      */   
+/*      */   public static boolean userpwd(String stno) {
+/* 1060 */     boolean userpwd = false;
+/*      */     
+/* 1062 */     if (stno.equals("0")) {
+/* 1063 */       userpwd = true;
+/*      */     } else {
+/*      */       try {
+/* 1066 */         int intid = 1;
+/* 1067 */         Connection conn = JDBCconnect.getConnection();
+/* 1068 */         String sql1 = "select * from(select * from dxtestwork where stno=?  order by nowdate desc) where rownum=1";
+/* 1069 */         PreparedStatement ps = null;
+/* 1070 */         ps = conn.prepareStatement(sql1);
+/* 1071 */         ps.setString(intid++, stno);
+/*      */         
+/* 1073 */         ResultSet rs = ps.executeQuery();
+/* 1074 */         String pwdString = null;
+/* 1075 */         while (rs.next()) {
+/* 1076 */           pwdString = rs.getString(4);
+/* 1077 */           System.out.println(pwdString);
+/* 1078 */           if (pwdString == null) {
+/* 1079 */             pwdString = "";
+/*      */           }
+/*      */         } 
+/*      */         
+/* 1083 */         if (pwdString.equals("restore"))
+/*      */         {
+/* 1085 */           userpwd = true;
+/*      */         }
+/* 1087 */         ps.close();
+/* 1088 */         rs.close();
+/* 1089 */         conn.close();
+/* 1090 */       } catch (Exception e) {
+/*      */         
+/* 1092 */         e.printStackTrace();
+/*      */       } 
+/*      */     } 
+/*      */ 
+/*      */ 
+/*      */     
+/* 1098 */     return userpwd;
+/*      */   }
+/*      */   
+/*      */   public static List<Equ> SelectItemPart(String sdate, String edate, String statu) {
+/* 1102 */     List<Equ> list = new ArrayList<Equ>();
+/*      */     try {
+/* 1104 */       int intid = 1;
+/* 1105 */       Connection conn = JDBCconnect.getConnection();
+/* 1106 */       String sql1 = "select * from dxtestwork where  sdate= ? and edate=? and statu=? order by nowdate,statu";
+/*      */       
+/* 1108 */       String sql = "select * from dxtestwork t1,dxtest t2 where t1.sn=t2.sn and   stno=? and task='0'   and time is not null";
+/* 1109 */       String sql3 = "select * from dxtestwork where  sdate= ? and edate=? and stno='0'  order by nowdate,statu desc";
+/* 1110 */       PreparedStatement ps = null;
+/* 1111 */       PreparedStatement ps3 = null;
+/* 1112 */       PreparedStatement ps2 = null;
+/* 1113 */       ResultSet rs = null;
+/* 1114 */       ResultSet rs2 = null;
+/* 1115 */       ResultSet rs3 = null;
+/* 1116 */       String stno = null;
+/* 1117 */       String s0 = "";
+/* 1118 */       String s1 = "";
+/* 1119 */       boolean flag = true;
+/* 1120 */       ps = conn.prepareStatement(sql1);
+/* 1121 */       ps.setString(intid++, sdate);
+/* 1122 */       ps.setString(intid++, edate);
+/* 1123 */       ps.setString(intid++, statu);
+/* 1124 */       rs = ps.executeQuery();
+/* 1125 */       while (rs.next()) {
+/* 1126 */         stno = rs.getString(11);
+/* 1127 */         if (stno.equals("0")) {
+/* 1128 */           if (flag) {
+/* 1129 */             ps3 = conn.prepareStatement(sql3);
+/* 1130 */             intid = 1;
+/* 1131 */             ps3.setString(intid++, sdate);
+/* 1132 */             ps3.setString(intid++, edate);
+/* 1133 */             rs3 = ps3.executeQuery();
+/* 1134 */             while (rs3.next()) {
+/* 1135 */               Equ equ = new Equ();
+/* 1136 */               equ.setMessage(rs3.getString("message"));
+/* 1137 */               equ.setUsername(rs3.getString("username"));
+/* 1138 */               equ.setUserpwd(rs3.getString("userpwd"));
+/* 1139 */               equ.setNowdate(rs3.getString("nowdate"));
+/* 1140 */               equ.setSn(rs3.getString("sn"));
+/* 1141 */               equ.setPos("无");
+/* 1142 */               equ.setStatu(rs3.getString("statu"));
+/* 1143 */               equ.setPicture(rs3.getString("picture"));
+/* 1144 */               equ.setSdate(rs3.getString("sdate"));
+/* 1145 */               equ.setEdate(rs3.getString("edate"));
+/* 1146 */               equ.setStno(rs3.getString("stno"));
+/* 1147 */               equ.setTime(rs3.getString("time"));
+/* 1148 */               list.add(equ);
+/* 1149 */             }  flag = false;
+/*      */           }  continue;
+/*      */         } 
+/* 1152 */         s1 = stno;
+/* 1153 */         if (s0.equals(s1)) {
+/*      */           continue;
+/*      */         }
+/*      */         
+/* 1157 */         if (flag) {
+/* 1158 */           ps3 = conn.prepareStatement(sql3);
+/* 1159 */           intid = 1;
+/* 1160 */           ps3.setString(intid++, sdate);
+/* 1161 */           ps3.setString(intid++, edate);
+/* 1162 */           rs3 = ps3.executeQuery();
+/* 1163 */           while (rs3.next()) {
+/* 1164 */             Equ equ = new Equ();
+/* 1165 */             equ.setMessage(rs3.getString("message"));
+/* 1166 */             equ.setUsername(rs3.getString("username"));
+/* 1167 */             equ.setUserpwd(rs3.getString("userpwd"));
+/* 1168 */             equ.setNowdate(rs3.getString("nowdate"));
+/* 1169 */             equ.setSn(rs3.getString("sn"));
+/* 1170 */             equ.setPos("无");
+/* 1171 */             equ.setStatu(rs3.getString("statu"));
+/* 1172 */             equ.setPicture(rs3.getString("picture"));
+/* 1173 */             equ.setSdate(rs3.getString("sdate"));
+/* 1174 */             equ.setEdate(rs3.getString("edate"));
+/* 1175 */             equ.setStno(rs3.getString("stno"));
+/* 1176 */             equ.setTime(rs3.getString("time"));
+/* 1177 */             list.add(equ);
+/* 1178 */           }  flag = false;
+/*      */         } 
+/* 1180 */         s0 = s1;
+/* 1181 */         intid = 1;
+/* 1182 */         ps2 = conn.prepareStatement(sql);
+/* 1183 */         ps2.setString(intid++, s0);
+/* 1184 */         rs2 = ps2.executeQuery();
+/* 1185 */         while (rs2.next()) {
+/* 1186 */           Equ equ = new Equ();
+/* 1187 */           equ.setMessage(rs2.getString("message"));
+/* 1188 */           equ.setUsername(rs2.getString("username"));
+/* 1189 */           equ.setUserpwd(rs2.getString("userpwd"));
+/* 1190 */           equ.setNowdate(rs2.getString("nowdate"));
+/* 1191 */           equ.setSn(rs2.getString("sn"));
+/* 1192 */           equ.setPos(rs2.getString("pos"));
+/* 1193 */           equ.setStatu(rs2.getString("statu"));
+/* 1194 */           equ.setPicture(rs2.getString("picture"));
+/* 1195 */           equ.setSdate(rs2.getString("sdate"));
+/* 1196 */           equ.setEdate(rs2.getString("edate"));
+/* 1197 */           equ.setStno(rs2.getString("stno"));
+/* 1198 */           equ.setTime(rs2.getString("time"));
+/* 1199 */           list.add(equ);
+/*      */         } 
+/*      */       } 
+/*      */ 
+/*      */ 
+/*      */       
+/* 1205 */       ps.close();
+/*      */       
+/* 1207 */       ps3.close();
+/* 1208 */       rs2.close();
+/* 1209 */       rs3.close();
+/* 1210 */       rs.close();
+/* 1211 */       conn.close();
+/* 1212 */     } catch (Exception e) {
+/*      */       
+/* 1214 */       e.printStackTrace();
+/*      */     } 
+/*      */     
+/* 1217 */     return list;
+/*      */   }
+/*      */   
+/*      */   public static List<Equ> SelectItemnow(String sn, String userid, String nowdate) {
+/* 1221 */     List<Equ> list = new ArrayList<Equ>();
+/*      */     try {
+/* 1223 */       int intid = 1;
+/* 1224 */       Connection conn = JDBCconnect.getConnection();
+/* 1225 */       String sql = "select * from dxtestwork where sn=? and nowdate= ? and usrname=?  order by nowdate,statu desc";
+/* 1226 */       PreparedStatement ps = null;
+/* 1227 */       ps = conn.prepareStatement(sql);
+/* 1228 */       ps.setString(intid++, sn);
+/* 1229 */       ps.setString(intid++, nowdate);
+/* 1230 */       ps.setString(intid++, userid);
+/*      */       
+/* 1232 */       ps.close();
+/* 1233 */       conn.close();
+/* 1234 */     } catch (Exception e) {
+/*      */       
+/* 1236 */       e.printStackTrace();
+/*      */     } 
+/*      */     
+/* 1239 */     return list;
+/*      */   }
+/*      */   
+/*      */   public void UpPwd(String username, String userpwd, String userpwd1) {
+/*      */     try {
+/* 1244 */       int intid = 1;
+/* 1245 */       Connection conn = JDBCconnect.getConnection();
+/* 1246 */       String sql = "update DXTESTUSER set  userpwd=?  where username=? and userpwd=?";
+/* 1247 */       PreparedStatement ps = conn.prepareStatement(sql);
+/* 1248 */       ps.setString(intid++, userpwd1);
+/* 1249 */       ps.setString(intid++, username);
+/* 1250 */       ps.setString(intid++, userpwd);
+/* 1251 */       ResultSet rs = ps.executeQuery();
+/*      */       
+/* 1253 */       rs.close();
+/* 1254 */       ps.close();
+/* 1255 */       conn.close();
+/*      */     }
+/* 1257 */     catch (Exception e) {
+/*      */       
+/* 1259 */       e.printStackTrace();
+/*      */     } 
+/*      */   }
+/*      */   
+/*      */   public static void delmessage(String nowdate, String message) {
+/*      */     try {
+/* 1265 */       int inti = 1;
+/* 1266 */       Connection conn = JDBCconnect.getConnection();
+/* 1267 */       String sql = "delete from dxtestwork where nowdate=? and message=?";
+/* 1268 */       String sql2 = "select stno,statu from dxtestwork where nowdate=? and message=?";
+/* 1269 */       String sql3 = "update dxtestwork set  userpwd=''  where stno=?";
+/* 1270 */       PreparedStatement ps2 = null;
+/* 1271 */       PreparedStatement ps = null;
+/* 1272 */       PreparedStatement ps3 = null;
+/*      */       
+/* 1274 */       ResultSet rs2 = null;
+/* 1275 */       ResultSet rs3 = null;
+/* 1276 */       String ston = "";
+/* 1277 */       String statu = "";
+/* 1278 */       ps2 = conn.prepareStatement(sql2);
+/* 1279 */       ps2.setString(inti++, nowdate);
+/* 1280 */       ps2.setString(inti++, message);
+/* 1281 */       rs2 = ps2.executeQuery();
+/* 1282 */       while (rs2.next()) {
+/* 1283 */         ston = rs2.getString(1);
+/* 1284 */         statu = rs2.getString(2);
+/* 1285 */         if (statu.equals("恢复")) {
+/* 1286 */           System.out.println("恢复+++");
+/* 1287 */           inti = 1;
+/* 1288 */           ps = conn.prepareStatement(sql);
+/* 1289 */           ps.setString(inti++, nowdate);
+/* 1290 */           ps.setString(inti++, message);
+/* 1291 */           ps.executeUpdate();
+/* 1292 */           inti = 1;
+/* 1293 */           ps3 = conn.prepareStatement(sql3);
+/* 1294 */           ps3.setString(inti, ston);
+/* 1295 */           ps3.executeUpdate(); continue;
+/*      */         } 
+/* 1297 */         inti = 1;
+/* 1298 */         ps = conn.prepareStatement(sql);
+/* 1299 */         ps.setString(inti++, nowdate);
+/* 1300 */         ps.setString(inti++, message);
+/* 1301 */         ps.executeUpdate();
+/*      */       } 
+/*      */       
+/* 1304 */       ps.close();
+/* 1305 */       ps2.close();
+/* 1306 */       ps3.close();
+/* 1307 */       rs2.close();
+/* 1308 */       conn.close();
+/* 1309 */     } catch (Exception e) {
+/*      */       
+/* 1311 */       e.printStackTrace();
+/*      */     } 
+/*      */   }
+/*      */   
+/*      */   public static void updatamessage(String nowdate, String message) {
+/* 1316 */     List<Equ> list = new ArrayList<Equ>();
+/*      */     try {
+/* 1318 */       int inti = 1;
+/* 1319 */       Connection conn = JDBCconnect.getConnection();
+/* 1320 */       String sql = "update dxtestwork set  message=?  where nowdate=?";
+/* 1321 */       PreparedStatement ps = conn.prepareStatement(sql);
+/* 1322 */       ps = conn.prepareStatement(sql);
+/* 1323 */       ps.setString(inti++, message);
+/* 1324 */       ps.setString(inti++, nowdate);
+/*      */       
+/* 1326 */       ResultSet rs = ps.executeQuery();
+/*      */       
+/* 1328 */       rs.close();
+/* 1329 */       ps.close();
+/* 1330 */       conn.close();
+/* 1331 */     } catch (Exception e) {
+/*      */       
+/* 1333 */       e.printStackTrace();
+/*      */     } 
+/*      */   }
+/*      */ 
+/*      */   
+/*      */   public static String[] sse2(String message, String nowdate, String sn) {
+/* 1339 */     String[] sse = new String[3];
+/*      */     try {
+/* 1341 */       int inti = 1;
+/* 1342 */       Connection conn = JDBCconnect.getConnection();
+/* 1343 */       String sql = "select stno,sdate,edate,statu from dxtestwork where message=? and nowdate=? and sn=? and rownum=1";
+/* 1344 */       PreparedStatement ps = conn.prepareStatement(sql);
+/* 1345 */       ps = conn.prepareStatement(sql);
+/* 1346 */       ps.setString(inti++, message);
+/* 1347 */       ps.setString(inti++, nowdate);
+/* 1348 */       ps.setString(inti++, sn);
+/* 1349 */       System.out.println(message);
+/* 1350 */       System.out.println(nowdate);
+/* 1351 */       System.out.println(sn);
+/* 1352 */       String stno = null;
+/* 1353 */       String sdate = null;
+/* 1354 */       String edate = null;
+/* 1355 */       String statu = null;
+/*      */       
+/* 1357 */       ResultSet rs = ps.executeQuery("select stno,sdate,edate from dxtestwork where message='" + message + "' and nowdate='" + nowdate + "' and sn='" + sn + "' and rownum=1");
+/*      */       
+/* 1359 */       while (rs.next()) {
+/* 1360 */         inti = 1;
+/* 1361 */         stno = rs.getString(inti++);
+/* 1362 */         sdate = rs.getString(inti++);
+/* 1363 */         edate = rs.getString(inti++);
+/* 1364 */         statu = rs.getString(inti++);
+/* 1365 */         System.out.println(stno);
+/* 1366 */         System.out.println(sdate);
+/* 1367 */         System.out.println(edate);
+/* 1368 */         System.out.println(statu);
+/* 1369 */         inti = 0;
+/* 1370 */         sse[inti++] = stno;
+/* 1371 */         sse[inti++] = sdate;
+/* 1372 */         sse[inti++] = edate;
+/* 1373 */         sse[inti++] = statu;
+/* 1374 */       }  rs.close();
+/* 1375 */       ps.close();
+/* 1376 */       conn.close();
+/* 1377 */     } catch (Exception e) {
+/*      */       
+/* 1379 */       e.printStackTrace();
+/*      */     } 
+/* 1381 */     return sse;
+/*      */   }
+/*      */ 
+/*      */   
+/*      */   public static String[] sse(String message, String nowdate, String sn) {
+/* 1386 */     String[] sse = new String[3];
+/*      */     try {
+/* 1388 */       int inti = 1;
+/* 1389 */       Connection conn = JDBCconnect.getConnection();
+/* 1390 */       String sql = "select stno,sdate,edate from dxtestwork where message=? and nowdate=? and sn=? and rownum=1";
+/* 1391 */       PreparedStatement ps = conn.prepareStatement(sql);
+/* 1392 */       ps = conn.prepareStatement(sql);
+/* 1393 */       ps.setString(inti++, message);
+/* 1394 */       ps.setString(inti++, nowdate);
+/* 1395 */       ps.setString(inti++, sn);
+/* 1396 */       System.out.println(message);
+/* 1397 */       System.out.println(nowdate);
+/* 1398 */       System.out.println(sn);
+/* 1399 */       String stno = null;
+/* 1400 */       String sdate = null;
+/* 1401 */       String edate = null;
+/*      */       
+/* 1403 */       ResultSet rs = ps.executeQuery("select stno,sdate,edate from dxtestwork where message='" + message + "' and nowdate='" + nowdate + "' and sn='" + sn + "' and rownum=1");
+/*      */       
+/* 1405 */       while (rs.next()) {
+/* 1406 */         inti = 1;
+/* 1407 */         stno = rs.getString(inti++);
+/* 1408 */         sdate = rs.getString(inti++);
+/* 1409 */         edate = rs.getString(inti++);
+/* 1410 */         System.out.println(stno);
+/* 1411 */         System.out.println(sdate);
+/* 1412 */         System.out.println(edate);
+/* 1413 */         inti = 0;
+/* 1414 */         sse[inti++] = stno;
+/* 1415 */         sse[inti++] = sdate;
+/* 1416 */         sse[inti++] = edate;
+/*      */       } 
+/* 1418 */       rs.close();
+/* 1419 */       ps.close();
+/* 1420 */       conn.close();
+/* 1421 */     } catch (Exception e) {
+/*      */       
+/* 1423 */       e.printStackTrace();
+/*      */     } 
+/* 1425 */     return sse;
+/*      */   }
+/*      */   
+/*      */   public static List<Equ> SelectItemAll(String sn) {
+/* 1429 */     List<Equ> list = new ArrayList<Equ>();
+/*      */     
+/*      */     try {
+/* 1432 */       int intid = 1;
+/*      */       
+/* 1434 */       Connection conn = JDBCconnect.getConnection();
+/* 1435 */       String sql = "select * from dxtestwork where sn=? order by nowdate desc,statu desc";
+/*      */       
+/* 1437 */       PreparedStatement ps = conn.prepareStatement(sql);
+/* 1438 */       System.out.println("sn=" + sn);
+/* 1439 */       ps.setString(intid++, sn.trim());
+/*      */       
+/* 1441 */       ResultSet rs = ps.executeQuery();
+/* 1442 */       while (rs.next()) { Equ equ = new Equ();
+/* 1443 */         equ.setMessage(rs.getString("message"));
+/* 1444 */         equ.setUsername(rs.getString("username"));
+/* 1445 */         equ.setUserpwd(rs.getString("userpwd"));
+/* 1446 */         equ.setNowdate(rs.getString("nowdate")); equ.setSn(rs.getString("sn"));
+/* 1447 */         equ.setStatu(rs.getString("statu")); equ.setPicture(rs.getString("picture"));
+/* 1448 */         equ.setSdate(rs.getString("sdate")); equ.setEdate(rs.getString("edate"));
+/* 1449 */         equ.setStno(rs.getString("stno"));
+/* 1450 */         list.add(equ); }
+/*      */       
+/* 1452 */       rs.close();
+/* 1453 */       ps.close();
+/* 1454 */       conn.close();
+/*      */     
+/*      */     }
+/* 1457 */     catch (Exception e) {
+/*      */       
+/* 1459 */       e.printStackTrace();
+/*      */     } 
+/*      */     
+/* 1462 */     return list;
+/*      */   }
+/*      */ 
+/*      */ 
+/*      */   
+/*      */   public static List<Equ> SelectItem2(String stno) {
+/* 1468 */     List<Equ> list = new ArrayList<Equ>();
+/*      */     try {
+/* 1470 */       int intid = 1;
+/* 1471 */       Connection conn = JDBCconnect.getConnection();
+/* 1472 */       String sql1 = "select * from dxtestwork where stno='" + stno + "' order by nowdate,statu desc";
+/* 1473 */       PreparedStatement ps = null;
+/* 1474 */       ResultSet rs = null;
+/* 1475 */       ps = conn.prepareStatement(sql1);
+/*      */       
+/* 1477 */       rs = ps.executeQuery(sql1);
+/* 1478 */       while (rs.next()) {
+/* 1479 */         Equ equ = new Equ();
+/* 1480 */         equ.setMessage(rs.getString("message"));
+/* 1481 */         equ.setUsername(rs.getString("username"));
+/* 1482 */         equ.setUserpwd(rs.getString("userpwd"));
+/* 1483 */         equ.setNowdate(rs.getString("nowdate"));
+/* 1484 */         equ.setSn(rs.getString("sn"));
+/* 1485 */         equ.setStatu(rs.getString("statu"));
+/* 1486 */         equ.setPicture(rs.getString("picture"));
+/* 1487 */         equ.setSdate(rs.getString("sdate"));
+/* 1488 */         equ.setEdate(rs.getString("edate"));
+/* 1489 */         equ.setStno(rs.getString("stno"));
+/* 1490 */         list.add(equ);
+/*      */       } 
+/* 1492 */       rs.close();
+/* 1493 */       ps.close();
+/* 1494 */       conn.close();
+/*      */     }
+/* 1496 */     catch (Exception exception) {}
+/*      */ 
+/*      */     
+/* 1499 */     return list;
+/*      */   }
+/*      */ 
+/*      */   
+/*      */   public static List<Equ> SelectItem(String sdate, String edate, String sn, String statu) {
+/* 1504 */     List<Equ> list = new ArrayList<Equ>();
+/*      */     try {
+/* 1506 */       int intid = 1;
+/* 1507 */       statu = "%" + statu + "%";
+/* 1508 */       Connection conn = JDBCconnect.getConnection();
+/* 1509 */       String sql1 = "select * from dxtestwork where sn=? and sdate>= ? and statu like ?  order by nowdate,statu desc";
+/* 1510 */       String sql2 = "select * from dxtestwork where sn=? and sdate>= ? and edate<=? and statu like ?  order by nowdate,statu desc";
+/* 1511 */       String sql3 = "select * from dxtestwork where sn=? and edate<= ? and  statu like ?  order by nowdate,statu desc";
+/* 1512 */       String sql4 = "select * from dxtestwork where sn=? and  statu like ?  order by nowdate,statu desc";
+/* 1513 */       PreparedStatement ps = null;
+/* 1514 */       ResultSet rs = null;
+/* 1515 */       if (sdate != "" && edate == "") {
+/* 1516 */         System.out.println(1);
+/*      */         
+/* 1518 */         ps = conn.prepareStatement(sql1);
+/* 1519 */         ps.setString(intid++, sn);
+/* 1520 */         ps.setString(intid++, sdate);
+/* 1521 */         ps.setString(intid++, statu);
+/*      */ 
+/*      */         
+/* 1524 */         rs = ps.executeQuery("select * from dxtestwork where sn='" + sn.trim() + "' and sdate>='" + sdate + "' and statu like '%" + statu.trim() + "%'  order by nowdate,statu desc");
+/* 1525 */       } else if (sdate != "" && edate != "") {
+/* 1526 */         System.out.println(2);
+/* 1527 */         ps = conn.prepareStatement(sql2);
+/*      */ 
+/*      */         
+/* 1530 */         ps.setString(intid++, sn);
+/* 1531 */         ps.setString(intid++, sdate);
+/* 1532 */         ps.setString(intid++, edate);
+/* 1533 */         ps.setString(intid++, statu);
+/*      */         
+/* 1535 */         rs = ps.executeQuery("select * from dxtestwork where sn='" + sn.trim() + "' and sdate>= '" + sdate + "' and sdate<='" + edate + "' and statu like '%" + statu.trim() + "%' order by nowdate,statu desc");
+/* 1536 */       } else if (sdate == "" && edate != "") {
+/*      */         
+/* 1538 */         ps = conn.prepareStatement(sql3);
+/* 1539 */         ps.setString(intid++, sn);
+/* 1540 */         ps.setString(intid++, edate);
+/* 1541 */         ps.setString(intid++, statu);
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */         
+/* 1546 */         rs = ps.executeQuery("select * from dxtestwork where sn='" + sn.trim() + "' and sdate<= '" + edate + "' and  statu like '%" + statu.trim() + "%'  order by nowdate,statu desc");
+/*      */       } else {
+/*      */         
+/* 1549 */         ps = conn.prepareStatement(sql4);
+/* 1550 */         ps.setString(intid++, sn.trim());
+/* 1551 */         ps.setString(intid++, statu.trim());
+/*      */         
+/* 1553 */         rs = ps.executeQuery("select * from dxtestwork where sn='" + sn.trim() + "' and  statu like '%" + statu.trim() + "%'  order by nowdate,statu desc");
+/*      */       } 
+/*      */       
+/* 1556 */       while (rs.next()) {
+/* 1557 */         Equ equ = new Equ();
+/* 1558 */         equ.setMessage(rs.getString("message"));
+/* 1559 */         equ.setUsername(rs.getString("username"));
+/* 1560 */         equ.setUserpwd(rs.getString("userpwd"));
+/* 1561 */         equ.setNowdate(rs.getString("nowdate"));
+/* 1562 */         equ.setSn(rs.getString("sn"));
+/* 1563 */         equ.setStatu(rs.getString("statu"));
+/* 1564 */         equ.setPicture(rs.getString("picture"));
+/* 1565 */         equ.setSdate(rs.getString("sdate"));
+/* 1566 */         equ.setEdate(rs.getString("edate"));
+/* 1567 */         equ.setStno(rs.getString("stno"));
+/* 1568 */         equ.setTask(rs.getString("task"));
+/* 1569 */         list.add(equ);
+/*      */       } 
+/* 1571 */       rs.close();
+/* 1572 */       ps.close();
+/* 1573 */       conn.close();
+/*      */     
+/*      */     }
+/* 1576 */     catch (Exception e) {
+/*      */       
+/* 1578 */       e.printStackTrace();
+/*      */     } 
+/*      */ 
+/*      */     
+/* 1582 */     return list;
+/*      */   }
+/*      */ 
+/*      */ 
+/*      */   
+/*      */   public static List<Equ> SelectItem5(String sdate, String edate, String sn, String statu, String stno) {
+/* 1588 */     List<Equ> list = new ArrayList<Equ>();
+/*      */     try {
+/* 1590 */       int intid = 1;
+/* 1591 */       statu = "%" + statu + "%";
+/* 1592 */       Connection conn = JDBCconnect.getConnection();
+/* 1593 */       String sql1 = "select * from dxtestwork where sn=? and sdate>= ? and statu like ? and stno=? order by nowdate,statu desc";
+/* 1594 */       String sql2 = "select * from dxtestwork where sn=? and sdate>= ? and edate<=? and statu like ? and stno=? order by nowdate,statu desc";
+/* 1595 */       String sql3 = "select * from dxtestwork where sn=? and edate<= ? and  statu like ? and stno=? order by nowdate,statu desc";
+/* 1596 */       String sql4 = "select * from dxtestwork where sn=? and  statu like ? and stno=? order by nowdate,statu desc";
+/* 1597 */       PreparedStatement ps = null;
+/* 1598 */       ResultSet rs = null;
+/* 1599 */       if (sdate != "" && edate == "") {
+/* 1600 */         System.out.println(1);
+/*      */         
+/* 1602 */         ps = conn.prepareStatement(sql1);
+/* 1603 */         ps.setString(intid++, sn);
+/* 1604 */         ps.setString(intid++, sdate);
+/* 1605 */         ps.setString(intid++, statu);
+/* 1606 */         ps.setString(intid++, stno);
+/*      */         
+/* 1608 */         rs = ps.executeQuery("select * from dxtestwork where sn='" + sn.trim() + "' and sdate>='" + sdate + "' and statu like '%" + statu.trim() + "%' and stno='" + stno + "' order by nowdate,statu desc");
+/* 1609 */       } else if (sdate != "" && edate != "") {
+/* 1610 */         System.out.println(2);
+/* 1611 */         ps = conn.prepareStatement(sql2);
+/*      */ 
+/*      */         
+/* 1614 */         ps.setString(intid++, sn);
+/* 1615 */         ps.setString(intid++, sdate);
+/* 1616 */         ps.setString(intid++, edate);
+/* 1617 */         ps.setString(intid++, statu);
+/* 1618 */         ps.setString(intid++, stno);
+/* 1619 */         rs = ps.executeQuery("select * from dxtestwork where sn='" + sn.trim() + "' and sdate>= '" + sdate + "' and sdate<='" + edate + "' and statu like '%" + statu.trim() + "%' and stno='" + stno + "'order by nowdate,statu desc");
+/* 1620 */       } else if (sdate == "" && edate != "") {
+/*      */         
+/* 1622 */         ps = conn.prepareStatement(sql3);
+/* 1623 */         ps.setString(intid++, sn);
+/* 1624 */         ps.setString(intid++, edate);
+/* 1625 */         ps.setString(intid++, statu);
+/* 1626 */         ps.setString(intid++, stno);
+/*      */ 
+/*      */ 
+/*      */         
+/* 1630 */         rs = ps.executeQuery("select * from dxtestwork where sn='" + sn.trim() + "' and sdate<= '" + edate + "' and  statu like '%" + statu.trim() + "%' and stno='" + stno + "' order by nowdate,statu desc");
+/*      */       } else {
+/*      */         
+/* 1633 */         ps = conn.prepareStatement(sql4);
+/* 1634 */         ps.setString(intid++, sn.trim());
+/* 1635 */         ps.setString(intid++, statu.trim());
+/* 1636 */         ps.setString(intid++, stno);
+/* 1637 */         rs = ps.executeQuery("select * from dxtestwork where sn='" + sn.trim() + "' and  statu like '%" + statu.trim() + "%' and stno='" + stno + "' order by nowdate,statu desc");
+/*      */       } 
+/*      */       
+/* 1640 */       while (rs.next()) {
+/* 1641 */         Equ equ = new Equ();
+/* 1642 */         equ.setMessage(rs.getString("message"));
+/* 1643 */         equ.setUsername(rs.getString("username"));
+/* 1644 */         equ.setUserpwd(rs.getString("userpwd"));
+/* 1645 */         equ.setNowdate(rs.getString("nowdate"));
+/* 1646 */         equ.setSn(rs.getString("sn"));
+/* 1647 */         equ.setStatu(rs.getString("statu"));
+/* 1648 */         equ.setPicture(rs.getString("picture"));
+/* 1649 */         equ.setSdate(rs.getString("sdate"));
+/* 1650 */         equ.setEdate(rs.getString("edate"));
+/* 1651 */         equ.setStno(rs.getString("stno"));
+/* 1652 */         equ.setTask(rs.getString("task"));
+/* 1653 */         list.add(equ);
+/*      */       } 
+/* 1655 */       rs.close();
+/* 1656 */       ps.close();
+/* 1657 */       conn.close();
+/*      */     
+/*      */     }
+/* 1660 */     catch (Exception e) {
+/*      */       
+/* 1662 */       e.printStackTrace();
+/*      */     } 
+/*      */ 
+/*      */     
+/* 1666 */     return list;
+/*      */   }
+/*      */   public static List<Equ> listWaring(String stno, String edate, String sdate, String message) {
+/* 1669 */     List<Equ> listWaring = new ArrayList<Equ>();
+/*      */     try {
+/* 1671 */       int intid = 1;
+/* 1672 */       message = "%" + message + "%";
+/* 1673 */       stno = "%" + stno + "%";
+/* 1674 */       Connection conn = JDBCconnect.getConnection();
+/* 1675 */       String sql1 = "select * from dxtestwork where stno in (select DISTINCT stno from ( select * from dxtestwork where stno!='0'  and  (sdate>= ? and stno like ? and message like ?)))   and time is not null order by sdate";
+/* 1676 */       String sql2 = "select * from dxtestwork where stno in  (select DISTINCT stno from ( select * from dxtestwork where stno!='0'  and  (sdate>= ? and edate<=? and stno like ? and message like ?)))    and time is not null order by sdate";
+/* 1677 */       String sql3 = "select * from dxtestwork where stno in (select DISTINCT stno from ( select * from dxtestwork where stno!='0'  and  (edate<= ? and  and stno like ? and message like ?)))   and time is not null order by sdate";
+/* 1678 */       String sql4 = "select * from dxtestwork where stno in (select DISTINCT stno from ( select * from dxtestwork where stno!='0'  and  (stno like ? and message like ?)))  and time is not null order by sdate";
+/*      */       
+/* 1680 */       String s1 = "0";
+/* 1681 */       String s0 = "0";
+/* 1682 */       PreparedStatement ps = null;
+/* 1683 */       ResultSet rs = null;
+/* 1684 */       if (sdate != "" && edate == "") {
+/* 1685 */         System.out.println(1);
+/* 1686 */         sdate = String.valueOf(sdate) + " 00:00:00";
+/*      */         
+/* 1688 */         ps = conn.prepareStatement(sql1);
+/*      */ 
+/*      */         
+/* 1691 */         ps.setString(intid++, sdate);
+/* 1692 */         ps.setString(intid++, stno);
+/* 1693 */         ps.setString(intid++, message);
+/*      */ 
+/*      */         
+/* 1696 */         rs = ps.executeQuery();
+/* 1697 */       } else if (sdate != "" && edate != "") {
+/* 1698 */         System.out.println(2);
+/* 1699 */         ps = conn.prepareStatement(sql2);
+/*      */ 
+/*      */         
+/* 1702 */         sdate = String.valueOf(sdate) + " 00:00:00";
+/* 1703 */         edate = String.valueOf(edate) + " 00:00:00";
+/* 1704 */         ps.setString(intid++, sdate);
+/* 1705 */         ps.setString(intid++, edate);
+/* 1706 */         ps.setString(intid++, stno);
+/* 1707 */         ps.setString(intid++, message);
+/*      */         
+/* 1709 */         rs = ps.executeQuery();
+/* 1710 */       } else if (sdate == "" && edate != "") {
+/* 1711 */         System.out.println(3);
+/* 1712 */         ps = conn.prepareStatement(sql3);
+/* 1713 */         edate = String.valueOf(edate) + " 00:00:00";
+/* 1714 */         ps.setString(intid++, edate);
+/* 1715 */         ps.setString(intid++, stno);
+/* 1716 */         ps.setString(intid++, message);
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */         
+/* 1721 */         rs = ps.executeQuery();
+/*      */       } else {
+/* 1723 */         System.out.println(4);
+/* 1724 */         ps = conn.prepareStatement(sql4);
+/* 1725 */         ps.setString(intid++, stno);
+/* 1726 */         ps.setString(intid++, message);
+/*      */         
+/* 1728 */         rs = ps.executeQuery();
+/*      */       } 
+/*      */       
+/* 1731 */       while (rs.next()) {
+/*      */         
+/* 1733 */         Equ equ = new Equ();
+/* 1734 */         s0 = rs.getString("stno");
+/*      */ 
+/*      */         
+/* 1737 */         if (s0.equals(s1)) {
+/*      */           continue;
+/*      */         }
+/*      */ 
+/*      */         
+/* 1742 */         s1 = s0;
+/* 1743 */         equ.setMessage(rs.getString("message"));
+/* 1744 */         equ.setUsername(rs.getString("username"));
+/* 1745 */         equ.setUserpwd(rs.getString("userpwd"));
+/* 1746 */         equ.setNowdate(rs.getString("nowdate"));
+/* 1747 */         equ.setSn(rs.getString("sn"));
+/* 1748 */         equ.setStatu(rs.getString("statu"));
+/* 1749 */         equ.setPicture(rs.getString("picture"));
+/* 1750 */         equ.setSdate(rs.getString("sdate"));
+/* 1751 */         equ.setEdate(rs.getString("edate"));
+/* 1752 */         equ.setStno(rs.getString("stno"));
+/* 1753 */         equ.setTask(rs.getString("task"));
+/* 1754 */         equ.setTime(rs.getString("time"));
+/* 1755 */         listWaring.add(equ);
+/*      */       } 
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */       
+/* 1761 */       rs.close();
+/* 1762 */       ps.close();
+/* 1763 */       conn.close();
+/*      */     
+/*      */     }
+/* 1766 */     catch (Exception e) {
+/*      */       
+/* 1768 */       e.printStackTrace();
+/*      */     } 
+/*      */     
+/* 1771 */     return listWaring;
+/*      */   }
+/*      */   
+/*      */   public static int LateAlert(String plandate1, String contractid, String planm2) {
+/* 1775 */     int a = 0;
+/*      */     try {
+/* 1777 */       int inti = 1;
+/* 1778 */       Connection conn = JDBCconnect.getConnection();
+/* 1779 */       conn.setAutoCommit(true);
+/* 1780 */       String sql = "update DXTESTCONTRACT set  plandate1=?, planm2=?  where contractid=?";
+/* 1781 */       PreparedStatement ps = conn.prepareStatement(sql);
+/* 1782 */       ps.setString(inti++, plandate1);
+/* 1783 */       ps.setString(inti++, planm2);
+/* 1784 */       ps.setString(inti++, contractid);
+/* 1785 */       ResultSet rs = ps.executeQuery();
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */       
+/* 1791 */       rs.close();
+/* 1792 */       ps.close();
+/* 1793 */       conn.close();
+/* 1794 */     } catch (Exception e) {
+/*      */       
+/* 1796 */       e.printStackTrace();
+/*      */     } 
+/* 1798 */     return a;
+/*      */   }
+/*      */ 
+/*      */   
+/*      */   public static List<Equ> planalertlist(String planAlertStr) {
+/* 1803 */     List<Equ> list = new ArrayList<Equ>();
+/* 1804 */     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+/* 1805 */     Date nowdateDate = new Date(System.currentTimeMillis());
+/* 1806 */     Date plandate1Date = null;
+/* 1807 */     int lastday = 0;
+/* 1808 */     long ms = 0L;
+/* 1809 */     String p1 = "", p2 = "";
+/*      */     
+/*      */     try {
+/* 1812 */       int inti = 1;
+/* 1813 */       Connection conn = JDBCconnect.getConnection();
+/* 1814 */       String sql = "select camount,planm2, planm1,sgmoney,plandate1,plandate2,finmoney,contractid,contractname from DXTESTCONTRACT where plandate1<=? and (statu!='end'or statu is null)";
+/* 1815 */       PreparedStatement ps = conn.prepareStatement(sql);
+/* 1816 */       ps.setString(inti++, planAlertStr);
+/* 1817 */       ResultSet rs = ps.executeQuery();
+/* 1818 */       while (rs.next()) {
+/* 1819 */         Equ equ = new Equ();
+/* 1820 */         equ.setPlanm1(rs.getString("planm1"));
+/* 1821 */         equ.setSgmoney(rs.getString("sgmoney"));
+/* 1822 */         equ.setPlandate1(rs.getString("plandate1"));
+/* 1823 */         equ.setPlandate2(rs.getString("plandate2"));
+/* 1824 */         p1 = rs.getString("plandate1");
+/* 1825 */         p2 = rs.getString("plandate2");
+/* 1826 */         if (p1 == "" || p1 == null) {
+/* 1827 */           p1 = p2;
+/*      */         }
+/* 1829 */         plandate1Date = formatter.parse(p1);
+/* 1830 */         ms = plandate1Date.getTime() - nowdateDate.getTime();
+/* 1831 */         lastday = (int)(ms / 1000L / 60L / 60L / 24L);
+/* 1832 */         equ.setLastday(lastday);
+/* 1833 */         equ.setFinmoney(rs.getString("finmoney"));
+/* 1834 */         equ.setContractid(rs.getString("contractid"));
+/* 1835 */         equ.setContractname(rs.getString("contractname"));
+/* 1836 */         equ.setCamount(rs.getString("camount"));
+/* 1837 */         equ.setPlanm2(rs.getString("planm2"));
+/* 1838 */         list.add(equ);
+/* 1839 */       }  rs.close();
+/* 1840 */       ps.close();
+/* 1841 */       conn.close();
+/* 1842 */     } catch (Exception e) {
+/*      */       
+/* 1844 */       e.printStackTrace();
+/*      */     } 
+/* 1846 */     return list;
+/*      */   }
+/*      */ 
+/*      */   
+/*      */   public static List<Equ> userIds() {
+	List<Equ>  list = new ArrayList<Equ>();
+/*      */     try {
+/* 1853 */       int inti = 1;
+/* 1854 */       Connection conn = JDBCconnect.getConnection();
+/* 1855 */       String sql = "select userid from DXTESTUSER where userid!='蒋勇' and userid is not null";
+/* 1856 */       PreparedStatement ps = conn.prepareStatement(sql);
+/* 1857 */       ps = conn.prepareStatement(sql);
+/*      */ 
+/*      */       
+/* 1860 */       ResultSet rs = ps.executeQuery();
+/* 1861 */       while (rs.next()) {
+/* 1862 */         Equ equ = new Equ();
+/* 1863 */         equ.setUserid(rs.getString("userid"));
+/* 1864 */         list.add(equ);
+/* 1865 */       }  rs.close();
+/* 1866 */       ps.close();
+/* 1867 */       conn.close();
+/* 1868 */     } catch (Exception e) {
+/*      */       
+/* 1870 */       e.printStackTrace();
+/*      */     } 
+/* 1872 */     return list;
+/*      */   }
+/*      */   
+/*      */   public static List<Equ> SelectAllDxtestwork2() {
+/* 1876 */    List<Equ> listAllDxtestwork2 = new ArrayList<Equ>();
+/*      */     try {
+/* 1878 */       int intid = 1;
+/* 1879 */       Connection conn = JDBCconnect.getConnection();
+/*      */       
+/* 1881 */       String sql = "select distinct username,sdate,edate,statu from (select * from dxtestwork where (task is null or task='0') and (statu='告警' or statu='巡检人员' or statu='故障') order by sdate desc)order by statu  desc";
+/* 1882 */       String sql2 = "select distinct username,sdate,edate,statu from (select * from dxtestwork where (task is null or task='0') and (statu='恢复' and stno!='0') order by sdate desc)order by sdate  desc";
+/* 1883 */       String sql3 = "select count(*) from ( select distinct userpwd,sdate,edate from (select * from dxtestwork where (task is null or task='0') and  (statu='告警' or statu='故障') and sdate=? and edate=?  order by sdate desc)order by sdate desc,edate)";
+/*      */ 
+/*      */       
+/* 1886 */       String sql4 = "select distinct username,sdate,edate,statu from (select * from dxtestwork where stno='0') order by sdate ";
+/* 1887 */       String sql5 = "select count(*) from(select stno from dxtestwork where sdate=? and edate=? and stno!='0')";
+/* 1888 */       Statement statement = null;
+/* 1889 */       int count = 0;
+/* 1890 */       PreparedStatement ps5 = null;
+/* 1891 */       PreparedStatement ps3 = null;
+/* 1892 */       ResultSet rs3 = null;
+/* 1893 */       ResultSet rs5 = null;
+/* 1894 */       ResultSet rs2 = null;
+/* 1895 */       Statement statement2 = null;
+/* 1896 */       String s0 = "0";
+/* 1897 */       String e0 = "0";
+/* 1898 */       String e1 = "0";
+/* 1899 */       String s1 = "0";
+/*      */       
+/* 1901 */       statement = conn.createStatement();
+/* 1902 */       ResultSet rs = statement.executeQuery(sql);
+/* 1903 */       while (rs.next()) {
+/*      */         
+/* 1905 */         Equ equ = new Equ();
+/* 1906 */         equ.setUsername(rs.getString("username"));
+/* 1907 */         equ.setEdate(rs.getString("edate"));
+/* 1908 */         equ.setSdate(rs.getString("sdate"));
+/* 1909 */         equ.setStatu(rs.getString("statu"));
+/* 1910 */         listAllDxtestwork2.add(equ);
+/*      */       } 
+/* 1912 */       statement.close();
+/* 1913 */       rs.close();
+/*      */       
+/* 1915 */       statement2 = conn.createStatement();
+/* 1916 */       rs2 = statement2.executeQuery(sql2);
+/* 1917 */       while (rs2.next()) {
+/* 1918 */         s1 = rs2.getString("sdate");
+/* 1919 */         e1 = rs2.getString("edate");
+/* 1920 */         if (s0.equals(s1) && e0.equals(e1)) {
+/*      */           continue;
+/*      */         }
+/*      */         
+/* 1924 */         s0 = s1;
+/* 1925 */         e0 = e1;
+/* 1926 */         ps3 = conn.prepareStatement(sql3);
+/* 1927 */         ps3.setString(1, s0);
+/* 1928 */         ps3.setString(2, e0);
+/* 1929 */         rs3 = ps3.executeQuery();
+/* 1930 */         while (rs3.next()) {
+/* 1931 */           count = rs3.getInt(1);
+/* 1932 */           if (count > 1) {
+/*      */             continue;
+/*      */           }
+/* 1935 */           Equ equ = new Equ();
+/* 1936 */           equ.setUsername(rs2.getString("username"));
+/* 1937 */           equ.setEdate(rs2.getString("edate"));
+/* 1938 */           equ.setSdate(rs2.getString("sdate"));
+/* 1939 */           equ.setStatu(rs2.getString("statu"));
+/* 1940 */           listAllDxtestwork2.add(equ);
+/*      */         } 
+/*      */         
+/* 1943 */         ps3.close();
+/* 1944 */         rs3.close();
+/*      */       } 
+/*      */       
+/* 1947 */       statement2.close();
+/* 1948 */       rs2.close();
+/*      */       
+/* 1950 */       String s10 = "0";
+/* 1951 */       String e10 = "0";
+/* 1952 */       String e11 = "0";
+/* 1953 */       String s11 = "0";
+/* 1954 */       int count1 = 0;
+/* 1955 */       Statement statement4 = conn.createStatement();
+/* 1956 */       ResultSet rs4 = statement4.executeQuery(sql4);
+/* 1957 */       while (rs4.next()) {
+/* 1958 */         s11 = rs4.getString("sdate");
+/* 1959 */         e11 = rs4.getString("edate");
+/*      */ 
+/*      */         
+/* 1962 */         if (s10.equals(s11) && e10.equals(e11)) {
+/*      */           continue;
+/*      */         }
+/*      */         
+/* 1966 */         s10 = s11;
+/* 1967 */         e10 = e11;
+/* 1968 */         ps5 = conn.prepareStatement(sql5);
+/* 1969 */         ps5.setString(1, s10);
+/* 1970 */         ps5.setString(2, e10);
+/* 1971 */         rs5 = ps5.executeQuery();
+/*      */         
+/* 1973 */         while (rs5.next()) {
+/* 1974 */           count1 = rs5.getInt(1);
+/*      */ 
+/*      */           
+/* 1977 */           if (count1 != 0) {
+/*      */             continue;
+/*      */           }
+/* 1980 */           Equ equ = new Equ();
+/* 1981 */           equ.setUsername(rs4.getString("username"));
+/* 1982 */           equ.setEdate(rs4.getString("edate"));
+/* 1983 */           equ.setSdate(rs4.getString("sdate"));
+/* 1984 */           equ.setStatu(rs4.getString("statu"));
+/* 1985 */           listAllDxtestwork2.add(equ);
+/*      */         } 
+/*      */         
+/* 1988 */         ps5.close();
+/* 1989 */         rs5.close();
+/*      */       } 
+/*      */       
+/* 1992 */       statement4.close();
+/* 1993 */       rs4.close();
+/* 1994 */       conn.close();
+/*      */     }
+/* 1996 */     catch (Exception e) {
+/*      */       
+/* 1998 */       e.printStackTrace();
+/*      */     } 
+/* 2000 */     return listAllDxtestwork2;
+/*      */   }
+/*      */   
+/*      */   public static List<Equ> typeclass() {
+	List<Equ>  list = new ArrayList<Equ>();
+/*      */     try {
+/* 2006 */       int inti = 1;
+/* 2007 */       Connection conn = JDBCconnect.getConnection();
+/* 2008 */       String sql = "select typeclass from typeclass ";
+/* 2009 */       PreparedStatement ps = conn.prepareStatement(sql);
+/* 2010 */       ResultSet rs = ps.executeQuery();
+/* 2011 */       while (rs.next()) {
+/* 2012 */         Equ equ = new Equ();
+/* 2013 */         equ.setTypeclass(rs.getString("typeclass"));
+/* 2014 */         list.add(equ);
+/* 2015 */       }  rs.close();
+/* 2016 */       ps.close();
+/* 2017 */       conn.close();
+/* 2018 */     } catch (Exception e) {
+/*      */       
+/* 2020 */       e.printStackTrace();
+/*      */     } 
+/* 2022 */     return list;
+/*      */   }
+/*      */   
+/*      */   public static List<Equ> SelectAllDxtestwork() {
+/* 2026 */   List<Equ>  listAllDxtestwork = new ArrayList<Equ>();
+/*      */     try {
+/* 2028 */       int intid = 1;
+/* 2029 */       Connection conn = JDBCconnect.getConnection();
+/*      */       
+/* 2031 */       String sql = "select t1.ID,\tt1.MESSAGE,\tt1.USERNAME,\tt1.USERPWD,\tt1.NOWDATE,\tt1.SDATE,\tt1.EDATE,\tt1.SN,\tt1.PICTURE,\tt1.STATU,\tt1.STNO,\tt1.TASK,\tt1.TIME,t2.ID AS ID_t2,\tt2.STDATE AS STDATE_t2,\tt2.SDATE AS SDATE_t2,\tt2.EDATE AS EDATE_t2,\tt2.REDATE AS REDATE_t2,\tt2.PNAME AS PNAME_t2,\tt2.USE AS USE_t2,\tt2.OWNNAME AS OWNNAME_t2,\tt2.PRONAME AS PRONAME_t2,\tt2.MANNAME AS MANNAME_t2,\tt2.AGENAME AS AGENAME_t2,\tt2.MANTYP AS MANTYP_t2,\tt2.SNAME AS SNAME_t2,\tt2.STYP AS STYP_t2,\tt2.POS AS POS_t2,\tt2.IP AS IP_t2,\tt2.PORT AS PORT_t2,\tt2.CPU AS CPU_t2,\tt2.MEMORY AS MEMORY_t2,\tt2.DISK AS DISK_t2,\tt2.SYN AS SYN_t2,\tt2.ORACLE AS ORACLE_t2,\tt2.SN AS SN_t2,\tt2.OTH AS OTH_t2,\tt2.SID AS SID_t2 from dxtestwork t1,dxtest t2 where t2.sn!='0' and t1.sn=t2.sn and t1.stno!='0' and t1.userpwd is null and task='0' order by t1.sdate desc";
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */       
+/* 2041 */       Statement statement = null;
+/* 2042 */       statement = conn.createStatement();
+/* 2043 */       ResultSet rs = statement.executeQuery(sql);
+/* 2044 */       while (rs.next()) {
+/*      */         
+/* 2046 */         Equ equ = new Equ();
+/* 2047 */         equ.setMessage(rs.getString("message"));
+/* 2048 */         equ.setUsername(rs.getString("username"));
+/* 2049 */         equ.setUserpwd(rs.getString("userpwd"));
+/* 2050 */         equ.setNowdate(rs.getString("nowdate"));
+/* 2051 */         equ.setSn(rs.getString("sn"));
+/* 2052 */         equ.setStatu(rs.getString("statu"));
+/* 2053 */         equ.setPicture(rs.getString("picture"));
+/* 2054 */         equ.setEdate(rs.getString("edate"));
+/* 2055 */         equ.setSdate(rs.getString("sdate"));
+/* 2056 */         equ.setStno(rs.getString("stno"));
+/* 2057 */         equ.setTask(rs.getString("task"));
+/* 2058 */         equ.setPNAME_T2(rs.getString("PNAME_T2"));
+/* 2059 */         equ.setIP_T2(rs.getString("IP_T2"));
+/* 2060 */         equ.setPOS_T2(rs.getString("POS_T2"));
+/* 2061 */         listAllDxtestwork.add(equ);
+/*      */       } 
+/* 2063 */       rs.close();
+/* 2064 */       statement.close();
+/* 2065 */       conn.close();
+/*      */     }
+/* 2067 */     catch (Exception e) {
+/*      */       
+/* 2069 */       e.printStackTrace();
+/*      */     } 
+/* 2071 */     return listAllDxtestwork;
+/*      */   }
+/*      */   
+/*      */   public static List<Equ> SelectAllMessageItem(String sn, String stno) {
+/* 2075 */     List<Equ> list = new ArrayList<Equ>();
+/*      */     try {
+/* 2077 */       int intid = 1;
+/* 2078 */       Connection conn = JDBCconnect.getConnection();
+/* 2079 */       String sql = "select * from dxtestwork where sn=? and stno=? order by nowdate,statu desc";
+/* 2080 */       PreparedStatement ps = conn.prepareStatement(sql);
+/* 2081 */       ps.setString(intid++, sn);
+/* 2082 */       ResultSet rs = ps.executeQuery("select * from dxtestwork where sn='" + sn.trim() + "' and stno='" + stno + "' order by nowdate,statu desc");
+/* 2083 */       while (rs.next()) {
+/* 2084 */         Equ equ = new Equ();
+/* 2085 */         equ.setMessage(rs.getString("message"));
+/* 2086 */         equ.setUsername(rs.getString("username"));
+/* 2087 */         equ.setUserpwd(rs.getString("userpwd"));
+/* 2088 */         equ.setNowdate(rs.getString("nowdate"));
+/* 2089 */         equ.setSn(rs.getString("sn"));
+/* 2090 */         equ.setStatu(rs.getString("statu"));
+/* 2091 */         equ.setPicture(rs.getString("picture"));
+/* 2092 */         equ.setEdate(rs.getString("edate"));
+/* 2093 */         equ.setSdate(rs.getString("sdate"));
+/* 2094 */         list.add(equ);
+/*      */       } 
+/* 2096 */       rs.close();
+/* 2097 */       ps.close();
+/* 2098 */       conn.close();
+/*      */     
+/*      */     }
+/* 2101 */     catch (Exception e) {
+/*      */       
+/* 2103 */       e.printStackTrace();
+/*      */     } 
+/* 2105 */     return list;
+/*      */   }
+/*      */ 
+/*      */   
+/*      */   public static List<Equ> SelectAllMessage(String sn) {
+/* 2110 */     List<Equ> list = new ArrayList<Equ>();
+/*      */     try {
+/* 2112 */       int intid = 1;
+/* 2113 */       Connection conn = JDBCconnect.getConnection();
+/* 2114 */       String sql = "select * from dxtestwork where sn=? order by nowdate desc,statu desc";
+/* 2115 */       PreparedStatement ps = conn.prepareStatement(sql);
+/* 2116 */       ps.setString(intid++, sn);
+/* 2117 */       ResultSet rs = ps.executeQuery("select * from dxtestwork where sn='" + sn.trim() + "' order by nowdate desc,statu desc");
+/* 2118 */       while (rs.next()) {
+/* 2119 */         Equ equ = new Equ();
+/* 2120 */         equ.setMessage(rs.getString("message"));
+/* 2121 */         equ.setUsername(rs.getString("username"));
+/* 2122 */         equ.setUserpwd(rs.getString("userpwd"));
+/* 2123 */         equ.setNowdate(rs.getString("nowdate"));
+/* 2124 */         equ.setSn(rs.getString("sn"));
+/* 2125 */         equ.setStatu(rs.getString("statu"));
+/* 2126 */         equ.setPicture(rs.getString("picture"));
+/* 2127 */         equ.setEdate(rs.getString("edate"));
+/* 2128 */         equ.setSdate(rs.getString("sdate"));
+/* 2129 */         list.add(equ);
+/*      */       } 
+/* 2131 */       rs.close();
+/* 2132 */       ps.close();
+/* 2133 */       conn.close();
+/*      */     }
+/* 2135 */     catch (Exception e) {
+/*      */       
+/* 2137 */       e.printStackTrace();
+/*      */     } 
+/* 2139 */     return list;
+/*      */   }
+/*      */   public static void updata_dxtestworkPer(String username, String sdate, String edate, String statu) {
+/*      */     try {
+/* 2143 */       int intid = 1;
+/* 2144 */       Connection conn = JDBCconnect.getConnection();
+/*      */       
+/* 2146 */       String sql1 = "insert into dxtestwork(username,sdate,edate,statu) values(?,?,?,?)";
+/* 2147 */       String sql2 = "select * from dxtestwork where username=? and sdate=? and edate=? and statu=?";
+/* 2148 */       PreparedStatement ps1 = null;
+/* 2149 */       PreparedStatement ps2 = conn.prepareStatement(sql2);
+/* 2150 */       ps2.setString(intid++, username);
+/* 2151 */       ps2.setString(intid++, sdate);
+/* 2152 */       ps2.setString(intid++, edate);
+/* 2153 */       ps2.setString(intid++, statu);
+/* 2154 */       ResultSet rs = ps2.executeQuery();
+/* 2155 */       if (!rs.next()) {
+/* 2156 */         intid = 1;
+/*      */         
+/* 2158 */         ps1 = conn.prepareStatement(sql1);
+/* 2159 */         ps1.setString(intid++, username);
+/* 2160 */         ps1.setString(intid++, sdate);
+/* 2161 */         ps1.setString(intid++, edate);
+/* 2162 */         ps1.setString(intid++, statu);
+/*      */ 
+/*      */         
+/* 2165 */         ps1.executeUpdate();
+/* 2166 */         ps1.close();
+/*      */       } 
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */       
+/* 2172 */       ps2.close();
+/* 2173 */       rs.close();
+/* 2174 */       conn.close();
+/*      */     }
+/* 2176 */     catch (Exception e) {
+/*      */       
+/* 2178 */       e.printStackTrace();
+/*      */     } 
+/*      */   }
+/*      */   
+/*      */   public static boolean upfileP(String sql) {
+/* 2183 */     boolean a = false;
+/*      */     
+/*      */     try {
+/* 2186 */       Connection conn = JDBCconnect.getConnection();
+/* 2187 */       PreparedStatement ps = conn.prepareStatement(sql);
+/* 2188 */       ResultSet rs = ps.executeQuery();
+/* 2189 */       a = true;
+/* 2190 */       rs.close();
+/* 2191 */       ps.close();
+/* 2192 */       conn.close();
+/*      */     }
+/* 2194 */     catch (Exception e) {
+/*      */       
+/* 2196 */       e.printStackTrace();
+/* 2197 */       a = false;
+/*      */     } 
+/* 2199 */     return a;
+/*      */   }
+/*      */   
+/*      */   public static void updataItemRes(String sn, String message, String userid, String nowdate, String statu, String picture, String edate, String sdate, String stno) {
+/*      */     try {
+/* 2204 */       int intid = 1;
+/* 2205 */       Connection conn = JDBCconnect.getConnection();
+/* 2206 */       String sql = "insert into dxtestwork(message,username,nowdate,sn,statu,picture,edate,sdate,stno,task) values(?,?,?,?,?,?,?,?,?,?)";
+/* 2207 */       String sql2 = "select * from dxtestwork where stno=? and message=?";
+/* 2208 */       String sql3 = "update dxtestwork set  userpwd=?  where  stno=?";
+/* 2209 */       PreparedStatement ps2 = conn.prepareStatement(sql2);
+/* 2210 */       ps2.setString(intid++, stno);
+/* 2211 */       ps2.setString(intid++, message);
+/* 2212 */       ResultSet rs = ps2.executeQuery();
+/* 2213 */       if (!rs.next()) {
+/* 2214 */         intid = 1;
+/* 2215 */         PreparedStatement ps = conn.prepareStatement(sql);
+/* 2216 */         ps.setString(intid++, message);
+/* 2217 */         ps.setString(intid++, userid);
+/* 2218 */         ps.setString(intid++, nowdate);
+/* 2219 */         ps.setString(intid++, sn);
+/* 2220 */         ps.setString(intid++, statu);
+/* 2221 */         ps.setString(intid++, picture);
+/* 2222 */         ps.setString(intid++, edate);
+/* 2223 */         ps.setString(intid++, sdate);
+/* 2224 */         ps.setString(intid++, stno);
+/* 2225 */         ps.setString(intid++, "0");
+/* 2226 */         ps.executeUpdate();
+/* 2227 */         intid = 1;
+/* 2228 */         PreparedStatement ps3 = conn.prepareStatement(sql3);
+/* 2229 */         ps3.setString(intid++, "restore");
+/* 2230 */         ps3.setString(intid++, stno);
+/* 2231 */         ps3.executeUpdate();
+/* 2232 */         ps.close();
+/* 2233 */         ps3.close();
+/*      */       } 
+/*      */ 
+/*      */ 
+/*      */       
+/* 2238 */       ps2.close();
+/* 2239 */       rs.close();
+/* 2240 */       conn.close();
+/*      */     }
+/* 2242 */     catch (Exception e) {
+/*      */       
+/* 2244 */       e.printStackTrace();
+/*      */     } 
+/*      */   }
+/*      */ 
+/*      */   
+/*      */   public static void updata_dxtestwork2(String sn, String message, String time, String userid, String nowdate, String statu, String picture, String edate, String sdate, String stno) {
+/*      */     try {
+/* 2251 */       int intid = 1;
+/* 2252 */       Connection conn = JDBCconnect.getConnection();
+/* 2253 */       String sql = "insert into dxtestwork(message,username,nowdate,sn,statu,picture,edate,sdate,stno,task,time) values(?,?,?,?,?,?,?,?,?,?,?)";
+/* 2254 */       String sql2 = "select * from dxtestwork where stno=? and message=?";
+/* 2255 */       String sql3 = "update dxtestwork set  userpwd='restore'   where  stno=?";
+/*      */       
+/* 2257 */       PreparedStatement ps = null;
+/* 2258 */       PreparedStatement ps2 = conn.prepareStatement(sql2);
+/* 2259 */       PreparedStatement ps3 = null;
+/* 2260 */       ps2.setString(intid++, stno);
+/* 2261 */       ps2.setString(intid++, message);
+/* 2262 */       ResultSet rs = ps2.executeQuery();
+/* 2263 */       if (!rs.next()) {
+/* 2264 */         intid = 1;
+/* 2265 */         ps = conn.prepareStatement(sql);
+/* 2266 */         ps.setString(intid++, message);
+/* 2267 */         ps.setString(intid++, userid);
+/* 2268 */         ps.setString(intid++, nowdate);
+/* 2269 */         ps.setString(intid++, sn);
+/* 2270 */         ps.setString(intid++, statu);
+/* 2271 */         ps.setString(intid++, picture);
+/* 2272 */         ps.setString(intid++, edate);
+/* 2273 */         ps.setString(intid++, sdate);
+/* 2274 */         ps.setString(intid++, stno);
+/* 2275 */         ps.setString(intid++, "0");
+/* 2276 */         ps.setString(intid++, time);
+/* 2277 */         ps.executeUpdate();
+/*      */         
+/* 2279 */         intid = 1;
+/* 2280 */         ps3 = conn.prepareStatement(sql3);
+/* 2281 */         ps3.setString(intid++, stno);
+/* 2282 */         ps3.executeUpdate();
+/*      */         
+/* 2284 */         ps.close();
+/* 2285 */         ps3.close();
+/*      */       } 
+/*      */ 
+/*      */       
+/* 2289 */       ps2.close();
+/* 2290 */       rs.close();
+/* 2291 */       conn.close();
+/* 2292 */     } catch (Exception e) {
+/*      */       
+/* 2294 */       e.printStackTrace();
+/*      */     } 
+/*      */   }
+/*      */ 
+/*      */ 
+/*      */   
+/*      */   public static void updata_dxtestworkItemAdd(String sn, String message, String userid, String nowdate, String statu, String picture, String edate, String sdate, String stno) {
+/*      */     try {
+/* 2302 */       int intid = 1;
+/* 2303 */       Connection conn = JDBCconnect.getConnection();
+/* 2304 */       String sql = "insert into dxtestwork(message,username,nowdate,sn,statu,picture,edate,sdate,stno,task) values(?,?,?,?,?,?,?,?,?,?)";
+/* 2305 */       String sql2 = "select * from dxtestwork where stno=? and message=?";
+/* 2306 */       PreparedStatement ps2 = conn.prepareStatement(sql2);
+/* 2307 */       ps2.setString(intid++, stno);
+/* 2308 */       ps2.setString(intid++, message);
+/* 2309 */       ResultSet rs = ps2.executeQuery();
+/* 2310 */       if (!rs.next()) {
+/* 2311 */         intid = 1;
+/* 2312 */         PreparedStatement ps = conn.prepareStatement(sql);
+/* 2313 */         ps.setString(intid++, message);
+/* 2314 */         ps.setString(intid++, userid);
+/* 2315 */         ps.setString(intid++, nowdate);
+/* 2316 */         ps.setString(intid++, sn);
+/* 2317 */         ps.setString(intid++, statu);
+/* 2318 */         ps.setString(intid++, picture);
+/* 2319 */         ps.setString(intid++, edate);
+/* 2320 */         ps.setString(intid++, sdate);
+/* 2321 */         ps.setString(intid++, stno);
+/* 2322 */         ps.setString(intid++, "1");
+/* 2323 */         ps.executeUpdate();
+/* 2324 */         ps.close();
+/*      */       } 
+/*      */ 
+/*      */       
+/* 2328 */       ps2.close();
+/* 2329 */       rs.close();
+/* 2330 */       conn.close();
+/*      */     }
+/* 2332 */     catch (Exception e) {
+/*      */       
+/* 2334 */       e.printStackTrace();
+/*      */     } 
+/*      */   }
+/*      */ 
+/*      */   
+/*      */   public static void updataPartPic2(String sn, String message, String userid, String nowdate, String statu, String picture, String edate, String sdate, String stno) {
+/*      */     try {
+/* 2341 */       int intid = 1;
+/*      */ 
+/*      */ 
+/*      */       
+/* 2345 */       Connection conn = JDBCconnect.getConnection();
+/* 2346 */       String sql = "insert into dxtestwork(message,username,nowdate,sn,statu,picture,edate,sdate,stno,task) values(?,?,?,?,?,?,?,?,?,?)";
+/* 2347 */       String sql2 = "select * from dxtestwork where stno=? and message=?";
+/* 2348 */       String sql3 = "update dxtestwork set  userpwd=?  where  stno=?";
+/* 2349 */       PreparedStatement ps2 = conn.prepareStatement(sql2);
+/* 2350 */       ps2.setString(intid++, stno);
+/* 2351 */       ps2.setString(intid++, message);
+/* 2352 */       ResultSet rs = ps2.executeQuery();
+/*      */       
+/* 2354 */       if (!rs.next()) {
+/* 2355 */         intid = 1;
+/*      */         
+/* 2357 */         PreparedStatement ps = conn.prepareStatement(sql);
+/* 2358 */         ps.setString(intid++, message);
+/* 2359 */         ps.setString(intid++, userid);
+/* 2360 */         ps.setString(intid++, nowdate);
+/* 2361 */         ps.setString(intid++, sn);
+/* 2362 */         ps.setString(intid++, statu);
+/* 2363 */         ps.setString(intid++, picture);
+/* 2364 */         ps.setString(intid++, edate);
+/* 2365 */         ps.setString(intid++, sdate);
+/* 2366 */         ps.setString(intid++, stno);
+/* 2367 */         ps.setString(intid++, "0");
+/* 2368 */         ps.executeUpdate();
+/*      */ 
+/*      */         
+/* 2371 */         intid = 1;
+/* 2372 */         PreparedStatement ps3 = conn.prepareStatement(sql3);
+/* 2373 */         ps3.setString(intid++, "restore");
+/* 2374 */         ps3.setString(intid++, stno);
+/* 2375 */         ps3.executeUpdate();
+/* 2376 */         ps3.close();
+/* 2377 */         ps.close();
+/*      */       } 
+/*      */ 
+/*      */       
+/* 2381 */       ps2.close();
+/* 2382 */       rs.close();
+/* 2383 */       conn.close();
+/*      */     
+/*      */     }
+/* 2386 */     catch (Exception e) {
+/*      */       
+/* 2388 */       e.printStackTrace();
+/*      */     } 
+/*      */   }
+/*      */ 
+/*      */ 
+/*      */   
+/*      */   public static void updataPartPic(String sn, String message, String userid, String nowdate, String statu, String picture, String edate, String sdate, String stno) {
+/*      */     try {
+/* 2396 */       int inti = 1;
+/* 2397 */       String task = "1";
+/* 2398 */       Connection conn = JDBCconnect.getConnection();
+/* 2399 */       String sql1 = "insert into dxtestwork(message,username,nowdate,sn,statu,picture,edate,sdate,stno,task) values(?,?,?,?,?,?,?,?,?,?)";
+/* 2400 */       String sql2 = "select * from dxtestwork where stno=?";
+/* 2401 */       String sql3 = "select * from dxtestwork where sn=? and username=? and sdate=? and edate=? and statu=? and message=?";
+/* 2402 */       PreparedStatement ps = null;
+/* 2403 */       PreparedStatement ps3 = conn.prepareStatement(sql3);
+/* 2404 */       ps3.setString(inti++, sn);
+/* 2405 */       ps3.setString(inti++, userid);
+/* 2406 */       ps3.setString(inti++, sdate);
+/* 2407 */       ps3.setString(inti++, edate);
+/* 2408 */       ps3.setString(inti++, statu);
+/* 2409 */       ps3.setString(inti++, message);
+/* 2410 */       ResultSet rs = ps3.executeQuery();
+/* 2411 */       if (!rs.next()) {
+/* 2412 */         inti = 1;
+/* 2413 */         ps = conn.prepareStatement(sql1);
+/* 2414 */         ps.setString(inti++, message);
+/* 2415 */         ps.setString(inti++, userid);
+/* 2416 */         ps.setString(inti++, nowdate);
+/* 2417 */         ps.setString(inti++, sn);
+/* 2418 */         ps.setString(inti++, statu);
+/* 2419 */         ps.setString(inti++, picture);
+/* 2420 */         ps.setString(inti++, edate);
+/* 2421 */         ps.setString(inti++, sdate);
+/* 2422 */         ps.setString(inti++, stno);
+/* 2423 */         ps.setString(inti++, task);
+/* 2424 */         ps.executeUpdate();
+/*      */       } 
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */       
+/* 2430 */       rs.close();
+/* 2431 */       ps3.close();
+/* 2432 */       ps.close();
+/* 2433 */       conn.close();
+/* 2434 */     } catch (Exception e) {
+/*      */       
+/* 2436 */       e.printStackTrace();
+/*      */     } 
+/*      */   }
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */   
+/*      */   public static void updata_dxtestwork(String sn, String message, String time, String userid, String nowdate, String statu, String picture, String edate, String sdate, String stnonew) {
+/* 2444 */     if (stnonew.equals("0")) {
+/*      */       try {
+/* 2446 */         int intid = 1;
+/* 2447 */         Connection conn = JDBCconnect.getConnection();
+/* 2448 */         String sql = "insert into dxtestwork(message,username,nowdate,sn,statu,picture,edate,sdate,stno,task,time) values(?,?,?,?,?,?,?,?,?,?,?)";
+/*      */ 
+/*      */         
+/* 2451 */         PreparedStatement ps = conn.prepareStatement(sql);
+/* 2452 */         ps.setString(intid++, message);
+/* 2453 */         ps.setString(intid++, userid);
+/* 2454 */         ps.setString(intid++, nowdate);
+/* 2455 */         ps.setString(intid++, sn);
+/* 2456 */         ps.setString(intid++, statu);
+/* 2457 */         ps.setString(intid++, picture);
+/* 2458 */         ps.setString(intid++, edate);
+/* 2459 */         ps.setString(intid++, sdate);
+/* 2460 */         ps.setString(intid++, stnonew);
+/* 2461 */         ps.setString(intid++, "0");
+/* 2462 */         ps.setString(intid++, time);
+/* 2463 */         ps.executeUpdate();
+/* 2464 */         ps.close();
+/* 2465 */         conn.close();
+/* 2466 */       } catch (Exception e) {
+/*      */         
+/* 2468 */         e.printStackTrace();
+/*      */       } 
+/*      */     } else {
+/*      */ 
+/*      */       
+/*      */       try {
+/*      */         
+/* 2475 */         int intid = 1;
+/* 2476 */         Connection conn = JDBCconnect.getConnection();
+/* 2477 */         String sql = "insert into dxtestwork(message,username,nowdate,sn,statu,picture,edate,sdate,stno,task,time) values(?,?,?,?,?,?,?,?,?,?,?)";
+/* 2478 */         String sql2 = "select * from dxtestwork where username=? and sdate=? and edate=? and statu=?";
+/*      */         
+/* 2480 */         PreparedStatement ps2 = conn.prepareStatement(sql2);
+/* 2481 */         ps2.setString(intid++, userid);
+/* 2482 */         ps2.setString(intid++, sdate);
+/* 2483 */         ps2.setString(intid++, edate);
+/* 2484 */         ps2.setString(intid++, statu);
+/* 2485 */         ResultSet rs = ps2.executeQuery("select * from dxtestwork where sn='" + sn + "' and username='" + userid + "' and sdate='" + sdate + "' and edate='" + edate + "' and statu='" + statu + "' and message='" + message + "'");
+/* 2486 */         if (!rs.next()) {
+/*      */           
+/* 2488 */           intid = 1;
+/*      */           
+/* 2490 */           PreparedStatement ps = conn.prepareStatement(sql);
+/* 2491 */           ps.setString(intid++, message);
+/* 2492 */           ps.setString(intid++, userid);
+/* 2493 */           ps.setString(intid++, nowdate);
+/* 2494 */           ps.setString(intid++, sn);
+/* 2495 */           ps.setString(intid++, statu);
+/* 2496 */           ps.setString(intid++, picture);
+/* 2497 */           ps.setString(intid++, edate);
+/* 2498 */           ps.setString(intid++, sdate);
+/* 2499 */           ps.setString(intid++, stnonew);
+/* 2500 */           ps.setString(intid++, "0");
+/* 2501 */           ps.setString(intid++, time);
+/* 2502 */           ps.executeUpdate();
+/* 2503 */           ps.close();
+/*      */         } 
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */         
+/* 2509 */         ps2.close();
+/* 2510 */         rs.close();
+/* 2511 */         conn.close();
+/*      */       }
+/* 2513 */       catch (Exception e) {
+/*      */         
+/* 2515 */         e.printStackTrace();
+/*      */       } 
+/*      */     } 
+/*      */   }
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */ 
+/*      */   
+/*      */   public static List<Equ> SelectAllSn2(String sn) {
+/* 2525 */     List<Equ> listsn = new ArrayList<Equ>();
+/*      */     try {
+/* 2527 */       int intsn = 1;
+/* 2528 */       Connection conn = JDBCconnect.getConnection();
+/* 2529 */       String sql = "select * from dxtest where sn=? ";
+/* 2530 */       PreparedStatement ps = conn.prepareStatement(sql);
+/* 2531 */       ps.setString(intsn++, sn);
+/* 2532 */       ps.execute();
+/* 2533 */       ResultSet rs = ps.getResultSet();
+/* 2534 */       System.out.println("===" + rs.next());
+/* 2535 */       while (rs.next()) {
+/* 2536 */         Equ equsn = new Equ();
+/* 2537 */         equsn.setId(rs.getInt("id"));
+/* 2538 */         equsn.setSid(rs.getString("sid"));
+/* 2539 */         equsn.setStdate(rs.getString("stdate"));
+/* 2540 */         equsn.setSdate(rs.getString("sdate"));
+/* 2541 */         equsn.setEdate(rs.getString("edate"));
+/* 2542 */         equsn.setRedate(rs.getString("redate"));
+/* 2543 */         equsn.setPname(rs.getString("pname"));
+/* 2544 */         equsn.setUse(rs.getString("use"));
+/* 2545 */         equsn.setOwnname(rs.getString("ownname"));
+/* 2546 */         equsn.setProname(rs.getString("proname"));
+/* 2547 */         equsn.setManname(rs.getString("manname"));
+/* 2548 */         equsn.setAgename(rs.getString("agename"));
+/* 2549 */         equsn.setMantyp(rs.getString("mantyp"));
+/* 2550 */         equsn.setSname(rs.getString("sname"));
+/* 2551 */         equsn.setStyp(rs.getString("styp"));
+/* 2552 */         equsn.setPos(rs.getString("pos"));
+/* 2553 */         equsn.setIp(rs.getString("ip"));
+/* 2554 */         equsn.setPort(rs.getString("port"));
+/* 2555 */         equsn.setCpu(rs.getString("cpu"));
+/* 2556 */         equsn.setMemory(rs.getString("memory"));
+/* 2557 */         equsn.setDisk(rs.getString("disk"));
+/* 2558 */         equsn.setSyn(rs.getString("syn"));
+/* 2559 */         equsn.setOracle(rs.getString("oracle"));
+/* 2560 */         equsn.setSn(rs.getString("sn"));
+/* 2561 */         equsn.setOth(rs.getString("oth"));
+/* 2562 */         equsn.setSroot(rs.getString("sroot"));
+/* 2563 */         equsn.setSpwd(rs.getString("spwd"));
+/* 2564 */         equsn.setOroot(rs.getString("oroot"));
+/* 2565 */         equsn.setOpwd(rs.getString("opwd"));
+/* 2566 */         equsn.setAroot(rs.getString("aroot"));
+/* 2567 */         equsn.setApwd(rs.getString("apwd"));
+/* 2568 */         equsn.setTitle(rs.getString("title"));
+/* 2569 */         equsn.setUrl(rs.getString("url"));
+/* 2570 */         equsn.setDid(rs.getString("did"));
+/* 2571 */         listsn.add(equsn);
+/*      */       } 
+/* 2573 */       ps.close();
+/* 2574 */       rs.close();
+/* 2575 */       conn.close();
+/*      */     }
+/* 2577 */     catch (Exception e) {
+/*      */       
+/* 2579 */       e.printStackTrace();
+/*      */     } 
+/*      */     
+/* 2582 */     return listsn;
+/*      */   }
+/*      */   
+/*      */   public static List<Equ> Warningstatu(String sqlv) {
+/* 2586 */     List<Equ> list = new ArrayList<Equ>();
+/*      */     
+/*      */     try {
+/* 2589 */       int inti = 1;
+/* 2590 */       Connection conn = JDBCconnect.getConnection();
+/* 2591 */       conn.setAutoCommit(true);
+/* 2592 */       String sql = sqlv;
+/* 2593 */       PreparedStatement ps = conn.prepareStatement(sql);
+/* 2594 */       ResultSet rs = ps.executeQuery();
+/* 2595 */       ResultSetMetaData md = rs.getMetaData();
+/* 2596 */       int columnCount = md.getColumnCount();
+/* 2597 */       while (rs.next()) {
+/* 2598 */         Equ equ = new Equ();
+/*      */         
+/* 2600 */         Map<String, Object> rowData = new HashMap<String, Object>();
+/* 2601 */         for (int i = 1; i <= columnCount; i++) {
+/* 2602 */           rowData.put(md.getColumnName(i), rs.getObject(i));
+/*      */         }
+/* 2604 */         equ.setRowData(rowData);
+/* 2605 */         list.add(equ);
+/*      */       } 
+/*      */ 
+/*      */       
+/* 2609 */       rs.close();
+/* 2610 */       ps.close();
+/* 2611 */       conn.close();
+/* 2612 */     } catch (Exception e) {
+/*      */       
+/* 2614 */       e.printStackTrace();
+/*      */     } 
+/* 2616 */     return list;
+/*      */   }
+/*      */ 
+/*      */ 
+/*      */   
+/*      */   public static List<Equ> SelectAllSn(String sn) {
+/* 2622 */     List<Equ> listsn = new ArrayList<Equ>();
+/*      */     try {
+/* 2624 */       int intsn = 1;
+/* 2625 */       sn = sn.trim();
+/* 2626 */       Connection connsn = JDBCconnect.getConnection();
+/* 2627 */       String sqlsn = "select * from dxtest where sn=? ";
+/* 2628 */       PreparedStatement pssn = connsn.prepareStatement(sqlsn);
+/* 2629 */       pssn.setString(intsn++, sn);
+/* 2630 */       ResultSet rssn = pssn.executeQuery();
+/*      */ 
+/*      */       
+/* 2633 */       while (rssn.next()) {
+/* 2634 */         Equ equsn = new Equ();
+/* 2635 */         equsn.setId(rssn.getInt("id"));
+/* 2636 */         equsn.setSid(rssn.getString("sid"));
+/* 2637 */         equsn.setStdate(rssn.getString("stdate"));
+/* 2638 */         equsn.setSdate(rssn.getString("sdate"));
+/* 2639 */         equsn.setEdate(rssn.getString("edate"));
+/* 2640 */         equsn.setRedate(rssn.getString("redate"));
+/* 2641 */         equsn.setPname(rssn.getString("pname"));
+/* 2642 */         equsn.setUse(rssn.getString("use"));
+/* 2643 */         equsn.setOwnname(rssn.getString("ownname"));
+/* 2644 */         equsn.setProname(rssn.getString("proname"));
+/* 2645 */         equsn.setManname(rssn.getString("manname"));
+/* 2646 */         equsn.setAgename(rssn.getString("agename"));
+/* 2647 */         equsn.setMantyp(rssn.getString("mantyp"));
+/* 2648 */         equsn.setSname(rssn.getString("sname"));
+/* 2649 */         equsn.setStyp(rssn.getString("styp"));
+/* 2650 */         equsn.setPos(rssn.getString("pos"));
+/* 2651 */         equsn.setIp(rssn.getString("ip"));
+/* 2652 */         equsn.setPort(rssn.getString("port"));
+/* 2653 */         equsn.setCpu(rssn.getString("cpu"));
+/* 2654 */         equsn.setMemory(rssn.getString("memory"));
+/* 2655 */         equsn.setDisk(rssn.getString("disk"));
+/* 2656 */         equsn.setSyn(rssn.getString("syn"));
+/* 2657 */         equsn.setOracle(rssn.getString("oracle"));
+/* 2658 */         equsn.setSn(rssn.getString("sn"));
+/* 2659 */         equsn.setOth(rssn.getString("oth"));
+/* 2660 */         equsn.setSroot(rssn.getString("sroot"));
+/* 2661 */         equsn.setSpwd(rssn.getString("spwd"));
+/* 2662 */         equsn.setOroot(rssn.getString("oroot"));
+/* 2663 */         equsn.setOpwd(rssn.getString("opwd"));
+/* 2664 */         equsn.setAroot(rssn.getString("aroot"));
+/* 2665 */         equsn.setApwd(rssn.getString("apwd"));
+/* 2666 */         equsn.setTitle(rssn.getString("title"));
+/* 2667 */         equsn.setUrl(rssn.getString("url"));
+/* 2668 */         equsn.setDid(rssn.getString("did"));
+/* 2669 */         listsn.add(equsn);
+/*      */       } 
+/* 2671 */       rssn.close();
+/* 2672 */       pssn.close();
+/* 2673 */       connsn.close();
+/*      */     }
+/* 2675 */     catch (Exception e) {
+/*      */       
+/* 2677 */       e.printStackTrace();
+/*      */     } 
+/* 2679 */     return listsn;
+/*      */   }
+/*      */ }
 
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import com.sun.org.apache.xml.internal.security.Init;
-import com.sun.xml.internal.ws.api.pipe.NextAction;
-
-import javafx.css.PseudoClass;
-
-public class SelectAll {
-	@SuppressWarnings("resource")
-
-	
-	public static void updataT(int id,String stdate,String sn,String pos,String ip,String styp,String sname,String sid,String pname,String use,String ownname,String proname,String manname,String agename,String mantyp,String did,String port,String cpu,String memory,String disk,String syn,String oracle,String oth) {
-		try {int inti = 1;
-		Connection	conn = com.clas.JDBCconnect.getConnection();
-			String sql = "update Dxtest set  stdate=?,sn=?,pos=?,ip=?,styp=?,sname=?,sid=?,pname=?,use=?,ownname=?,proname=?,manname=?,agename=?,mantyp=?,did=?,port=?,cpu=?,memory=?,disk=?,syn=?,oracle=?,oth=?  where id=?";
-			PreparedStatement ps2 = null;
-			ResultSet rs2=null;
-			ps2 = conn.prepareStatement(sql);
-			ps2.setString(inti++, stdate);
-			ps2.setString(inti++, sn);
-			ps2.setString(inti++, pos);
-			ps2.setString(inti++, ip);
-			ps2.setString(inti++, styp);
-			ps2.setString(inti++, sname);
-			ps2.setString(inti++, sid);
-			ps2.setString(inti++, pname);
-			ps2.setString(inti++, use);
-			ps2.setString(inti++, ownname);
-			ps2.setString(inti++, proname);
-			ps2.setString(inti++, manname);
-			ps2.setString(inti++, agename);
-			ps2.setString(inti++, mantyp);
-			ps2.setString(inti++, did);
-			ps2.setString(inti++, port);
-			ps2.setString(inti++, cpu);
-			ps2.setString(inti++, memory);
-			ps2.setString(inti++, disk);
-			ps2.setString(inti++, syn);
-			ps2.setString(inti++, oracle);
-			ps2.setString(inti++, oth);
-			ps2.setInt(inti++, id);
-			rs2=ps2.executeQuery();
-		
-			ps2.close();
-			rs2.close();
-			
-		
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-	}
-	
-	public static void uptestp(String stdate,String sn,String pos,String ip,String styp,String sname,String sid,String pname,String use,String ownname,String proname,String manname,String agename,String mantyp,String did,String port,String cpu,String memory,String disk,String syn,String oracle,String oth) {
-		try {
-			int inti = 1;
-		Connection	conn = com.clas.JDBCconnect.getConnection();
-		String sqlR="select count(*) from Dxtesttemp";
-		String sqlin= "insert into Dxtesttemp(stdate,sn,pos,ip,styp,sname,sid,pname,use,ownname,proname,manname,agename,mantyp,did,port,cpu,memory,disk,syn,oracle,oth) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-			String sql = "update Dxtesttemp set  stdate=?,sn=?,pos=?,ip=?,styp=?,sname=?,sid=?,pname=?,use=?,ownname=?,proname=?,manname=?,agename=?,mantyp=?,did=?,port=?,cpu=?,memory=?,disk=?,syn=?,oracle=?,oth=?  where rownum=1";
-			PreparedStatement ps1 = null;
-			PreparedStatement ps2 = null;
-			PreparedStatement ps3 = null;
-			ps1 = conn.prepareStatement(sqlR);
-			ResultSet rs1=ps1.executeQuery();
-			ResultSet rs2=null;
-			ResultSet rs3=null;		
-			int count=0;
-			if (rs1.next()) {
-				count=rs1.getInt("count(*)");
-			}
-			
-			//System.out.println("count="+count);
-			if (count>0) {
-				inti = 1;
-				conn = com.clas.JDBCconnect.getConnection();
-				ps2 = conn.prepareStatement(sql);
-				ps2.setString(inti++, stdate);
-				ps2.setString(inti++, sn);
-				ps2.setString(inti++, pos);
-				ps2.setString(inti++, ip);
-				ps2.setString(inti++, styp);
-				ps2.setString(inti++, sname);
-				ps2.setString(inti++, sid);
-				ps2.setString(inti++, pname);
-				ps2.setString(inti++, use);
-				ps2.setString(inti++, ownname);
-				ps2.setString(inti++, proname);
-				ps2.setString(inti++, manname);
-				ps2.setString(inti++, agename);
-				ps2.setString(inti++, mantyp);
-				ps2.setString(inti++, did);
-				ps2.setString(inti++, port);
-				ps2.setString(inti++, cpu);
-				ps2.setString(inti++, memory);
-				ps2.setString(inti++, disk);
-				ps2.setString(inti++, syn);
-				ps2.setString(inti++, oracle);
-				ps2.setString(inti++, oth);
-				rs2=ps2.executeQuery();
-				//("update Dxtesttemp set  stdate='"+stdate+"',sn='"+sn+"',pos='"+pos+"',ip='"+ip+"',styp='"+styp+"',sname='"+sname+"',sid='"+sid+"',pname='"+pname+"',use='"+use+"',ownname='"+ownname+"',proname='"+proname+"',manname='"+manname+"',agename='"+agename+"',mantyp='"+mantyp+"',did='"+did+"',port='"+port+"',cpu='"+cpu+"',memory='"+memory+"',disk='"+disk+"',syn='"+syn+"',oracle='"+oracle+"',oth='"+oth+"'  where rownum=1");
-				//System.out.println(21);
-				ps2.close();
-				rs2.close();
-			}else {
-			
-				inti = 1;
-				conn = com.clas.JDBCconnect.getConnection();
-				ps3 = conn.prepareStatement(sqlin);
-				ps3.setString(inti++, stdate);
-				ps3.setString(inti++, sn);
-				ps3.setString(inti++, pos);
-				ps3.setString(inti++, ip);
-				ps3.setString(inti++, styp);
-				ps3.setString(inti++, sname);
-				ps3.setString(inti++, sid);
-				ps3.setString(inti++, pname);
-				ps3.setString(inti++, use);
-				ps3.setString(inti++, ownname);
-				ps3.setString(inti++, proname);
-				ps3.setString(inti++, manname);
-				ps3.setString(inti++, agename);
-				ps3.setString(inti++, mantyp);
-				ps3.setString(inti++, did);
-				ps3.setString(inti++, port);
-				ps3.setString(inti++, cpu);
-				ps3.setString(inti++, memory);
-				ps3.setString(inti++, disk);
-				ps3.setString(inti++, syn);
-				ps3.setString(inti++, oracle);
-				ps3.setString(inti++, oth);
-				rs3=ps3.executeQuery();
-			//	System.out.println("rs3="+rs3.next());
-				ps3.close();
-				rs3.close();
-				
-			}
-			ps1.close();
-			rs1.close();
-			conn.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-	}
-	
-	public static List<Equ> testformall() {
-		List<Equ> list= new ArrayList<Equ>();
-		try {
-			int inti = 1;
-		Connection	conn = com.clas.JDBCconnect.getConnection();
-			String sql="select * from dxtesttemp where rownum=1";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps = conn.prepareStatement(sql);
-			ResultSet rs=ps.executeQuery();
-			while (rs.next()) {
-				Equ equ=new Equ();
-				equ.setPname(rs.getString("pname"));
-				equ.setSn (rs.getString("sn"));
-				equ.setPos(rs.getString("pos"));
-				equ.setIp(rs.getString("ip"));
-				equ.setStyp(rs.getString("styp"));
-				equ.setSname(rs.getString("sname"));
-				equ.setSid (rs.getString("sid"));
-				equ.setDid (rs.getString("did"));
-				equ.setStdate (rs.getString("stdate"));
-				equ.setUse (rs.getString("use"));
-				equ.setOwnname(rs.getString("ownname"));
-				equ.setProname(rs.getString("proname"));
-				equ.setManname(rs.getString("manname"));
-				equ.setAgename(rs.getString("agename"));
-				equ.setMantyp(rs.getString("mantyp"));
-				equ.setPort(rs.getString("port"));
-				equ.setCpu (rs.getString("cpu"));
-				equ.setMemory (rs.getString("memory"));
-				equ.setDisk (rs.getString("disk"));
-				equ.setSyn(rs.getString("syn"));
-				equ.setOracle (rs.getString("oracle"));
-				equ.setOth (rs.getString("oth"));
-				list.add(equ);}
-			
-			
-			rs.close();
-			ps.close();
-			conn.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return list;
-	}
-	
-	public static void UpPlanServlet(String sdate,String edate,String statu,String username) {
-		try {
-			int inti = 1;
-			Connection conn = com.clas.JDBCconnect.getConnection();
-			String sql = "update dxtestwork set  username=?  where sdate=? and edate=? and statu=?";
-			
-			//String sql = "delete from ## where ##=?";
-			//String sql="select * from ## where ##=?";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps = conn.prepareStatement(sql);
-			ps.setString(inti++, username);
-			ps.setString(inti++, sdate);
-			ps.setString(inti++, edate);
-			ps.setString(inti++, statu);
-			//ps.executeUpdate();
-			ResultSet rs=ps.executeQuery("update dxtestwork set  username='"+username+"'  where sdate='"+sdate+"' and edate='"+edate+"' and statu='"+statu+"'");
-			
-			//while (rs.next()) {
-			//	Equ equ=new Equ();
-			//	equ.setName(rs.getString("name"));
-			//	list.add(equ);}
-			//rs.close
-			rs.close();
-			ps.close();
-			conn.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-	}
-	
-	public static  List<String> typeList() {
-		List<String> list=new ArrayList<>();
-		try {
-			int inti = 1;
-	Connection		conn = com.clas.JDBCconnect.getConnection();
-		
-			String sql="select styp from dxtest";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ResultSet rs=ps.executeQuery();
-			while (rs.next()) {
-				String a=rs.getString(1);
-				if (a==null) {
-					a="";
-				}
-				a=a.substring(0,a.indexOf("/"));
-				if (a.length()==0) {
-					continue;
-				}
-				else if (list.indexOf(a)==-1) {
-					list.add(a);
-				}
-				else {
-					continue;
-				}
-			}
-				
-			rs.close();
-			ps.close();
-			conn.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		
-		return list;
-		
-	}
-	
-	public static List<Equ> usersall() {
-		List<Equ> list =new ArrayList<Equ>();
-		try {
-			int inti = 1;
-		Connection	conn = com.clas.JDBCconnect.getConnection();
-			String sql = "select * from DXTESTUSER where userid is not null";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps = conn.prepareStatement(sql);
-			ResultSet rs=ps.executeQuery();
-			while (rs.next()) {
-				Equ equ=new Equ();
-				equ.setUserid(rs.getString("userid"));
-				equ.setUsername(rs.getString("username"));
-				equ.setUserpwd(rs.getString("userpwd"));
-				equ.setAut(rs.getInt("aut"));
-				equ.setDay(rs.getString("day"));
-				equ.setEdi(rs.getString("edi"));
-				equ.setDel(rs.getString("del"));
-				equ.setCon(rs.getString("con"));
-				equ.setConedit(rs.getString("conedit"));
-				equ.setCondel(rs.getString("condel"));
-				equ.setAddevent(rs.getString("addevent"));
-				equ.setLevela(rs.getString("levela"));
-				list.add(equ);}
-			rs.close();
-			ps.close();
-			conn.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return list;
-	}
-	
-	public static boolean updataAuthor(String username,String con,String addevent,String levela,String day) {
-		boolean a=false;
-		try {
-			int inti = 1;
-		Connection	conn = com.clas.JDBCconnect.getConnection();
-			String sql = "update DXTESTUSER set  con=?,addevent=?,levela=?,day=?  where username=?";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps = conn.prepareStatement(sql);
-			ps.setString(inti++, con);
-			ps.setString(inti++, addevent);
-			ps.setString(inti++, levela);
-			ps.setString(inti++, day);
-			ps.setString(inti++, username);
-			//ps.executeUpdate();
-			ResultSet rs=ps.executeQuery();
-			//while (rs.next()) {
-			//	Equ equ=new Equ();
-			//	equ.setName(rs.getString("name"));
-			//	list.add(equ);}
-			//rs.close();
-			ps.close();
-			conn.close();
-			a=true;
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			a=false;
-		}
-		return a;
-	}
-	
-	public static boolean updataUser(String userid,String userpwd,String username,String con,String addevent,String levela) {
-		boolean a=false;
-		try {
-			int inti = 1;
-			Connection conn = com.clas.JDBCconnect.getConnection();
-			String sql = "insert into DXTESTUSER (userid,username,userpwd,aut,day,edi,del,con,addevent,levela) values(?,?,?,'2','7','1','1',?,?,?)";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(inti++, userid);
-			ps.setString(inti++, username);
-			ps.setString(inti++, userpwd);
-			ps.setString(inti++, con);
-			ps.setString(inti++, addevent);
-			ps.setString(inti++, levela);
-			ResultSet rs=ps.executeQuery();
-			ps.close();
-			conn.close();
-			a=true;
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return a;
-	}
-	
-	public static List<Equ> searchAuthor(String username) {
-		List<Equ> list = new ArrayList<Equ>();
-		try {int inti = 1;
-	Connection	conn = com.clas.JDBCconnect.getConnection();
-		
-		String sql="select * from DXTESTUSER where username=?";
-		PreparedStatement ps = conn.prepareStatement(sql);
-		ps.setString(inti++, username);
-		//ps.executeUpdate();
-		ResultSet rs=ps.executeQuery();
-		while (rs.next()) {
-			Equ equ=new Equ();
-			equ.setUserid(rs.getString("userid"));
-			equ.setUsername(rs.getString("username"));
-			equ.setAut(rs.getInt("aut"));
-			equ.setDay(rs.getString("day"));
-			equ.setCon(rs.getString("con"));
-			equ.setConedit(rs.getString("conedit"));
-			equ.setCondel(rs.getString("condel"));
-			equ.setAddevent(rs.getString("addevent"));
-			equ.setLevela(rs.getString("levela"));
-			list.add(equ);}
-		rs.close();
-		ps.close();
-		conn.close();
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return list;
-	}
-	
-	public static List<Equ> listTemp() {
-		List<Equ> list =new ArrayList<Equ>();
-		int  id=1;
-		
-		 try { Connection conn = com.clas.JDBCconnect.getConnection();
-		  
-		  String sql = "select * from dxtesttemp where rownum=1"; 
-		  Statement stmt =conn.createStatement(); 
-		  ResultSet rs = stmt.executeQuery(sql);
-		  
-		  while (rs.next()) { 
-		 
-		 Equ equ=new Equ();
-		
-		equ.setId(id); 
-		equ.setSid(rs.getString("sid"));
-		equ.setDid(rs.getString("did"));
-		equ.setStdate(rs.getString("stdate"));
-		equ.setUse(rs.getString("use"));
-		equ.setOwnname(rs.getString("ownname"));
-		equ.setProname(rs.getString("proname"));
-		equ.setManname(rs.getString("manname"));
-		equ.setAgename(rs.getString("agename"));
-		equ.setMantyp(rs.getString("mantyp"));
-		equ.setPort(rs.getString("port"));
-		equ.setCpu(rs.getString("cpu"));
-		equ.setMemory(rs.getString("memory"));
-		equ.setDisk(rs.getString("disk"));
-		equ.setSyn(rs.getString("syn"));
-		equ.setOracle(rs.getString("oracle"));
-		equ.setOth(rs.getString("oth"));
-		equ.setPname(rs.getString("pname"));
-		equ.setSn(rs.getString("sn"));
-		equ.setPos(rs.getString("pos"));
-		equ.setIp(rs.getString("ip"));
-		equ.setStyp(rs.getString("styp"));
-		equ.setSname(rs.getString("sname"));
-		
-		
-		  list.add(equ); }
-		  
-		  rs.close();
-		  conn.close();
-	} catch (Exception e) {
-		// TODO: handle exception
-	}
-		return list;
-	}
-	
-	public static boolean insertItem(String sql) {
-		boolean a=false;
-		try {
-		Connection	conn = com.clas.JDBCconnect.getConnection();
-			//String sql = "insert into table (#,#) values(?,?)";
-			 PreparedStatement	ps = conn.prepareStatement(sql);
-			ResultSet rs=ps.executeQuery();
-			a=true;
-			rs.close();
-			ps.close();
-			conn.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return a;
-	}
-	
-	public static boolean Del(String sql) {
-		boolean a=false;
-		try {
-			//String sql = "delete from ## where ##=?";
-		Connection	conn = com.clas.JDBCconnect.getConnection();
-			 PreparedStatement	ps = conn.prepareStatement(sql);
-			ResultSet rs=ps.executeQuery();
-			a=true;
-			rs.close();
-			ps.close();
-			conn.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return a;
-	}
-	
-	public static boolean Update (String sql) {
-		boolean a=false;
-		try {
-			//String sql = "update # set  #=?  where ##=?";
-		Connection	conn = com.clas.JDBCconnect.getConnection();
-			 PreparedStatement	ps = conn.prepareStatement(sql);
-			ResultSet rs=ps.executeQuery();
-			a=true;
-			rs.close();
-			ps.close();
-			conn.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		return a;
-	}
-	
-	public static String getKey(String sql,String key) {
-		String a="";
-		try {
-//			select edate from dxtestwork where id=id 
-			Connection conn = com.clas.JDBCconnect.getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps = conn.prepareStatement(sql);
-			//ps.setString(inti++, ##);
-			//ps.executeUpdate();
-			ResultSet rs=ps.executeQuery();
-			while (rs.next()) {
-				a=rs.getString(key);
-				break;
-				}
-			rs.close();
-			ps.close();
-			conn.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			a="";
-		}
-		return a;
-	}
-	
-	public static int  getCount(String sql) {
-		int a=0;
-		try {
-//			 sql="select COUNT(userpwd) from dxtestuser WHERE userpwd='"+userpwd+"' and username='"+username+"'";
-		Connection conn = com.clas.JDBCconnect.getConnection();
-		//String sql="select * from ## where ##=?";
-		 PreparedStatement ps = conn.prepareStatement(sql);
-		//ps.setString(inti++, ##);
-		//ps.executeUpdate();
-		ResultSet rs=ps.executeQuery();
-		while (rs.next()) {
-			a=rs.getInt(1);
-			}
-		rs.close();
-		ps.close();
-		conn.close();
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return a;
-	}
-	
-	
-	public static int getRownum(String sql) {
-		int a=0;
-		try {
-			Connection conn = com.clas.JDBCconnect.getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps = conn.prepareStatement(sql);
-			//ps.setString(inti++, ##);
-			//ps.executeUpdate();
-			ResultSet rs=ps.executeQuery();
-			while (rs.next()) {
-				a=rs.getInt("id");
-				break;
-				}
-			rs.close();
-			ps.close();
-			conn.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			a=0;
-		}
-		return a;
-	}
-	
-	public static boolean deluser(String username) {
-		boolean deluser=false;
-		try {
-			int inti = 1;
-		Connection	conn = com.clas.JDBCconnect.getConnection();
-			String sql = "delete from DXTESTUSER where username=?";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(inti++, username);
-			ResultSet rs=ps.executeQuery();
-			//while (rs.next()) {
-			//	Equ equ=new Equ();
-			//	equ.setName(rs.getString("name"));
-			//	list.add(equ);}
-			//rs.close();
-			deluser=true;
-			ps.close();
-			conn.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			deluser=false;
-		}
-		return deluser;
-	}
-	
-	
-	public static  List<Equ> delEqu(String id) {
-		 List<Equ> list = new ArrayList<Equ>();
-		try {
-			int inti = 1;
-		Connection	conn = com.clas.JDBCconnect.getConnection();
-			String sql = "delete from DXTEST where id=?";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps = conn.prepareStatement(sql);
-			ps.setString(inti++, id);
-			ResultSet rs=ps.executeQuery();
-			Statement stmt = conn.createStatement();
-			 sql = "select * from dxtest ";
-			 rs = stmt.executeQuery(sql);
-			 while(rs.next()){
-	            	Equ equ=new Equ();
-			        equ.setId(rs.getInt("id"));
-			        equ.setSid(rs.getString("sid"));
-			    	equ.setStdate(rs.getString("stdate"));
-			    	equ.setSdate(rs.getString("sdate"));
-			    	equ.setEdate(rs.getString("edate"));
-			    	equ.setRedate(rs.getString("redate"));
-			    	equ.setPname(rs.getString("pname"));
-			    	equ.setUse(rs.getString("use"));
-			    	equ.setOwnname(rs.getString("ownname"));
-			    	equ.setProname(rs.getString("proname"));
-			    	equ.setManname(rs.getString("manname"));
-			    	equ.setAgename(rs.getString("agename"));
-			    	equ.setMantyp(rs.getString("mantyp"));
-			    	equ.setSname(rs.getString("sname"));
-			    	equ.setStyp(rs.getString("styp"));
-			    	equ.setPos(rs.getString("pos"));
-			    	equ.setIp(rs.getString("ip"));
-			    	equ.setPort(rs.getString("port"));
-			    	equ.setCpu(rs.getString("cpu"));
-			    	equ.setMemory(rs.getString("memory"));
-			    	equ.setDisk(rs.getString("disk"));
-			    	equ.setSyn(rs.getString("syn"));
-			    	equ.setOracle(rs.getString("oracle"));
-			    	equ.setSn(rs.getString("sn"));
-			    	equ.setOth(rs.getString("oth"));
-			    	equ.setSroot(rs.getString("sroot"));
-			    	equ.setSpwd(rs.getString("spwd"));
-			    	equ.setOroot(rs.getString("oroot"));
-			    	equ.setOpwd(rs.getString("opwd"));
-			    	equ.setAroot(rs.getString("aroot"));
-			    	equ.setApwd(rs.getString("apwd"));
-			    	equ.setTitle(rs.getString("title"));
-			    	equ.setUrl(rs.getString("url"));
-			    	equ.setDid(rs.getString("did"));
-			        list.add(equ);
-	            }
-	            
-	            rs.close();
-	            stmt.close();
-			ps.close();
-			conn.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return list;
-	}
-	public static List<Equ> allEqus() {
-		List<Equ> list =new ArrayList<>();
-		try {
-		Connection	conn = com.clas.JDBCconnect.getConnection();
-
-            // 执行 SQL 查询
-         Statement   stmt = conn.createStatement();
-            String sql;
-            //sql = "select * from dxtest order by id desc";
-            sql = "select * from dxtest WHERE sname!='虚拟机'";
-            ResultSet rs = stmt.executeQuery(sql);
-            
-
-            // 展开结果集数据库
-            while(rs.next()){
-            	Equ equ=new Equ();
-		        equ.setId(rs.getInt("id"));
-		        equ.setSid(rs.getString("sid"));
-		    	equ.setStdate(rs.getString("stdate"));
-		    	equ.setSdate(rs.getString("sdate"));
-		    	equ.setEdate(rs.getString("edate"));
-		    	equ.setRedate(rs.getString("redate"));
-		    	equ.setPname(rs.getString("pname"));
-		    	equ.setUse(rs.getString("use"));
-		    	equ.setOwnname(rs.getString("ownname"));
-		    	equ.setProname(rs.getString("proname"));
-		    	equ.setManname(rs.getString("manname"));
-		    	equ.setAgename(rs.getString("agename"));
-		    	equ.setMantyp(rs.getString("mantyp"));
-		    	equ.setSname(rs.getString("sname"));
-		    	equ.setStyp(rs.getString("styp"));
-		    	equ.setPos(rs.getString("pos"));
-		    	equ.setIp(rs.getString("ip"));
-		    	equ.setPort(rs.getString("port"));
-		    	equ.setCpu(rs.getString("cpu"));
-		    	equ.setMemory(rs.getString("memory"));
-		    	equ.setDisk(rs.getString("disk"));
-		    	equ.setSyn(rs.getString("syn"));
-		    	equ.setOracle(rs.getString("oracle"));
-		    	equ.setSn(rs.getString("sn"));
-		    	equ.setOth(rs.getString("oth"));
-		    	equ.setSroot(rs.getString("sroot"));
-		    	equ.setSpwd(rs.getString("spwd"));
-		    	equ.setOroot(rs.getString("oroot"));
-		    	equ.setOpwd(rs.getString("opwd"));
-		    	equ.setAroot(rs.getString("aroot"));
-		    	equ.setApwd(rs.getString("apwd"));
-		    	equ.setTitle(rs.getString("title"));
-		    	equ.setUrl(rs.getString("url"));
-		    	equ.setDid(rs.getString("did"));
-
-		        list.add(equ);
-            }
-            
-            
-            rs.close();
-		      
-            stmt.close();
-		      
-		      conn.close();
-			
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		
-		return list;
-	}
-	
-	
-	public static void deletePlan(String username,String  sdate,String  edate,String  statu) {
-		try {
-			int intid=1;
-			Connection conn=com.clas.JDBCconnect.getConnection();
-			
-			String sql="delete from dxtestwork where username=? and sdate=? and edate=? and statu=? ";
-			
-			PreparedStatement ps=conn.prepareStatement(sql);
-			ps.setString(intid++, username);
-			ps.setString(intid++, sdate);
-			ps.setString(intid++, edate);
-			ps.setString(intid++, statu);
-			
-			ResultSet rs=ps.executeQuery();
-			//ps.executeUpdate();
-			ps.close();
-			rs.close();
-			conn.close();
-			
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-	}
-	
-	public static List<Equ> userAddListRe(String userid) {
-		List<Equ> listus=new ArrayList<Equ>();
-		
-		try {int intid=1;
-		Connection conn=com.clas.JDBCconnect.getConnection();
-		String sql="select * from dxtestuser where userid=? ";
-		PreparedStatement ps=null;
-		ps=conn.prepareStatement(sql);
-		ps.setString(intid++, userid);
-		ResultSet rs=ps.executeQuery();
-		
-		while (rs.next()) {
-			Equ equ=new Equ();
-			equ.setUsername(rs.getString("username"));
-			equ.setUserpwd(rs.getString("userpwd"));
-			equ.setAut(rs.getInt("aut"));
-			equ.setUserid(rs.getString("userid"));
-			listus.add(equ);
-			
-		}
-		rs.close();
-		ps.close();
-		conn.close();
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			
-		}
-		return listus;
-		
-	}
-	
-	public static int daydf() {
-		int dd=0;
-		try {
-			int inti = 1;
-		Connection	conn = com.clas.JDBCconnect.getConnection();
-		
-			String sql="select day from DXTESTUSER where ##=?";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps = conn.prepareStatement(sql);
-			//ps.setString(inti++, ##);
-			//ps.executeUpdate();
-			//ResultSet rs=ps.executeQuery();
-			//while (rs.next()) {
-			//	Equ equ=new Equ();
-			//	equ.setName(rs.getString("name"));
-			//	list.add(equ);}
-			//rs.close();
-			ps.close();
-			conn.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		
-		return dd;
-	}
-	
-	
-	public static List<Equ> userAddList(String username,String userpwd ){
-		List<Equ> listus=new ArrayList<Equ>();
-		
-		try {
-			int intid=1;
-			Connection conn=com.clas.JDBCconnect.getConnection();
-			String sql="select * from dxtestuser where username=? and userpwd=?";
-			PreparedStatement ps=null;
-			ps=conn.prepareStatement(sql);
-			ps.setString(intid++, username);
-			ps.setString(intid++, userpwd);
-			ResultSet rs=ps.executeQuery();
-			
-			
-				
-			//	System.out.println("TTTT");
-				while (rs.next()) {
-					Equ equ=new Equ();
-					equ.setUsername(rs.getString("username"));
-					equ.setUserpwd(rs.getString("userpwd"));
-					equ.setAut(rs.getInt("aut"));
-					equ.setUserid(rs.getString("userid"));
-					equ.setDay(rs.getString("day"));
-					equ.setEdi(rs.getString("edi"));
-					equ.setDel(rs.getString("del"));
-					equ.setCon(rs.getString("con"));
-					equ.setLevela(rs.getString("levela"));
-					equ.setConedit(rs.getString("conedit"));
-					equ.setCondel(rs.getString("condel"));
-					listus.add(equ);
-					
-				}
-				//System.out.println(listus);
-			
-			
-			rs.close();
-			ps.close();
-			conn.close();
-			
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return listus;
-	}
-	
-	public int findCount(Integer count,String sdate,String edate, String statu)  {
-		 
-		 
-		 Connection conn=com.clas.JDBCconnect.getConnection();
-		
-		    String sql = "select count(*) from dxtestwork where  sdate>=? and edate<? and statu= ? order by nowdate,statu desc";
-		    System.out.println(sdate);
-		   System.out.println(edate);
-		    System.out.println(statu);
-		    try {
-		    	int intid=1;
-		    	PreparedStatement ps=null;
-				ps=conn.prepareStatement(sql);
-				ps.setString(intid++, sdate);
-				ps.setString(intid++, edate);
-				ps.setString(intid++, statu);
-				ResultSet rs=ps.executeQuery();
-				
-				if (rs.next()) {
-					count=rs.getInt(1);
-					System.out.println(count);
-				}
-				//System.out.println("22"+rs.getInt(1));
-				
-		     
-		      
-		      
-		      rs.close();
-				ps.close();
-				conn.close();
-				 
-		    } catch (SQLException e) {
-		      e.printStackTrace();
-		    } 
-		 
-		    return count;  
-		 
-	}
-	
-	public static List<Equ> SelectItemPart2(String sn,String nowdate,String stno) {
-		List<Equ> list=new ArrayList<Equ>();
-		try {
-			String sql="select * from dxtestwork where stno=? order by nowdate,statu desc";
-			Connection conn=null;
-			PreparedStatement ps=null;
-			ResultSet rs=null;
-			
-			int intN=1;
-			conn=com.clas.JDBCconnect.getConnection();
-			ps=conn.prepareStatement(sql);
-//			ps.setString(intN++, nowdate);
-//			ps.setString(intN++, sn);
-			ps.setString(intN++, stno);
-			rs=ps.executeQuery();
-			
-			while (rs.next()) {
-				Equ equ=new Equ();
-				equ.setMessage(rs.getString("message"));
-				equ.setUsername(rs.getString("username"));
-				equ.setUserpwd(rs.getString("userpwd"));
-				equ.setNowdate(rs.getString("nowdate"));
-				equ.setSn(rs.getString("sn"));
-				equ.setStatu(rs.getString("statu"));
-				equ.setPicture(rs.getString("picture"));
-				equ.setSdate(rs.getString("sdate"));
-				equ.setEdate(rs.getString("edate"));
-				list.add(equ);
-				
-			}
-			rs.close();
-			ps.close();
-			conn.close();
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return list;
-		
-	}
-	
-	
-	public static List<String> ston(String sdate,String edate,String statu) {
-		List<String> ston=new ArrayList<String>();
-		try {
-			int intid=1;
-			Connection conn=com.clas.JDBCconnect.getConnection();
-			String sql1="select * from dxtestwork where  sdate>= ? and edate<=? and statu like ? order by nowdate,statu desc,statu desc";
-			PreparedStatement ps=null;
-			ps=conn.prepareStatement(sql1);
-			ps.setString(intid++, sdate);
-			ps.setString(intid++, edate);
-			ps.setString(intid++, statu);
-			ResultSet rs=ps.executeQuery();
-			while (rs.next()) {
-				
-				
-			    ston.add(rs.getString(11)) ;
-			} 
-			
-			ps.close();
-			rs.close();
-			conn.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		
-
-		return ston;
-	}
-	
-	public static List<Equ> sucList(String stno,String edate,String sdate) {
-		List<Equ> sucList=new ArrayList<Equ>();
-		try {
-			int intid=1;
-			Connection conn=com.clas.JDBCconnect.getConnection();
-			String sql1="select * from dxtestwork where stno=? and edate=? and sdate=?  order by nowdate desc,statu desc";
-			PreparedStatement ps=null;
-			ps=conn.prepareStatement(sql1);
-			ps.setString(intid++, stno);
-			ps.setString(intid++, edate);
-			ps.setString(intid++, sdate);
-//			System.out.println("=="+stno);
-			ResultSet rs=ps.executeQuery("select * from dxtestwork where stno='"+stno+"' and edate='"+edate+"' and sdate='"+sdate+"'  order by nowdate desc,statu desc");
-			
-			while (rs.next()) {
-				Equ equ=new Equ();
-				equ.setUsername(rs.getString("username"));
-				equ.setUserpwd(rs.getString("userpwd"));
-				equ.setNowdate(rs.getString("nowdate"));
-				equ.setSn(rs.getString("sn"));
-				equ.setStatu(rs.getString("statu"));
-				equ.setPicture(rs.getString("picture"));
-				equ.setSdate(rs.getString("sdate"));
-				equ.setEdate(rs.getString("edate"));
-				equ.setStno(rs.getString("stno"));
-				equ.setMessage(rs.getString("message"));
-				sucList.add(equ);
-				
-			}
-			ps.close();
-			rs.close();
-			conn.close();
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		
-		
-		return sucList;
-	}
-	
-	public static boolean userpwd(String stno) {
-		boolean userpwd=false;
-		
-		if (stno.equals("0")) {
-			userpwd=true;
-		}else {
-			try {
-				int intid=1;
-				Connection conn=com.clas.JDBCconnect.getConnection();
-				String sql1="select * from(select * from dxtestwork where stno=?  order by nowdate desc) where rownum=1";
-				PreparedStatement ps=null;
-				ps=conn.prepareStatement(sql1);
-				ps.setString(intid++, stno);
-//				System.out.println("=="+stno);
-				ResultSet rs=ps.executeQuery();
-				String pwdString=null;
-				while (rs.next()) {
-					pwdString = rs.getString(4);
-					System.out.println(pwdString);
-					if (pwdString==null) {
-						pwdString="";
-					}
-					
-				}
-				if (pwdString.equals("restore")) {
-//					System.out.println(pwdString);
-					userpwd=true;
-				}
-				ps.close();
-				rs.close();
-				conn.close();
-			} catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
-			}
-		}
-		
-		
-		
-		return userpwd;
-	}
-	
-	public static List<Equ> SelectItemPart(String sdate,String edate,String statu) {
-		List<Equ> list=new ArrayList<Equ>();
-		try {
-			int intid=1;
-			Connection conn=com.clas.JDBCconnect.getConnection();
-			String sql1="select * from dxtestwork where  sdate= ? and edate=? and statu=? order by nowdate,statu";
-//			String sql="select * from dxtestwork where   stno=? and task='0' and rownum=1  order by nowdate,statu";
-			String sql="select * from dxtestwork where   stno=? and task='0'   and time is not null";
-			String sql3="select * from dxtestwork where  sdate= ? and edate=? and stno='0'  order by nowdate,statu desc";
-			PreparedStatement ps=null;
-			PreparedStatement ps3=null;
-			PreparedStatement ps2=null;
-			ResultSet rs=null;
-			ResultSet rs2=null;
-			ResultSet rs3=null;
-			String stno=null;
-			String s0="";
-			String s1="";
-			boolean flag=true;
-			ps=conn.prepareStatement(sql1);
-			ps.setString(intid++, sdate);
-			ps.setString(intid++, edate);
-			ps.setString(intid++, statu);
-			rs=ps.executeQuery();
-			while (rs.next()) {
-				stno= rs.getString(11);
-				if (stno.equals("0")) {
-					if (flag) {
-						ps3=conn.prepareStatement(sql3);
-						 intid=1;
-						 ps3.setString(intid++, sdate);
-						ps3.setString(intid++, edate);
-						rs3=ps3.executeQuery();
-						 while (rs3.next()) {
-							 Equ equ=new Equ();
-								equ.setMessage(rs3.getString("message"));
-								equ.setUsername(rs3.getString("username"));
-								equ.setUserpwd(rs3.getString("userpwd"));
-								equ.setNowdate(rs3.getString("nowdate"));
-								equ.setSn(rs3.getString("sn"));
-								equ.setStatu(rs3.getString("statu"));
-								equ.setPicture(rs3.getString("picture"));
-								equ.setSdate(rs3.getString("sdate"));
-								equ.setEdate(rs3.getString("edate"));
-								equ.setStno(rs3.getString("stno"));
-								equ.setTime(rs3.getString("time"));
-								list.add(equ);}
-						 flag=false;
-					}
-				}else {
-					s1=stno;
-					if (s0.equals(s1)) {
-					//	System.out.println("continue");
-						continue;
-					}else {
-						if (flag) {
-							ps3=conn.prepareStatement(sql3);
-							 intid=1;
-							 ps3.setString(intid++, sdate);
-							ps3.setString(intid++, edate);
-							rs3=ps3.executeQuery();
-							 while (rs3.next()) {
-								 Equ equ=new Equ();
-									equ.setMessage(rs3.getString("message"));
-									equ.setUsername(rs3.getString("username"));
-									equ.setUserpwd(rs3.getString("userpwd"));
-									equ.setNowdate(rs3.getString("nowdate"));
-									equ.setSn(rs3.getString("sn"));
-									equ.setStatu(rs3.getString("statu"));
-									equ.setPicture(rs3.getString("picture"));
-									equ.setSdate(rs3.getString("sdate"));
-									equ.setEdate(rs3.getString("edate"));
-									equ.setStno(rs3.getString("stno"));
-									equ.setTime(rs3.getString("time"));
-									list.add(equ);}
-							 flag=false;
-						}
-						s0=s1;
-						intid=1;
-						ps2=conn.prepareStatement(sql);
-						ps2.setString(intid++, s0);
-						rs2=ps2.executeQuery();
-						 while (rs2.next()) {
-							 Equ equ=new Equ();
-								equ.setMessage(rs2.getString("message"));
-								equ.setUsername(rs2.getString("username"));
-								equ.setUserpwd(rs2.getString("userpwd"));
-								equ.setNowdate(rs2.getString("nowdate"));
-								equ.setSn(rs2.getString("sn"));
-								equ.setStatu(rs2.getString("statu"));
-								equ.setPicture(rs2.getString("picture"));
-								equ.setSdate(rs2.getString("sdate"));
-								equ.setEdate(rs2.getString("edate"));
-								equ.setStno(rs2.getString("stno"));
-								equ.setTime(rs2.getString("time"));
-								list.add(equ);}
-					}
-				}
-				
-			}
-			
-			ps.close();
-//			 ps2.close();
-			 ps3.close();
-			rs2.close();
-			 rs3.close();
-			 rs.close();
-				conn.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		
-		return list;
-	}
-	
-	public  static List<Equ> SelectItemnow(String sn,String userid,String nowdate){
-		List<Equ> list=new ArrayList<Equ>();
-		try {
-			int intid=1;
-			Connection conn=com.clas.JDBCconnect.getConnection();
-			String sql="select * from dxtestwork where sn=? and nowdate= ? and usrname=?  order by nowdate,statu desc";
-			PreparedStatement ps=null;
-			 ps=conn.prepareStatement(sql);
-				ps.setString(intid++, sn);
-				ps.setString(intid++, nowdate);
-				ps.setString(intid++, userid);
-			
-				ps.close();
-				conn.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		
-		return list;
-	}
-	
-	public void UpPwd(String username,String userpwd,String userpwd1) {
-		try {
-				int intid=1;
-			Connection conn=com.clas.JDBCconnect.getConnection();
-			String sql="update DXTESTUSER set  userpwd=?  where username=? and userpwd=?";
-			PreparedStatement ps=conn.prepareStatement(sql);
-			ps.setString(intid++, userpwd1);
-			ps.setString(intid++, username);
-			ps.setString(intid++, userpwd);
-			ResultSet rs=ps.executeQuery();
-			
-			rs.close();
-			ps.close();
-			conn.close();
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-	}
-	
-	public static void delmessage(String nowdate,String message) {
-		try {
-			int inti = 1;
-		Connection	conn = com.clas.JDBCconnect.getConnection();
-			String sql = "delete from dxtestwork where nowdate=? and message=?";
-			String sql2="select stno,statu from dxtestwork where nowdate=? and message=?";
-			String sql3="update dxtestwork set  userpwd=''  where stno=?";
-			PreparedStatement ps2=null;
-			PreparedStatement ps=null;
-			PreparedStatement ps3=null;
-		//	ResultSet rs=null;
-			ResultSet rs2=null;
-			ResultSet rs3=null;
-			String ston="";
-			String statu="";
-			ps2=conn.prepareStatement(sql2);
-			ps2.setString(inti++, nowdate);
-			ps2.setString(inti++, message);
-			rs2=ps2.executeQuery();
-			while (rs2.next()) {
-				ston=rs2.getString(1);
-				statu=rs2.getString(2);
-			if (statu.equals("恢复")) {
-				System.out.println("恢复+++");
-				inti = 1;
-				ps = conn.prepareStatement(sql);
-				ps.setString(inti++, nowdate);
-				ps.setString(inti++, message);
-				ps.executeUpdate();
-				 inti = 1;
-				 ps3 = conn.prepareStatement(sql3);
-				 ps3.setString(inti, ston);
-				 ps3.executeUpdate();
-			}else {
-				inti = 1;
-				ps = conn.prepareStatement(sql);
-				ps.setString(inti++, nowdate);
-				ps.setString(inti++, message);
-				ps.executeUpdate();
-			}
-			}
-			ps.close();
-			ps2.close();
-			ps3.close();
-			rs2.close();
-			conn.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-	}
-	
-	public static void updatamessage(String nowdate,String message) {
-		List<Equ> list=new ArrayList<Equ>();
-		try {
-			int inti = 1;
-			Connection 	conn = com.clas.JDBCconnect.getConnection();
-			String sql = "update dxtestwork set  message=?  where nowdate=?";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps = conn.prepareStatement(sql);
-			ps.setString(inti++, message);
-			ps.setString(inti++, nowdate);
-			//ps.executeUpdate();
-			ResultSet rs=ps.executeQuery();
-			
-			rs.close();
-			ps.close();
-			conn.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		
-	}
-	
-	public static String[] sse2(String message,String nowdate,String sn) {
-		String[] sse=new String[3];
-		try {
-			int inti = 1;
-		Connection	conn = com.clas.JDBCconnect.getConnection();
-			String sql="select stno,sdate,edate,statu from dxtestwork where message=? and nowdate=? and sn=? and rownum=1";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps = conn.prepareStatement(sql);
-			ps.setString(inti++, message);
-			ps.setString(inti++, nowdate);
-			ps.setString(inti++, sn);
-			System.out.println(message);
-			System.out.println(nowdate);
-			System.out.println(sn);
-			String stno=null;
-			String sdate=null;
-			String edate=null;
-			String statu=null;
-			//ps.executeUpdate();
-			ResultSet rs=ps.executeQuery("select stno,sdate,edate from dxtestwork where message='"+message+"' and nowdate='"+nowdate+"' and sn='"+sn+"' and rownum=1");
-		//	System.out.println(rs.next());
-			while (rs.next()) {
-				inti=1;
-				stno =rs.getString(inti++);
-				sdate=rs.getString(inti++);
-				edate=rs.getString(inti++);
-				statu=rs.getString(inti++);
-				System.out.println(stno);
-				System.out.println(sdate);
-				System.out.println(edate);
-				System.out.println(statu);
-				inti=0;
-				sse[inti++]=stno;
-				sse[inti++]=sdate;
-				sse[inti++]=edate;
-				sse[inti++]=statu;		}
-			rs.close();
-			ps.close();
-			conn.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return sse;
-	}
-	
-	
-	public static String[] sse(String message,String nowdate,String sn) {
-		String[] sse=new String[3];
-		try {
-			int inti = 1;
-		Connection	conn = com.clas.JDBCconnect.getConnection();
-			String sql="select stno,sdate,edate from dxtestwork where message=? and nowdate=? and sn=? and rownum=1";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps = conn.prepareStatement(sql);
-			ps.setString(inti++, message);
-			ps.setString(inti++, nowdate);
-			ps.setString(inti++, sn);
-			System.out.println(message);
-			System.out.println(nowdate);
-			System.out.println(sn);
-			String stno=null;
-			String sdate=null;
-			String edate=null;
-			//ps.executeUpdate();
-			ResultSet rs=ps.executeQuery("select stno,sdate,edate from dxtestwork where message='"+message+"' and nowdate='"+nowdate+"' and sn='"+sn+"' and rownum=1");
-		//	System.out.println(rs.next());
-			while (rs.next()) {
-				inti=1;
-				stno =rs.getString(inti++);
-				sdate=rs.getString(inti++);
-				edate=rs.getString(inti++);
-				System.out.println(stno);
-				System.out.println(sdate);
-				System.out.println(edate);
-				inti=0;
-				sse[inti++]=stno;
-				sse[inti++]=sdate;
-				sse[inti++]=edate;
-						}
-			rs.close();
-			ps.close();
-			conn.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return sse;
-	}
-	
-	public static List<Equ> SelectItemAll(String sn){
-		List<Equ> list=new ArrayList<Equ>();
-		
-		try {
-			int intid=1;
-			
-			  Connection conn=com.clas.JDBCconnect.getConnection(); 
-			  String  sql="select * from dxtestwork where sn=? order by nowdate desc,statu desc";
-			  
-			  PreparedStatement ps=conn.prepareStatement(sql); 
-			System.out.println("sn="+sn);
-			ps.setString(intid++, sn.trim());
-	//		  ResultSet rs=ps.executeQuery("select * from dxtestwork where sn=\'"+sn.trim()+"\' order by nowdate desc,statu desc");
-			ResultSet rs=ps.executeQuery();
-			  while (rs.next()) { Equ equ=new Equ();
-			  equ.setMessage(rs.getString("message"));
-			  equ.setUsername(rs.getString("username"));
-			  equ.setUserpwd(rs.getString("userpwd"));
-			  equ.setNowdate(rs.getString("nowdate")); equ.setSn(rs.getString("sn"));
-			  equ.setStatu(rs.getString("statu")); equ.setPicture(rs.getString("picture"));
-			  equ.setSdate(rs.getString("sdate")); equ.setEdate(rs.getString("edate"));
-			  equ.setStno(rs.getString("stno"));
-			  list.add(equ); }
-			 
-			rs.close();
-			ps.close();
-			conn.close();
-			
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		
-		return list;
-	}
-	
-	
-	
-	public static List<Equ> SelectItem2(String stno) {
-		List<Equ> list=new ArrayList<Equ>();
-		try {
-			int intid=1;
-			Connection conn=com.clas.JDBCconnect.getConnection();
-			String sql1="select * from dxtestwork where stno='"+stno+"' order by nowdate,statu desc";
-			PreparedStatement ps=null;
-			ResultSet rs=null;
-			 ps=conn.prepareStatement(sql1);
-//				ps.setString(intid++, stno);
-				 rs=ps.executeQuery(sql1);
-				 while (rs.next()) {
-						Equ equ=new Equ();
-						equ.setMessage(rs.getString("message"));
-						equ.setUsername(rs.getString("username"));
-						equ.setUserpwd(rs.getString("userpwd"));
-						equ.setNowdate(rs.getString("nowdate"));
-						equ.setSn(rs.getString("sn"));
-						equ.setStatu(rs.getString("statu"));
-						equ.setPicture(rs.getString("picture"));
-						equ.setSdate(rs.getString("sdate"));
-						equ.setEdate(rs.getString("edate"));
-						equ.setStno(rs.getString("stno"));
-						list.add(equ);
-					}
-					rs.close();
-					ps.close();
-					conn.close();
-				 
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		return list;
-	}
-	
-	
-	public static List<Equ> SelectItem(String sdate,String edate,String sn,String statu) {
-		List<Equ> list=new ArrayList<Equ>();
-		try {
-			int intid=1;
-			statu="%"+statu+"%";
-			Connection conn=com.clas.JDBCconnect.getConnection();
-			String sql1="select * from dxtestwork where sn=? and sdate>= ? and statu like ?  order by nowdate,statu desc";
-			String sql2="select * from dxtestwork where sn=? and sdate>= ? and edate<=? and statu like ?  order by nowdate,statu desc";
-			String sql3="select * from dxtestwork where sn=? and edate<= ? and  statu like ?  order by nowdate,statu desc";
-			String sql4="select * from dxtestwork where sn=? and  statu like ?  order by nowdate,statu desc";
-			PreparedStatement ps=null;
-			ResultSet rs=null;
-			if (sdate!=""&& edate=="") {
-				System.out.println(1);
-			//	System.out.println(statu);
-				 ps=conn.prepareStatement(sql1);
-				ps.setString(intid++, sn);
-				ps.setString(intid++, sdate);
-				ps.setString(intid++, statu);
-				
-			//	System.out.println(sdate+"a");
-				 rs=ps.executeQuery("select * from dxtestwork where sn=\'"+sn.trim()+"\' and sdate>=\'"+sdate+"\' and statu like \'%"+statu.trim()+"%\'  order by nowdate,statu desc");
-			}else if (sdate!=""&&edate!="") {
-				System.out.println(2);
-				 ps=conn.prepareStatement(sql2);
-				//	System.out.println(sdate);
-				//	System.out.println(edate);
-				ps.setString(intid++, sn);
-				ps.setString(intid++, sdate);
-				ps.setString(intid++, edate);
-				ps.setString(intid++, statu);
-				
-			 rs=ps.executeQuery("select * from dxtestwork where sn=\'"+sn.trim()+"\' and sdate>= \'"+sdate+"\' and sdate<=\'"+edate+"\' and statu like \'%"+statu.trim()+"%\' order by nowdate,statu desc");
-			}else if (sdate==""&&edate!="") {
-//				System.out.println(3);
-				 ps=conn.prepareStatement(sql3);
-				ps.setString(intid++, sn);
-				ps.setString(intid++, edate);
-				ps.setString(intid++, statu);
-			
-//				System.out.println(edate);
-//				System.out.println(sn.trim());
-//				System.out.println(statu.trim());
-				 rs=ps.executeQuery("select * from dxtestwork where sn=\'"+sn.trim()+"\' and sdate<= \'"+edate+"\' and  statu like \'%"+statu.trim()+"%\'  order by nowdate,statu desc");
-			}else {
-//				System.out.println(4);
-				 ps=conn.prepareStatement(sql4);
-				ps.setString(intid++, sn.trim());
-				ps.setString(intid++, statu.trim());
-				
-				rs=ps.executeQuery("select * from dxtestwork where sn=\'"+sn.trim()+"\' and  statu like \'%"+statu.trim()+"%\'  order by nowdate,statu desc");
-			}
-			
-			while (rs.next()) {
-				Equ equ=new Equ();
-				equ.setMessage(rs.getString("message"));
-				equ.setUsername(rs.getString("username"));
-				equ.setUserpwd(rs.getString("userpwd"));
-				equ.setNowdate(rs.getString("nowdate"));
-				equ.setSn(rs.getString("sn"));
-				equ.setStatu(rs.getString("statu"));
-				equ.setPicture(rs.getString("picture"));
-				equ.setSdate(rs.getString("sdate"));
-				equ.setEdate(rs.getString("edate"));
-				equ.setStno(rs.getString("stno"));
-				equ.setTask(rs.getString("task"));
-				list.add(equ);
-			}
-			rs.close();
-			ps.close();
-			conn.close();
-			
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		
-		
-		return list;
-	}
-	
-	
-	
-	public static List<Equ> SelectItem5(String sdate,String edate,String sn,String statu,String stno) {
-		List<Equ> list=new ArrayList<Equ>();
-		try {
-			int intid=1;
-			statu="%"+statu+"%";
-			Connection conn=com.clas.JDBCconnect.getConnection();
-			String sql1="select * from dxtestwork where sn=? and sdate>= ? and statu like ? and stno=? order by nowdate,statu desc";
-			String sql2="select * from dxtestwork where sn=? and sdate>= ? and edate<=? and statu like ? and stno=? order by nowdate,statu desc";
-			String sql3="select * from dxtestwork where sn=? and edate<= ? and  statu like ? and stno=? order by nowdate,statu desc";
-			String sql4="select * from dxtestwork where sn=? and  statu like ? and stno=? order by nowdate,statu desc";
-			PreparedStatement ps=null;
-			ResultSet rs=null;
-			if (sdate!=""&& edate=="") {
-				System.out.println(1);
-			//	System.out.println(statu);
-				 ps=conn.prepareStatement(sql1);
-				ps.setString(intid++, sn);
-				ps.setString(intid++, sdate);
-				ps.setString(intid++, statu);
-				ps.setString(intid++, stno);
-			//	System.out.println(sdate+"a");
-				 rs=ps.executeQuery("select * from dxtestwork where sn=\'"+sn.trim()+"\' and sdate>=\'"+sdate+"\' and statu like \'%"+statu.trim()+"%\' and stno=\'"+stno+"\' order by nowdate,statu desc");
-			}else if (sdate!=""&&edate!="") {
-				System.out.println(2);
-				 ps=conn.prepareStatement(sql2);
-				//	System.out.println(sdate);
-				//	System.out.println(edate);
-				ps.setString(intid++, sn);
-				ps.setString(intid++, sdate);
-				ps.setString(intid++, edate);
-				ps.setString(intid++, statu);
-				ps.setString(intid++, stno);
-			 rs=ps.executeQuery("select * from dxtestwork where sn=\'"+sn.trim()+"\' and sdate>= \'"+sdate+"\' and sdate<=\'"+edate+"\' and statu like \'%"+statu.trim()+"%\' and stno=\'"+stno+"\'order by nowdate,statu desc");
-			}else if (sdate==""&&edate!="") {
-//				System.out.println(3);
-				 ps=conn.prepareStatement(sql3);
-				ps.setString(intid++, sn);
-				ps.setString(intid++, edate);
-				ps.setString(intid++, statu);
-				ps.setString(intid++, stno);
-//				System.out.println(edate);
-//				System.out.println(sn.trim());
-//				System.out.println(statu.trim());
-				 rs=ps.executeQuery("select * from dxtestwork where sn=\'"+sn.trim()+"\' and sdate<= \'"+edate+"\' and  statu like \'%"+statu.trim()+"%\' and stno=\'"+stno+"\' order by nowdate,statu desc");
-			}else {
-//				System.out.println(4);
-				 ps=conn.prepareStatement(sql4);
-				ps.setString(intid++, sn.trim());
-				ps.setString(intid++, statu.trim());
-				ps.setString(intid++, stno);
-				rs=ps.executeQuery("select * from dxtestwork where sn=\'"+sn.trim()+"\' and  statu like \'%"+statu.trim()+"%\' and stno=\'"+stno+"\' order by nowdate,statu desc");
-			}
-			
-			while (rs.next()) {
-				Equ equ=new Equ();
-				equ.setMessage(rs.getString("message"));
-				equ.setUsername(rs.getString("username"));
-				equ.setUserpwd(rs.getString("userpwd"));
-				equ.setNowdate(rs.getString("nowdate"));
-				equ.setSn(rs.getString("sn"));
-				equ.setStatu(rs.getString("statu"));
-				equ.setPicture(rs.getString("picture"));
-				equ.setSdate(rs.getString("sdate"));
-				equ.setEdate(rs.getString("edate"));
-				equ.setStno(rs.getString("stno"));
-				equ.setTask(rs.getString("task"));
-				list.add(equ);
-			}
-			rs.close();
-			ps.close();
-			conn.close();
-			
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		
-		
-		return list;
-	}
-	public static List<Equ> listWaring(String stno,String edate,String sdate,String message) {
-		List<Equ> listWaring=new ArrayList<Equ>();
-		try {
-			int intid=1;
-			message="%"+message+"%";
-			stno="%"+stno+"%";
-			Connection conn=com.clas.JDBCconnect.getConnection();
-			String sql1="select * from dxtestwork where stno in (select DISTINCT stno from ( select * from dxtestwork where stno!='0'  and  (sdate>= ? and stno like ? and message like ?)))   and time is not null order by sdate";
-			String sql2="select * from dxtestwork where stno in  (select DISTINCT stno from ( select * from dxtestwork where stno!='0'  and  (sdate>= ? and edate<=? and stno like ? and message like ?)))    and time is not null order by sdate";
-			String sql3="select * from dxtestwork where stno in (select DISTINCT stno from ( select * from dxtestwork where stno!='0'  and  (edate<= ? and  and stno like ? and message like ?)))   and time is not null order by sdate";
-			String sql4="select * from dxtestwork where stno in (select DISTINCT stno from ( select * from dxtestwork where stno!='0'  and  (stno like ? and message like ?)))  and time is not null order by sdate";
-			 
-		 String	s1="0";
-		 String	s0="0";
-			PreparedStatement ps=null;
-			ResultSet rs=null;
-			if (sdate!=""&& edate=="") {
-				System.out.println(1);
-				sdate=sdate+" 00:00:00";
-			//	System.out.println(statu);
-				 ps=conn.prepareStatement(sql1);
-				
-				 
-				ps.setString(intid++, sdate);
-				ps.setString(intid++, stno);
-				ps.setString(intid++, message);
-				
-			//	System.out.println(sdate+"a");
-				 rs=ps.executeQuery();
-			}else if (sdate!=""&&edate!="") {
-				System.out.println(2);
-				 ps=conn.prepareStatement(sql2);
-				//	System.out.println(sdate);
-				//	System.out.println(edate);
-				 sdate=sdate+" 00:00:00";
-				 edate=edate+" 00:00:00";
-				ps.setString(intid++, sdate);
-				ps.setString(intid++, edate);
-				ps.setString(intid++, stno);
-				ps.setString(intid++, message);
-				
-			 rs=ps.executeQuery();
-			}else if (sdate==""&&edate!="") {
-				System.out.println(3);
-				 ps=conn.prepareStatement(sql3);
-				 edate=edate+" 00:00:00";
-				ps.setString(intid++, edate);
-				ps.setString(intid++, stno);
-				ps.setString(intid++, message);
-			
-//				System.out.println(edate);
-//				System.out.println(sn.trim());
-//				System.out.println(statu.trim());
-				 rs=ps.executeQuery();
-			}else {
-				System.out.println(4);
-				 ps=conn.prepareStatement(sql4);
-				 ps.setString(intid++, stno);
-					ps.setString(intid++, message);
-				
-				rs=ps.executeQuery();
-			}
-			
-			while (rs.next()) {
-				
-				Equ equ=new Equ();
-				s0=rs.getString("stno");
-//				System.out.println("==");
-//				System.out.println(s0);
-				if (s0.equals(s1)) {
-//					System.out.println("1");
-					continue;
-				}else {
-//					System.out.println("2");
-					s1=s0;
-					equ.setMessage(rs.getString("message"));
-					equ.setUsername(rs.getString("username"));
-					equ.setUserpwd(rs.getString("userpwd"));
-					equ.setNowdate(rs.getString("nowdate"));
-					equ.setSn(rs.getString("sn"));
-					equ.setStatu(rs.getString("statu"));
-					equ.setPicture(rs.getString("picture"));
-					equ.setSdate(rs.getString("sdate"));
-					equ.setEdate(rs.getString("edate"));
-					equ.setStno(rs.getString("stno"));
-					equ.setTask(rs.getString("task"));
-					equ.setTime(rs.getString("time"));
-					listWaring.add(equ);
-				}
-				
-				
-				
-			}
-			rs.close();
-			ps.close();
-			conn.close();
-			
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		
-		return listWaring;
-	}
-	
-	public static int LateAlert(String plandate1,String contractid,String planm2) {
-		int a=0;
-		try {
-			int inti = 1;
-		Connection	conn = com.clas.JDBCconnect.getConnection();
-			String sql = "update DXTESTCONTRACT set  plandate1=?, planm2=?  where contractid=?";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(inti++, plandate1);
-			ps.setString(inti++, planm2);
-			ps.setString(inti++, contractid);
-			ResultSet rs=ps.executeQuery();
-			//while (rs.next()) {
-			//	Equ equ=new Equ();
-			//	equ.setName(rs.getString("name"));
-			//	list.add(equ);}
-			rs.close();
-			ps.close();
-			conn.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return a;
-	}
-	
-	public static List<Equ> planalertlist(String planAlertStr) {
-//		System.out.println(planAlertStr);
-		List<Equ> list=new ArrayList<Equ>();
-		SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
-		Date nowdateDate = new Date(System.currentTimeMillis());
-		Date plandate1Date=null;
-		 int lastday=0;
-		long ms=0;
-		String p1="",p2="";
-				
-		try {
-			int inti = 1;
-		Connection	conn = com.clas.JDBCconnect.getConnection();
-			String sql="select camount,planm2, planm1,sgmoney,plandate1,plandate2,finmoney,contractid,contractname from DXTESTCONTRACT where plandate1<=? and (statu!='end'or statu is null)";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(inti++, planAlertStr);
-			ResultSet rs=ps.executeQuery();
-			while (rs.next()) {
-				Equ equ=new Equ();
-				equ.setPlanm1(rs.getString("planm1"));
-				equ.setSgmoney(rs.getString("sgmoney"));
-				equ.setPlandate1(rs.getString("plandate1"));
-				equ.setPlandate2(rs.getString("plandate2"));
-				p1=rs.getString("plandate1");
-				p2=rs.getString("plandate2");
-				if (p1==""||p1==null) {
-					p1=p2;
-				}
-				plandate1Date = formatter.parse(p1);
-				ms=plandate1Date.getTime()-nowdateDate.getTime();
-				 lastday = (int) ( ms / 1000 / 60 / 60 / 24 );
-				 equ.setLastday(lastday);
-				equ.setFinmoney(rs.getString("finmoney"));
-				equ.setContractid(rs.getString("contractid"));
-				equ.setContractname(rs.getString("contractname"));
-				equ.setCamount(rs.getString("camount"));
-				equ.setPlanm2(rs.getString("planm2"));
-				list.add(equ);}
-			rs.close();
-			ps.close();
-			conn.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return list;
-	}
-	
-	
-	public static List<Equ> userIds() {
-		List<Equ> list=new ArrayList<Equ>();
-		try {
-			int inti = 1;
-		Connection	conn = com.clas.JDBCconnect.getConnection();
-			String sql = "select userid from DXTESTUSER where userid!='蒋勇' and userid is not null";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps = conn.prepareStatement(sql);
-			//ps.setString(inti++, ##);
-			//ps.executeUpdate();
-			ResultSet rs=ps.executeQuery();
-			while (rs.next()) {
-				Equ equ=new Equ();
-				equ.setUserid(rs.getString("userid"));
-				list.add(equ);}
-			rs.close();
-			ps.close();
-			conn.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return list;
-	}
-	
-	public static List<Equ> SelectAllDxtestwork2() {
-		List<Equ> listAllDxtestwork2=new ArrayList<Equ>();
-		try {
-			int intid=1;
-			Connection conn=com.clas.JDBCconnect.getConnection();
-//			String sql="select distinct username,sdate,edate,statu from (select * from dxtestwork where task is null or task='0' order by sdate desc)order by sdate  desc";
-			String sql="select distinct username,sdate,edate,statu from (select * from dxtestwork where (task is null or task='0') and (statu='告警' or statu='巡检人员' or statu='故障') order by sdate desc)order by statu  desc";
-			String sql2="select distinct username,sdate,edate,statu from (select * from dxtestwork where (task is null or task='0') and (statu='恢复' and stno!='0') order by sdate desc)order by sdate  desc";
-			String sql3="select count(*) from ( select distinct userpwd,sdate,edate from " + 
-					"(select * from dxtestwork where (task is null or task='0') and  " + 
-					"(statu='告警' or statu='故障') and sdate=? and edate=?  order by sdate desc)order by sdate desc,edate)";
-			String sql4="select distinct username,sdate,edate,statu from (select * from dxtestwork where stno='0') order by sdate ";
-			String sql5="select count(*) from(select stno from dxtestwork where sdate=? and edate=? and stno!='0')";
-			Statement statement=null;
-			int count=0;
-			PreparedStatement ps5=null;
-			PreparedStatement ps3=null;
-			ResultSet rs3=null;
-			ResultSet rs5=null;
-			ResultSet rs2=null;
-			Statement statement2=null;
-			String s0="0";
-			String e0="0";
-			String e1="0";
-			String s1="0";
-			
-			statement=conn.createStatement();
-			ResultSet rs=statement.executeQuery(sql);
-			while (rs.next()) {
-				//System.out.println(rs.getString("statu"));
-				Equ equ=new Equ();
-				equ.setUsername(rs.getString("username"));
-				equ.setEdate(rs.getString("edate"));
-				equ.setSdate(rs.getString("sdate"));
-				equ.setStatu(rs.getString("statu"));
-				listAllDxtestwork2.add(equ);				
-			}
-			statement.close();
-			rs.close();
-			
-			 statement2=conn.createStatement();
-			 rs2=statement2.executeQuery(sql2);
-				 while (rs2.next()) {
-						s1=rs2.getString("sdate");
-						e1=rs2.getString("edate");
-						if (s0.equals(s1)&&e0.equals(e1)) {
-						//	System.out.println(s0);
-							continue;
-						}else {
-							s0=s1;
-							e0=e1;
-							ps3=conn.prepareStatement(sql3);
-							ps3.setString(1, s0);
-							ps3.setString(2, e0);
-							rs3=ps3.executeQuery();
-							while (rs3.next()) {
-								count =rs3.getInt(1);
-								if (count>1) {
-									continue;
-								}else {
-									Equ equ=new Equ();
-									equ.setUsername(rs2.getString("username"));
-									equ.setEdate(rs2.getString("edate"));
-									equ.setSdate(rs2.getString("sdate"));
-									equ.setStatu(rs2.getString("statu"));
-									listAllDxtestwork2.add(equ);	
-								}
-							}
-							ps3.close();
-							rs3.close();
-						}
-				 }
-				 statement2.close(); 
-				 rs2.close();
-				 
-			String s10="0";
-			String e10="0";
-			String e11="0";
-			String s11="0";
-			int count1=0;
-			Statement statement4=conn.createStatement();
-			ResultSet rs4=statement4.executeQuery(sql4);
-			while (rs4.next()) {
-				s11=rs4.getString("sdate");
-				e11=rs4.getString("edate");
-				//System.out.println(s11);
-			//	System.out.println(e11);
-				if (s10.equals(s11)&&e10.equals(e11)) {
-					//	System.out.println(s10);
-						continue;
-					}else {
-						s10=s11;
-						e10=e11;
-						ps5=conn.prepareStatement(sql5);
-						ps5.setString(1, s10);
-						ps5.setString(2, e10);
-						rs5=ps5.executeQuery();
-					//	System.out.println(rs5.next());
-						while (rs5.next()) {
-							count1 =rs5.getInt(1);
-						//	System.out.println(count1);
-						
-							if (count1!=0) {
-								continue;
-							}else {//System.out.println("count==0");
-								Equ equ=new Equ();
-								equ.setUsername(rs4.getString("username"));
-								equ.setEdate(rs4.getString("edate"));
-								equ.setSdate(rs4.getString("sdate"));
-								equ.setStatu(rs4.getString("statu"));
-								listAllDxtestwork2.add(equ);
-							}
-						}
-						ps5.close();
-						rs5.close();
-				}
-			}
-			statement4.close();
-			rs4.close();
-			conn.close();
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return listAllDxtestwork2;
-	}
-	
-	public static List<Equ> typeclass() {
-		List<Equ> list=new ArrayList<Equ>();
-		try {
-			int inti = 1;
-		Connection	conn = com.clas.JDBCconnect.getConnection();
-			String sql="select typeclass from typeclass ";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ResultSet rs=ps.executeQuery();
-			while (rs.next()) {
-				Equ equ=new Equ();
-				equ.setTypeclass(rs.getString("typeclass"));
-				list.add(equ);}
-			rs.close();
-			ps.close();
-			conn.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return list;
-	}
-	
-	public static List<Equ> SelectAllDxtestwork() {
-		List<Equ> listAllDxtestwork=new ArrayList<Equ>();
-		try {
-			int intid=1;
-			Connection conn=com.clas.JDBCconnect.getConnection();
-//			String sql="select * from dxtestwork where task is null or task='0' and userpwd is null and sn!='0' order by sdate desc";
-			String sql="select t1.ID,	t1.MESSAGE,	t1.USERNAME,	t1.USERPWD,	t1.NOWDATE,	t1.SDATE,	"
-					+ "t1.EDATE,	t1.SN,	t1.PICTURE,	t1.STATU,	t1.STNO,	t1.TASK,	t1.TIME,t2.ID AS "
-					+ "ID_t2,	t2.STDATE AS STDATE_t2,	t2.SDATE AS SDATE_t2,	t2.EDATE AS EDATE_t2,	"
-					+ "t2.REDATE AS REDATE_t2,	t2.PNAME AS PNAME_t2,	t2.USE AS USE_t2,	t2.OWNNAME AS OWNNAME_t2,	"
-					+ "t2.PRONAME AS PRONAME_t2,	t2.MANNAME AS MANNAME_t2,	t2.AGENAME AS AGENAME_t2,	"
-					+ "t2.MANTYP AS MANTYP_t2,	t2.SNAME AS SNAME_t2,	t2.STYP AS STYP_t2,	t2.POS AS POS_t2,	"
-					+ "t2.IP AS IP_t2,	t2.PORT AS PORT_t2,	t2.CPU AS CPU_t2,	t2.MEMORY AS MEMORY_t2,	t2.DISK AS DISK_t2,	"
-					+ "t2.SYN AS SYN_t2,	t2.ORACLE AS ORACLE_t2,	t2.SN AS SN_t2,	t2.OTH AS OTH_t2,	t2.SID AS SID_t2 from "
-					+ "dxtestwork t1,dxtest t2 where t2.sn!='0' and t1.sn=t2.sn and t1.stno!='0' and t1.userpwd is null and task='0' "
-					+ "order by t1.sdate desc";
-			Statement statement=null;
-			statement=conn.createStatement();
-			ResultSet rs=statement.executeQuery(sql);
-			while (rs.next()) {
-				
-				Equ equ=new Equ();
-				equ.setMessage(rs.getString("message"));
-				equ.setUsername(rs.getString("username"));
-				equ.setUserpwd(rs.getString("userpwd"));
-				equ.setNowdate(rs.getString("nowdate"));
-				equ.setSn(rs.getString("sn"));
-				equ.setStatu(rs.getString("statu"));
-				equ.setPicture(rs.getString("picture"));
-				equ.setEdate(rs.getString("edate"));
-				equ.setSdate(rs.getString("sdate"));
-				equ.setStno(rs.getString("stno"));
-				equ.setTask(rs.getString("task"));
-				equ.setPNAME_T2(rs.getString("PNAME_T2"));
-				equ.setIP_T2(rs.getString("IP_T2"));
-				equ.setPOS_T2(rs.getString("POS_T2"));
-				listAllDxtestwork.add(equ);
-			}
-			rs.close();
-			statement.close();
-			conn.close();
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return listAllDxtestwork;
-	}
-	
-	public static List<Equ> SelectAllMessageItem(String sn,String stno) {
-		List<Equ> list=new ArrayList<Equ>();
-		try {
-			int intid=1;
-			Connection conn=com.clas.JDBCconnect.getConnection();
-			String sql="select * from dxtestwork where sn=? and stno=? order by nowdate,statu desc";
-			PreparedStatement ps=conn.prepareStatement(sql);
-			ps.setString(intid++, sn);
-			ResultSet rs=ps.executeQuery("select * from dxtestwork where sn=\'"+sn.trim()+"\' and stno=\'"+stno+"\' order by nowdate,statu desc");
-			while (rs.next()) {
-				Equ equ=new Equ();
-				equ.setMessage(rs.getString("message"));
-				equ.setUsername(rs.getString("username"));
-				equ.setUserpwd(rs.getString("userpwd"));
-				equ.setNowdate(rs.getString("nowdate"));
-				equ.setSn(rs.getString("sn"));
-				equ.setStatu(rs.getString("statu"));
-				equ.setPicture(rs.getString("picture"));
-				equ.setEdate(rs.getString("edate"));
-				equ.setSdate(rs.getString("sdate"));
-				list.add(equ);
-			}
-			rs.close();
-			ps.close();
-			conn.close();
-			
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return list;
-	}
-	
-	
-	public static List<Equ> SelectAllMessage(String sn) {
-		List<Equ> list=new ArrayList<Equ>();
-		try {
-			int intid=1;
-			Connection conn=com.clas.JDBCconnect.getConnection();
-			String sql="select * from dxtestwork where sn=? order by nowdate desc,statu desc";
-			PreparedStatement ps=conn.prepareStatement(sql);
-			ps.setString(intid++, sn);
-			ResultSet rs=ps.executeQuery("select * from dxtestwork where sn=\'"+sn.trim()+"\' order by nowdate desc,statu desc");
-			while (rs.next()) {
-				Equ equ=new Equ();
-				equ.setMessage(rs.getString("message"));
-				equ.setUsername(rs.getString("username"));
-				equ.setUserpwd(rs.getString("userpwd"));
-				equ.setNowdate(rs.getString("nowdate"));
-				equ.setSn(rs.getString("sn"));
-				equ.setStatu(rs.getString("statu"));
-				equ.setPicture(rs.getString("picture"));
-				equ.setEdate(rs.getString("edate"));
-				equ.setSdate(rs.getString("sdate"));
-				list.add(equ);
-			}
-			rs.close();
-			ps.close();
-			conn.close();
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return list;
-	}
-	
-	public static void updata_dxtestworkPer(String username,String sdate,String edate,String statu) {
-		try {int intid=1;
-		Connection conn=com.clas.JDBCconnect.getConnection();
-		
-		String sql1="insert into dxtestwork(username,sdate,edate,statu) values(?,?,?,?)";
-		String sql2="select * from dxtestwork where username=? and sdate=? and edate=? and statu=?";
-		PreparedStatement ps1=null;
-		PreparedStatement ps2=conn.prepareStatement(sql2);
-		ps2.setString(intid++, username);
-		ps2.setString(intid++, sdate);
-		ps2.setString(intid++, edate);
-		ps2.setString(intid++, statu);
-		ResultSet rs=ps2.executeQuery();
-		if (!rs.next()) {
-			 intid=1;
-		//	System.out.println(444);
-			 ps1=conn.prepareStatement(sql1);
-			ps1.setString(intid++, username);
-			ps1.setString(intid++, sdate);
-			ps1.setString(intid++, edate);
-			ps1.setString(intid++, statu);
-			
-			
-			ps1.executeUpdate();
-			ps1.close();
-		}else {
-		//	System.out.println(666);
-		}
-		
-		
-		ps2.close();
-		rs.close();
-		conn.close();
-		
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-	}
-	
-	public static boolean upfileP(String sql) {
-		boolean a=false;
-		try {
-		
-		Connection	conn = com.clas.JDBCconnect.getConnection();
-			PreparedStatement 	ps = conn.prepareStatement(sql);
-			ResultSet rs=ps.executeQuery();
-			a=true;
-			rs.close();
-			ps.close();
-			conn.close();
-		
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			a=false;
-		}
-		return a;
-	}
-	
-	public static void updataItemRes(String sn,String message,String userid,String nowdate,String statu,String picture,String edate,String sdate,String stno) {
-		try {
-			int intid=1;
-			Connection conn=com.clas.JDBCconnect.getConnection();
-			String sql="insert into dxtestwork(message,username,nowdate,sn,statu,picture,edate,sdate,stno,task) values(?,?,?,?,?,?,?,?,?,?)";
-			String sql2="select * from dxtestwork where stno=? and message=?";
-			String sql3="update dxtestwork set  userpwd=?  where  stno=?";
-			PreparedStatement ps2=conn.prepareStatement(sql2);
-			ps2.setString(intid++, stno);
-			ps2.setString(intid++, message);
-			ResultSet rs=ps2.executeQuery();
-			if (!rs.next()) {
-				intid=1;
-				PreparedStatement	ps=conn.prepareStatement(sql);
-				ps.setString(intid++, message);
-				ps.setString(intid++, userid);
-				ps.setString(intid++, nowdate);
-				ps.setString(intid++, sn);
-				ps.setString(intid++, statu);
-				ps.setString(intid++, picture);
-				ps.setString(intid++, edate);
-				ps.setString(intid++, sdate);
-				ps.setString(intid++, stno);
-				ps.setString(intid++, "0");
-				ps.executeUpdate();
-				intid=1;
-				PreparedStatement ps3=conn.prepareStatement(sql3);
-				ps3.setString(intid++, "restore");
-				ps3.setString(intid++, stno);
-				ps3.executeUpdate();
-				ps.close();
-				ps3.close();
-				
-			}else {
-				
-			}
-			ps2.close();
-			rs.close();
-			conn.close();
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-	}
-	
-	
-	public static void updata_dxtestwork2(String sn,String message,String time,String userid,String nowdate,String statu,String picture,String edate,String sdate,String stno) {
-	try {
-		int intid=1;
-		Connection conn=com.clas.JDBCconnect.getConnection();
-		String sql="insert into dxtestwork(message,username,nowdate,sn,statu,picture,edate,sdate,stno,task,time) values(?,?,?,?,?,?,?,?,?,?,?)";
-		String sql2="select * from dxtestwork where stno=? and message=?";
-		String sql3="update dxtestwork set  userpwd='restore'   where  stno=?";
-		//restore
-		PreparedStatement ps=null;
-		PreparedStatement ps2=conn.prepareStatement(sql2);
-		PreparedStatement ps3=null;
-		ps2.setString(intid++, stno);
-		ps2.setString(intid++, message);
-		ResultSet rs=ps2.executeQuery();
-		if (!rs.next()) {
-			intid=1;
-			ps=conn.prepareStatement(sql);
-			ps.setString(intid++, message);
-			ps.setString(intid++, userid);
-			ps.setString(intid++, nowdate);
-			ps.setString(intid++, sn);
-			ps.setString(intid++, statu);
-			ps.setString(intid++, picture);
-			ps.setString(intid++, edate);
-			ps.setString(intid++, sdate);
-			ps.setString(intid++, stno);
-			ps.setString(intid++, "0");
-			ps.setString(intid++, time);
-			ps.executeUpdate();
-			
-			intid=1;
-			ps3=conn.prepareStatement(sql3);
-			ps3.setString(intid++, stno);
-			ps3.executeUpdate();
-			
-			ps.close();
-			ps3.close();
-		}else {
-		}
-		
-		ps2.close();
-		rs.close();
-		conn.close();
-	} catch (Exception e) {
-		// TODO: handle exception
-		e.printStackTrace();
-	}
-	
-	
-	}
-	
-	public static void updata_dxtestworkItemAdd(String sn,String message,String userid,String nowdate,String statu,String picture,String edate,String sdate,String stno) {
-		try {
-			int intid=1;
-			Connection conn=com.clas.JDBCconnect.getConnection();
-			String sql="insert into dxtestwork(message,username,nowdate,sn,statu,picture,edate,sdate,stno,task) values(?,?,?,?,?,?,?,?,?,?)";
-			String sql2="select * from dxtestwork where stno=? and message=?";
-			PreparedStatement ps2=conn.prepareStatement(sql2);
-			ps2.setString(intid++, stno);
-			ps2.setString(intid++, message);
-			ResultSet rs=ps2.executeQuery();
-			if (!rs.next()) {
-				intid=1;
-				PreparedStatement	ps=conn.prepareStatement(sql);
-				ps.setString(intid++, message);
-				ps.setString(intid++, userid);
-				ps.setString(intid++, nowdate);
-				ps.setString(intid++, sn);
-				ps.setString(intid++, statu);
-				ps.setString(intid++, picture);
-				ps.setString(intid++, edate);
-				ps.setString(intid++, sdate);
-				ps.setString(intid++, stno);
-				ps.setString(intid++, "1");
-				ps.executeUpdate();
-				ps.close();
-			}else {
-				
-			}
-			ps2.close();
-			rs.close();
-			conn.close();
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		
-	}
-	
-	public static void updataPartPic2(String sn,String message,String userid,String nowdate,String statu,String picture,String edate,String sdate,String stno) {
-		try {
-			int intid=1;
-			
-			
-			
-			Connection conn=com.clas.JDBCconnect.getConnection();
-			String sql="insert into dxtestwork(message,username,nowdate,sn,statu,picture,edate,sdate,stno,task) values(?,?,?,?,?,?,?,?,?,?)";
-			String sql2="select * from dxtestwork where stno=? and message=?";
-			String sql3="update dxtestwork set  userpwd=?  where  stno=?";
-			PreparedStatement ps2=conn.prepareStatement(sql2);
-			ps2.setString(intid++, stno);
-			ps2.setString(intid++, message);
-			ResultSet rs=ps2.executeQuery();
-		//	System.out.println("if="+rs.next());
-			if (!rs.next()) {
-				intid=1;
-		//		System.out.println("TTTTT:"+stno);
-				PreparedStatement	ps=conn.prepareStatement(sql);
-				ps.setString(intid++, message);
-				ps.setString(intid++, userid);
-				ps.setString(intid++, nowdate);
-				ps.setString(intid++, sn);
-				ps.setString(intid++, statu);
-				ps.setString(intid++, picture);
-				ps.setString(intid++, edate);
-				ps.setString(intid++, sdate);
-				ps.setString(intid++, stno);
-				ps.setString(intid++, "0");
-				ps.executeUpdate();
-				
-				
-				intid=1;
-				PreparedStatement ps3=conn.prepareStatement(sql3);
-				ps3.setString(intid++, "restore");
-				ps3.setString(intid++, stno);
-				ps3.executeUpdate();
-				ps3.close();
-				ps.close();
-			}else {
-				
-			}
-			ps2.close();
-			rs.close();
-			conn.close();
-			
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-	
-		}
-	
-	public static void updataPartPic (String sn,String message,String userid,String nowdate,String statu,String picture,String edate,String sdate,String stno) {
-		try {
-			
-			int inti = 1;
-			String task="1";
-			Connection conn = com.clas.JDBCconnect.getConnection();
-			String sql1 = "insert into dxtestwork(message,username,nowdate,sn,statu,picture,edate,sdate,stno,task) values(?,?,?,?,?,?,?,?,?,?)";
-			String sql2 = "select * from dxtestwork where stno=?";
-			String sql3 = "select * from dxtestwork where sn=? and username=? and sdate=? and edate=? and statu=? and message=?";
-			PreparedStatement ps=null;
-			PreparedStatement ps3=conn.prepareStatement(sql3);
-			ps3.setString(inti++, sn);
-			ps3.setString(inti++, userid);
-			ps3.setString(inti++, sdate);
-			ps3.setString(inti++, edate);
-			ps3.setString(inti++, statu);
-			ps3.setString(inti++, message);
-			ResultSet rs=ps3.executeQuery();
-			if (!rs.next()) {
-				inti = 1;
-				ps = conn.prepareStatement(sql1);
-				ps.setString(inti++, message);
-				ps.setString(inti++, userid);
-				ps.setString(inti++, nowdate);
-				ps.setString(inti++, sn);
-				ps.setString(inti++, statu);
-				ps.setString(inti++, picture);
-				ps.setString(inti++, edate);
-				ps.setString(inti++, sdate);
-				ps.setString(inti++, stno);
-				ps.setString(inti++, task);
-				ps.executeUpdate();
-				
-			}else {
-				
-			}
-			
-			rs.close();	
-			ps3.close();
-			ps.close();
-			conn.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-	}
-	
-	
-	
-	
-	public static void updata_dxtestwork(String sn,String message,String time,String userid,String nowdate,String statu,String picture,String edate,String sdate,String stnonew) {
-		if (stnonew.equals("0")) {
-			try {
-				int intid = 1;
-				Connection	conn = com.clas.JDBCconnect.getConnection();
-				String sql = "insert into dxtestwork(message,username,nowdate,sn,statu,picture,edate,sdate,stno,task,time) values(?,?,?,?,?,?,?,?,?,?,?)";
-				//String sql = "delete from ## where ##=?";
-				//String sql="select * from ## where ##=?";
-				PreparedStatement	ps=conn.prepareStatement(sql);
-				ps.setString(intid++, message);
-				ps.setString(intid++, userid);
-				ps.setString(intid++, nowdate);
-				ps.setString(intid++, sn);
-				ps.setString(intid++, statu);
-				ps.setString(intid++, picture);
-				ps.setString(intid++, edate);
-				ps.setString(intid++, sdate);
-				ps.setString(intid++, stnonew);
-				ps.setString(intid++, "0");
-				ps.setString(intid++, time);
-				ps.executeUpdate();
-				ps.close();
-				conn.close();
-			} catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
-			}
-			
-			
-			
-		}else {
-			try {
-				int intid=1;
-				Connection conn=com.clas.JDBCconnect.getConnection();
-				String sql="insert into dxtestwork(message,username,nowdate,sn,statu,picture,edate,sdate,stno,task,time) values(?,?,?,?,?,?,?,?,?,?,?)";
-				String sql2="select * from dxtestwork where username=? and sdate=? and edate=? and statu=?";
-				//System.out.println(222);
-				PreparedStatement ps2=conn.prepareStatement(sql2);
-				ps2.setString(intid++, userid);
-				ps2.setString(intid++, sdate);
-				ps2.setString(intid++, edate);
-				ps2.setString(intid++, statu);
-				ResultSet rs=ps2.executeQuery("select * from dxtestwork where sn=\'"+sn+"\' and username=\'"+userid+"\' and sdate=\'"+sdate+"\' and edate=\'"+edate+"\' and statu=\'"+statu+"\' and message=\'"+message+"\'");
-				if (!rs.next()) {
-					
-					 intid=1;
-				//	System.out.println(444);
-					PreparedStatement	ps=conn.prepareStatement(sql);
-					ps.setString(intid++, message);
-					ps.setString(intid++, userid);
-					ps.setString(intid++, nowdate);
-					ps.setString(intid++, sn);
-					ps.setString(intid++, statu);
-					ps.setString(intid++, picture);
-					ps.setString(intid++, edate);
-					ps.setString(intid++, sdate);
-					ps.setString(intid++, stnonew);
-					ps.setString(intid++, "0");
-					ps.setString(intid++, time);
-					ps.executeUpdate();
-					ps.close();
-				}else {
-					//System.out.println(666);
-				}
-				
-				
-				ps2.close();
-				rs.close();
-				conn.close();
-				
-			} catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
-			}
-		}
-		
-		
-		
-	}
-	
-	
-	public static List<Equ> SelectAllSn2(String sn) {
-		List<Equ> listsn = new ArrayList<Equ>();
-		
-		try {int intsn=1;
-		Connection	conn=com.clas.JDBCconnect.getConnection();
-		String sql="select * from dxtest where sn=? ";
-		PreparedStatement ps = conn.prepareStatement(sql);
-		ps.setString(intsn++, sn);
-		 ps.execute();
-		 ResultSet rs = ps.getResultSet();
-		 System.out.println("==="+rs.next());
-		while (rs.next()) {
-			Equ equsn=new Equ();
-			equsn.setId(rs.getInt("id"));
-			equsn.setSid(rs.getString("sid"));
-			equsn.setStdate(rs.getString("stdate"));
-			equsn.setSdate(rs.getString("sdate"));
-	    	equsn.setEdate(rs.getString("edate"));
-	    	equsn.setRedate(rs.getString("redate"));
-	    	equsn.setPname(rs.getString("pname"));
-	    	equsn.setUse(rs.getString("use"));
-	    	equsn.setOwnname(rs.getString("ownname"));
-	    	equsn.setProname(rs.getString("proname"));
-	    	equsn.setManname(rs.getString("manname"));
-	    	equsn.setAgename(rs.getString("agename"));
-	    	equsn.setMantyp(rs.getString("mantyp"));
-	    	equsn.setSname(rs.getString("sname"));
-	    	equsn.setStyp(rs.getString("styp"));
-	    	equsn.setPos(rs.getString("pos"));
-	    	equsn.setIp(rs.getString("ip"));
-	    	equsn.setPort(rs.getString("port"));
-	    	equsn.setCpu(rs.getString("cpu"));
-	    	equsn.setMemory(rs.getString("memory"));
-	    	equsn.setDisk(rs.getString("disk"));
-	    	equsn.setSyn(rs.getString("syn"));
-	    	equsn.setOracle(rs.getString("oracle"));
-	    	equsn.setSn(rs.getString("sn"));
-	    	equsn.setOth(rs.getString("oth"));
-	    	equsn.setSroot(rs.getString("sroot"));
-	    	equsn.setSpwd(rs.getString("spwd"));
-	    	equsn.setOroot(rs.getString("oroot"));
-	    	equsn.setOpwd(rs.getString("opwd"));
-	    	equsn.setAroot(rs.getString("aroot"));
-	    	equsn.setApwd(rs.getString("apwd"));
-	    	equsn.setTitle(rs.getString("title"));
-	    	equsn.setUrl(rs.getString("url"));
-	    	equsn.setDid(rs.getString("did"));
-	    	listsn.add(equsn);
-		}	
-		ps.close();
-		rs.close();
-		conn.close();
-		
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		
-		return listsn;
-	}
-	
-	public static List<Equ> Warningstatu(String sqlv) {
-		List<Equ> list = new ArrayList<Equ>();
-		
-		try {
-			int inti = 1;
-		Connection	conn = com.clas.JDBCconnect.getConnection();
-			
-			String sql=sqlv;
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ResultSet rs=ps.executeQuery();
-			ResultSetMetaData md = rs.getMetaData();
-			int columnCount = md.getColumnCount(); //Map rowData;
-			while (rs.next()) {
-				Equ equ=new Equ();
-				
-				Map<String,Object> rowData = new HashMap<String,Object>();
-				for (int i = 1; i <= columnCount; i++) {
-				rowData.put(md.getColumnName(i), rs.getObject(i));
-				}
-				equ.setRowData(rowData);
-				list.add(equ);
-				}
-			
-			rs.close();
-			ps.close();
-			conn.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return list;
-	}
-	
-	
-
-	public static List<Equ> SelectAllSn(String sn) {
-		List<Equ> listsn = new ArrayList<Equ>();
-		try {
-			int intsn=1;
-			sn=sn.trim();
-		Connection	connsn=com.clas.JDBCconnect.getConnection();
-			String sqlsn="select * from dxtest where sn=? ";
-			PreparedStatement pssn = connsn.prepareStatement(sqlsn);
-			pssn.setString(intsn++, sn);
-			ResultSet rssn = pssn.executeQuery();
-			
-			
-			while (rssn.next()) {
-				Equ equsn=new Equ();
-				equsn.setId(rssn.getInt("id"));
-				equsn.setSid(rssn.getString("sid"));
-				equsn.setStdate(rssn.getString("stdate"));
-				equsn.setSdate(rssn.getString("sdate"));
-		    	equsn.setEdate(rssn.getString("edate"));
-		    	equsn.setRedate(rssn.getString("redate"));
-		    	equsn.setPname(rssn.getString("pname"));
-		    	equsn.setUse(rssn.getString("use"));
-		    	equsn.setOwnname(rssn.getString("ownname"));
-		    	equsn.setProname(rssn.getString("proname"));
-		    	equsn.setManname(rssn.getString("manname"));
-		    	equsn.setAgename(rssn.getString("agename"));
-		    	equsn.setMantyp(rssn.getString("mantyp"));
-		    	equsn.setSname(rssn.getString("sname"));
-		    	equsn.setStyp(rssn.getString("styp"));
-		    	equsn.setPos(rssn.getString("pos"));
-		    	equsn.setIp(rssn.getString("ip"));
-		    	equsn.setPort(rssn.getString("port"));
-		    	equsn.setCpu(rssn.getString("cpu"));
-		    	equsn.setMemory(rssn.getString("memory"));
-		    	equsn.setDisk(rssn.getString("disk"));
-		    	equsn.setSyn(rssn.getString("syn"));
-		    	equsn.setOracle(rssn.getString("oracle"));
-		    	equsn.setSn(rssn.getString("sn"));
-		    	equsn.setOth(rssn.getString("oth"));
-		    	equsn.setSroot(rssn.getString("sroot"));
-		    	equsn.setSpwd(rssn.getString("spwd"));
-		    	equsn.setOroot(rssn.getString("oroot"));
-		    	equsn.setOpwd(rssn.getString("opwd"));
-		    	equsn.setAroot(rssn.getString("aroot"));
-		    	equsn.setApwd(rssn.getString("apwd"));
-		    	equsn.setTitle(rssn.getString("title"));
-		    	equsn.setUrl(rssn.getString("url"));
-		    	equsn.setDid(rssn.getString("did"));
-		    	listsn.add(equsn);
-			}
-			rssn.close();
-		      pssn.close();
-		      connsn.close();
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return listsn;
-	}
-}
+/* Location:              D:\桌面\dxtest.war!\WEB-INF\classes\com\clas\SelectAll.class
+ * Java compiler version: 8 (52.0)
+ * JD-Core Version:       1.0.7
+ */

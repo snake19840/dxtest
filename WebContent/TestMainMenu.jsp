@@ -4,7 +4,59 @@
     <%@page import="java.text.SimpleDateFormat" %>
 <%@page import="java.util.Date" %>
     <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<style>
+@media (min-width: 1200px){
+#sidebar-left {
+min-width:110px;
+}
+#content{
 
+}
+}
+
+
+@media only screen and (max-width: 1199px) and (min-width: 980px){
+#sidebar-left {
+display:none;
+}
+#content{
+width:100%;
+margin-left: 0% !important;
+}
+
+}
+
+/* @media (max-width: 979px) and (min-width: 768px){ */
+/* .row-fluid .span9{ */
+/* with:auto !important; */
+/* } */
+/* } */
+
+
+@media only screen and (max-width: 979px) and (min-width: 768px){
+#sidebar-left {
+display:none;
+}
+#content{
+width:100%;
+margin-left: 0% !important;
+}
+.row-fluid .span9{
+with:100%;
+}
+}
+
+
+@media (max-width: 979px) and (min-width: 768px){
+.row-fluid .span9{
+width:100% ;
+padding-right:4%;
+}}
+
+
+
+
+</style>
 
 <!-- start: Main Menu -->
 			<div id="sidebar-left" class="span2">

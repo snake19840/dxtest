@@ -900,7 +900,7 @@ function getPost(data, url) {
           if (httpRequest.readyState == 4 && httpRequest.status == 200) { //  验证请求是否发送成功
                  var json = httpRequest.responseText; // 获取到服务端返回的数据
                  console.log(json);
-       	   if(json==1){alert('已经录入过相同的设备编号!');return;}
+       	   if(json==1){alert('已经录入过相同的设备SN号!');return;}
        	  
        	   else if(json==2){alert('录入设备成功!');window.location.href='Testform.jsp';}
        	   else if(json=="check"){alert('暂存成功!');window.location.href='Testform.jsp';}

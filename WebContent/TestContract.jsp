@@ -963,7 +963,33 @@ var vm=new Vue({
 // 	    console.log(this.mypaym);
 // 	    console.log(this.plan1);
 // 	    console.log(this.planm2);
-
+function getCommonObj(arr,key,value){
+    let valArr = [];
+    for (j in arr){
+	if(arr[j][key] == value){
+                valArr.push(arr[j])//存值
+        }}
+    if(valArr.length>=2){
+	return true;
+        }
+    return false;
+}
+		let arr=this.plan1;
+		let key="payname";
+		let value="";
+		console.log(this.plan1);
+		for (i in this.plan1){
+		    value=this.plan1[i][key];
+// 		    console.log(getCommonObj(arr,key,value));
+		    if(getCommonObj(arr,key,value)){
+			this.$message({
+		            type: 'info',
+		            message: '有重复的付款名称'
+		          });
+			return;
+		    }
+		    }
+	    
 	    if (this.contractid==''||	this.contractname==''||	this.oppunit==''||	this.markdate==''||	this.contractnlife==''||	this.myname==''||	this.oppname==''||	this.CAMOUNT==''||	this.plan2==''||	this.plan4==''||	this.plandate2==''||	this.plandate1==''||	this.planm1==''||	this.classson==''||	this.oppu==''||	this.oppp==''||	this.oppa==''||	this.oppn==''||	this.oppe==''||	this.oppx==''||	this.oppmail==''||	this.oppe2==''||	this.oppad==''||	this.opppayb==''||	this.opppaya==''||	this.opppayz==''||	this.opppayh==''||	this.opppaye==''||	this.opppaya2==''||	this.opppaym==''||	this.myu==''||	this.mya==''||	this.myp==''||	this.myn==''||	this.mye==''||	this.myad==''||	this.mye2==''||	this.myx==''||	this.myemail==''||	this.mypayb==''||	this.mypaya==''||	this.mypayz==''||	this.mypayh==''||	this.mypaye==''||	this.mypaya2==''||	this.mypaym==''||	this.plan1==''||	this.planm2=='') {
 		this.$message({
 	            type: 'info',
@@ -971,6 +997,8 @@ var vm=new Vue({
 	          });
 		return;
 	    }
+	    
+	    
 	    
 	    axios({
                 url: '/dxtest/UpDataContract4',
@@ -1254,7 +1282,7 @@ var vm=new Vue({
     },
     watch: {
 		lin:function(n,o){
-		    console.log(n);
+// 		    console.log(n);
 		    let arr=[],
 		    payname='请选择付款名称',
 		    paypor='',

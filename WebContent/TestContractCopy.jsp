@@ -629,7 +629,50 @@ contractPayGson=<%=session.getAttribute("contractPayGson")%>;
 		   if (s==1) {
 		       statu='end';
 		}
+		   
+		   function getCommonObj(arr,key,value){
+		       let valArr = [];
+		       for (j in arr){
+		   	if(arr[j][key] == value){
+		                   valArr.push(arr[j])//存值
+		           }}
+		       if(valArr.length>=2){
+		   	return true;
+		           }
+		       return false;
+		   }
+		   
+		   let arr=this.plans1;
+			let key="payname";
+			let value="";
+			console.log(arr);
+			for (i in arr){
+			    value=arr[i][key];
+//	 		    console.log(getCommonObj(arr,key,value));
+			    if(getCommonObj(arr,key,value)){
+				this.$message({
+			            type: 'info',
+			            message: '有重复的付款名称'
+			          });
+				return;
+			    }
+			    }
 		  
+			arr=JSON.parse(p2);
+			console.log(arr);
+			
+			for (i in arr){
+			    value=arr[i][key];
+//	 		    console.log(getCommonObj(arr,key,value));
+			    if(getCommonObj(arr,key,value)){
+				this.$message({
+			            type: 'info',
+			            message: '有重复的付款名称'
+			          });
+				return;
+			    }
+			    }
+			
 		    
 		    axios({
 			url:'/dxtest/copyAdd',

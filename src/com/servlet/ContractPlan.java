@@ -54,6 +54,12 @@ public class ContractPlan extends HttpServlet {
 		
 		List<Equ> contractPlanList=ContractDao.contractPlanList();
 		Gson gson = new Gson();
+		String sql="SELECT DISTINCT CLASSFAMILY FROM CONTRACTCLASS";
+		List<Equ> ListClassFamily = SelectAll.Warningstatu(sql);
+		
+		String ListClassFamilyGson=gson.toJson(ListClassFamily); 
+		session.setAttribute("ListClassFamilyGson", ListClassFamilyGson);
+		
 		String contractPlanListGson=gson.toJson(contractPlanList); 
 		session.setAttribute("contractPlanListGson",contractPlanListGson);
 		request.getRequestDispatcher("ContractPlanList.jsp").forward(request, response);

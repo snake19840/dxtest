@@ -1,53 +1,69 @@
-package com.servlet.Testindex;
+/*    */ package com.servlet.Testindex;
+/*    */ 
+/*    */ import com.clas.Equ;
+/*    */ import com.clas.SelectAll;
+/*    */ import com.google.gson.Gson;
+/*    */ import com.google.gson.reflect.TypeToken;
+/*    */ import java.io.IOException;
+/*    */ import java.io.PrintWriter;
+/*    */ import java.util.List;
+/*    */ import javax.servlet.ServletException;
+/*    */ import javax.servlet.annotation.WebServlet;
+/*    */ import javax.servlet.http.HttpServlet;
+/*    */ import javax.servlet.http.HttpServletRequest;
+/*    */ import javax.servlet.http.HttpServletResponse;
+/*    */ import javax.servlet.http.HttpSession;
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ @WebServlet({"/LateAlert"})
+/*    */ public class LateAlert
+/*    */   extends HttpServlet
+/*    */ {
+/*    */   private static final long serialVersionUID = 1L;
+/*    */   
+/*    */   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+/* 34 */     response.setContentType("Text/html");
+/* 35 */     request.setCharacterEncoding("UTF-8");
+/* 36 */     response.setCharacterEncoding("UTF-8");
+/* 37 */     HttpSession session = request.getSession();
+/* 38 */     Gson gson = new Gson();
+/*    */     
+/* 40 */     String contractid = request.getParameter("contractid");
+/* 41 */     String plandate1 = request.getParameter("plandate1");
+/* 42 */     String planm2 = request.getParameter("planm2");
+/*    */ 
+/*    */     
+/* 45 */     int LateAlert = SelectAll.LateAlert(plandate1, contractid, planm2);
+/*    */     
+/* 47 */     String sql = "";
+/*    */     
+///* 49 */     List<Equ> list = (List)gson.fromJson(planm2, (new TypeToken<List<Equ>>() {  }).getType());
+			List<Equ> list = gson.fromJson(planm2, new TypeToken<List<Equ>>() {}.getType());
+/*    */     
+/* 51 */     for (int i = 0; i < list.size(); i++) {
+///* 52 */       System.out.println(i);
+/* 53 */       sql = "update PLANSUB set  REALPAY='" + list.get(i).getPaydate() + "', PAYPLAN='" + list.get(i).getPaydate() + "'  where contractid='" + contractid + "' and payname='" + list.get(i).getPayname() + "'";
+/* 54 */       boolean bool = SelectAll.Update(sql);
+/*    */     } 
+/*    */ 
+/*    */     
+/* 58 */     PrintWriter out = response.getWriter();
+/* 59 */     out.print("LateAlertSuccess");
+/* 60 */     out.close();
+/*    */   }
+/*    */ }
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import com.clas.Equ;
-import com.clas.SelectAll;
-import com.google.gson.Gson;
-
-/**
- * Servlet implementation class LateAlert
+/* Location:              D:\×ÀÃæ\dxtest (2)\WEB-INF\classes\!\com\servlet\Testindex\LateAlert.class
+ * Java compiler version: 8 (52.0)
+ * JD-Core Version:       1.0.7
  */
-@WebServlet("/LateAlert")
-public class LateAlert extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.setContentType("Text/html");
-		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
-		HttpSession session = request.getSession();
-		Gson gson=new Gson();
-		
-		String contractid=request.getParameter("contractid");
-		String plandate1=request.getParameter("plandate1");
-		String planm2=request.getParameter("planm2");
-	
-		
-		 int LateAlert=SelectAll.LateAlert(plandate1, contractid, planm2);
-		PrintWriter out = response.getWriter();
-		out.print("LateAlertSuccess");
-		out.close();
-	//	System.out.println(dd);
-		
-		
-	}
-
-}

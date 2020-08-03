@@ -177,6 +177,18 @@ height:40px;
 					</div>
 					
 					<div  id="tableList" class="box-content">
+					
+									  <div style="float: left;width: 140px;">
+<el-select v-model="classFamilyValue" :change="change_cf" clearable  placeholder="可筛选合同类型">
+    <el-option
+      v-for="item in ListClassFamilyGson"
+      :key="item.rowData.CLASSFAMILY"
+      :label="item.label"
+      :value="item.rowData.CLASSFAMILY">
+    </el-option>
+  </el-select>  
+  </div>
+					
 					<div style="float: right;height: 50px;">
 <el-input
     placeholder="请输入查询内容"
@@ -324,6 +336,7 @@ height:40px;
 	
 	<script type="text/javascript">
 	 contractListJSON=<%=session.getAttribute("contractPlanListGson")%>;
+	 ListClassFamilyGson=<%=session.getAttribute("ListClassFamilyGson")%>
 	 TT="ContractPlanList.jsp";
 	
 	</script>
@@ -401,7 +414,8 @@ height:40px;
 var tableList=new Vue({
     el:'#tableList',
     data:{
-	
+	classFamilyValue:'',
+	ListClassFamilyGson:ListClassFamilyGson,
 	tableData:[],
 	input2: '',
 	currentPage:1,
@@ -439,6 +453,14 @@ var tableList=new Vue({
                              
                  });
              }
+             
+             if (this.classFamilyValue!='') {
+        	 this.subcontents = this.subcontents.filter(temp=>{
+                     return   (temp['plan4'].includes(this.classFamilyValue)
+                 )
+                 });
+	    }
+             
              this.allData=this.subcontents;
              this.tableData=this.dataShow( this.allData);
              
@@ -523,9 +545,14 @@ var tableList=new Vue({
 					}
 				  
 	      },
-	      
-	      
     },
+    computed:{
+	      change_cf(){
+// 		  console.log(this.classFamilyValue);
+		  this.shaixuan(this.input2);
+	      },
+    },
+    
     watch:{
 	input2:function(n,o){
 	    console.log(n);

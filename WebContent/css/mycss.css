@@ -1,56 +1,39 @@
 @charset "UTF-8";
-body{
-	margin:0px;
-	padding:0px;
-      font-size:9pt;
-     
 
+body {
+	margin: 0px;
+	padding: 0px;
+	font-size: 9pt;
 }
 
-#box{
-	margin:0 auto auto auto;
-	width:1024px;
-	clear:both;
-	background-color:#FFFFFF;
+#box {
+	margin: 0 auto auto auto;
+	width: 1024px;
+	clear: both;
+	background-color: #FFFFFF;
 }
 
 td {
-font-family: "Times New Roman", Times, serif;
-
-      font-size: 14px;
-
-            font-weight: bold;
-
+	font-family: "Times New Roman", Times, serif;
+	font-size: 14px;
+	font-weight: bold;
 }
 
 input {
-	font-size:9pt;
-
-            color: #003399;
-
-            font-family: 宋体;
-
-            border: '1px' 'dashed' '#999999';
-
-            background: #EEEEEE;
-	}
-
-.td1{
-
-            font-size: 12pt;
-
-            font-family: 黑体;
-
-}
-.botton1{
-
-            background: #FFFFFF;
-
-            font-weight:bold;
-
-            width: 50px;
-
+	font-size: 9pt;
+	color: #003399;
+	font-family: 宋体;
+	border: '1px' 'dashed' '#999999';
+	background: #EEEEEE;
 }
 
+.td1 {
+	font-size: 12pt;
+	font-family: 黑体;
+}
 
-	
+.botton1 {
+	background: #FFFFFF;
+	font-weight: bold;
+	width: 50px;
+}
