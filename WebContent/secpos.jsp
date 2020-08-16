@@ -59,10 +59,10 @@ arrGson2=<%=session.getAttribute("arrGson2")%>;
 					</div>
 					
 						<div class="box-content">
-						 <div id="main" style="width: 100%;height:400px;"></div>
+						 <div id="main2" style="width: 100%;height:400px;"></div>
 <!-- 						 <div id="main2" style="width: 100%;height:400px;"></div> -->
  <hr align=center width=100% color=#987cb9 SIZE=1 style="background: linear-gradient(to right, #409eff 0%,#ebeef5 50%,#e6a23c 100%);">
-						 <div id="main2" style="width: 100%;height:400px;"></div>
+						 <div id="main" style="width: 100%;height:400px;"></div>
 						
 						</div>
 					</div>
@@ -178,7 +178,7 @@ arrGson2=<%=session.getAttribute("arrGson2")%>;
 	      		
         	    title: {
         		x:'40px',
-        	        text: '近三年每月告警总量'
+        	        text: '近三年每月环境问题总量'
         	    },
         	    tooltip: {
         	        trigger: 'axis'
@@ -220,19 +220,19 @@ arrGson2=<%=session.getAttribute("arrGson2")%>;
         	        {
         	            name: yearArr[0],
         	            type: 'line',
-        	            stack: '告警总量',
+        	            stack: '环境问题总量',
         	            data: arrGson[2]
         	        },
         	        {
         	            name: yearArr[1],
         	            type: 'line',
-        	            stack: '告警总量',
+        	            stack: '环境问题总量',
         	            data: arrGson[1]
         	        },
         	        {
         	            name: yearArr[2],
         	            type: 'line',
-        	            stack: '告警总量',
+        	            stack: '环境问题总量',
         	            data: arrGson[0]
         	        },
         	    ]

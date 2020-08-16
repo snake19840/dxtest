@@ -434,6 +434,7 @@ return t2;
 		 }
 	     }).then((response)=>{
 			 console.log(response.data);
+// 			 return;
 			 location.href="PrintTest2.jsp";
 		     }).catch((error)=>{
 			 console.log(error);

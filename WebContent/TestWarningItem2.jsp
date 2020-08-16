@@ -183,9 +183,9 @@ chevron[2].classList.add("chevron-down");
 						<span class="add-on">开始时间</span><input id="s_sdate" type="date"><span class="add-on">结束时间</span><input id="s_edate" type="date">
 						<select id="select_statu_search">
 									<option value="1"></option>
-									<option value="2">告警</option>
-									<option value="3">故障</option>
-									<option value="4">恢复</option>
+<!-- 									<option value="2">告警</option> -->
+									<option value="2">故障</option>
+									<option value="3">恢复</option>
 									
 								  </select>
 						
@@ -401,10 +401,10 @@ chevron[2].classList.add("chevron-down");
 	<script type="text/javascript">
 						console.log("TestWarningItem");
 						 stno="<%=c_stno%>";
-						var arr=["告警","故障","恢复"];
+						var arr=["故障","恢复"];
 						var checkValue;
 						if ("<%=c_statu%>"==null) {
-						    checkValue=4;
+						    checkValue=3;
 						}else {
 						    for (var i = 0; i < arr.length; i++) {
 							    if (arr[i]=="<%=c_statu%>") {

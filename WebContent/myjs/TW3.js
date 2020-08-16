@@ -146,7 +146,7 @@ var warning=new Vue({
 	if (TT=="Testwork3.jsp"||TT=="Testwork1.jsp") {
 	    this.TT=true;
 	};
-	if(statu=="null"){ this.couponSelected="告警";}
+	if(statu=="null"){ this.couponSelected="故障";}
 	
 	this.dataShow=this.dataShowf(this.WarningGsons);
 	this.totalLen=this.WarningGsons.length;
@@ -595,6 +595,22 @@ console.log(this.$refs.upload);
 //			      });
 //		    });
 		},
+		
+		Status(){
+		
+		let a=[];
+		if (TT=="Testwork3.jsp"||TT=="Testwork1.jsp"){
+			a=["故障","环境","恢复"];
+		}else{
+			 a=["故障","恢复"];
+//		console.log(a);
+		if (AllListGsons.substring(0,2)=="A-"){
+			return ["环境","恢复"];
+		}
+		}
+		
+		return a;
+	},
 		shaixuan:function(s,e,st) {
                     //绑定了筛选的选项，并用watch监听
                     this.subcontents = this.WarningGsons;

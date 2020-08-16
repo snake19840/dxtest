@@ -65,6 +65,7 @@ public class WarningItem extends HttpServlet {
 		String nowdate=equ.getNowdate();
 		String statu=equ.getStatu();
 		String stno=equ.getStno();
+		String time=equ.getTime();
 	
 //		System.out.println(statu);
 //		System.out.println(sn);
@@ -81,8 +82,8 @@ public class WarningItem extends HttpServlet {
 		}else {
 			task=1;
 		}
-		String sql="insert into dxtestwork(message,username,nowdate,sn,statu,picture,edate,sdate,stno,task) values("+
-		"'"+message+"','"+username+"','"+nowdate+"','"+sn+"','"+statu+"','[]','"+edate+"','"+sdate+"','"+stno+"','"+task+"')";
+		String sql="insert into dxtestwork(message,username,nowdate,sn,statu,picture,edate,sdate,stno,task,time) values("+
+		"'"+message+"','"+username+"','"+nowdate+"','"+sn+"','"+statu+"','[]','"+edate+"','"+sdate+"','"+stno+"','"+task+"','"+time+"')";
 		boolean falg=SelectAll.Update(sql);
 		
 		if (falg) {

@@ -46,10 +46,18 @@ public class Payover extends HttpServlet {
 		String plandate1=request.getParameter("plandate1");
 		String planm1=request.getParameter("planm1");
 		String sgmoney=request.getParameter("sgmoney");
-		String paydate=request.getParameter("paydate");
+		String payname=request.getParameter("payname");
+		String plandate3=request.getParameter("plandate3");
 		
-		String sql="update DXTESTCONTRACT set  planm2='"+planm2+"',	statu='"+statu+"',	plandate2='"+plandate2+"',	plandate1='"+plandate1+"',	planm1='"+planm1+"',sgmoney='"+sgmoney+"'  where contractid='"+contractid+"'";
+		String sql="update DXTESTCONTRACT set  planm2='"+planm2+"',	statu='"+statu+"',	plandate2='"+plandate2+"',	plandate1='"+plandate1+"',	planm1='"+planm1+"',sgmoney='"+sgmoney+"',plandate3='"+plandate3+"'  where contractid='"+contractid+"'";
 		boolean flag=SelectAll.Update(sql);
+		sql="SELECT Username,day FROM dxtestuser WHERE con='1' ";
+		List<Equ> userAllList=SelectAll.Warningstatu(sql);
+		
+		for (int i = 0; i < userAllList.size(); i++) {
+			sql="update  CONTRACTDAY set PLANDATE3 values('"+userAllList.get(i).getRowData().get("DAY")+"' where contractid='"+contractid+"' and username='"+userAllList.get(i).getRowData().get("USERNAME")+"'";
+			 flag=SelectAll.Update(sql);
+		}
 		
 		String sqlv="SELECT	    id,	    contractpicture,	    contractid,	    contractsdate,	    contractedate,	    "
 				+ "contractname,	    contractnowdate,	    statu,	    oppunit,	    markdate,	    contractnlife,	"
@@ -65,7 +73,7 @@ public class Payover extends HttpServlet {
 		for (int i = 0; i < list2.size(); i++) {
 //			sql = "insert into PLANSUB (PAYNAME,PAYPOR,PAYDATE,STATU,REALPAY,PAYPLAN,CONTRACTID) values('"+list2.get(i).getPayname()+"','"+list2.get(i).getPaypor()+"',"
 //					+ "'"+list.get(i).getPaydate()+"','"+list2.get(i).getStatu()+"','"+list2.get(i).getPaydate()+"','"+list2.get(i).getPaydate()+"','"+contractid+"')";
-			sql = "update PLANSUB set  PAYNAME='"+list2.get(i).getPayname()+"',PAYPOR='"+list2.get(i).getPaypor()+"',STATU_SUB='"+list2.get(i).getStatu()+"',REALPAY='"+list2.get(i).getPaydate()+"',PAYPLAN='"+list2.get(i).getPaydate()+"'  where contractid='"+contractid+"' and PAYDATE='"+paydate+"'";		
+			sql = "update PLANSUB set  PAYNAME='"+list2.get(i).getPayname()+"',PAYPOR='"+list2.get(i).getPaypor()+"',STATU_SUB='"+list2.get(i).getStatu()+"',REALPAY='"+list2.get(i).getPaydate()+"',PAYPLAN='"+list2.get(i).getPaydate()+"'  where contractid='"+contractid+"' and PAYNAME='"+list2.get(i).getPayname()+"'";		
 			flag=SelectAll.Update(sql);
 					
 		}

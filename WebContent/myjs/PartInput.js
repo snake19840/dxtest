@@ -94,7 +94,7 @@ function nowT(date,time) {
 var warning=new Vue({
     el:"#warning",
     data:{
-	
+//	Status:["故障","环境","恢复"],
 	seen:false,
 	Pagedata:[],
 	// 所有页面的数据
@@ -108,7 +108,7 @@ var warning=new Vue({
 	      // 默认当前显示第一页
 	      currentPage: 0,
 	      currentPage1: 1,
-	      couponSelected:statu,
+	      couponSelected:'恢复',
 	docFlag:false,
 	docPercentage:0,
 	action:'http://127.0.0.1:8080/dxtest1/UploadPictureItem/',
@@ -156,7 +156,12 @@ var warning=new Vue({
     methods:{
     	
 	isRec(){
-	   return !this.WarningGsons[0].rowData.USERPWD;
+		
+		if (this.WarningGsons[0].rowData.SN=="0" && this.WarningGsons[0].rowData.STNO=="0"){
+			return false;
+			}else{
+				 return !this.WarningGsons[0].rowData.USERPWD;
+			}
 	},
 	dataShowf(items){
 //	 	    console.log(this.WarningGsons.length);
@@ -392,7 +397,12 @@ var warning=new Vue({
 		          if(this.WarningGsons.length==0){
 		          	location.href = "Testindex.jsp";
 		          }else{
-		           this.isRec= this.WarningGsons[0].rowData.USERPWD=="restore"? false:true;
+					if (this.WarningGsons[0].rowData.SN=="0" && this.WarningGsons[0].rowData.STNO=="0"){
+						
+						this.isRec=false;
+					}else{
+						this.isRec= this.WarningGsons[0].rowData.USERPWD=="restore"? false:true;
+					}
 		          }
 		          this.$message({
 		            type: 'success',
@@ -477,14 +487,15 @@ var warning=new Vue({
 			  var ss = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds());
 			  return YY + MM + DD +" "+hh + mm + ss;
 			}
-		    if (this.newMessage==null||this.newMessage=="") {
-			 this.$notify.error({
-			        title: '添加失败',
-			        message: `请输入信息`,
-			            duration:1500
-			      });
-			return
-		    }
+			 function formatTime() {
+			  var date = new Date(date);
+			  var hh = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
+			  var mm = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes());
+			  return hh+mm;
+			}
+			
+	
+			
 		    axios({
 			url: '/dxtest/WarningItem',
 	                method: 'post',
@@ -497,6 +508,7 @@ var warning=new Vue({
 	                    "edate":this.WarningGsons[0].rowData.EDATE,
 	                    "username":this.listusGson[0].userid,
 	                    "nowdate":formatDate(myDate),
+						"time":formatDate(myDate).substr(11,5),
 	                },
 	                enctype:'application/json',
 		    }).then((response)=>{
@@ -562,7 +574,29 @@ var warning=new Vue({
                     this.dataShow=this.dataShowf(this.subcontents);
                     this.totalLen=this.subcontents.length;
              },
+		Status(){
+		let a=[];
+//		console.log(TT);
+		if (TT=="Testwork3.jsp"){
+			a=["故障","环境","恢复"];
+		}else{
+			 a=["故障","恢复"];
+//		console.log(a);
+		if (AllListGsons.substring(0,2)=="A-"){
+			return ["环境","恢复"];
+		}
+		}
+		
+		return a;
+	},
+	
+	
+
     },
+computed:{
+	
+},
+
     watch:{
 sx_sdate: function (n,o) {
     this.shaixuan(this.sx_sdate,this.sx_edate,this.sx_statu);

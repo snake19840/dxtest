@@ -261,7 +261,7 @@ function getCookie(name) {
             		  var sname = v1["sname"];
             		  var id = v1["id"];
             		//console.log(ip1); 
-            		 str += "<tr><td id=Pname>"+pname+"</td><td class=\"center\">"+sn+"</td><td class=\"center\">"+pos+"</td><td class=\"center\">"+ip1+"</td><td class=\"center\">"+styp1+"</td><td class=\"center\">"+sname+"</td><td class=\"center\"><a class=\"btn btn-info\" href=\"EditTestServlet?id="+id+"\"><i class=\"halflings-icon white warning-sign\"></i></a></td></tr>"; 
+            		 str += "<tr><td id=Pname>"+pname+"</td><td class=\"center\">"+sn+"</td><td class=\"center\">"+pos+"</td><td class=\"center\">"+ip1+"</td><td class=\"center\">"+styp1+"</td><td class=\"center\">"+sname+"</td><td class=\"center\"><a class=\"btn btn-info\" target=\"_blank\" href=\"EditTestServlet?id="+id+"\"><i class=\"halflings-icon white warning-sign\"></i></a></td></tr>"; 
             		// str += "<tr><td >"+pname+"</td> <td class=\"center\">"+sn+"</td></tr>"; 
             
             	}; 

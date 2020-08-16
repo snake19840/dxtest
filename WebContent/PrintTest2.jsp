@@ -1,6 +1,5 @@
 
-<%@ page language="java" contentType="application/vnd.ms-word;charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="application/vnd.ms-word;charset=UTF-8" pageEncoding="UTF-8"%>
       <%@page import="java.util.List" %>
 <%@page import="com.clas.Equ"%>
 <%  
@@ -12,7 +11,10 @@
 %>
 
  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http ://www.w3.org/TR/html4/loose.dtd">
-<html>
+
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word" xmlns:m="http://schemas.microsoft.com/office/2004/12/omml"
+xmlns="http://www.w3.org/TR/REC-html40">
 
 <head>
 <meta http-equiv=Content-Type content="text/html; charset=utf-8">
@@ -40,6 +42,7 @@ listGson_print=<%=session.getAttribute("listGson_print") %>;
 	System.out.print(list_PrintTest2.size());
 	if(list_PrintTest2.size()!=0){
 // 		if(false){
+	String m1="";String m2="";String m3="";String[] b=null;
 	String statu="",message="",nowdate="",sdate="",time="",markTime="",username="",task="",stno="",PNAME_T2="",POS_T2="",IP_T2="";
 	for (int i=0;i<list_PrintTest2.size();i++){
 		task=list_PrintTest2.get(i).getRowData().get("TASK").toString();
@@ -52,15 +55,23 @@ listGson_print=<%=session.getAttribute("listGson_print") %>;
 		username=list_PrintTest2.get(i).getRowData().get("USERNAME").toString();
 		stno=list_PrintTest2.get(i).getRowData().get("STNO").toString();
 		
-		PNAME_T2=list_PrintTest2.get(i).getRowData().get("PNAME_T2").toString();
+		PNAME_T2=list_PrintTest2.get(i).getRowData().get("PNAME_T2")==null? "暂无":list_PrintTest2.get(i).getRowData().get("PNAME_T2").toString();
 		POS_T2=list_PrintTest2.get(i).getRowData().get("POS_T2")==null? "暂无":list_PrintTest2.get(i).getRowData().get("POS_T2").toString();
 		IP_T2=list_PrintTest2.get(i).getRowData().get("IP_T2")==null? "暂无":list_PrintTest2.get(i).getRowData().get("IP_T2").toString();
 		IP_T2=!IP_T2.equals("暂无")? IP_T2.substring(0,IP_T2.indexOf("/")):"暂无";
 		sdate=sdate.substring(0,10);
-		if(time==null||time.equals("")){
+		if(!stno.equals("0") && statu.equals("恢复")){
 			markTime=nowdate;
 		}else{
 			markTime=sdate+" "+time;
+		}
+		
+		if(!statu.equals("恢复") && stno.substring(0,2).equals("A-")){
+			b=message.split("--");
+			
+			m1=b[0];
+			m2=b[1];
+			m3=b[2];
 		}
 		
 %>
@@ -109,7 +120,10 @@ listGson_print=<%=session.getAttribute("listGson_print") %>;
   <p class=MsoNormal align=left style='text-align:left;line-height:12.0pt'><span
   style='font-size:11.0pt;font-family:宋体;color:black'>正常【</span>
   <span style='font-size:11.0pt;font-family:"MS Gothic";color:black'>
-  &#10003;
+ <% if(!(!statu.equals("恢复") && stno.substring(0,2).equals("A-") && m1.equals("机房环境"))){%>
+	 &#10003;
+ <%}
+ %>
   </span>
   <span
   style='font-size:11.0pt;font-family:宋体;color:black'>】</span></p>
@@ -120,7 +134,9 @@ listGson_print=<%=session.getAttribute("listGson_print") %>;
   style='font-size:11.0pt;font-family:宋体;color:black'>不正常【</span><span
   style='font-size:11.0pt;font-family:"MS Gothic";color:black'>
   
-  <%--&#10007;--%>
+   <% if(!statu.equals("恢复") && stno.substring(0,2).equals("A-") && m1.equals("机房环境")){%>
+	  &#10007;
+  <%}%> 
   
   </span><span
   style='font-size:11.0pt;font-family:宋体;color:black'>】</span></p>
@@ -137,7 +153,17 @@ listGson_print=<%=session.getAttribute("listGson_print") %>;
   border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;
   border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:1.0pt'>
   <p class=MsoNormal align=left style='text-align:left;line-height:12.0pt'><span
-  style='font-size:11.0pt;font-family:宋体;color:black'>检查异常描述：</span></p>
+  style='font-size:11.0pt;font-family:宋体;color:black'>检查异常描述：
+    <%if(!statu.equals("恢复") && stno.substring(0,2).equals("A-") && m1.equals("机房环境")){%>
+  <%if(m3.length()>110){ %>
+  <%=m3.substring(0,110)+"..."%>
+  <%}else{%>
+  <%=m2%>
+  <%} %>
+	  
+  <%}%>
+  
+  </span></p>
   </td>
   <td width=217 style='width:179.0pt;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -165,7 +191,13 @@ listGson_print=<%=session.getAttribute("listGson_print") %>;
   height:1.0pt'>
   <p class=MsoNormal align=left style='text-align:left;line-height:12.0pt'><span
   style='font-size:11.0pt;font-family:宋体;color:black'>正常【</span><span
-  style='font-size:11.0pt;font-family:"MS Gothic";color:black'>&#10003;</span><span
+  style='font-size:11.0pt;font-family:"MS Gothic";color:black'>
+<% if(!(!statu.equals("恢复") && stno.substring(0,2).equals("A-") && m1.equals("卫生环境"))){%>
+	 &#10003;
+ <%}
+ %>
+  
+  </span><span
   style='font-size:11.0pt;font-family:宋体;color:black'>】</span></p>
   </td>
   <td width=134 colspan=2 valign=top style='width:107.4pt;border:none;
@@ -173,9 +205,9 @@ listGson_print=<%=session.getAttribute("listGson_print") %>;
   <p class=MsoNormal align=right style='text-align:right;line-height:12.0pt'><span
   style='font-size:11.0pt;font-family:宋体;color:black'>不正常【</span><span
   style='font-size:11.0pt;font-family:"MS Gothic";color:black'>
-  <template v-if="flase">
- <%-- &#10007;--%>
-  </template>
+   <% if(!statu.equals("恢复") && stno.substring(0,2).equals("A-") && m1.equals("卫生环境")){%>
+	  &#10007;
+  <%}%> 
   </span><span
   style='font-size:11.0pt;font-family:宋体;color:black'>】</span></p>
   </td>
@@ -191,7 +223,17 @@ listGson_print=<%=session.getAttribute("listGson_print") %>;
   border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;
   border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:1.0pt'>
   <p class=MsoNormal align=left style='text-align:left;line-height:12.0pt'><span
-  style='font-size:11.0pt;font-family:宋体;color:black'>检查异常描述：</span></p>
+  style='font-size:11.0pt;font-family:宋体;color:black'>检查异常描述：
+   <%if(!statu.equals("恢复") && stno.substring(0,2).equals("A-") && m1.equals("卫生环境")){%>
+  <%if(m3.length()>110){ %>
+  <%=m3.substring(0,110)+"..."%>
+  <%}else{%>
+  <%=m2%>
+  <%} %>
+	  
+  <%}%>
+  
+  </span></p>
   </td>
   <td width=217 style='width:179.0pt;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -219,7 +261,12 @@ listGson_print=<%=session.getAttribute("listGson_print") %>;
   height:1.0pt'>
   <p class=MsoNormal align=left style='text-align:left;line-height:12.0pt'><span
   style='font-size:11.0pt;font-family:宋体;color:black'>正常【</span><span
-  style='font-size:11.0pt;font-family:"MS Gothic";color:black'>&#10003;</span><span
+  style='font-size:11.0pt;font-family:"MS Gothic";color:black'>
+<% if(!(!statu.equals("恢复") && stno.substring(0,2).equals("A-") && m1.equals("安全隐患"))){%>
+	 &#10003;
+ <%}
+ %>
+  </span><span
   style='font-size:11.0pt;font-family:宋体;color:black'>】</span></p>
   </td>
   <td width=134 colspan=2 valign=top style='width:107.4pt;border:none;
@@ -227,9 +274,9 @@ listGson_print=<%=session.getAttribute("listGson_print") %>;
   <p class=MsoNormal align=right style='text-align:right;line-height:12.0pt'><span
   style='font-size:11.0pt;font-family:宋体;color:black'>不正常【</span><span
   style='font-size:11.0pt;font-family:"MS Gothic";color:black'>
-   <template v-if="flase">
-  <%--&#10007;--%>
-  </template>
+     <% if(!statu.equals("恢复") && stno.substring(0,2).equals("A-") && m1.equals("安全隐患")){%>
+	  &#10007;
+  <%}%> 
   </span><span
   style='font-size:11.0pt;font-family:宋体;color:black'>】</span></p>
   </td>
@@ -245,7 +292,17 @@ listGson_print=<%=session.getAttribute("listGson_print") %>;
   border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;
   border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:1.0pt'>
   <p class=MsoNormal align=left style='text-align:left;line-height:12.0pt'><span
-  style='font-size:11.0pt;font-family:宋体;color:black'>检查异常描述：</span></p>
+  style='font-size:11.0pt;font-family:宋体;color:black'>检查异常描述：
+     <%if(!statu.equals("恢复") && stno.substring(0,2).equals("A-") && m1.equals("安全隐患")){%>
+  <%if(m3.length()>110){ %>
+  <%=m3.substring(0,110)+"..."%>
+  <%}else{%>
+  <%=m2%>
+  <%} %>
+	  
+  <%}%>
+  
+  </span></p>
   </td>
   <td width=217 style='width:179.0pt;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -290,7 +347,7 @@ listGson_print=<%=session.getAttribute("listGson_print") %>;
   <p class=MsoNormal align=left style='text-align:left;line-height:12.0pt'><span
   style='font-size:11.0pt;font-family:宋体;color:black'>正常【</span><span
   style='font-size:11.0pt;font-family:"MS Gothic";color:black'>
- <% if(statu.equals("恢复")){%>
+ <% if(!(!statu.equals("恢复") && stno.substring(0,2).equals("W-"))){%>
 	 &#10003;
  <%}
  %>
@@ -304,7 +361,7 @@ listGson_print=<%=session.getAttribute("listGson_print") %>;
   <p class=MsoNormal align=right style='text-align:right;line-height:12.0pt'><span
   style='font-size:11.0pt;font-family:宋体;color:black'>不正常【</span><span
   style='font-size:11.0pt;font-family:"MS Gothic";color:black'>
-  <% if(!statu.equals("恢复")){%>
+  <% if(!statu.equals("恢复") && stno.substring(0,2).equals("W-")){%>
 	  &#10007;
   <%}%> 
   
@@ -324,14 +381,18 @@ listGson_print=<%=session.getAttribute("listGson_print") %>;
   border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;
   border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:160pt'>
   <p class=MsoNormal align=left style='text-align:left;line-height:12.0pt'><span
-  style='font-size:11.0pt;font-family:宋体;color:black'>检查异常描述：<%if(!statu.equals("恢复")){%>
+  style='font-size:11.0pt;font-family:宋体;color:black'>检查异常描述：
+  
+  <%if(!statu.equals("恢复") && stno.substring(0,2).equals("W-")){%>
   <%if(message.length()>110){ %>
   <%=message.substring(0,110)+"..."%>
   <%}else{%>
   <%=message%>
   <%} %>
 	  
-  <%}%></span></p>
+  <%}%>
+  
+  </span></p>
   </td>
   <td width=217 style='width:179.0pt;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -371,7 +432,7 @@ listGson_print=<%=session.getAttribute("listGson_print") %>;
   <p class=MsoNormal align=left style='text-align:left;line-height:12.0pt'><span
   style='font-size:11.0pt;font-family:宋体;color:black'>备注： <span lang=EN-US>
   <%
-  if(!stno.equals("0")){%>
+  if(!stno.equals("0")&& stno.substring(0,2).equals("W-")){%>
 	  设备名: <%=PNAME_T2 %> </br>&nbsp;设备位置: <%=POS_T2 %>&nbsp;设备IP: <%=IP_T2 %>&nbsp;
  <% }
   %>
@@ -387,6 +448,16 @@ listGson_print=<%=session.getAttribute("listGson_print") %>;
   <%=message%>
   <%} %>
 	<%  } %>
+	
+	<%if((!statu.equals("恢复") && stno.substring(0,2).equals("A-") && m1.equals("机房环境"))||(!statu.equals("恢复") && stno.substring(0,2).equals("A-") && m1.equals("卫生环境"))||(!statu.equals("恢复") && stno.substring(0,2).equals("A-") && m1.equals("安全隐患"))){	  
+  %>
+  <%if(m3.length()>240){%>
+  <%=m3.substring(0,240)+"..."%>
+  <%}else{%>
+  <%=m3%>
+  <%} %>
+	<%  } %>
+	
   </span></span></p>
   </td>
  </tr>

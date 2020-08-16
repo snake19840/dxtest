@@ -2,6 +2,7 @@ package com.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.clas.Equ;
 import com.clas.SelectAll;
+import com.dao.ListDxtestwork;
 import com.google.gson.Gson;
 
 /**
@@ -77,7 +79,12 @@ public class WarningServlet4 extends HttpServlet {
 		SelectAll.updata_dxtestwork(sn, message, time, userid, nowdate, statu, picture, edate, sdate, stnonew);
 		List<Equ> listus=SelectAll.userAddListRe(userid);
 		List<Equ> listAllDxtestwork=SelectAll.SelectAllDxtestwork();
-		List<Equ> listAllDxtestwork2=SelectAll.SelectAllDxtestwork2();
+//		List<Equ> listAllDxtestwork2=SelectAll.SelectAllDxtestwork2();
+		Date date = new Date(System.currentTimeMillis());
+		List<Equ> listAllDxtestwork2=ListDxtestwork.selAll(date);
+		
+		
+		
 		String listAllDxtestworkSon2=gson.toJson(listAllDxtestwork2); 
 		String listAllDxtestworkSon=gson.toJson(listAllDxtestwork); 
 		session.setAttribute("listAllDxtestwork", listAllDxtestworkSon);

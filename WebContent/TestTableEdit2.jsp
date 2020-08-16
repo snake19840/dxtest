@@ -374,7 +374,8 @@ var tableList=new Vue({
 	},
 	rowclick(e){
 // 	    console.log(e);
-	    location.href = "EditTestServlet?id="+e.id;
+		window.open("EditTestServlet?id="+e.id);
+// 	    location.href = "EditTestServlet?id="+e.id;
 	    
 	},
 	wraning(n,e){

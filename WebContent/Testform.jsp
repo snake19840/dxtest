@@ -454,6 +454,7 @@ String		ownname4 = "";
 								  <option></option>
 									<option value="Windows" >Windows</option>
 									<option value="Linux"  >Linux</option>
+									<option value="其它"  >其它</option>
 									</select>
 									<span class="add-on">-</span>
 									<input  name="textfield21syn" type="text" id="syn2" size="16" value="<%=syn2 %>">

@@ -637,7 +637,8 @@ var tableList=new Vue({
 	},
 	rowclick(e){
 // 	    console.log(e);
-	    location.href = "WarningServlet2?sn="+e.sn;
+		window.open("WarningServlet2?sn="+e.sn);
+// 	    location.href = "WarningServlet2?sn="+e.sn;
 	},
 	wraning(n,e){
 	    this.rowclick(e);

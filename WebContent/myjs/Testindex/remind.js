@@ -138,6 +138,7 @@ for (var i = 0; i < datan.length; i++) {
     
     function aclose(i) {
     		setCookie("mark", 1, 1);
+//console.log(111111);
 	document.getElementById("gritter-item-"+i).style.display="none";
     }
     
@@ -168,9 +169,11 @@ for (var i = 0; i < datan.length; i++) {
 		if (httpRequest.readyState == 4 && httpRequest.status == 200) { // 验证请求是否发送成功
 			var json = httpRequest.responseText; // 获取到服务端返回的数据
 			console.log(json);
-			if (json == "LateAlertSuccess") {aclose(i);}
-			if (json == "PayoverSuccess") {alert("付款成功!");aclose(i);}
-			if (json == "False") {alert("失败,请联系管理员!");return;}
+			alert("修改成功!");
+			aclose(i);
+//			if (json == "LateAlertSuccess") {aclose(i);}
+//			if (json == "PayoverSuccess") {alert("付款成功!");aclose(i);}
+//			if (json == "False") {alert("失败,请联系管理员!");return;}
 		}
 	};
 }

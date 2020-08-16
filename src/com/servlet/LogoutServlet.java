@@ -1,12 +1,19 @@
 package com.servlet;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.clas.Equ;
+import com.clas.SelectAll;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 /**
  * Servlet implementation class LogoutServlet
@@ -37,6 +44,15 @@ public class LogoutServlet extends HttpServlet {
 		//String loginId="n";
 		//session.invalidate();
 		//session.setAttribute("loginId", loginId);
+		Gson gson = new Gson();
+		//String #Gson=gson.toJson(#); 
+		//session.setAttribute("#Gson", #Gson);
+		
+		String listusGson=(String) session.getAttribute("listusGson");
+		List<Equ> ll=gson.fromJson(listusGson, new TypeToken<List<Equ>>() {}.getType());
+		
+		String sql="insert into dxtestlog (userid,username,edits) values ('"+ll.get(0).getUsername()+"','"+ll.get(0).getUserid()+"','logout succsess')";
+		SelectAll.insertItem(sql);
 		
 		session.setAttribute("loginId", "n");
 		request.getRequestDispatcher("index_login.jsp").forward(request, response);

@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 
 import com.clas.Equ;
 import com.clas.SelectAll;
+import com.dao.ListDxtestwork;
 import com.google.gson.Gson;
 
 /**
@@ -77,15 +78,19 @@ public class LoginServlet2 extends HttpServlet {
 				Date nowdateDate = new Date(System.currentTimeMillis());
 				//String nowdateStr=formatter.format(nowdateDate);
 				String planAlertStr=null;
+				String planAlertStr_compare=null;
 				String info="";
+				String username0="";
 			 
 //		System.out.println(count_userpwd);
 		if (count_username>0) {
 			if (count_userpwd>0) {
 				
 				dd=Integer.parseInt(listus.get(0).getDay());
+				username0=listus.get(0).getUsername();
 //				System.out.println(dd);
-				planAlertStr=formatter.format(new Date(nowdateDate.getTime()+dd*86400000));
+				planAlertStr_compare=formatter.format(new Date(nowdateDate.getTime()+dd*86400000));
+				planAlertStr=formatter.format(new Date(nowdateDate.getTime()));
 				session.setAttribute("listus", listus);
 			//	System.out.println("ture");
 				info="";
@@ -95,14 +100,17 @@ public class LoginServlet2 extends HttpServlet {
 			//	session.setAttribute("username", username);
 				List<Equ> typeclass=SelectAll.typeclass();
 				List<Equ> listAllDxtestwork=SelectAll.SelectAllDxtestwork();
-				List<Equ> listAllDxtestwork2=SelectAll.SelectAllDxtestwork2();
+				
+//				List<Equ> listAllDxtestwork2=SelectAll.SelectAllDxtestwork2();
+				
+				List<Equ> listAllDxtestwork2=ListDxtestwork.selAll(nowdateDate);
+				
 				List<Equ> userIds=SelectAll.userIds();
 				
 //				System.out.println(planAlertStr);
 				//合同提示列表
 				
-				
-				List<Equ> planalertlist=SelectAll.planalertlist(planAlertStr);
+				List<Equ> planalertlist=SelectAll.planalertlist(planAlertStr,planAlertStr_compare, username0);
 				String listAllDxtestworkSon=gson.toJson(listAllDxtestwork); 
 				String listAllDxtestworkSon2=gson.toJson(listAllDxtestwork2); 
 				String planalertlistGson=gson.toJson(planalertlist);
@@ -118,14 +126,24 @@ public class LoginServlet2 extends HttpServlet {
 				session.setAttribute("typeclassGson", typeclassGson);
 				session.setAttribute("listAllDxtestwork", listAllDxtestworkSon);
 				session.setAttribute("listAllDxtestwork2", listAllDxtestworkSon2);
+				
+				
+				sql="insert into dxtestlog (userid,username,edits) values ('"+username+"','"+listus.get(0).getUserid()+"','login succsess')";
+				SelectAll.insertItem(sql);
+				
 				out.print("{\"statu\":\"success\",\"planalertlistGson\":" + planalertlistGson + "}");
 				out.close();
 				
 			}else {
+				sql="insert into dxtestlog (userid,username,edits) values ('Guest','','login false userpwd_error, pwd is "+userpwd+"')";
+				SelectAll.insertItem(sql);
+				
 				out.print("{\"statu\":\"userpwd_error\"}");
 				out.close();
 			}
 		}else {
+			sql="insert into dxtestlog (userid,username,edits) values ('Guest','','login false username_error, username is "+username+"')";
+			SelectAll.insertItem(sql);
 			out.print("{\"statu\":\"username_error\"}");
 			out.close();
 		}

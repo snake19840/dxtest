@@ -164,7 +164,7 @@ function($) {
 			if (className == "badge-success") {
 				badgeRe = "恢复";
 			} else if (className == "badge-warning") {
-				badgeRe = "告警"
+				badgeRe = "环境"
 			} else if (className == "badge-important") {
 				badgeRe = "故障"
 			} else {
@@ -266,9 +266,9 @@ function($) {
 				form = $("<form></form>");
 				form.append("<label style='margin-left: 12px;'></label>");
 				form.append("<div class='input-group' style='margin-top: 32px;margin-left: 52px;'><span class='input-group-btn'>\
-            <button class='btn  waves-effect waves-light btn-primary'  style='background-color: #b94a48; margin-top: -10px;margin-left: 80px;'\
-            onclick=\"location.href=\'WarningSelect2?sdate=" + sdate + "&userid=" + useridwarning + "&edate=" + edate + "&statu=" + statu + "\'\" >事件内容\
-            </button></span></div>");
+            <a target=\"_blank\" class='btn  waves-effect waves-light btn-primary'  style='background-color: #b94a48; margin-top: -10px;margin-left: 80px;'\
+            href='WarningSelect2?sdate=" + sdate + "&userid=" + useridwarning + "&edate=" + edate + "&statu=" + statu + "'>事件内容\
+            </a></span></div>");
 			} else {}
 
 		}
@@ -291,9 +291,9 @@ function($) {
 					form.append("<label style='/* margin-left: 60px; */width: 14%;float: left;font-weight: bolder;padding-top: 1px;font-size: 16px;text-align: center;'>巡检人员:</label>");
 					form.append("<div class='input-group'>\
             <span style='/* margin-left: 60px; */padding-left: 20px;font-weight: bolder;/* padding-bottom: 1px; */' class='form-control' name='title'>" + userid.substr(0, userid.length - 1) + "\
-            <button class='btn  waves-effect waves-light btn-primary'  style='background-color: #b94a48; margin-top: -10px;margin-left: 80px;'\
-            onclick=\"location.href=\'WarningSelect2?sdate=" + sdate + "&edate=" + edate + "&userid=" + useridwarning + "&statu=" + statu + "\'\" >事件内容\
-            </button></span></div>")
+            <a target=\"_blank\" class='btn  waves-effect waves-light btn-primary'  style='background-color: #b94a48; margin-top: -10px;margin-left: 80px;'\
+            href='WarningSelect2?sdate=" + sdate + "&edate=" + edate + "&userid=" + useridwarning + "&statu=" + statu + "' >事件内容\
+            </a></span></div>")
 
 				} else {
 
@@ -306,7 +306,7 @@ function($) {
 					form.append("<label style='/* margin-left: 60px; */width: 14%;float: left;font-weight: bolder;padding-top: 1px;font-size: 16px;text-align: center;'>巡检人员:</label>");
 					form.append("<div class='input-group'>\
             <span style='/* margin-left: 60px; */padding-left: 20px;font-weight: bolder;/* padding-bottom: 1px; */' class='form-control' name='title'>" + userid.substr(0, userid.length - 1) + "\
-            <button class='btn  waves-effect waves-light btn-primary'  style='margin-top: -10px;margin-left: 120px;'\
+            <button  class='btn  waves-effect waves-light btn-primary'  style='margin-top: -10px;margin-left: 120px;'\
             onclick=\"location.href=\'WarningServlet4?sdate=" + codeA(sdatesuccess) + "&edate=" + codeA(edatesuccess) + "&userid=" + useridsuccess + "\'\" >事件登记</button>\
            </span></div>")
 				}
@@ -342,9 +342,9 @@ function($) {
 					form.append("<label style='/* margin-left: 60px; */width: 14%;float: left;font-weight: bolder;padding-top: 1px;font-size: 16px;text-align: center;'>巡检人员:</label>");
 					form.append("<div class='input-group'>\
             <span style='/* margin-left: 60px; */padding-left: 20px;font-weight: bolder;/* padding-bottom: 1px; */' class='form-control' name='title'>" + userid.substr(0, userid.length - 1) + "\
-            <button class='btn  waves-effect waves-light btn-primary'  style='background-color: #b94a48; margin-top: -10px;margin-left: 80px;'\
-            onclick=\"location.href=\'WarningSelect2?sdate=" + sdate + "&edate=" + edate + "&userid=" + useridwarning + "&statu=" + statu + "\'\" >事件内容\
-            </button></span></div>")
+            <a target=\"_blank\" class='btn  waves-effect waves-light btn-primary'  style='background-color: #b94a48; margin-top: -10px;margin-left: 80px;'\
+            href='WarningSelect2?sdate=" + sdate + "&edate=" + edate + "&userid=" + useridwarning + "&statu=" + statu + "' >事件内容\
+            </a></span></div>")
 				} else {
 					var sdatewarning = initDate_s(calEvent);
 					var edatewarning = initDate_e(calEvent);
@@ -530,7 +530,7 @@ function($) {
 			.find("select[name='category']")
 			.append("<option value='badge-success'>巡检正常</option>")
 			.append("<option value='badge-important'>设备故障</option>")
-			.append("<option value='badge-warning'>设备告警</option></div></div>");
+			.append("<option value='badge-warning'>环境问题</option></div></div>");
 			}
 			else{
 				var form = $("<form></form>");
@@ -545,7 +545,7 @@ function($) {
 			.find("select[name='category']")
 			.append("<option value='badge-success'>无新增故障</option>")
 			.append("<option value='badge-important'>设备故障</option>")
-			.append("<option value='badge-warning'>设备告警</option></div></div>");
+			.append("<option value='badge-warning'>环境问题</option></div></div>");
 			}
 
 		}
@@ -556,22 +556,30 @@ function($) {
 		});
 		$this.$modal.find('form').on('submit',
 		function() {
+			function enc(str){
+			return	window.btoa(window.encodeURIComponent(str));
+			}
+			
+			let t='';
 			if (aut == "1\/") {
-				var title = form.find("select[name='title'] option:checked").val();
-				console.log(title);
+				t=form.find("select[name='title'] option:checked").val();
+				var title = enc(t);
+//				console.log(title);
 				setCookie("userS",title,300);
 			}else if (listusGson[0].levela==1) {
 			    if (document.getElementsByName("title")[0].tagName=="SELECT") {
-				var title = form.find("select[name='title'] option:checked").val();
+				t=form.find("select[name='title'] option:checked").val();
+				var title =enc(t) ;
 				console.log(title);
 				setCookie("userS",title,300);
 			    }else {
-				var title = form.find("span[name='title'] ").text();
+				t=form.find("span[name='title'] ").text()
+				var title =enc(t) ;
 			    }
 			} 
 			else {
-			    
-				var title = form.find("span[name='title'] ").text();
+			    t=form.find("span[name='title'] ").text();
+				var title =enc(t) ;
 				//  console.log(title);
 			}
 
@@ -586,7 +594,7 @@ function($) {
 				sdate = formatDate(sdate) + " 00:00:00";
 				var edate = end["_d"];
 				edate = formatDate(edate) + " 00:00:00";
-				var userid = title;
+				var userid = window.decodeURIComponent(window.atob(title));
 				var statu = categoryClass;
 				statu = badgeRe(statu);
 				
@@ -597,7 +605,7 @@ function($) {
 //				console.log(title);
 				if (statu == "巡检人员") {
 					$this.$calendarObj.fullCalendar('renderEvent', {
-						title: title,
+						title: window.decodeURIComponent(window.atob(title)),
 						start: start,
 						end: end,
 						allDay: false,
@@ -608,7 +616,7 @@ function($) {
 					location.href = "AddPlanServlet1?sdate=" + codeA(sdate) + "&edate=" + codeA(edate) + "&userid=" + codeA(userid) + "&statu=" + codeA(statu);
 				} else if (statu == "恢复") {
 					$this.$calendarObj.fullCalendar('renderEvent', {
-						title: title,
+						title: window.decodeURIComponent(window.atob(title)),
 						start: start,
 						end: end,
 						allDay: false,
@@ -625,9 +633,9 @@ function($) {
 					alert("请选择当天或当天之前的日期");
 					location.reload();
 					}
-				} else {
+				} else if (statu == "环境"){
 					$this.$calendarObj.fullCalendar('renderEvent', {
-						title: title,
+						title: window.decodeURIComponent(window.atob(title)),
 						start: start,
 						end: end,
 						allDay: false,
@@ -640,12 +648,46 @@ function($) {
 					let d0=myDate.getTime();
 					var flag=d1>d0;
 					if(!flag){
+						setCookie("EnvServlet_sdate",codeA(sdate),300);
+						setCookie("EnvServlet_edate",codeA(edate),300);
+						setCookie("EnvServlet_userid",codeA(userid),300);
+						setCookie("EnvServlet_statu",codeA(statu),300);
+						setCookie("EnvServlet_time",codeA(timea),300);
+						
+					location.href = "EnvServlet.jsp";
+					}else{
+					alert("请选择当天或当天之前的日期");
+					location.reload();
+					}
+				}else{
+					$this.$calendarObj.fullCalendar('renderEvent', {
+						title: window.decodeURIComponent(window.atob(title)),
+						start: start,
+						end: end,
+						allDay: false,
+						className: categoryClass
+					},
+					true);
+					
+					$this.$modal.modal('hide');
+					let d1=start._d.getTime()-28800000;
+					let d0=myDate.getTime();
+					var flag=d1>d0;
+					if(!flag){
+//						console.log(codeA(sdate))
+//						console.log(codeA(edate))
+//						console.log(codeA(userid))
+//						console.log(statu)
+//						console.log(timea)
+						
 					location.href = "AllListServlet3?sdate=" + codeA(sdate) + "&edate=" + codeA(edate) + "&userid=" + codeA(userid) + "&statu=" + statu+"&time="+timea;
 					}else{
 					alert("请选择当天或当天之前的日期");
 					location.reload();
 					}
+					
 				}
+				
 
 			} else {
 				alert('You have to give a title to your event');
@@ -655,6 +697,8 @@ function($) {
 		});
 		$this.$calendarObj.fullCalendar('unselect');
 	},
+	
+	
 	CalendarApp.prototype.enableDrag = function() {
 		//init events
 		$(this.$event).each(function() {
@@ -680,10 +724,12 @@ function($) {
 		if (className == "badge-success") {
 			badgeRe = "恢复";
 		} else if (className == "badge-warning") {
-			badgeRe = "告警"
+			badgeRe = "环境"
 		} else if (className == "badge-important") {
 			badgeRe = "故障"
-		} else {
+		} else if (className == "badge-inverse"){
+			badgeRe = "巡检人员"
+		}else{
 			badgeRe = "巡检人员"
 		}
 		return badgeRe;
@@ -719,11 +765,13 @@ function($) {
 
 		if (statu == "恢复") {
 			badgeStatu = "badge-success";
-		} else if (statu == "告警") {
+		} else if (statu == "环境") {
 			badgeStatu = "badge-warning"
 		} else if (statu == "故障") {
 			badgeStatu = "badge-important"
-		} else {
+		} else if (statu == "巡检人员"){
+			badgeStatu = "badge-inverse"
+		}else{
 			badgeStatu = "badge-inverse"
 		}
 		return badgeStatu;
@@ -771,8 +819,9 @@ function($) {
 		var obj = JSON.parse(text);
 		
 		var defaultEvents = obj;
+		
 		// var defaultEvents =  text;
-		//console.log(defaultEvents);
+//		console.log(defaultEvents);
 		var $this = this;
 		$this.$calendarObj = $this.$calendar.fullCalendar({
 			slotDuration: '00:15:00',
@@ -833,9 +882,18 @@ function($) {
 
 (window.jQuery);
 
-function selectUsers(){		
-	var text = "";
-	var userS=getCookie("userS");
+function selectUsers(){	
+//	function dec(str){
+//	return	window.decodeURIComponent(window.atob(str))	;
+//	}
+//	
+//	
+//	
+//	var userS= dec(getCookie("userS"));
+var text = "";
+
+var userS= "俞健";
+//	console.log(userS);
 	userS=turnUser(userS);
 	text += "<option value='"+userS+"'>"+userS+"</option>";
 	for(var i=0;i<userIdsGson.length;i++){
@@ -885,7 +943,7 @@ if(listAllDxtestworkObj.length==0){
 	 text += "<option value='badge-success'>无新增故障</option>";
 }
 	    text += "<option value='badge-important'>设备故障</option>";
-	    text += "<option value='badge-warning'>设备告警</option>";
+	    text += "<option value='badge-warning'>环境问题</option>";
 	    text += "</select>";
 	    text += "</div>";
 	    text += "</div>";
@@ -935,6 +993,19 @@ if(listAllDxtestworkObj.length==0){
 	}
 }
 
+
+function changetitle(sd,ed,us){
+	let obj=document.getElementById("title");
+	let i=obj.selectedIndex;
+	us =obj.options[i].value;
+	
+	location.href="Changetitle?sd="+sd+"&ed="+ed+"&us="+codeA(us)+"";
+	
+	console.log(sd);
+	console.log(ed);
+	console.log(us);
+	return
+}
 
 
  var formatDate = function (date) { 

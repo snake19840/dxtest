@@ -999,7 +999,6 @@ function getCommonObj(arr,key,value){
 	    }
 	    
 	    
-	    
 	    axios({
                 url: '/dxtest/UpDataContract4',
                    method: 'post',
@@ -1058,6 +1057,7 @@ function getCommonObj(arr,key,value){
                        "plan1":plan1,
                        "planm2":planm2,
 					"sgmoney":sgmoney,
+					"plandate_str":listusGson[0].day,
                    },
                    enctype:'application/json',
              }).then((response)=>{

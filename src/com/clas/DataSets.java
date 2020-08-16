@@ -39,17 +39,18 @@ public class DataSets {
 	}
 	public static String anytomorrow(String n) {
 		SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
-		Date dd=null;
+		String dateTomString="";
 		try {
-			 dd=dateFormat.parse(n);
+		Date dd=dateFormat.parse(n);
+		Calendar calendar=new GregorianCalendar();
+		calendar.setTime(dd);
+		calendar.add(calendar.DATE, 1);
+		 dateTomString=dateFormat.format(calendar.getTime());
+		
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Calendar calendar=new GregorianCalendar();
-		calendar.setTime(dd);
-		calendar.add(calendar.DATE, 1);
-		String dateTomString=dateFormat.format(calendar.getTime());
 		return dateTomString;
 	}
 	public static String yesterdate() {

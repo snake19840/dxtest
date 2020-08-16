@@ -113,6 +113,7 @@ public class UpDataContract3 extends HttpServlet {
 		String plandate1=equ.getPlandate1();
 		String plandate2=equ.getPlandate2();
 		String classson=equ.getClassson();
+		String plandate3=equ.getPlandate_str();
 		String myidTemp=null;
 		String oppidTemp=null;
         String myid=formatter.format(date)+System.currentTimeMillis();
@@ -194,7 +195,7 @@ public class UpDataContract3 extends HttpServlet {
 					+ "	    plan4='"+    plan4+"',	    plandate2='"+    plandate2+"',	    plandate1='"+    plandate1+"',"
 					+ "	    planm1='"+    planm1+"',	    planm2='"+    planm2+"',	    myname='"+    myname+"',"
 					+ "	    oppname='"+    oppname+"',	    oppid='"+    oppid+"',	    myid='"+    myid+"',"
-					+ "	    classson='"+    classson+"' ,sgmoney='"+sgmoney+"'  where contractid='"+contractid+"'";
+					+ "	    classson='"+    classson+"' ,sgmoney='"+sgmoney+"' ,plandate3='"+plandate3+"' where contractid='"+contractid+"'";
 		
 			flag=SelectAll.Update(sql);
 			
@@ -203,7 +204,7 @@ public class UpDataContract3 extends HttpServlet {
 			for (int i = 0; i < list2.size(); i++) {
 //				sql = "insert into PLANSUB (PAYNAME,PAYPOR,PAYDATE,STATU,REALPAY,PAYPLAN,CONTRACTID) values('"+list2.get(i).getPayname()+"','"+list2.get(i).getPaypor()+"',"
 //						+ "'"+list.get(i).getPaydate()+"','"+list2.get(i).getStatu()+"','"+list2.get(i).getPaydate()+"','"+list2.get(i).getPaydate()+"','"+contractid+"')";
-				sql = "update PLANSUB set  PAYNAME='"+list2.get(i).getPayname()+"',PAYPOR='"+list2.get(i).getPaypor()+"',STATU_SUB='"+list2.get(i).getStatu()+"',REALPAY='"+list2.get(i).getPaydate()+"',PAYPLAN='"+list2.get(i).getPaydate()+"'  where contractid='"+contractid+"' and PAYDATE='"+list.get(i).getPaydate()+"'";		
+				sql = "update PLANSUB set  PAYNAME='"+list2.get(i).getPayname()+"',PAYPOR='"+list2.get(i).getPaypor()+"',STATU_SUB='"+list2.get(i).getStatu()+"',REALPAY='"+list2.get(i).getPaydate()+"',PAYPLAN='"+list2.get(i).getPaydate()+"'  where contractid='"+contractid+"' and PAYNAME='"+list2.get(i).getPayname()+"'"; 		
 				flag=SelectAll.Update(sql);
 						
 			}

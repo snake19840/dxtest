@@ -36,24 +36,27 @@
 /* 36 */     response.setCharacterEncoding("UTF-8");
 /* 37 */     HttpSession session = request.getSession();
 /* 38 */     Gson gson = new Gson();
+//String #Gson=gson.toJson(#); 
+//session.setAttribute("#Gson", #Gson);
 /*    */     
 /* 40 */     String contractid = request.getParameter("contractid");
-/* 41 */     String plandate1 = request.getParameter("plandate1");
-/* 42 */     String planm2 = request.getParameter("planm2");
+/* 41 */     String plandate3 = request.getParameter("plandate3");
+			String username=request.getParameter("username");
+///* 42 */     String planm2 = request.getParameter("planm2");
 /*    */ 
 /*    */     
-/* 45 */     int LateAlert = SelectAll.LateAlert(plandate1, contractid, planm2);
+/* 45 */     int LateAlert = SelectAll.LateAlert(plandate3, contractid,username);
 /*    */     
 /* 47 */     String sql = "";
-/*    */     
+/*    */    
 ///* 49 */     List<Equ> list = (List)gson.fromJson(planm2, (new TypeToken<List<Equ>>() {  }).getType());
-			List<Equ> list = gson.fromJson(planm2, new TypeToken<List<Equ>>() {}.getType());
+//			List<Equ> list = gson.fromJson(planm2, new TypeToken<List<Equ>>() {}.getType());
 /*    */     
-/* 51 */     for (int i = 0; i < list.size(); i++) {
-///* 52 */       System.out.println(i);
-/* 53 */       sql = "update PLANSUB set  REALPAY='" + list.get(i).getPaydate() + "', PAYPLAN='" + list.get(i).getPaydate() + "'  where contractid='" + contractid + "' and payname='" + list.get(i).getPayname() + "'";
-/* 54 */       boolean bool = SelectAll.Update(sql);
-/*    */     } 
+///* 51 */     for (int i = 0; i < list.size(); i++) {
+/////* 52 */       System.out.println(i);
+///* 53 */       sql = "update PLANSUB set  REALPAY='" + list.get(i).getPaydate() + "', PAYPLAN='" + list.get(i).getPaydate() + "'  where contractid='" + contractid + "' and payname='" + list.get(i).getPayname() + "'";
+///* 54 */       boolean bool = SelectAll.Update(sql);
+///*    */     } 
 /*    */ 
 /*    */     
 /* 58 */     PrintWriter out = response.getWriter();

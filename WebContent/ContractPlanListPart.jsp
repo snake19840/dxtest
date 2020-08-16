@@ -566,7 +566,8 @@ var tableList=new Vue({
 	},
 	      edit(id){
 // 	    console.log(id);
-		  location.href = "ContractPlanItem?contractid="+id+"&TT="+TT;
+			window.open("ContractPlanItem?contractid="+id+"&TT="+TT);
+// 		  location.href = "ContractPlanItem?contractid="+id+"&TT="+TT;
 	      },
 	      countCamcount(e){
 		  var sum=e.rowData.CAMOUNT;

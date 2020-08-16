@@ -1008,7 +1008,7 @@ contractListItemGson=<%=session.getAttribute("contractListItemGson")%>;
 // 				   console.log(planMain.items[n]);
 			   sgmoney=planMain.items[n].paypor;
 				
-				    data="contractid="+contractid+"&planm2="+planm2	+"&plandate1="+PLANDATE1	+"&planm1="+PLANM1  +"&sgmoney="+sgmoney+"&paydate="+paydate;
+				    data="contractid="+contractid+"&planm2="+planm2	+"&plandate1="+PLANDATE1	+"&planm1="+PLANM1  +"&sgmoney="+sgmoney+"&paydate="+paydate+"&username="+listusGson[0].username+"&plandate3="+listusGson[0].day;
 				    getPost(data, url);
 				}
 			    
@@ -1031,7 +1031,7 @@ contractListItemGson=<%=session.getAttribute("contractListItemGson")%>;
 				    var data=JSON.parse(json);
 		 		    console.log(data);
 		 		   if (data.statu) {
-		 			contractListItemGson=data.contractListItemGson;
+		 			contractItemGson=data.contractListItemGson;
 		 			planMain.$message({
 		 			          message: '修改成功',
 		 			          type: 'success'
@@ -1126,10 +1126,10 @@ contractListItemGson=<%=session.getAttribute("contractListItemGson")%>;
 				PLANDATE1=this.items[i+1].paydate;
 				PLANM1=this.items[i+1].payname;
 				sgmoney=this.items[i+1].paypor;
-				paydate=this.pnamexString[n].paydate;
+				payname=this.pnamexString[i].payname;
 			    }
 			    planm2=JSON.stringify(this.items);
-			    data="contractid="+contractid+"&planm2="+planm2	+"&statu="+statu	+"&plandate2="+PLANDATE2	+"&plandate1="+PLANDATE1	+"&planm1="+PLANM1+"&sgmoney="+sgmoney+"&paydate="+paydate;
+			    data="contractid="+contractid+"&planm2="+planm2	+"&statu="+statu	+"&plandate2="+PLANDATE2	+"&plandate1="+PLANDATE1	+"&planm1="+PLANM1+"&sgmoney="+sgmoney+"&payname="+payname+"&plandate3="+listusGson[0].day;
 			    getPost(data, url,i);
 		        } else {
 		            return;// 取消执行时的代码

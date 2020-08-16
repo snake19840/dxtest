@@ -447,6 +447,7 @@
 /*      */   }
 /*      */   
 /*      */   public static boolean insertItem(String sql) {
+//	insert into classinfo(classid,classname) values(01,'测试一班');
 /*  450 */     boolean a = false;
 /*      */     try {
 /*  452 */       Connection conn = JDBCconnect.getConnection();
@@ -485,7 +486,7 @@
 /*      */   
 /*      */   public static boolean Update(String sql) {
 /*  487 */     boolean a = false;
-/*      */     
+///*      */     update studentinfo set studentname='李五',studentsex='女',studentage=15 where studentid=2;
 /*      */     try {
 /*  490 */       Connection conn = JDBCconnect.getConnection();
 /*  491 */       conn.setAutoCommit(true);
@@ -1074,7 +1075,7 @@
 /* 1074 */         String pwdString = null;
 /* 1075 */         while (rs.next()) {
 /* 1076 */           pwdString = rs.getString(4);
-/* 1077 */           System.out.println(pwdString);
+///* 1077 */           System.out.println(pwdString);
 /* 1078 */           if (pwdString == null) {
 /* 1079 */             pwdString = "";
 /*      */           }
@@ -1098,6 +1099,9 @@
 /* 1098 */     return userpwd;
 /*      */   }
 /*      */   
+
+
+
 /*      */   public static List<Equ> SelectItemPart(String sdate, String edate, String statu) {
 /* 1102 */     List<Equ> list = new ArrayList<Equ>();
 /*      */     try {
@@ -1205,7 +1209,7 @@
 /* 1205 */       ps.close();
 /*      */       
 /* 1207 */       ps3.close();
-/* 1208 */       rs2.close();
+///* 1208 */       rs2.close();
 /* 1209 */       rs3.close();
 /* 1210 */       rs.close();
 /* 1211 */       conn.close();
@@ -1771,21 +1775,18 @@
 /* 1771 */     return listWaring;
 /*      */   }
 /*      */   
-/*      */   public static int LateAlert(String plandate1, String contractid, String planm2) {
+/*      */   public static int LateAlert(String plandate3, String contractid,String username) {
 /* 1775 */     int a = 0;
 /*      */     try {
 /* 1777 */       int inti = 1;
 /* 1778 */       Connection conn = JDBCconnect.getConnection();
 /* 1779 */       conn.setAutoCommit(true);
-/* 1780 */       String sql = "update DXTESTCONTRACT set  plandate1=?, planm2=?  where contractid=?";
+/* 1780 */       String sql = "update CONTRACTDAY set  plandate3=?  where contractid=? and username=?";
 /* 1781 */       PreparedStatement ps = conn.prepareStatement(sql);
-/* 1782 */       ps.setString(inti++, plandate1);
-/* 1783 */       ps.setString(inti++, planm2);
+/* 1782 */       ps.setString(inti++, plandate3);
 /* 1784 */       ps.setString(inti++, contractid);
+				ps.setString(inti++, username);
 /* 1785 */       ResultSet rs = ps.executeQuery();
-/*      */ 
-/*      */ 
-/*      */ 
 /*      */ 
 /*      */       
 /* 1791 */       rs.close();
@@ -1799,7 +1800,7 @@
 /*      */   }
 /*      */ 
 /*      */   
-/*      */   public static List<Equ> planalertlist(String planAlertStr) {
+/*      */   public static List<Equ> planalertlist(String planAlertStr,String planAlertStr_compare,String username) {
 /* 1803 */     List<Equ> list = new ArrayList<Equ>();
 /* 1804 */     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 /* 1805 */     Date nowdateDate = new Date(System.currentTimeMillis());
@@ -1807,13 +1808,14 @@
 /* 1807 */     int lastday = 0;
 /* 1808 */     long ms = 0L;
 /* 1809 */     String p1 = "", p2 = "";
-/*      */     
+/*      */     int PLANDATE3=0;
 /*      */     try {
 /* 1812 */       int inti = 1;
 /* 1813 */       Connection conn = JDBCconnect.getConnection();
-/* 1814 */       String sql = "select camount,planm2, planm1,sgmoney,plandate1,plandate2,finmoney,contractid,contractname from DXTESTCONTRACT where plandate1<=? and (statu!='end'or statu is null)";
+/* 1814 */       String sql = "select t2.PLANDATE3,t1.camount,t1.planm2, planm1,sgmoney,plandate1,plandate2,finmoney,t1.contractid,contractname from DXTESTCONTRACT t1,CONTRACTDAY t2 where t1.contractid=t2.contractid and  t1.plandate1<=? and (t1.statu!='end' or t1.statu is null) and t2.username=?";
 /* 1815 */       PreparedStatement ps = conn.prepareStatement(sql);
-/* 1816 */       ps.setString(inti++, planAlertStr);
+/* 1816 */       ps.setString(inti++, planAlertStr_compare);
+				ps.setString(inti++, username);
 /* 1817 */       ResultSet rs = ps.executeQuery();
 /* 1818 */       while (rs.next()) {
 /* 1819 */         Equ equ = new Equ();
@@ -1829,7 +1831,13 @@
 /* 1829 */         plandate1Date = formatter.parse(p1);
 /* 1830 */         ms = plandate1Date.getTime() - nowdateDate.getTime();
 /* 1831 */         lastday = (int)(ms / 1000L / 60L / 60L / 24L);
-/* 1832 */         equ.setLastday(lastday);
+/* 1832 */        
+					PLANDATE3=rs.getInt("plandate3");
+					if (PLANDATE3-lastday<0) {
+						continue;
+					}
+					 equ.setLastday(lastday);
+					 equ.setPlandate3(PLANDATE3);
 /* 1833 */         equ.setFinmoney(rs.getString("finmoney"));
 /* 1834 */         equ.setContractid(rs.getString("contractid"));
 /* 1835 */         equ.setContractname(rs.getString("contractname"));
@@ -1872,15 +1880,34 @@
 /* 1872 */     return list;
 /*      */   }
 /*      */   
+
+			public static List<Equ> SelectAllDxtestwork3() {
+				 List<Equ> listAllDxtestwork2 = new ArrayList<Equ>();
+				 try {
+					 Connection conn = JDBCconnect.getConnection();
+					 String sql="";
+					 Statement statement = conn.createStatement();
+					 ResultSet rs = statement.executeQuery(sql);
+					 
+					 
+					 
+				} catch (Exception e) {
+					// TODO: handle exception
+					 e.printStackTrace();
+				}
+				 
+				return listAllDxtestwork2;
+			}
+
 /*      */   public static List<Equ> SelectAllDxtestwork2() {
 /* 1876 */    List<Equ> listAllDxtestwork2 = new ArrayList<Equ>();
 /*      */     try {
 /* 1878 */       int intid = 1;
 /* 1879 */       Connection conn = JDBCconnect.getConnection();
 /*      */       
-/* 1881 */       String sql = "select distinct username,sdate,edate,statu from (select * from dxtestwork where (task is null or task='0') and (statu='告警' or statu='巡检人员' or statu='故障') order by sdate desc)order by statu  desc";
+/* 1881 */       String sql = "select distinct username,sdate,edate,statu from (select * from dxtestwork where (task is null or task='0') and (statu='环境' or statu='巡检人员' or statu='故障') order by sdate desc)order by statu  desc";
 /* 1882 */       String sql2 = "select distinct username,sdate,edate,statu from (select * from dxtestwork where (task is null or task='0') and (statu='恢复' and stno!='0') order by sdate desc)order by sdate  desc";
-/* 1883 */       String sql3 = "select count(*) from ( select distinct userpwd,sdate,edate from (select * from dxtestwork where (task is null or task='0') and  (statu='告警' or statu='故障') and sdate=? and edate=?  order by sdate desc)order by sdate desc,edate)";
+/* 1883 */       String sql3 = "select count(*) from ( select distinct userpwd,sdate,edate from (select * from dxtestwork where (task is null or task='0') and  (statu='环境' or statu='故障') and sdate=? and edate=?  order by sdate desc)order by sdate desc,edate)";
 /*      */ 
 /*      */       
 /* 1886 */       String sql4 = "select distinct username,sdate,edate,statu from (select * from dxtestwork where stno='0') order by sdate ";
@@ -2029,13 +2056,7 @@
 /* 2029 */       Connection conn = JDBCconnect.getConnection();
 /*      */       
 /* 2031 */       String sql = "select t1.ID,\tt1.MESSAGE,\tt1.USERNAME,\tt1.USERPWD,\tt1.NOWDATE,\tt1.SDATE,\tt1.EDATE,\tt1.SN,\tt1.PICTURE,\tt1.STATU,\tt1.STNO,\tt1.TASK,\tt1.TIME,t2.ID AS ID_t2,\tt2.STDATE AS STDATE_t2,\tt2.SDATE AS SDATE_t2,\tt2.EDATE AS EDATE_t2,\tt2.REDATE AS REDATE_t2,\tt2.PNAME AS PNAME_t2,\tt2.USE AS USE_t2,\tt2.OWNNAME AS OWNNAME_t2,\tt2.PRONAME AS PRONAME_t2,\tt2.MANNAME AS MANNAME_t2,\tt2.AGENAME AS AGENAME_t2,\tt2.MANTYP AS MANTYP_t2,\tt2.SNAME AS SNAME_t2,\tt2.STYP AS STYP_t2,\tt2.POS AS POS_t2,\tt2.IP AS IP_t2,\tt2.PORT AS PORT_t2,\tt2.CPU AS CPU_t2,\tt2.MEMORY AS MEMORY_t2,\tt2.DISK AS DISK_t2,\tt2.SYN AS SYN_t2,\tt2.ORACLE AS ORACLE_t2,\tt2.SN AS SN_t2,\tt2.OTH AS OTH_t2,\tt2.SID AS SID_t2 from dxtestwork t1,dxtest t2 where t2.sn!='0' and t1.sn=t2.sn and t1.stno!='0' and t1.userpwd is null and task='0' order by t1.sdate desc";
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
+
 /*      */ 
 /*      */       
 /* 2041 */       Statement statement = null;
@@ -2060,6 +2081,29 @@
 /* 2060 */         equ.setPOS_T2(rs.getString("POS_T2"));
 /* 2061 */         listAllDxtestwork.add(equ);
 /*      */       } 
+				sql="select * FROM dxtestwork WHERE statu='环境' and task<>'1' AND USERPWD is null";
+				rs=statement.executeQuery(sql);
+				while (rs.next()) {
+					Equ equ = new Equ();
+/* 2047 */         equ.setMessage(rs.getString("message"));
+/* 2048 */         equ.setUsername(rs.getString("username"));
+/* 2049 */         equ.setUserpwd(rs.getString("userpwd"));
+/* 2050 */         equ.setNowdate(rs.getString("nowdate"));
+/* 2051 */         equ.setSn(rs.getString("sn"));
+/* 2052 */         equ.setStatu(rs.getString("statu"));
+/* 2053 */         equ.setPicture(rs.getString("picture"));
+/* 2054 */         equ.setEdate(rs.getString("edate"));
+/* 2055 */         equ.setSdate(rs.getString("sdate"));
+/* 2056 */         equ.setStno(rs.getString("stno"));
+/* 2057 */         equ.setTask(rs.getString("task"));
+/* 2058 */         equ.setPNAME_T2("9楼机房环境问题");
+/* 2059 */         equ.setIP_T2("无");
+/* 2060 */         equ.setPOS_T2("无");
+/* 2061 */         listAllDxtestwork.add(equ);
+					
+				}
+
+
 /* 2063 */       rs.close();
 /* 2064 */       statement.close();
 /* 2065 */       conn.close();

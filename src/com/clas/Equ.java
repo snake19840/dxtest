@@ -119,7 +119,7 @@ public class Equ {
 		private String plan2;
 		private String plandate2;
 		private String plan3;
-		private String plandate3;
+		private Integer plandate3;
 		private String plan4;
 		private String plandate4;
 		private String planm1;
@@ -196,6 +196,7 @@ public class Equ {
 		private String PNAME_T2;
 		private String POS_T2;
 		private String IP_T2;
+		private String plandate_str;
 
 
 	
@@ -203,6 +204,18 @@ public class Equ {
 
 		
 		
+		public String getPlandate_str() {
+			return plandate_str;
+		}
+		public void setPlandate_str(String plandate_str) {
+			this.plandate_str = plandate_str;
+		}
+		public Integer getPlandate3() {
+			return plandate3;
+		}
+		public void setPlandate3(Integer plandate3) {
+			this.plandate3 = plandate3;
+		}
 		public String getPNAME_T2() {
 			return PNAME_T2;
 		}
@@ -534,7 +547,6 @@ public class Equ {
 		public String getPlan2() {return plan2;}
 		public String getPlandate2() {return plandate2;}
 		public String getPlan3() {return plan3;}
-		public String getPlandate3() {return plandate3;}
 		public String getPlan4() {return plan4;}
 		public String getPlandate4() {return plandate4;}
 		public String getPlanm1() {return planm1;}
@@ -613,7 +625,6 @@ public class Equ {
 		public void setPlan2(String plan2) {this.plan2=plan2;}
 		public void setPlandate2(String plandate2) {this.plandate2=plandate2;}
 		public void setPlan3(String plan3) {this.plan3=plan3;}
-		public void setPlandate3(String plandate3) {this.plandate3=plandate3;}
 		public void setPlan4(String plan4) {this.plan4=plan4;}
 		public void setPlandate4(String plandate4) {this.plandate4=plandate4;}
 		public void setPlanm1(String planm1) {this.planm1=planm1;}

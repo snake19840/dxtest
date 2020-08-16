@@ -110,9 +110,9 @@ overflow-x:auto;
 </span>
 <span>  
 
-<select style="margin-left: 25px" ref="select_statu"   v-model="couponSelected" @change="getCouponSelected">
-			<option :value=WarningStatuGson.rowData.STATU  v-for="(WarningStatuGson,index) in WarningStatuGsons" :key="index">
-			{{WarningStatuGson.rowData.STATU}}</option>
+<select style="margin-left: 25px"  ref="select_statu"   v-model="couponSelected" @change="getCouponSelected">
+			<option :value="item" v-for="(item,index) in Status()"  :key="index">
+			{{item}}</option>
 </select>
 </span>
 

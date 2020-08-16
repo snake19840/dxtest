@@ -9,7 +9,7 @@ function codeA(a) {
 		}
 		 function textSub1(statu) {
 		    var textSub1;
-		     if (statu=="告警") {
+		     if (statu=="环境") {
 			textSub1="icon-bell yellow";
 			return textSub1;
 		    }else {
@@ -53,13 +53,13 @@ function codeA(a) {
 		//	 console.log(j++);
 			 continue
 		    }else {
-			if (statu=="告警") {
+			if (statu=="环境") {
 		//	    console.log(j++);
 			    message=line2br(message);
 
 				// console.log(666);
 				 text += "<li>";
-				 text += "<a href=\"WarningPart?sn="+sn+"&sdate="+codeA(s_sdate)+"&userid="+userid+"&stno="+stno+"&edate="+codeA(s_edate)+"&statu="+codeA("告警")+"\"";
+				 text += "<a target=\"_blank\" href=\"WarningPart?sn="+sn+"&sdate="+codeA(s_sdate)+"&userid="+userid+"&stno="+stno+"&edate="+codeA(s_edate)+"&statu="+codeA("环境")+"\"";
 				 text += ">"   ;
 				 text += "<i class=\""+textSub1(statu)+"\"></i>";
 				 text += ""+pname+"&nbsp;&nbsp;&nbsp;&nbsp;";
@@ -72,7 +72,7 @@ function codeA(a) {
 			//	console.log(j++);
 				 message=line2br(message);
 				text += "<li>";
-				 text += "<a href=\"WarningPart?sn="+sn+"&sdate="+codeA(s_sdate)+"&userid="+userid+"&stno="+stno+"&edate="+codeA(s_edate)+"&TT=ReturnIndex&statu="+codeA("故障")+"\"";
+				 text += "<a target=\"_blank\" href=\"WarningPart?sn="+sn+"&sdate="+codeA(s_sdate)+"&userid="+userid+"&stno="+stno+"&edate="+codeA(s_edate)+"&TT=ReturnIndex&statu="+codeA("故障")+"\"";
 				 text += ">"   ;
 				 text += "<i class=\""+textSub1(statu)+"\"></i>";
 				 text += ""+pname+"&nbsp;&nbsp;&nbsp;&nbsp;";

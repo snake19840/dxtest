@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.clas.Equ;
 import com.clas.SelectAll;
+import com.dao.SelItemPart;
 
 
 /**
@@ -54,7 +55,11 @@ public class WarningSelect2 extends HttpServlet {
 	    statu=java.net.URLDecoder.decode(statu,"UTF-8");
 	    userid=java.net.URLDecoder.decode(userid,"UTF-8");
 	//   System.out.println("userid="+userid);
-	    List<Equ> list=SelectAll.SelectItemPart(sdate, edate, statu);
+//	    List<Equ> list=SelectAll.SelectItemPart(sdate, edate, statu);
+	    SelItemPart selItemPart=new SelItemPart();
+	    List<Equ> list=selItemPart.selAll(sdate, edate);
+	   
+	    
 	  //  List<String> stonList=SelectAll.ston(sdate, edate, statu);
 	    HttpSession session = request.getSession();
 	    session.setAttribute("list_WarningSelect2",list); 

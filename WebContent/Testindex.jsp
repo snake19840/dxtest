@@ -169,11 +169,11 @@ String loginId=(String)session.getAttribute("loginId");
                        <!--  <div class="external-event badge badge-success"  data-class="badge-success" > -->
                          <i class="fa fa-move"></i>巡检正常 </div>
                          <div class=" badge badge-warning" style="margin-bottom: 10px;" data-class="badge-warning" >
-                         <i class="fa fa-move"></i>设备告警</div>
+                         <i class="fa fa-move"></i>环境问题</div>
                          <div class=" badge badge-important" style="margin-bottom: 10px;" data-class="badge-important">
                           <i class="fa fa-move"></i>设备故障</div>
-                          <!--  <div class="external-event badge badge-inverse" data-class="badge-inverse">
-                          <i class="fa fa-move"></i>巡检人员</div> -->
+                        <div class="badge badge-inverse" style="margin-bottom: 10px;" data-class="badge-important">
+                          <i class="fa fa-move"></i>巡检人员</div> 
 
                          <!--  <p>
 						<label for="drop-remove"><input type="checkbox" id="drop-remove" /> 移除标签</label>
@@ -251,7 +251,7 @@ String loginId=(String)session.getAttribute("loginId");
 																<option value="inverse">添加人员</option>
 																<option value="success">巡检正常</option>
 																<option value="important">设备故障</option>
-																<option value="warning">设备告警</option>
+																<option value="warning">环境问题</option>
 
 															</select>
                                                                 </div>
@@ -387,6 +387,9 @@ if (planalertlistGson!=[]) {
 		todate:7,
 	    },
 	    methods:{
+		open_success() {
+		        this.$message.success('修改成功');
+		      },
 		setCookie(name, value, day) {
 		    var date = new Date();
 		    date.setDate(date.getDate() + day);
@@ -402,13 +405,13 @@ if (planalertlistGson!=[]) {
 		    text += "<input id='contractid"+i+"'  type=\"hidden\" value='"+contractid+"'>";
 		    text += "<input id=\"plandate1"+i+"\" type=\"hidden\" value=\""+plandate1+"\">";
 		    text += "<div class=\"gritter-without-image\">";
-		    text += "付款日期：<span>"+plandate1+"</span>&nbsp;&nbsp;&nbsp;离付款日期还剩<span >"+lastday+"</span>天<br>";
+		    text += "付款日期：<span>"+plandate1+"</span>&nbsp;&nbsp;&nbsp;离付款日期还剩<span id='lastday"+i+"'>"+lastday+"</span>天<br>";
 		    text += "付款名称：<span >"+planm1+"</span>&nbsp;&nbsp;&nbsp;付款比例<span >"+sgmoney+"</span>%<br>";
-		    text += "<select id=\"late"+i+"\"   style=\"width: auto;font-size: 1px;background-color: f0f0f0;box-sizing: border-box;height: auto;margin-bottom: 1px;background-color: white;\">";
-		    text += "<option value='1'>1</option ><option value='7'>7</option><option value='10'>10</option>";
-		    text += "<option value='15'>15</option><option value='30'>30</option>";
-		    text += "</select>&nbsp;天&nbsp;";
-		    text += "<input style=\"font-size: 1px;line-height: 13px;\" type=\"button\" onclick='latealert("+i+")' value=\"延后提醒\">";
+		    text += "<input id='late"+i+"' type=\"number\" class=\"form-control\" id=\"inoutnum\" name=\"inoutnum\"";
+		    text += "value='{$ITEM->inoutnum}' min=\"0\" placeholder=\"请输入天数...\" onkeyup=\"if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}\"";
+		    text += "onafterpaste=\"if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'0')}else{this.value=this.value.replace(/\D/g,'')}\"";
+		    text += "style=\"max-width: 100px;    font-size: 13px; margin-top: 5px; margin-bottom: auto;\">";
+		    text += "<input style=\"font-size: 12px;line-height: 13px;margin-left: 10px;height: 20px;width: 56px;margin-top: 5px;\" type=\"button\" onclick='latealert("+i+")' value=\"延后提醒\">";
 // 		    text += "<input onclick='return payover("+i+")' style=\"display: inline;float: right;font-size: 1px;line-height: 13px;margin-top: 4px;\" type=\"button\" value=\"已付款\">";
 		    text += "</div>";
 		    text += "<div style=\"clear:both\">";
@@ -423,6 +426,7 @@ if (planalertlistGson!=[]) {
 		
 	    },
 	    mounted(){
+		
 // 		console.log(this.listusGson);
 // 		console.log(this.datan);
 		if (this.listusGson[0].con==1) {
@@ -440,6 +444,7 @@ if (planalertlistGson!=[]) {
 		       sgmoney=dd.sgmoney;
 		       let pay=(camount*sgmoney/100).toFixed(2);
 		       this.$notify({
+			   customClass:'msgAlert'+i,
 			          title: contractname,
 			          dangerouslyUseHTMLString: true,
 			          message: this.htmls(plandate1,lastday,planm1,sgmoney,i,contractid,planm2),
@@ -536,32 +541,36 @@ document.cookie = name + '=' + value + ';expires=' + date;
 };
     
 function latealert(i) {
+
 	var selectx=document.getElementById("late"+i);
 	var contractid=document.getElementById("contractid"+i).value;
 	var plandate1=document.getElementById("plandate1"+i).value;
 	var p2= JSON.parse( datan[i].planm2);
 // 	console.log(p2);
-	var dd=selecta(selectx);
-	
+	var dd=selectx.value==''? 0:selectx.value;
+	var lastday_init=document.getElementById("lastday"+i).innerHTML;
 	var t0=new Date(plandate1);
 	var t1=new Date(t0.valueOf() + dd * 86400000)
-	
+// 	console.log(lastday_init);
+// 	console.log(dd);
+	var tt=parseInt(lastday_init)-parseInt(dd);
+	var username=listusGson[0].username;
 // 	console.log(formatDate(t0));
 // 	console.log(formatDate(t1));
-	for (var i = 0; i < p2.length; i++) {
-	    if (p2[i].statu==0) {
-		p2[i].paydate=formatDate(t1);
+	for (var j = 0; j < p2.length; j++) {
+	    if (p2[j].statu==0) {
+		p2[j].paydate=formatDate(t1);
 		break;
 	    }
 	}
 	var p3= JSON.stringify(p2);
 	var url="LateAlert";
-	var data="planm2="+p3+"&contractid="+contractid+"&plandate1="+formatDate(t1);
+	var data="planm2="+p3+"&contractid="+contractid+"&plandate3="+tt+"&username="+username;
 //	console.log(dd);
 //	console.log(ld);
 			setCookie("mark", 1, 1);
+// 			console.log(i);
 	    getPost(data, url,i);
-	
 }
 
 
@@ -583,6 +592,8 @@ function selecta(selectx) {
 
 function getPost(data, url,i) {
 	var httpRequest = new XMLHttpRequest(); // 第一步：创建需要的对象
+	var id=i;
+	
 	httpRequest.open('POST', url, true); // 第二步：打开连接
 	httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); // 设置请求头
 	// 注：post方式必须设置请求头（在建立连接后设置请求头）
@@ -591,8 +602,12 @@ function getPost(data, url,i) {
 	httpRequest.onreadystatechange = function() { // 请求后的回调接口，可将请求成功后要执行的程序写在其中
 		if (httpRequest.readyState == 4 && httpRequest.status == 200) { // 验证请求是否发送成功
 			var json = httpRequest.responseText; // 获取到服务端返回的数据
-			console.log(json);
-			if (json == "LateAlertSuccess") {alert("修改成功");}
+// 			console.log(json);
+			if (json == "LateAlertSuccess") {
+// 			    console.log(id);
+			   vm.open_success();
+			document.getElementsByClassName("msgAlert"+id)[0].style.display="none";
+			}
 			if (json == "PayoverSuccess") {alert("付款成功!");aclose(i);}
 			if (json == "False") {alert("失败,请联系管理员!");return;}
 		}

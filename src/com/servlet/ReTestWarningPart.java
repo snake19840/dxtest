@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.clas.Equ;
 import com.clas.SelectAll;
+import com.dao.SelItemPart;
 
 /**
  * Servlet implementation class ReTestWarningPart
@@ -50,7 +51,10 @@ public class ReTestWarningPart extends HttpServlet {
 	   // System.out.println(sdate);
 		//System.out.println(edate);
 		//System.out.println(statu);
-	    List<Equ> list=SelectAll.SelectItemPart(sdate, edate, statu);
+//	    List<Equ> list=SelectAll.SelectItemPart(sdate, edate, statu);
+	    SelItemPart selItemPart=new SelItemPart();
+	    List<Equ> list=selItemPart.selAll(sdate, edate);
+	    
 	   
 	    session.setAttribute("list_WarningSelect2",list); 
 	    session.setAttribute("sdate_WarningSelect2",sdate); 

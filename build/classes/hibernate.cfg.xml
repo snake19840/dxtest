@@ -7,8 +7,8 @@
 		<!-- 1.配置数据库的信息 必须有-->
 		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
 		<property name="hibernate.connection.username">test</property>
-		<property name="hibernate.connection.password">test</property>
-		<property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:orcl3</property> 
+		<property name="hibernate.connection.password">yujian123</property>
+		<property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:orcloc</property>
 
 
 		<!-- 2.配置hibernate信息 可选-->
@@ -34,3 +34,6 @@
 </hibernate-configuration>
 <!-- 		<property name="hibernate.connection.password">yujian123</property> -->
 <!-- 		<property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:orcloc</property> -->
+
+<!-- 		<property name="hibernate.connection.password">test</property> -->
+<!-- 		<property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:orcl3</property>  -->

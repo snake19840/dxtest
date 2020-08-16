@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.clas.Equ;
+import com.clas.SelectAll;
 import com.dao.ContractDao;
 import com.google.gson.Gson;
 
@@ -43,6 +44,13 @@ public class Base extends HttpServlet {
 		HttpSession session = request.getSession();
 		List<Equ> list=ContractDao.classf();
 		Gson gson = new Gson();
+		
+		String sql="SELECT DISTINCT CLASSFAMILY FROM CONTRACTCLASS";
+		List<Equ> ListClassFamily = SelectAll.Warningstatu(sql);
+		String ListClassFamilyGson=gson.toJson(ListClassFamily); 
+		session.setAttribute("ListClassFamilyGson", ListClassFamilyGson);
+		
+		
 		String listGson=gson.toJson(list); 
 		session.setAttribute("classflistGson", listGson);
 		request.getRequestDispatcher("Base.jsp").forward(request, response);

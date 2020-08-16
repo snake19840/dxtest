@@ -129,7 +129,7 @@
 									<%-- <a class="btn btn-success" href="ChakanTestServlet?sn=<%=equ.getSn()%>">
 										<i class="halflings-icon white zoom-in"></i>  
 									</a> --%>
-									 <a class="btn btn-info" href="EditTestServlet?id=<%=equ.getId()%>">
+									 <a class="btn btn-info" target="_blank" href="EditTestServlet?id=<%=equ.getId()%>">
 										<i class="halflings-icon white edit"></i>  
 									</a>
 									

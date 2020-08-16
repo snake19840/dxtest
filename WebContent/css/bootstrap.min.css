@@ -5942,7 +5942,7 @@ button.btn.btn-mini, input[type="submit"].btn.btn-mini {
 		background-color: #2d6987
 	}
 	.label-inverse, .badge-inverse {
-		background-color: #03a9f4
+		background-color: #03a9f4 !important
 	}
 	.label-inverse[href], .badge-inverse[href] {
 		background-color: #1a1a1a

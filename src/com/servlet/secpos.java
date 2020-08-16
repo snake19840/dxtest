@@ -110,7 +110,7 @@ public class secpos extends HttpServlet {
 				}
 			 
 //			      System.out.println(mm);
-			        sql ="SELECT COUNT (*) FROM( SELECT distinct    stno FROM dxtestwork WHERE nowdate LIKE '%"+mm+"%' and stno <> '0' and  SUBSTR(sdate,1,7) ='"+mm+"' and stno  like '%W%') ";
+			        sql ="SELECT COUNT (*) FROM( SELECT distinct    stno FROM dxtestwork WHERE nowdate LIKE '%"+mm+"%' and stno <> '0' and  SUBSTR(sdate,1,7) ='"+mm+"' and statu  like '%π ’œ%') ";
 			        count=SelectAll.getCount(sql);
 					arr[i][j]=String.valueOf(count);
 				}

@@ -780,14 +780,17 @@ if (levela==1) {
 	       
 	      },
 	view(id){
-		  location.href = "ContractMain?contractid="+id;
+		  window.open("ContractMain?contractid="+id);
+// 		  location.href = "ContractMain?contractid="+id;
 	      },
 	      edit(id){
-		  location.href = "ContractEdit?contractid="+id;
+		  window.open("ContractEdit?contractid="+id);
+// 		  location.href = "ContractEdit?contractid="+id;
 	      },
 	
 	      copy(id){
-		  location.href = "ContractCopy?contractid="+id;
+		  window.open("ContractCopy?contractid="+id);
+// 		  location.href = "ContractCopy?contractid="+id;
 	      },
 	
 	      del(id){

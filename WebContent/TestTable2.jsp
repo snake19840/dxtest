@@ -474,7 +474,8 @@ var tableList=new Vue({
 	},
 	rowclick(e){
 // 	    console.log(e);
-	    location.href = "ChakanTestServlet?id="+e.id;
+		window.open("ChakanTestServlet?id="+e.id);
+//  	    location.href = "ChakanTestServlet?id="+e.id;
 	    
 	},
 

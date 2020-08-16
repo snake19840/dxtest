@@ -40,7 +40,7 @@ color:#f5f7fa;
 			
 				<a class="brand" href="" style="padding-left: 0px;padding-right: 0px;margin-left: 30px;">
 				<!-- <span>JANUX</span> -->
-				<img alt="" src="img/icon3_dx.png" style="padding-top: 13px;">
+				<img alt="" src="img/icon3_dx.png" style="padding-top: 19px;">
 				</a>
 								
 				<!-- start: Header Menu -->
@@ -79,7 +79,7 @@ color:#f5f7fa;
    <el-submenu index="4">
     <template slot="title">系统管理</template>
     <el-menu-item index="4-1" @click="linkjsp('TestUsers.jsp')">用户管理</el-menu-item>
-    <el-menu-item index="4-2" @click="linkjsp('TestPerm')" v-if="islevela()">权限管理</el-menu-item>
+    <el-menu-item index="4-2" @click="linkjsp('TestPerm')" v-if="islevela()">权限与日志</el-menu-item>
   </el-submenu>
   
   <el-submenu index="5" >

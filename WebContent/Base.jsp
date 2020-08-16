@@ -46,11 +46,43 @@
 	<link rel="shortcut icon" href="img/favicon.ico">
 	<!-- end: Favicon -->
 	
-	
+<style type="text/css">
+.input2 input{
+height:40px; }
+.el-input__icon{
+height:0;line-height:40px; 
+}
+</style>		
+	<style type="text/css">
+.input2 input{
+height:40px; }
+
+.add-on, select, textarea, input[type="text"],.uneditable-input{
+height:26px;
+}
+.el-input__icon {
+    /* height: 0; */
+    /* line-height: 40px; */
+}
+
+.el-input__icon {
+     height: 40px; 
+    width: 25px;
+    text-align: center;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+    line-height: 40px;
+}
+.el-input--mini .el-input__icon {
+    line-height: 0px;
+    height: 28px;
+}
+</style>	
 	
 </head>
 <body>
 <% String classflistGson=(String)session.getAttribute("classflistGson"); %>
+
 
 	<%@include file="TestHeader.jsp" %>
 	
@@ -293,11 +325,11 @@
  							</select>							 
 							</div>
 							<a style="padding-bottom: 12px;"   href="#" onclick="showSon('son')" class="glyphicons chevron-right"><i></i></a>
-							<div id="son"  style="display: none;"><b style="letter-spacing: 3px;padding-right: 16px;" >项目子类</b><input id="contractname" name="contractname" size="16" type="text"> </div>
+							<div id="son"  style="display: inline;"><b style="letter-spacing: 3px;padding-right: 16px;" >项目子类</b><input id="contractname" name="contractname" size="16" type="text"> </div>
 							
 							
 								<div style="float: right;">
-								<button type="button" class="btn btn-primary"  onclick="return  classall()">提交</button>
+								<button type="button" class="btn btn-primary"  onclick="return  classall()">添加</button>
 								<button type="button" class="btn" onclick="rs('3')">取消</button>
 							  </div>
 							</div>
@@ -308,19 +340,76 @@
 							<b style="padding-left: 25px;padding-right: 52px;letter-spacing: 3px;font-size: 25px;">付款信息</b><hr />
 							</div>
 							<div style="padding-bottom: 20px">
-							<b style="padding-left: 25px;padding-right: 33px;letter-spacing: 3px;" >付款名称</b><input name="payname" id="payname" size="16" type="text">
-							<a style="padding-bottom: 12px;"   href="#"  class="glyphicons chevron-right"><i></i></a> 
+							<b style="padding-left: 46px;letter-spacing: 3px;padding-right: 5px;">项目大类</b>
 							<select id="CB_class_s2">
 							<option>请选择项目大类</option>
 							<option>Option 2</option>
 							<option>Option 3</option>
 							</select>
+							<a style="padding-bottom: 12px;"   href="#"  class="glyphicons chevron-right"><i></i></a> 
+							<b style="padding-left: 0px;padding-right: 16px;letter-spacing: 3px;" >付款名称</b><input name="payname" id="payname" size="16" type="text">
 							
 						<div style="float: right;">
-								<button type="button" class="btn btn-primary"  onclick="return  payall()">提交</button>
+								<button type="button" class="btn btn-primary"  onclick="return  payall()">添加</button>
 								<button type="button" class="btn" onclick="rs('4')">取消</button>
 							  </div>
 						</div>
+						
+						<div style="padding-top: 20px;text-align: center;">
+							<b style="padding-left: 25px;padding-right: 52px;letter-spacing: 3px;font-size: 25px;">合同类型与付款名修改</b><hr />
+							</div>
+						<div id="vm">
+<el-select style="width:150px;padding-left:40px;padding-right:20px;" clearable size="mini" v-model="classF" placeholder="请选择项目大类">
+    <el-option
+      v-for="item in options1"
+      :key="item.rowData.CLASSFAMILY"
+      :label="item.label"
+      :value="item.rowData.CLASSFAMILY">
+    </el-option>
+  </el-select>
+  <el-select style="width:150px;"  size="mini" v-model="classX" placeholder="请选择修改对象">
+  <el-option
+      v-for="item in options2"
+      :key="item"
+      :label="item.label"
+      :value="item">
+    </el-option>
+  </el-select>
+						
+<el-table
+
+    :data="tableData"
+    style="width: 70%;padding-left:50px;">
+    <el-table-column
+      label="项目大类"
+      width="180">
+      <template slot-scope="scope">
+  
+        <span style="margin-left: 0px">{{ scope.row.rowData.CLASSFAMILY}}</span>
+      </template>
+    </el-table-column>
+    <el-table-column
+      :label="this.classX"
+      width="180">
+       <template slot-scope="scope">
+     
+        <span style="margin-left: 0px">{{ show(scope.row)}}</span>
+      </template>
+    </el-table-column>
+    <el-table-column label="操作">
+      <template slot-scope="scope">
+     
+        <el-button
+          size="mini"
+          type="danger"
+          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+      </template>
+    </el-table-column>
+  </el-table>
+						</div>
+						
+						
+						
 						</form>
 							
 						
@@ -355,29 +444,6 @@
 			<!-- end: Content -->
 		</div><!--/#content.span10-->
 		</div><!--/fluid-row-->
-		
-	<div class="modal hide fade" id="myModal">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">×</button>
-			<h3>Settings</h3>
-		</div>
-		<div class="modal-body">
-			<p>Here settings can be configured...</p>
-		</div>
-		<div class="modal-footer">
-			<a href="#" class="btn" data-dismiss="modal">Close</a>
-			<a href="#" class="btn btn-primary">Save changes</a>
-		</div>
-	</div>
-	<div class="common-modal modal fade" id="common-Modal1" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-content">
-			<ul class="list-inline item-details">
-				<li><a href="http://sc.chinaz.com">Admin templates</a></li>
-				<li><a href="http://sc.chinaz.com">Bootstrap themes</a></li>
-			</ul>
-		</div>
-	</div>
-	<div class="clearfix"></div>
 	
 	<%
 		Date d = new Date();
@@ -462,7 +528,120 @@
 		
 		<script type="text/javascript">
 		classflistGson=<%=classflistGson%>;
+		ListClassFamilyGson=<%=session.getAttribute("ListClassFamilyGson")%>
+		
 		classf();
+		
+		var vm=new Vue({
+		    el:'#vm',
+		    data:{
+			tableData:[],
+			a:123,
+			classF:'',
+			classX:'',
+			options1:ListClassFamilyGson,
+			options2:["合同类别","付款信息"],
+			tableData:[],
+			classXlist:[],
+		    },
+		    methods:{
+			open(a,e) {
+			        this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+			          confirmButtonText: '确定',
+			          cancelButtonText: '取消',
+			          type: 'warning'
+			        }).then(() => {
+			            
+			            axios.get('/dxtest/classDel', {
+					params: {
+					    classF: this.classF,
+					    classX:this.classX,
+					    dataX:a,
+					    dataF:e.rowData.CLASSFAMILY,
+					}
+					})
+					.then( (response)=> {
+					console.log(response.data);
+					this.tableData=response.data.classXlist;
+					 this.$message({
+					            type: 'success',
+					            message: '删除成功!'
+					          });
+					
+					})
+					.catch( (error) =>{
+					console.log(error);
+					})
+					.then(function () {
+					// always executed
+					});
+			         
+			        }).catch(() => {
+			          this.$message({
+			            type: 'info',
+			            message: '已取消删除'
+			          });          
+			        });
+			      },
+			    
+			
+			handleDelete(i, e){
+			    console.log(i);
+			    console.log(e);
+			    let a="";
+			    if (this.classX=="合同类别") {
+				a=e.rowData.CLASSSON;
+			    }else {
+				a=e.rowData.PAYNAME
+			    }
+			    this.open(a,e);
+			},
+			
+			show(e){
+// 			    console.log(e);
+			    let a="";
+			    if (this.classX=="合同类别") {
+				a=e.rowData.CLASSSON;
+			    }else {
+				a=e.rowData.PAYNAME
+			    }
+			    return a;
+			},
+			changeClass(){
+// 			    console.log(this.classF);
+// 			    console.log(this.classX);
+			    
+			    axios.get('/dxtest/classEdit', {
+				params: {
+				    classF: this.classF,
+				    classX:this.classX,
+				}
+				})
+				.then( (response)=> {
+				console.log(response.data);
+				this.tableData=response.data.classXlist;
+				})
+				.catch( (error) =>{
+				console.log(error);
+				})
+				.then(function () {
+				// always executed
+				});
+			},
+		    },
+		    computed:{
+			
+		    },
+		    watch:{
+			classX:function (n,o){
+			    this.changeClass();
+			},
+			classF:function(n,o){
+			    this.changeClass();
+			},
+		    },
+		    
+		})
 		</script>
 		
 		

@@ -65,7 +65,7 @@
 					<a href="ReturnIndex">主页</a> 
 					<i class="icon-angle-right"></i>
 				</li>
-				<li><a href="#">权限管理</a></li>
+				<li><a href="#">权限与日志</a></li>
 			</ul>
 
 
@@ -125,6 +125,34 @@
 			
 			</div><!--/row-->
 
+
+
+
+<div id="testlog">		
+				<div class="box span12">
+					<div class="box-header" data-original-title>
+						<h2><i class="halflings-icon white user"></i><span class="break"></span>日志导出</h2>
+						<div class="box-icon">
+							<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+						</div>
+					</div>
+					<div class="box-content">			
+					 <el-date-picker
+      v-model="value2"
+      type="daterange"
+      align="right"
+      unlink-panels
+      range-separator="至"
+      start-placeholder="开始日期"
+      end-placeholder="结束日期"
+      :picker-options="pickerOptions">
+    </el-date-picker>
+						 
+					  <el-button style="margin-left: 50px;" type="primary" @click="log_output()" size="small">日志导出</el-button>
+					</div>
+				</div><!--/span-->
+			
+			</div><!--/row-->
 
 
 
@@ -211,9 +239,7 @@
 		<script src="myjs/vue.js" charset="GBK"></script>
 	<!-- end: JavaScript-->
 	<script src="element-ui/lib/index.js"></script>
-	<script type="text/javascript">
-	
-	</script>
+
 	
 	
 
@@ -770,6 +796,127 @@ function updataUser1(e) {
 		}
 
 
+
+</script>
+
+<script type="myjs/moment.js"></script>
+
+<script type="text/javascript">
+
+console.log( moment().subtract(0, 'year').startOf('year').startOf('day').format('YYYY-MM-DD HH:mm:ss'));
+
+
+var testlog=new Vue({
+    el:'#testlog',
+//     components: {
+//         moment,
+//     },
+    data:{
+	statu:0,
+	tableData:[],
+	pickerOptions: {
+	          shortcuts: [{
+	            text: '最近一周',
+	            onClick(picker) {
+	        	var end = moment().endOf('day').format('YYYY-MM-DD HH:mm:ss');
+	              var start = moment().subtract(7, 'days').startOf('day').format('YYYY-MM-DD HH:mm:ss');
+	              picker.$emit('pick', [start, end]);
+	            }
+	          }, {
+	            text: '最近一个月',
+	            onClick(picker) {
+	        	var end = moment().endOf('day').format('YYYY-MM-DD HH:mm:ss');
+	        	var start = moment().subtract(0, 'month').startOf('month').startOf('day').format('YYYY-MM-DD HH:mm:ss');
+	             
+	              picker.$emit('pick', [start, end]);
+	            }
+	          }, {
+	            text: '最近三个月',
+	            onClick(picker) {
+	        	var end = moment().endOf('day').format('YYYY-MM-DD HH:mm:ss');
+	        	var start = moment().subtract(3, 'month').startOf('month').startOf('day').format('YYYY-MM-DD HH:mm:ss');
+	              picker.$emit('pick', [start, end]);
+	            }
+	          },
+	          {
+		            text: '最近一年',
+		            onClick(picker) {
+		        	var end = moment().endOf('day').format('YYYY-MM-DD HH:mm:ss');
+		        	var start = moment().subtract(0, 'year').startOf('year').startOf('day').format('YYYY-MM-DD HH:mm:ss');
+		             
+		              picker.$emit('pick', [start, end]);
+		            }
+		          },
+	          
+	          ]
+	        },
+	        value1: '',
+	        value2: '',
+        
+    },
+    methods:{
+	update(n){
+	  var  sd=n[0];
+	  var  ed=n[1];
+	    axios.get('/dxtest/Update', {
+		params: {
+		sd:sd,
+		ed:ed
+		}
+		})
+		.then( (response)=> {
+		console.log(response);
+		this.tableData=response.data.listTextGson;
+		})
+		.catch( (error) =>{
+		console.log(error);
+		});
+	},
+	
+	log_output() {
+	  if(!this.statu){
+	      this.$message.warning('请选择导出日志的日期');
+	      return
+	  }
+	    
+            var title = '>>>>>>>>>>>>>>>>>>>>>>>'+''+moment().format('YYYY-MM-DD HH:mm:ss')+''+'>>>>>>>>>>>>>>>>>>>>>>>'
+            var str=''
+            this.tableData.forEach(item=>{
+                str+='时间:'+item.rowData.NOWDATE+'   '+'用户:'+item.rowData.USERNAME+'   '+'ID:'+item.rowData.USERID+'   '+'事件:'+item.rowData.EDITS+'\r\n'
+            })
+            var allStr = title+'\r\n'+'\r\n'+str
+            var export_blob = new Blob([allStr]);
+            var save_link = document.createElement("a");
+            save_link.href = window.URL.createObjectURL(export_blob);
+            save_link.download = moment().format('YYYY-MM-DD HH:mm:ss')+'.txt';
+            this.fakeClick(save_link);
+        },
+        
+        fakeClick(obj) {
+            var ev = document.createEvent("MouseEvents");
+            ev.initMouseEvent(
+                "click",
+                true,false,window,0,0,0,0,0,
+                false,false,false,false,0,
+                null
+            );
+            obj.dispatchEvent(ev);
+        }
+    },
+    watch:{
+	value2:function(n,o){
+	   
+	    if(n){
+		n[0]= moment(n[0]).startOf('day').format('YYYY-MM-DD HH:mm:ss');
+		n[1]= moment(n[1]).endOf('day').format('YYYY-MM-DD HH:mm:ss');
+		this.statu=1;
+		this.update(n);
+	    }else {
+		this.statu=0;
+	    }
+	},
+    },
+})
 
 </script>
 

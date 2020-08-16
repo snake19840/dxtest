@@ -697,7 +697,7 @@ String contractListItemFileGson=(String)session.getAttribute("contractListItemFi
 			        }).catch(() => {
 			          this.$message({
 			            type: 'info',
-			            message: '表单出错'
+			            message: '表单未提交'
 			          });          
 			        });
 			},
@@ -797,10 +797,11 @@ String contractListItemFileGson=(String)session.getAttribute("contractListItemFi
 		                       "plan1":plan1,
 		                       "planm2":planm2,
 		                       "sgmoney":sgmoney,
+		                       "plandate_str":listusGson[0].day,
 		                   },
 		                   enctype:'application/json',
 		             }).then((response)=>{
-		                console.log(response.data.WarningGsons);
+// 		                console.log(response.data.WarningGsons);
 		                 if (response.data.statu) {
 		                     this.$message({
 		     	            type: 'success',

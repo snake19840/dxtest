@@ -1,6 +1,7 @@
 package com.servlet;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.clas.Equ;
 import com.clas.SelectAll;
+import com.dao.ListDxtestwork;
 import com.google.gson.Gson;
 
 /**
@@ -64,7 +66,11 @@ public class UpPlanServlet extends HttpServlet {
 		
 		SelectAll.UpPlanServlet(sdate, edate, statu, username);
 		
-		List<Equ> listAllDxtestwork2=SelectAll.SelectAllDxtestwork2();
+//		List<Equ> listAllDxtestwork2=SelectAll.SelectAllDxtestwork2();
+		Date date = new Date(System.currentTimeMillis());
+		List<Equ> listAllDxtestwork2=ListDxtestwork.selAll(date);
+		
+		
 		Gson gson = new Gson();
 		String listAllDxtestworkSon2=gson.toJson(listAllDxtestwork2); 
 		session.setAttribute("listAllDxtestwork2", listAllDxtestworkSon2);

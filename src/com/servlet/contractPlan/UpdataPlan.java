@@ -45,9 +45,14 @@ public class UpdataPlan extends HttpServlet {
 		String planm1=request.getParameter("planm1");
 		String sgmoney=request.getParameter("sgmoney");
 		String paydate=request.getParameter("paydate");
+		String username=request.getParameter("username");
+		String plandate3=request.getParameter("plandate3");
+//		String plandate3=request.getParameter("plandate3");
 		
 		String sql="update DXTESTCONTRACT set  planm2='"+planm2+"',	plandate1='"+plandate1+"',	planm1='"+planm1+"', sgmoney='"+sgmoney+"'  where contractid='"+contractid+"'";
 		boolean flag=SelectAll.Update(sql);
+		sql="update CONTRACTDAY set plandate3='"+plandate3+"' where contractid='"+contractid+"' and username='"+username+"'";
+		 flag=SelectAll.Update(sql);
 		String sqlv="SELECT	    id,	    contractpicture,	    contractid,	    contractsdate,	    contractedate,	    "
 				+ "contractname,	    contractnowdate,	    statu,	    oppunit,	    markdate,	    contractnlife,	"
 				+ "    camount,	    myconn,	    oppconn,	    myconnt,	    oppconnt,	    ctype,	    tax,	    plan1,	"
@@ -62,7 +67,7 @@ public class UpdataPlan extends HttpServlet {
 		for (int i = 0; i < list2.size(); i++) {
 //			sql = "insert into PLANSUB (PAYNAME,PAYPOR,PAYDATE,STATU,REALPAY,PAYPLAN,CONTRACTID) values('"+list2.get(i).getPayname()+"','"+list2.get(i).getPaypor()+"',"
 //					+ "'"+list.get(i).getPaydate()+"','"+list2.get(i).getStatu()+"','"+list2.get(i).getPaydate()+"','"+list2.get(i).getPaydate()+"','"+contractid+"')";
-			sql = "update PLANSUB set  PAYNAME='"+list2.get(i).getPayname()+"',PAYPOR='"+list2.get(i).getPaypor()+"',STATU_SUB='"+list2.get(i).getStatu()+"',REALPAY='"+list2.get(i).getPaydate()+"',PAYPLAN='"+list2.get(i).getPaydate()+"'  where contractid='"+contractid+"' and PAYDATE='"+paydate+"'";		
+			sql = "update PLANSUB set  PAYNAME='"+list2.get(i).getPayname()+"',PAYPOR='"+list2.get(i).getPaypor()+"',STATU_SUB='"+list2.get(i).getStatu()+"',REALPAY='"+list2.get(i).getPaydate()+"',PAYPLAN='"+list2.get(i).getPaydate()+"'  where contractid='"+contractid+"' and PAYNAME='"+list2.get(i).getPayname()+"'";		
 			flag=SelectAll.Update(sql);
 					
 		}

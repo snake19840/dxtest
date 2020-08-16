@@ -112,6 +112,7 @@ public class UpDataContract4 extends HttpServlet {
 		String sgmoney=equ.getSgmoney();
 		String plandate1=equ.getPlandate1();
 		String plandate2=equ.getPlandate2();
+		String plandate3=equ.getPlandate_str();
 		String classson=equ.getClassson();
 		String myidTemp=null;
 		String oppidTemp=null;
@@ -191,11 +192,11 @@ public class UpDataContract4 extends HttpServlet {
 			sql= "insert into DXTESTCONTRACT (        contractid,	    contractname,	    statu,	    oppunit,	   "
 					+ " markdate,	    contractnlife,	    camount,	    plan1,	    plan2,	    plan3,	  "
 					+ "  plan4,	    plandate2,	    plandate1,	    planm1,	    planm2,	    myname,	    oppname,"
-					+ "	    oppid,	    myid,	    classson,sgmoney) values('"+    contractid+"',	'"+    contractname+"',	"
+					+ "	    oppid,	    myid,	    classson,sgmoney,plandate3) values('"+    contractid+"',	'"+    contractname+"',	"
 					+ "'"+    statu+"',	'"+    oppunit+"',	'"+    markdate+"',	'"+    contractnlife+"',"
 					+ "	'"+    camount+"',	'"+    plan1+"',	'"+    plan2+"',	'"+    plan3+"',	'"+    plan4+"',"
 					+ "	'"+    plandate2+"',	'"+    plandate1+"',	'"+    planm1+"',	'"+    planm2+"',	'"+    myname+"',"
-					+ "	'"+    oppname+"',	'"+    oppid+"',	'"+    myid+"',	'"+    classson+"','"+sgmoney+"')";
+					+ "	'"+    oppname+"',	'"+    oppid+"',	'"+    myid+"',	'"+    classson+"','"+sgmoney+"','"+plandate3+"')";
 			
 			flag=SelectAll.Update(sql);
 			
@@ -205,6 +206,19 @@ public class UpDataContract4 extends HttpServlet {
 						+ "'"+list.get(i).getPaydate()+"','"+list.get(i).getStatu()+"','','"+list.get(i).getPaydate()+"','"+contractid+"')";
 						flag=SelectAll.insertItem(sql);
 			}
+			sql="SELECT Username,day FROM dxtestuser WHERE con='1' ";
+			List<Equ> userAllList=SelectAll.Warningstatu(sql);
+			
+		
+			
+			
+			for (int i = 0; i < userAllList.size(); i++) {
+				sql="insert into CONTRACTDAY(USERNAME,	CONTRACTID,	PLANDATE3,	STATU) values('"+userAllList.get(i).getRowData().get("USERNAME")+"','"+contractid+"','"+userAllList.get(i).getRowData().get("DAY")+"','"+statu+"')";
+				SelectAll.insertItem(sql);
+			}
+			
+			
+			
 			out.print("{\"statu\":1,\"WarningGsons\":\" Ìí¼Ó³É¹¦ \"}");
 			out.close();
 
